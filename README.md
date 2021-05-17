@@ -1,21 +1,19 @@
-# Template for deploying k3s backed by Flux
+[![Schedule - Renovate Helm Releases](https://github.com/ChristfriedBalizou/homelab/actions/workflows/renovate-schedule.yaml/badge.svg)](https://github.com/ChristfriedBalizou/homelab/actions/workflows/renovate-schedule.yaml)
+[![Schedule - Update Flux](https://github.com/ChristfriedBalizou/homelab/actions/workflows/flux-schedule.yaml/badge.svg)](https://github.com/ChristfriedBalizou/homelab/actions/workflows/flux-schedule.yaml)
 
-Highly opinionated template for deploying a single [k3s](https://k3s.io) cluster with [Ansible](https://www.ansible.com) and [Terraform](https://www.terraform.io) backed by [Flux](https://toolkit.fluxcd.io/) and [SOPS](https://toolkit.fluxcd.io/guides/mozilla-sops/).
 
 The purpose here is to showcase how you can deploy an entire Kubernetes cluster and show it off to the world using the [GitOps](https://www.weave.works/blog/what-is-gitops-really) tool [Flux](https://toolkit.fluxcd.io/). When completed, your Git repository will be driving the state of your Kubernetes cluster. In addition with the help of the [Ansible](https://github.com/ansible-collections/community.sops), [Terraform](https://github.com/carlpett/terraform-provider-sops) and [Flux](https://toolkit.fluxcd.io/guides/mozilla-sops/) SOPS integrations you'll be able to commit Age encrypted secrets to your public repo.
 
-## Overview
+<p align="center">
+  <img src="https://i.imgur.com/EXNTJnA.png" alt="kubernetes home logo" width="150" align="center" />
+  <br/><br/>
+  <b>My home self hosted K3s cluster</b>
+</p>
 
-- [Introduction](https://github.com/k8s-at-home/template-cluster-k3s#wave-introduction)
-- [Prerequisites](https://github.com/k8s-at-home/template-cluster-k3s#memo-prerequisites)
-- [Repository structure](https://github.com/k8s-at-home/template-cluster-k3s#open_file_folder-repository-structure)
-- [Lets go!](https://github.com/k8s-at-home/template-cluster-k3s#rocket-lets-go)
-- [Post installation](https://github.com/k8s-at-home/template-cluster-k3s#mega-post-installation)
-- [Thanks](https://github.com/k8s-at-home/template-cluster-k3s#handshake-thanks)
+## Installing
 
-## :wave:&nbsp; Introduction
 
-The following components will be installed in your [k3s](https://k3s.io/) cluster by default. They are only included to get a minimum viable cluster up and running. You are free to add / remove components to your liking but anything outside the scope of the below components are not supported by this template.
+1. Installing the primary node
 
 Feel free to read up on any of these technologies before you get started to be more familiar with them.
 
@@ -227,12 +225,6 @@ flux --kubeconfig=./provision/kubeconfig check --pre
 # ✔ kubectl 1.21.5 >=1.18.0-0
 # ✔ Kubernetes 1.21.5+k3s1 >=1.16.0-0
 # ✔ prerequisites checks passed
-```
-
-2. Pre-create the `flux-system` namespace
-
-```sh
-kubectl --kubeconfig=./provision/kubeconfig create namespace flux-system --dry-run=client -o yaml | kubectl --kubeconfig=./provision/kubeconfig apply -f -
 ```
 
 3. Add the Age key in-order for Flux to decrypt SOPS secrets
