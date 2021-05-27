@@ -1,4 +1,5 @@
 [![Schedule - Renovate Helm Releases](https://github.com/ChristfriedBalizou/homelab/actions/workflows/renovate-schedule.yaml/badge.svg)](https://github.com/ChristfriedBalizou/homelab/actions/workflows/renovate-schedule.yaml)
+[![Schedule - Update Flux](https://github.com/ChristfriedBalizou/homelab/actions/workflows/flux-schedule.yaml/badge.svg)](https://github.com/ChristfriedBalizou/homelab/actions/workflows/flux-schedule.yaml)
 
 
 # homelab
