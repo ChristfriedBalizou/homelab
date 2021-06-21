@@ -10,6 +10,19 @@
   <b>My home self hosted K3s cluster</b>
 </p>
 
+## Installing
+
+
+1. Installing the master node
+
+```bash
+k3sup install \
+    --host=<host> \
+    --user=k8s-at-home \
+    --k3s-version=v1.21.1+k3s1 \
+    --k3s-extra-args="--disable servicelb --disable traefik"
+```
+
 
 ## :handshake:&nbsp; Acknowledgement
 
