@@ -1,16 +1,14 @@
-
 ---
-
 name: Schedule - Renovate Helm Releases
 
 on: # yamllint disable-line rule:truthy
   workflow_dispatch:
   schedule:
-  - cron: '0 */12 * * *'
+  - cron: '0 */6 * * *'
 
 jobs:
   renovate-helm-releases:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
       with:
@@ -29,9 +27,8 @@ jobs:
         branch: renovate-annotations
         delete-branch: true
         title: "chore(deps): update renovate annotations"
-        signoff: false
-        committer: GitHub <noreply@github.com>
-        author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+        committer: "Christfried <christfriedbalizou@gmail.com>"
+        author: "Christfried <christfriedbalizou@gmail.com>"
         commit-message: "chore(deps): update renovate annotations"
         body: |
           Update HelmReleases inorder for Renovate to pick up new versions of Helm charts
