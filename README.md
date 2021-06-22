@@ -13,16 +13,25 @@
 ## Installing
 
 
-1. Installing the master node
+1. Installing the primary node
 
 ```bash
 k3sup install \
     --host=<host> \
-    --user=k8s-at-home \
+    --user=<user> \
     --k3s-version=v1.21.1+k3s1 \
     --k3s-extra-args="--disable servicelb --disable traefik"
 ```
 
+2. Join workers nodes
+
+```bash
+k3sup join \
+    --host=<host> \
+    --server-host=<host> \
+    --k3s-version=v1.21.1+k3s1 \
+    --user=<user> \
+```
 
 ## :handshake:&nbsp; Acknowledgement
 
