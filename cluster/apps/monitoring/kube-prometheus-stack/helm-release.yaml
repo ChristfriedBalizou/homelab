@@ -1,0 +1,91 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: kube-prometheus-stack
+  namespace: monitoring
+spec:
+  interval: 10m
+  chart:
+    spec:
+      # renovate: registryUrl=https://prometheus-community.github.io/helm-charts
+      chart: kube-prometheus-stack
+      version: 16.10.0
+      sourceRef:
+        kind: HelmRepository
+        name: prometheus-community
+        namespace: flux-system
+  values:
+    alertmanager:
+      ingress:
+        enabled: true
+        annotations:
+          kubernetes.io/ingress.class: "nginx"
+        hosts:
+          - alertmanager.${SECRET_DOMAIN}
+        paths:
+          - /
+        pathType: Prefix
+        tls:
+          - hosts:
+              - alertmanager.${SECRET_DOMAIN}
+      alertManagerSpec:
+        storage:
+          volumeClaimTemplate:
+            spec:
+              volumeName: prometheus-config
+              resources:
+                requests:
+                  storage: 250Mi
+    grafana:
+      enabled: false
+    kubelet:
+      serviceMonitor:
+        metricRelabelings:
+          - action: replace
+            sourceLabels:
+              - node
+            targetLabel: instance
+    kubeControllerManager:
+      enabled: false
+    kubeEtcd:
+      enabled: false
+    kubeScheduler:
+      enabled: false
+    kubeProxy:
+      enabled: false
+    nodeExporter:
+      enabled: true
+      serviceMonitor:
+        relabelings:
+          - action: replace
+            sourceLabels:
+              - __meta_kubernetes_pod_node_name
+            targetLabel: kubernetes_node
+    prometheus:
+      ingress:
+        enabled: true
+        annotations:
+          kubernetes.io/ingress.class: "nginx"
+        hosts:
+          - prometheus.${SECRET_DOMAIN}
+        paths:
+          - /
+        pathType: Prefix
+        tls:
+          - hosts:
+              - prometheus.${SECRET_DOMAIN}
+      prometheusSpec:
+        enableAdminAPI: true
+        ruleSelectorNilUsesHelmValues: false
+        serviceMonitorSelectorNilUsesHelmValues: false
+        podMonitorSelectorNilUsesHelmValues: false
+        retention: 2d
+        walCompression: true
+        storageSpec:
+          volumeClaimTemplate:
+            spec:
+              volumeName: prometheus-config
+              resources:
+                requests:
+                  storage: 250Mi
