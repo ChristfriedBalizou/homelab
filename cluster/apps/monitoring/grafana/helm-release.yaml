@@ -73,6 +73,16 @@ spec:
         flux-control-plane:
           url: https://raw.githubusercontent.com/fluxcd/flux2/main/manifests/monitoring/grafana/dashboards/control-plane.json
           datasource: Prometheus
+        # Ref: https://grafana.com/grafana/dashboards/1860
+        node-exporter:
+          gnetId: 1860
+          revision: 23
+          datasource: Prometheus
+        # Ref: https://grafana.com/grafana/dashboards/9614
+        nginx-ingress:
+          gnetId: 9614
+          revision: 1
+          datasource: Prometheus
     sidecar:
       dashboards:
         enabled: true
@@ -87,6 +97,7 @@ spec:
       - vonage-status-panel
       - grafana-worldmap-panel
       - grafana-clock-panel
+      - grafana-image-renderer
     serviceMonitor:
       enabled: true
     ingress:
