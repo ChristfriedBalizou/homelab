@@ -33,7 +33,9 @@ spec:
         storage:
           volumeClaimTemplate:
             spec:
-              volumeName: prometheus-config
+              storageClassName: local-path
+              accessModes:
+                - ReadWriteOnce
               resources:
                 requests:
                   storage: 250Mi
@@ -85,7 +87,9 @@ spec:
         storageSpec:
           volumeClaimTemplate:
             spec:
-              volumeName: prometheus-config
+              storageClassName: local-path
+              accessModes:
+                - ReadWriteOnce
               resources:
                 requests:
                   storage: 250Mi
