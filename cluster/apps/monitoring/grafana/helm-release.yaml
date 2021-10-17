@@ -64,9 +64,6 @@ spec:
         vernemq:
           url: https://raw.githubusercontent.com/vernemq/vernemq/master/metrics_scripts/grafana/VerneMQ%20Node%20Metrics.json
           datasource: Prometheus
-        nginx-dashboard:
-          url: https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/grafana/dashboards/nginx.json
-          datasource: Prometheus
         flux-cluster:
           url: https://raw.githubusercontent.com/fluxcd/flux2/main/manifests/monitoring/grafana/dashboards/cluster.json
           datasource: Prometheus
@@ -77,11 +74,6 @@ spec:
         node-exporter:
           gnetId: 1860
           revision: 23
-          datasource: Prometheus
-        # Ref: https://grafana.com/grafana/dashboards/9614
-        nginx-ingress:
-          gnetId: 9614
-          revision: 1
           datasource: Prometheus
     sidecar:
       dashboards:
@@ -101,16 +93,28 @@ spec:
     serviceMonitor:
       enabled: true
     ingress:
-      enabled: true
-      annotations:
-        kubernetes.io/ingress.class: "nginx"
-      hosts:
-        - grafana.${SECRET_DOMAIN}
-      tls:
-        - hosts:
-            - grafana.${SECRET_DOMAIN}
+      main:
+        enabled: true
+        annotations:
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
+          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+        hosts:
+          - host: "grafana.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - "grafana.${SECRET_DOMAIN}"
+            secretName: "grafana-tls"
     persistence:
       enabled: true
       existingClaim: grafana-config
     podAnnotations:
-      configmap.reloader.stakater.com/reload: grafana
+      configmap.reloader.stakater.com/reload: "grafana-settings"
+    resources:
+      requests:
+        cpu: 100m
+        memory: 128Mi
+      limits:
+        memory: 256Mi
