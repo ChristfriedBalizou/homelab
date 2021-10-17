@@ -3,9 +3,9 @@ creation_rules:
   - path_regex: provision/.*\.sops\.ya?ml
     unencrypted_regex: "^(kind)$"
     pgp: >-
-      4F27D7B953202EE9D30FC9E8C165E321C5A55006
+      ${BOOTSTRAP_PERSONAL_KEY_FP}
   - path_regex: cluster/.*\.ya?ml
     encrypted_regex: "^(data|stringData)$"
     pgp: >-
-      F2B0E828BA95150E53B215E50EA87CE3021221A3,
-      4F27D7B953202EE9D30FC9E8C165E321C5A55006
+      ${BOOTSTRAP_FLUX_KEY_FP},
+      ${BOOTSTRAP_PERSONAL_KEY_FP}
