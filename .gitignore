@@ -8,6 +8,7 @@ kubeconfig
 xanmanning.k3s*
 # Terraform
 .terraform
+.terraform.lock*
 .terraform.tfstate*
 terraform.tfstate*
 
