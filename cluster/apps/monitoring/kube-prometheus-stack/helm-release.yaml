@@ -31,7 +31,7 @@ spec:
           tls:
             - hosts:
                 - "alertmanager.${SECRET_DOMAIN}"
-              secretName: "alertmanager-tls"
+              secretName: "alertmanager-kube-prometheus-stack-alertmanager-tls-assets"
       alertManagerSpec:
         storage:
           volumeClaimTemplate:
@@ -82,7 +82,7 @@ spec:
           tls:
             - hosts:
                 - "prometheus.${SECRET_DOMAIN}"
-              secretName: "promotheus-tls"
+              secretName: "prometheus-kube-prometheus-stack-prometheus-tls-assets"
       prometheusSpec:
         enableAdminAPI: true
         ruleSelectorNilUsesHelmValues: false
