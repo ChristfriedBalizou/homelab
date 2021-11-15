@@ -18,20 +18,20 @@ spec:
   values:
     alertmanager:
       ingress:
-        main:
-          enabled: true
-          annotations:
-            cert-manager.io/cluster-issuer: "letsencrypt-production"
-            traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-          hosts:
-            - host: "alertmanager.${SECRET_DOMAIN}"
-              paths:
-                - path: /
-                  pathType: Prefix
-          tls:
-            - hosts:
-                - "alertmanager.${SECRET_DOMAIN}"
-              secretName: "alertmanager-kube-prometheus-stack-alertmanager-tls-assets"
+        enabled: true
+        className: "traefik"
+        annotations:
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
+          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+        hosts:
+          - host: "alertmanager.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - "alertmanager.${SECRET_DOMAIN}"
+            secretName: "alertmanager-kube-prometheus-stack-alertmanager-tls-assets"
       alertManagerSpec:
         storage:
           volumeClaimTemplate:
@@ -69,20 +69,20 @@ spec:
             targetLabel: kubernetes_node
     prometheus:
       ingress:
-        main:
-          enabled: true
-          annotations:
-            cert-manager.io/cluster-issuer: "letsencrypt-production"
-            traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-          hosts:
-            - host: "prometheus.${SECRET_DOMAIN}"
-              paths:
-                - path: /
-                  pathType: Prefix
-          tls:
-            - hosts:
-                - "prometheus.${SECRET_DOMAIN}"
-              secretName: "prometheus-kube-prometheus-stack-prometheus-tls-assets"
+        enabled: true
+        ingressClassName: "traefik"
+        annotations:
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
+          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+        hosts:
+          - host: "prometheus.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - "prometheus.${SECRET_DOMAIN}"
+            secretName: "prometheus-kube-prometheus-stack-prometheus-tls-assets"
       prometheusSpec:
         enableAdminAPI: true
         ruleSelectorNilUsesHelmValues: false
