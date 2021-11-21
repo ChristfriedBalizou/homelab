@@ -23,6 +23,7 @@ spec:
       retries: 3
   values:
     installCRDs: false
+    no_proxy: ".svc,.svc.cluster.local"
     webhook:
       enabled: true
     extraArgs:
