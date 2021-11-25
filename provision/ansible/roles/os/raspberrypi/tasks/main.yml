@@ -18,3 +18,11 @@
     line: '\1 cgroup_enable=cpuset cgroup_memory=1 cgroup_enable=memory'
     backrefs: true
   notify: reboot
+
+- name: Enable ARM 64 bit
+  lineinfile:
+    path: /boot/config.txt
+    search_string: 'arm_64bit=1'
+    insertafter: 'EOF'
+    line: 'arm_64bit=1'
+  notify: reboot
