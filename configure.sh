@@ -34,6 +34,7 @@ main() {
         verify_age
         verify_git_repository
         verify_cloudflare
+        verify_generic_account
         success
     else
         # generate sops configuration file
@@ -49,6 +50,8 @@ main() {
         # generate cluster secrets
         envsubst < "${PROJECT_DIR}/tmpl/cluster/cluster-secrets.sops.yaml" \
             > "${PROJECT_DIR}/cluster/base/cluster-secrets.sops.yaml"
+        envsubst < "${PROJECT_DIR}/tmpl/cluster/cluster-secrets-generic.sops.yaml" \
+            > "${PROJECT_DIR}/cluster/base/cluster-secrets-generic.sops.yaml"
         envsubst < "${PROJECT_DIR}/tmpl/cluster/cert-manager-secret.sops.yaml" \
             > "${PROJECT_DIR}/cluster/core/cert-manager/secret.sops.yaml"
         envsubst < "${PROJECT_DIR}/tmpl/cluster/cloudflare-ddns-secret.sops.yaml" \
@@ -57,6 +60,7 @@ main() {
             > "${PROJECT_DIR}/cluster/apps/networking/external-dns/secret.sops.yaml"
         # encrypt cluster secrets
         sops --encrypt --in-place "${PROJECT_DIR}/cluster/base/cluster-secrets.sops.yaml"
+        sops --encrypt --in-place "${PROJECT_DIR}/cluster/base/cluster-secrets-generic.sops.yaml"
         sops --encrypt --in-place "${PROJECT_DIR}/cluster/core/cert-manager/secret.sops.yaml"
         sops --encrypt --in-place "${PROJECT_DIR}/cluster/apps/networking/cloudflare-ddns/secret.sops.yaml"
         sops --encrypt --in-place "${PROJECT_DIR}/cluster/apps/networking/external-dns/secret.sops.yaml"
@@ -291,6 +295,10 @@ verify_ansible_hosts() {
             exit 1
         fi
     done
+}
+
+verify_generic_account() {
+    _has_envar "GENERIC_ACCOUNT"
 }
 
 success() {
