@@ -101,8 +101,7 @@ spec:
           hajimari.io/enable: "true"
           hajimari.io/icon: "weather-sunset"
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-          ingress.kubernetes.io/auth-type: "basic"
-          ingress.kubernetes.io/auth-secret: "cluster-secrets-generic"
+          traefik.ingress.kubernetes.io/router.middlewares: "traefik-basic-auth"
         hosts:
           - host: "hajimari.${SECRET_DOMAIN}"
             paths:
