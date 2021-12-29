@@ -62,10 +62,10 @@ tasks:
     desc: Reboot all the k8s nodes
     dir: provision/ansible
     cmds:
-      - "ansible kubernetes -i {{.ANSIBLE_INVENTORY_DIR}}/hosts.yml -a '/usr/bin/systemctl reboot' --become"
+      - "ansible kubernetes -i {{.ANSIBLE_INVENTORY_DIR}}/hosts.yml -a 'systemctl reboot' --become"
 
   adhoc:poweroff:
     desc: Shutdown all the k8s nodes
     dir: provision/ansible
     cmds:
-      - "ansible kubernetes -i {{.ANSIBLE_INVENTORY_DIR}}/hosts.yml -a '/usr/bin/systemctl poweroff' --become"
+      - "ansible kubernetes -i {{.ANSIBLE_INVENTORY_DIR}}/hosts.yml -a 'systemctl poweroff' --become"
