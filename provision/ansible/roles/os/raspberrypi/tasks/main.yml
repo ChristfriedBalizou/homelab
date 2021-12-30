@@ -5,6 +5,35 @@
   failed_when: false
   changed_when: false
 
+- name: Install iptable packages
+  ansible.builtin.apt:
+    name:
+      - iptables
+    install_recommends: false
+    update_cache: true
+    cache_valid_time: 3600
+    autoclean: true
+    autoremove: true
+  register: apt_install_iptables
+  retries: 5
+  until: apt_install_iptables is success
+
+- name: Flush iptables
+  command: iptables -F
+  register: flush_iptables
+  failed_when: false
+  changed_when: false
+
+- name: Correct iptables version selected
+  community.general.alternatives:
+    name: iptables
+    path: /usr/sbin/iptables-legacy
+
+- name: Correct ip6tables version selected
+  community.general.alternatives:
+    name: ip6tables
+    path: /usr/sbin/ip6tables-legacy
+
 - name: Test for raspberry pi /proc/device-tree/model
   command: grep -E "Raspberry Pi" /proc/device-tree/model
   register: grep_device_tree_model_raspberrypi
