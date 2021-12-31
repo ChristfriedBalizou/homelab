@@ -16,4 +16,4 @@ metadata:
 spec:
   routes:
     middlewares:
-      - name: basicauth
+      - basicauth
