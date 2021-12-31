@@ -22,11 +22,6 @@ spec:
   values:
     image:
       name: ghcr.io/k8s-at-home/traefik
-    providers:
-      kubernetesCRD:
-        namespaces:
-          - default
-          - networking
     deployment:
       kind: Deployment
       replicas: 2
@@ -70,9 +65,6 @@ spec:
         tls:
           enabled: true
           options: "default"
-        http:
-          middlewares:
-            - networking-basicauth@kubernetscrd
       metrics:
         port: 8082
         expose: true
