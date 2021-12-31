@@ -7,18 +7,3 @@ metadata:
 spec:
   basicAuth:
     secret: "cluster-secrets-generic"
----
-apiVersion: traefik.containo.us/v1alpha1
-kind: IngressRoute
-metadata:
-  name: basicauth-route
-  namespace: networking
-spec:
-  entryPoints:
-    - websecure
-  routes:
-    - kind: Rule
-      match: Path(`/`)
-      middlewares:   
-        - name: basicauth
-          namespace: networking
