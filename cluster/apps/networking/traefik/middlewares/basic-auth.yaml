@@ -1,3 +1,4 @@
+---
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
@@ -6,3 +7,14 @@ metadata:
 spec:
   basicAuth:
     secret: "cluster-secrets-generic"
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: basicauth-route
+  namespace: networking
+spec:
+  routes:
+    middlewares:
+      - name: basicauth
+        namespace: networking
