@@ -14,5 +14,10 @@ metadata:
   name: basicauth-route
   namespace: networking
 spec:
+  entryPoints:
+    - websecure
   routes:
-    middlewares: "basicauth"
+    - kind: Rule
+      middlewares:   
+        - name: basicauth
+          namespace: networking
