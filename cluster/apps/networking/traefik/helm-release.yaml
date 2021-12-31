@@ -76,6 +76,9 @@ spec:
         tls:
           enabled: true
           options: "default"
+        http:
+          middlewares:
+            - networking-basicauth@kubernetscrd
       metrics:
         port: 8082
         expose: true
