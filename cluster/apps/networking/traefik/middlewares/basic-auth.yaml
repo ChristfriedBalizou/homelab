@@ -18,6 +18,7 @@ spec:
     - websecure
   routes:
     - kind: Rule
+      match: Path(`/`)
       middlewares:   
         - name: basicauth
           namespace: networking
