@@ -17,4 +17,3 @@ spec:
   routes:
     middlewares:
       - name: basicauth
-        namespace: networking
