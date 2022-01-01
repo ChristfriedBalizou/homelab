@@ -75,7 +75,7 @@ spec:
           options: "default"
         http:
           middlewares:
-            - middleware-basicauth@kubernetescrd
+            - basicauth
       metrics:
         port: 8082
         expose: true
