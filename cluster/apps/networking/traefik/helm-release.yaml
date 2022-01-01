@@ -39,9 +39,6 @@ spec:
         externalTrafficPolicy: Local
     serviceAccount:
       name: traefik
-    providers:
-      kubernetesCRD:
-        enabled: true
     logs:
       general:
         format: json
