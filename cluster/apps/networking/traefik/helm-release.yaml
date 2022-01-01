@@ -31,6 +31,12 @@ spec:
       spec:
         loadBalancerIP: "${METALLB_TRAEFIK_ADDR}"
         externalTrafficPolicy: Local
+    serviceAccount:
+      name: traefik
+    providers:
+      kubernetesCRD:
+        enabled: true
+        allowCrossNamespace: true
     logs:
       general:
         format: json
