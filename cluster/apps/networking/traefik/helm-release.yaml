@@ -35,7 +35,6 @@ spec:
     providers:
       kubernetesCRD:
         enabled: true
-        allowCrossNamespace: true
     logs:
       general:
         format: json
