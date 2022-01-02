@@ -44,7 +44,7 @@ spec:
                 - ReadWriteOnce
               resources:
                 requests:
-                  storage: 250Mi
+                  storage: 1Gi
     grafana:
       enabled: false
     kubelet:
@@ -108,4 +108,4 @@ spec:
                 - ReadWriteOnce
               resources:
                 requests:
-                  storage: 250Mi
+                  storage: 2Gi
