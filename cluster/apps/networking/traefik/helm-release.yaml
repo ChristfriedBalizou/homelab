@@ -67,9 +67,6 @@ spec:
         tls:
           enabled: true
           options: "default"
-        http:
-          middlewares:
-            - basicauth
       metrics:
         port: 8082
         expose: true
