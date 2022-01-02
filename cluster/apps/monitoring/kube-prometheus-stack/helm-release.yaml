@@ -113,4 +113,4 @@ spec:
           - job_name: 'traefik'
             static_configs:
               - targets:
-                - traefik:8082
+                - metrics:8082
