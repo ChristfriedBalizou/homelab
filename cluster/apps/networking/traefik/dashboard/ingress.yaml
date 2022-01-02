@@ -10,8 +10,7 @@ metadata:
     hajimari.io/enable: "true"
     hajimari.io/icon: "web"
     traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-    ingress.kubernetes.io/auth-type: "basic"
-    ingress.kubernetes.io/auth-secret: "cluster-secrets-generic"
+    traefik.ingress.kubernetes.io/router.middlewares: "middleware-basicauth@kubernetescrd"
 spec:
   ingressClassName: "traefik"
   tls:
