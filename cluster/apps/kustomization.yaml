@@ -7,4 +7,3 @@ resources:
   - networking
   - monitoring
   - system-upgrade
-  - middlewares
