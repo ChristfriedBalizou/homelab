@@ -18,21 +18,23 @@ spec:
   values:
     alertmanager:
       ingress:
-        main:
           enabled: true
           ingressClassName: "traefik"
           annotations:
+            external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
             cert-manager.io/cluster-issuer: "letsencrypt-production"
             traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+            hajimari.io/enable: "true"
+            hajimari.io/icon: alert
+            hajimari.io/appName: Alertmanager
           hosts:
-            - host: "alertmanager.${SECRET_DOMAIN}"
-              paths:
-                - path: /
-                  pathType: Prefix
+            - "alertmanager.${SECRET_DOMAIN}"
+          path: /
+          pathType: Prefix
           tls:
             - hosts:
                 - "alertmanager.${SECRET_DOMAIN}"
-              secretName: "alertmanager-kube-prometheus-stack-alertmanager-tls-assets"
+              secretName: "alertmanager-tls"
       alertManagerSpec:
         storage:
           volumeClaimTemplate:
