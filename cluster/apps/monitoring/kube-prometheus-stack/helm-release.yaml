@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://prometheus-community.github.io/helm-charts
       chart: kube-prometheus-stack
-      version: 16.10.0
+      version: 27.0.1
       sourceRef:
         kind: HelmRepository
         name: prometheus-community-charts
@@ -18,23 +18,23 @@ spec:
   values:
     alertmanager:
       ingress:
-          enabled: true
-          ingressClassName: "traefik"
-          annotations:
-            external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
-            cert-manager.io/cluster-issuer: "letsencrypt-production"
-            traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-            hajimari.io/enable: "true"
-            hajimari.io/icon: alert
-            hajimari.io/appName: Alertmanager
-          hosts:
-            - "alertmanager.${SECRET_DOMAIN}"
-          path: /
-          pathType: Prefix
-          tls:
-            - hosts:
-                - "alertmanager.${SECRET_DOMAIN}"
-              secretName: "alertmanager-tls"
+        enabled: true
+        ingressClassName: "traefik"
+        annotations:
+          external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
+          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+          hajimari.io/enable: "true"
+          hajimari.io/icon: alert
+          hajimari.io/appName: Alertmanager
+        hosts:
+          - "alertmanager.${SECRET_DOMAIN}"
+        path: /
+        pathType: Prefix
+        tls:
+          - hosts:
+              - "alertmanager.${SECRET_DOMAIN}"
+            secretName: "alertmanager-tls"
       alertManagerSpec:
         storage:
           volumeClaimTemplate:
@@ -62,6 +62,8 @@ spec:
       enabled: false
     kubeProxy:
       enabled: false
+    kube-state-metrics:
+      fullnameOverride: kube-state-metrics
     nodeExporter:
       enabled: true
       serviceMonitor:
@@ -70,23 +72,27 @@ spec:
             sourceLabels:
               - __meta_kubernetes_pod_node_name
             targetLabel: kubernetes_node
+    prometheus-node-exporter:
+      fullnameOverride: prometheus-node-exporter
     prometheus:
       ingress:
-        main:
-          enabled: true
-          ingressClassName: "traefik"
-          annotations:
-            cert-manager.io/cluster-issuer: "letsencrypt-production"
-            traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-          hosts:
-            - host: "prometheus.${SECRET_DOMAIN}"
-              paths:
-                - path: /
-                  pathType: Prefix
-          tls:
-            - hosts:
-                - "prometheus.${SECRET_DOMAIN}"
-              secretName: "prometheus-kube-prometheus-stack-prometheus-tls-assets"
+        enabled: true
+        ingressClassName: "traefik"
+        annotations:
+          external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
+          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+          hajimari.io/enable: "true"
+          hajimari.io/icon: clipboard-text
+          hajimari.io/appName: Prometheus
+        hosts:
+          - "prometheus.${SECRET_DOMAIN}"
+        path: /
+        pathType: Prefix
+        tls:
+          - hosts:
+              - "prometheus.${SECRET_DOMAIN}"
+            secretName: "prometheus-tls"
       prometheusSpec:
         enableAdminAPI: true
         ruleSelectorNilUsesHelmValues: false
