@@ -61,6 +61,15 @@ spec:
               path: /var/lib/grafana/dashboards/default
     dashboards:
       default:
+        # Ref: https://grafana.com/grafana/dashboards/12175
+        calico-felix:
+          gnetId: 12175
+          revision: 5
+          datasource: Prometheus
+        traefik:
+          gnetId: 4475
+          revision: 5
+          datasource: Prometheus
         vernemq:
           url: https://raw.githubusercontent.com/vernemq/vernemq/master/metrics_scripts/grafana/VerneMQ%20Node%20Metrics.json
           datasource: Prometheus
@@ -89,33 +98,26 @@ spec:
       - vonage-status-panel
       - grafana-worldmap-panel
       - grafana-clock-panel
-      - grafana-image-renderer
     serviceMonitor:
       enabled: true
     ingress:
-      main:
         enabled: true
         ingressClassName: "traefik"
         annotations:
+          external-dns.alpha.kubernetes.io/target: ${DOMAIN}
           cert-manager.io/cluster-issuer: "letsencrypt-production"
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+          hajimari.io/enable: "true"
+          hajimari.io/icon: monitor-dashboard
         hosts:
-          - host: "grafana.${SECRET_DOMAIN}"
-            paths:
-              - path: /
-                pathType: Prefix
+          - "grafana.${SECRET_DOMAIN}"
+        path: /
+        pathType: Prefix
         tls:
           - hosts:
               - "grafana.${SECRET_DOMAIN}"
             secretName: "grafana-tls"
     persistence:
-      enabled: true
-      existingClaim: grafana-config
+      enabled: false
     podAnnotations:
-      configmap.reloader.stakater.com/reload: "grafana-settings"
-    resources:
-      requests:
-        cpu: 100m
-        memory: 128Mi
-      limits:
-        memory: 256Mi
+      configmap.reloader.stakater.com/reload: "grafana"
