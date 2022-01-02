@@ -7,4 +7,3 @@ resources:
   - networking.yaml
   - system-upgrade.yaml
   - monitoring.yaml
-  - middleware.yaml
