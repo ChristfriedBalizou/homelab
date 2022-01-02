@@ -109,8 +109,3 @@ spec:
               resources:
                 requests:
                   storage: 2Gi
-        additionalScrapeConfigs:
-          - job_name: 'traefik'
-            static_configs:
-              - targets:
-                - metrics:8082
