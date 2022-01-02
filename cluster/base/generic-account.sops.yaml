@@ -1,0 +1,28 @@
+# yamllint disable
+apiVersion: v1
+kind: Secret
+metadata:
+    name: generic-account
+    namespace: middleware
+stringData:
+    users: ENC[AES256_GCM,data:1mZMWU81xjXHkgKAl+ykOMAMB0yHJvxFijemAtT3LA1SwnMrvzwXwg==,iv:Xxm9+m2YlF0dxkzI3S1HHESzkqayl5mTnJNZus0PLvE=,tag:2UsGjh8Ymywu9Ms57A/xnA==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age1undkver5jqs36xk2djfjemx8hyq4zl4wkfkrq3yx36zmedmduvkqkgs0rg
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBBcjVKcWxwbUxhaERrVHVT
+            dU14OUJlTEI0bXdyV2Z1dmJ1S1o5VUxkZ1JzCktJVWh1TVp3MXlCaGF2ZzZFSDVj
+            MWUzVGZPYjJyTytkNUFGTDRoSjduQTQKLS0tIFI1UDBScWVsNzQxUUs5dDlvTW91
+            NEViRUoySHBib2lUWFpwYjMzMFdpdUUKxJ773muiUypxLgVeCZzFBK4NgjszPkKc
+            l3OUuAZWWKCF6YHqVlG4a4GKBUwyszowHbtheV4aTB246BxbprNvwg==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2022-01-02T03:28:43Z"
+    mac: ENC[AES256_GCM,data:GKZWL9VvssiPjlK63GjFZWRk3btsYRVYCfnbXZtc5ELWX+6dpvkviYQsY/oUXQHh0jNQB3zfeBHrk2j0tuKu+59JbbWuYUNlzuRtiYDyZaB1YtupQV09WX5w80tPtdpKl/kGTfHzzZZLCndzXbv7j2XvGHQ2XFZuRR/cYgsKRv4=,iv:JiX9aDwwRKeGwFBphFdseLwsWVj8Ixdj/Jdieqyk3SY=,tag:3zd/nR1SgxDA/J+Cf6VI0g==,type:str]
+    pgp: []
+    encrypted_regex: ^(data|stringData)$
+    version: 3.7.1
