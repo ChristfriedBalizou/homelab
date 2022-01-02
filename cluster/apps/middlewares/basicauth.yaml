@@ -3,7 +3,7 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
   name: basicauth
-  namespace: default
+  namespace: middleware
 spec:
   basicAuth:
-    secret: "cluster-secrets-generic"
+    secret: generic-account
