@@ -6,4 +6,3 @@ resources:
   - metallb-system.yaml
   - networking.yaml
   - monitoring.yaml
-  - middleware.yaml
