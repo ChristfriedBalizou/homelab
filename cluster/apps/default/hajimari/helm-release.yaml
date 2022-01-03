@@ -25,6 +25,7 @@ spec:
         matchNames:
           - default
           - networking
+          - monitoring
       name: "you"
       groups:
         - name: Communicate
