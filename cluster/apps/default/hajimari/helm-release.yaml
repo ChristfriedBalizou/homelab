@@ -26,7 +26,7 @@ spec:
           - default
           - networking
           - monitoring
-      name: "you"
+      name: "Christfried"
       groups:
         - name: Communicate
           links:
