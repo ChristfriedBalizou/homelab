@@ -24,6 +24,7 @@ spec:
           external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
           cert-manager.io/cluster-issuer: "letsencrypt-production"
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+          traefik.ingress.kubernetes.io/router.middlewares: "middleware-basicauth@kubernetescrd"
           hajimari.io/enable: "true"
           hajimari.io/icon: alert
           hajimari.io/appName: Alertmanager
@@ -82,6 +83,7 @@ spec:
           external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
           cert-manager.io/cluster-issuer: "letsencrypt-production"
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+          traefik.ingress.kubernetes.io/router.middlewares: "middleware-basicauth@kubernetescrd"
           hajimari.io/enable: "true"
           hajimari.io/icon: clipboard-text
           hajimari.io/appName: Prometheus
