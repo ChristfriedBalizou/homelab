@@ -1,0 +1,22 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: rook-ceph
+  namespace: rook-ceph
+spec:
+  interval: 10m
+  chart:
+    spec:
+      # renovate: registryUrl=https://charts.rook.io/release
+      chart: rook-ceph
+      version: v1.8.2
+      sourceRef:
+        kind: HelmRepository
+        name: rook
+        namespace: flux-system
+  values:
+    crds:
+      enabled: false
+    monitoring:
+      enabled: true
