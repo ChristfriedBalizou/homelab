@@ -37,15 +37,9 @@ spec:
         ssl: false
       storage:
         nodes:
-          - name: k8s-node-1
+          - name: k8s-1
             devices:
-              - name: nvme0n1
-          - name: k8s-node-2
-            devices:
-              - name: nvme0n1
-          - name: k8s-node-3
-            devices:
-              - name: nvme0n1
+              - name: 169F-841E
         useAllDevices: false
         useAllNodes: false
     cephFileSystems: []
