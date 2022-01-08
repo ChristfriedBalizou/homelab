@@ -23,7 +23,7 @@ spec:
     ingress:
       dashboard:
         annotations:
-          kubernetes.io/ingress.class: nginx
+          kubernetes.io/ingress.class: traefik
         host:
           name: rook.${DOMAIN}
           path: /
