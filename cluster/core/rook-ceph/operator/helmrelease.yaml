@@ -17,6 +17,6 @@ spec:
         namespace: flux-system
   values:
     crds:
-      enabled: false
+      enabled: true
     monitoring:
       enabled: true
