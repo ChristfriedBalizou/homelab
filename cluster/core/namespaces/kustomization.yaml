@@ -4,7 +4,7 @@ kind: Kustomization
 resources:
   - cert-manager.yaml
   - metallb-system.yaml
+  - middleware.yaml
   - networking.yaml
   - monitoring.yaml
   - rook-ceph.yaml
-  - middleware.yaml
