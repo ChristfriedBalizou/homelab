@@ -1,8 +1,0 @@
-# yamllint disable
-apiVersion: v1
-kind: Secret
-metadata:
-  name: generic-account
-  namespace: middleware
-stringData:
-  users: ${GENERIC_ACCOUNT}
