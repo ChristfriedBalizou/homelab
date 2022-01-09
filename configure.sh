@@ -34,7 +34,6 @@ main() {
         verify_age
         verify_git_repository
         verify_cloudflare
-        verify_generic_account
         success
     else
         # sops configuration file
@@ -49,12 +48,9 @@ main() {
             > "${PROJECT_DIR}/cluster/core/kube-system/kube-vip/daemon-set.yaml"
         envsubst < "${PROJECT_DIR}/tmpl/cluster/cluster-secrets.sops.yaml" \
             > "${PROJECT_DIR}/cluster/base/cluster-secrets.sops.yaml"
-        envsubst < "${PROJECT_DIR}/tmpl/cluster/generic-account.sops.yaml" \
-            > "${PROJECT_DIR}/cluster/base/generic-account.sops.yaml"
         envsubst < "${PROJECT_DIR}/tmpl/cluster/cert-manager-secret.sops.yaml" \
             > "${PROJECT_DIR}/cluster/core/cert-manager/secret.sops.yaml"
         sops --encrypt --in-place "${PROJECT_DIR}/cluster/base/cluster-secrets.sops.yaml"
-        sops --encrypt --in-place "${PROJECT_DIR}/cluster/base/generic-account.sops.yaml"
         sops --encrypt --in-place "${PROJECT_DIR}/cluster/core/cert-manager/secret.sops.yaml"
         # terraform
         envsubst < "${PROJECT_DIR}/tmpl/terraform/secret.sops.yaml" \
@@ -256,10 +252,6 @@ verify_ansible_hosts() {
             exit 1
         fi
     done
-}
-
-verify_generic_account() {
-    _has_envar "GENERIC_ACCOUNT"
 }
 
 success() {

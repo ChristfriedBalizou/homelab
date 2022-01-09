@@ -6,4 +6,4 @@ metadata:
   namespace: middleware
 spec:
   basicAuth:
-    secret: generic-account
+    secret: basicauth-middleware-secret
