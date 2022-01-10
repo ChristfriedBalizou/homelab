@@ -31,8 +31,6 @@ spec:
       spec:
         loadBalancerIP: "${METALLB_TRAEFIK_ADDR}"
         externalTrafficPolicy: Local
-    serviceAccount:
-      name: traefik
     logs:
       general:
         format: json
