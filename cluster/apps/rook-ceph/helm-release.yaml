@@ -24,6 +24,8 @@ spec:
       dashboard:
         annotations:
           kubernetes.io/ingress.class: traefik
+          hajimari.io/enable: "true"
+          hajimari.io/icon: sd
         host:
           name: rook.${SECRET_DOMAIN}
           path: /
