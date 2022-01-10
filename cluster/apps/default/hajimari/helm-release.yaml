@@ -33,6 +33,7 @@ spec:
           - default
           - networking
           - monitoring
+          - rook-ceph
       name: "Christfried"
       groups:
         - name: Communicate
