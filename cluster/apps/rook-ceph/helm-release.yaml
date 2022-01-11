@@ -23,17 +23,25 @@ spec:
     ingress:
       dashboard:
         annotations:
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
           kubernetes.io/ingress.class: "traefik"
           hajimari.io/enable: "true"
           hajimari.io/icon: sd
+          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+          traefik.ingress.kubernetes.io/router.middlewares: "middleware-basicauth@kubernetescrd"
         host:
           name: rook.${SECRET_DOMAIN}
           path: /
+        tls:
+          - hosts:
+              - rook.${SECRET_DOMAIN}
+            secretName: "rook-tls"
     cephClusterSpec:
       dashboard:
         enabled: true
+        port: 8555
         urlPrefix: /
-        ssl: false
+        ssl: true
       storage:
         nodes:
           - name: k8s-1
