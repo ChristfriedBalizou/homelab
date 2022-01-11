@@ -39,6 +39,7 @@ spec:
     cephClusterSpec:
       dashboard:
         enabled: true
+        port: 8555
         urlPrefix: /
         ssl: true
       storage:
