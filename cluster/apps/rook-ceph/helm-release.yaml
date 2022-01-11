@@ -27,10 +27,7 @@ spec:
           kubernetes.io/ingress.class: "traefik"
           hajimari.io/enable: "true"
           hajimari.io/icon: sd
-          ingress.kubernetes.io/ssl-force-host: "false"
-          ingress.kubernetes.io/protocol: "http"
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-          traefik.ingress.kubernetes.io/router.middlewares: "middleware-basicauth@kubernetescrd"
         host:
           name: rook.${SECRET_DOMAIN}
           path: /
@@ -42,7 +39,7 @@ spec:
       dashboard:
         enabled: true
         urlPrefix: /
-        ssl: true
+        ssl: false
       storage:
         nodes:
           - name: k8s-1
