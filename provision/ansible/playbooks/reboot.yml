@@ -12,5 +12,4 @@
   tasks:
     - name: Reboot cluster
       ansible.builtin.reboot:
-        msg: Cluster nodes are rebooting...
-      ingore_errors: yes
+        msg: "Cluster nodes are rebooting..."
