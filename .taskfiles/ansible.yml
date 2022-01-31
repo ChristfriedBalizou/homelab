@@ -46,6 +46,12 @@ tasks:
     cmds:
       - "ansible-playbook -i {{.ANSIBLE_INVENTORY_DIR}}/hosts.yml {{.ANSIBLE_PLAYBOOK_DIR}}/k3s-nuke.yml"
 
+  playbook:os-reboot:
+    desc: Reboot all the k8s nodes
+    dir: provision/ansible
+    cmds:
+      - "ansible-playbook -i {{.ANSIBLE_INVENTORY_DIR}}/hosts.yml {{.ANSIBLE_PLAYBOOK_DIR}}/reboot.yml"
+
   adhoc:ping:
     desc: Ping all the hosts
     dir: provision/ansible
@@ -57,12 +63,6 @@ tasks:
     dir: provision/ansible
     cmds:
       - ansible all -i {{.ANSIBLE_INVENTORY_DIR}}/hosts.yml --one-line -a 'uptime'
-
-  adhoc:reboot:
-    desc: Reboot all the k8s nodes
-    dir: provision/ansible
-    cmds:
-      - "ansible kubernetes -i {{.ANSIBLE_INVENTORY_DIR}}/hosts.yml -a 'systemctl reboot' --become"
 
   adhoc:poweroff:
     desc: Shutdown all the k8s nodes
