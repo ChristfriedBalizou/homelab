@@ -1,9 +1,5 @@
 ---
-<<<<<<< HEAD
 apiVersion: source.toolkit.fluxcd.io/v1beta2
-=======
-apiVersion: source.toolkit.fluxcd.io/v1beta1
->>>>>>> 3fa193b (Revert "admin: delete tmpl directory")
 kind: GitRepository
 metadata:
   name: flux-system
