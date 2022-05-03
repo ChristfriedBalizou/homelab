@@ -5,6 +5,18 @@
   failed_when: false
   changed_when: false
 
+- name: Install ceph common
+  ansible.builtin.apt:
+    name:
+      - ceph-common
+    update_cache: true
+    cache_valid_time: 3600
+    autoclean: true
+    autoremove: true
+  register: apt_install_ceph_common
+  retries: 5
+  until: apt_install_ceph_common is success
+
 - name: Install iptable packages
   ansible.builtin.apt:
     name:
