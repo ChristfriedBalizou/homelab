@@ -5,31 +5,6 @@
   failed_when: false
   changed_when: false
 
-- name: Install ceph common
-  ansible.builtin.apt:
-    name:
-      - ceph-common
-    update_cache: true
-    cache_valid_time: 3600
-    autoclean: true
-    autoremove: true
-  register: apt_install_ceph_common
-  retries: 5
-  until: apt_install_ceph_common is success
-
-- name: Install iptable packages
-  ansible.builtin.apt:
-    name:
-      - iptables
-    install_recommends: false
-    update_cache: true
-    cache_valid_time: 3600
-    autoclean: true
-    autoremove: true
-  register: apt_install_iptables
-  retries: 5
-  until: apt_install_iptables is success
-
 - name: Flush iptables
   command: iptables -F
   register: flush_iptables
@@ -54,7 +29,7 @@
 
 - name: Activating cgroup support
   lineinfile:
-    path: /boot/cmdline.txt
+    path: /boot/firmware/cmdline.txt
     regexp: '^((?!.*\bcgroup_enable=cpuset cgroup_memory=1 cgroup_enable=memory\b).*)$'
     line: '\1 cgroup_enable=cpuset cgroup_memory=1 cgroup_enable=memory'
     backrefs: true
@@ -62,7 +37,7 @@
 
 - name: Enable ARM 64 bit
   lineinfile:
-    path: /boot/config.txt
+    path: /boot/firmware/config.txt
     search_string: 'arm_64bit=1'
     insertafter: 'EOF'
     line: 'arm_64bit=1'
