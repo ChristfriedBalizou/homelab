@@ -10,4 +10,5 @@
       pause:
         seconds: 5
   roles:
+    - "os/raspberrypi"
     - "os/core"
