@@ -24,7 +24,11 @@ spec:
       dashboard:
         ingressClassName: "traefik"
         annotations:
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
           external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
+          external-dns/is-public: "true"
+          kubernetes.io/ingress.class: "traefik"
+          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
           hajimari.io/enable: "true"
           hajimari.io/icon: sd
         host:
@@ -33,6 +37,7 @@ spec:
         tls:
           - hosts:
               - rook.${SECRET_DOMAIN}
+            secretName: "rook-tls"
     cephClusterSpec:
       dashboard:
         enabled: true
