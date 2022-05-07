@@ -116,22 +116,22 @@ spec:
     serviceMonitor:
       enabled: true
     ingress:
-        enabled: true
-        ingressClassName: "traefik"
-        annotations:
-          external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
-          cert-manager.io/cluster-issuer: "letsencrypt-production"
-          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-          hajimari.io/enable: "true"
-          hajimari.io/icon: monitor-dashboard
-        hosts:
-          - "grafana.${SECRET_DOMAIN}"
-        path: /
-        pathType: Prefix
-        tls:
-          - hosts:
-              - "grafana.${SECRET_DOMAIN}"
-            secretName: "grafana-tls"
+      enabled: true
+      ingressClassName: "traefik"
+      annotations:
+        external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
+        cert-manager.io/cluster-issuer: "letsencrypt-production"
+        traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+        hajimari.io/enable: "true"
+        hajimari.io/icon: "monitor-dashboard"
+      hosts:
+        - "grafana.${SECRET_DOMAIN}"
+      path: /
+      pathType: Prefix
+      tls:
+        - hosts:
+            - "grafana.${SECRET_DOMAIN}"
+          secretName: "grafana-tls"
     persistence:
       enabled: false
     podAnnotations:
