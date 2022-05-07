@@ -33,7 +33,6 @@ spec:
         tls:
           - hosts:
               - rook.${SECRET_DOMAIN}
-            secretName: "rook-tls"
     cephClusterSpec:
       dashboard:
         enabled: true
