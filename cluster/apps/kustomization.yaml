@@ -13,4 +13,3 @@ resources:
   - networking
   - monitoring
   - middlewares
-  - rook-ceph
