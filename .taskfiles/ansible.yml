@@ -46,6 +46,12 @@ tasks:
     cmds:
       - "ansible-playbook -i {{.ANSIBLE_INVENTORY_DIR}}/hosts.yml {{.ANSIBLE_PLAYBOOK_DIR}}/k3s-nuke.yml"
 
+  playbook:rook-ceph-nuke:
+    desc: Uninstall Rook ceph on the nodes
+    dir: provision/ansible
+    cmds:
+      - "ansible-playbook -i {{.ANSIBLE_INVENTORY_DIR}}/hosts.yml {{.ANSIBLE_PLAYBOOK_DIR}}/rook-ceph-nuke.yml"
+
   playbook:os-reboot:
     desc: Reboot all the k8s nodes
     dir: provision/ansible

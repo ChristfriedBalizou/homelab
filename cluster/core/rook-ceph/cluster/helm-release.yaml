@@ -44,11 +44,7 @@ spec:
         urlPrefix: /
         ssl: false
       storage:
-        nodes:
-          - name: k8s-1
-            devices:
-              - name: "/dev/disk/by-uuid/a3ef8669-53e8-47da-b8f2-0d89e9ead2cd"
-        useAllDevices: false
-        useAllNodes: false
+        useAllDevices: true
+        useAllNodes: true
     cephFileSystems: []
     cephObjectStores: []
