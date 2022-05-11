@@ -44,7 +44,17 @@ spec:
         urlPrefix: /
         ssl: false
       storage:
-        useAllDevices: true
-        useAllNodes: true
+        nodes:
+          - name: "k8s-0"
+            devices:
+              - name: sda3
+          - name: "k8s-1"
+            devices:
+              - name: sda1
+          - name: "k8s-2"
+            devices:
+              - name: mmcblk0p3
+        useAllDevices: false
+        useAllNodes: false
     cephFileSystems: []
     cephObjectStores: []
