@@ -1,4 +1,4 @@
 ---
 rook_ceph_enabled: yes
 rook_ceph_devices:
-  - /dev/mmcblk0p3
+  - /dev/disk/by-partuuid/ddbefb06-03

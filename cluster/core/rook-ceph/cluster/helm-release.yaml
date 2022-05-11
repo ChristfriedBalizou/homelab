@@ -47,7 +47,7 @@ spec:
         nodes:
           - name: "k8s-1"
             devices:
-              - name: sda1
+              - name: "/dev/disk/by-partuuid/cfa9730c-00df-4355-ad7f-3ed2db96c93f"
         useAllDevices: false
         useAllNodes: false
     cephFileSystems: []
