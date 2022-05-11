@@ -1,4 +1,0 @@
----
-rook_ceph_enabled: yes
-rook_ceph_devices:
-  - /dev/disk/by-partuuid/49e355ce-ee1c-49a3-885d-1679f4197100
