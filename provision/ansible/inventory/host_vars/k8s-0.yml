@@ -1,0 +1,4 @@
+---
+rook_ceph_enabled: true
+rook_ceph_devices:
+  - /dev/disk/by-uuid/432215c8-5ff6-47ab-abe0-093786d3c826

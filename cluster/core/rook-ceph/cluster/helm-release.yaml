@@ -45,9 +45,12 @@ spec:
         ssl: false
       storage:
         nodes:
+          - name: "k8s-0"
+            devices:
+              - name: "/dev/disk/by-uuid/432215c8-5ff6-47ab-abe0-093786d3c826"
           - name: "k8s-1"
             devices:
-              - name: "/dev/disk/by-uuid/c4732a7b-7f7f-4fbb-bde8-44487e8de818"
+              - name: "/dev/disk/by-uuid/7de84ecb-4f23-4583-b93c-5a1fc31081aa"
         useAllDevices: false
         useAllNodes: false
     cephFileSystems: []
