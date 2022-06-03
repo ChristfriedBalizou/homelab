@@ -1,4 +1,4 @@
 ---
-rook_ceph_enabled: yes
+rook_ceph_enabled: true
 rook_ceph_devices:
-  - /dev/disk/by-uuid/c4732a7b-7f7f-4fbb-bde8-44487e8de818
+  - /dev/disk/by-uuid/7de84ecb-4f23-4583-b93c-5a1fc31081aa
