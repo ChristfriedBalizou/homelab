@@ -47,9 +47,6 @@ spec:
           - name: "k8s-0"
             devices:
               - name: "/dev/sdb1"
-          - name: "k8s-1"
-            devices:
-              - name: "/dev/sdb1"
         useAllDevices: false
         useAllNodes: false
     cephFileSystems: []
