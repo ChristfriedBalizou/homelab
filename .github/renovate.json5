@@ -88,14 +88,12 @@
     {
       "matchDatasources": ["docker"],
       "matchUpdateTypes": ["minor"],
-      "labels": ["renovate/image", "dep/minor"],
-      "automerge": true
+      "labels": ["renovate/image", "dep/minor"]
     },
     {
       "matchDatasources": ["docker"],
       "matchUpdateTypes": ["patch"],
-      "labels": ["renovate/image", "dep/patch"],
-      "automerge": true,
+      "labels": ["renovate/image", "dep/patch"]
     },
     {
       "matchDatasources": ["helm"],
@@ -105,14 +103,12 @@
     {
       "matchDatasources": ["helm"],
       "matchUpdateTypes": ["minor"],
-      "labels": ["renovate/helm", "dep/minor"],
-      "automerge": true
+      "labels": ["renovate/helm", "dep/minor"]
     },
     {
       "matchDatasources": ["helm"],
       "matchUpdateTypes": ["patch"],
-      "labels": ["renovate/helm", "dep/patch"],
-      "automerge": true
+      "labels": ["renovate/helm", "dep/patch"]
     },
     // auto merge
     {
