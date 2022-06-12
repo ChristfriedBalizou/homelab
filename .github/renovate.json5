@@ -5,6 +5,7 @@
   "dependencyDashboardTitle": "Renovate Dashboard",
   "suppressNotifications": ["prIgnoreNotification"],
   "rebaseWhen": "conflicted",
+  "automergeStrategy": "rebase",
   "schedule": [
     "every weekend"
   ],
@@ -113,10 +114,11 @@
       "labels": ["renovate/helm", "dep/patch"],
       "automerge": true
     },
+    // auto merge
     {
-        "matchDatasources": ["docker", "helm"],
-        "matchUpdateTypes": ["minor", "patch"],
-        "automerge": true
+      "matchDatasources": ["docker", "helm"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "automerge": true
     }
   ]
 }
