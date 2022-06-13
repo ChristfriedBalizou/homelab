@@ -38,6 +38,14 @@ spec:
               - rook.${SECRET_DOMAIN}
             secretName: "rook-tls"
     cephClusterSpec:
+      mgr:
+        modules:
+          - name: pg_autoscaler
+            enabled: true
+          - name: dashboard
+            enabled: true
+          - name: monitoring
+            enabled: true
       dashboard:
         enabled: true
         urlPrefix: /
@@ -46,7 +54,7 @@ spec:
         nodes:
           - name: "k8s-0"
             devices:
-              - name: "/dev/sdb1"
+              - name: "/dev/disk/by-label/jericho"
         useAllDevices: false
         useAllNodes: false
     cephFileSystems: []
