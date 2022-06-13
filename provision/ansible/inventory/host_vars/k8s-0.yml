@@ -1,4 +1,4 @@
 ---
 rook_ceph_enabled: true
 rook_ceph_devices:
-  - /dev/sdb1
+  - /dev/sdb

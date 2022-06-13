@@ -46,7 +46,7 @@ spec:
         nodes:
           - name: "k8s-0"
             devices:
-              - name: "/dev/sdb1"
+              - name: "/dev/sdb"
         useAllDevices: false
         useAllNodes: false
     cephFileSystems: []
