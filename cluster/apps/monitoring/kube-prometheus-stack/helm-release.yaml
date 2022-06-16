@@ -22,7 +22,7 @@ spec:
         ingressClassName: "traefik"
         annotations:
           external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
-          cert-manager.io/cluster-issuer: "letsencrypt-production"
+          cert-manager.io/cluster-issuer: "letsencrypt-staging"
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
           traefik.ingress.kubernetes.io/router.middlewares: "middleware-basicauth@kubernetescrd"
           hajimari.io/enable: "true"
@@ -81,7 +81,7 @@ spec:
         ingressClassName: "traefik"
         annotations:
           external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
-          cert-manager.io/cluster-issuer: "letsencrypt-production"
+          cert-manager.io/cluster-issuer: "letsencrypt-staging"
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
           traefik.ingress.kubernetes.io/router.middlewares: "middleware-basicauth@kubernetescrd"
           hajimari.io/enable: "true"
@@ -115,4 +115,4 @@ spec:
           - job_name: 'traefik'
             static_configs:
               - targets:
-                - ${METALLB_TRAEFIK_ADDR}:8082
+                  - ${METALLB_TRAEFIK_ADDR}:8082
