@@ -24,3 +24,4 @@ resources:
   - ./nfs-subdir-external-provisioner.yaml
   - ./intel.yaml
   - ./node-feature-discovery.yaml
+  - ./kyverno.yaml
