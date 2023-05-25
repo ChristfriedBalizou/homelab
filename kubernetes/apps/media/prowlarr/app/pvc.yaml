@@ -1,15 +1,30 @@
 ---
 apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: config-prowlarr
+spec:
+  accessModes:
+    - ReadWriteMany
+  capacity:
+    storage: 5Gi
+  nfs:
+    path: /mnt/volume1/apps/prowlarr
+    server: ${NFS_SERVER_IP}
+  storageClassName: config-prowlarr
+  volumeMode: Filesystem
+  persistentVolumeReclaimPolicy: Retain
+---
+apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: config-prowlarr
   namespace: media
-  annotations:
-    nfs.io/storage-path: "volume1/apps/prowlarr"
 spec:
   accessModes:
     - ReadWriteMany
   resources:
     requests:
       storage: 5Gi
-  storageClassName: nfs
+  storageClassName: config-prowlarr
+  volumeMode: Filesystem
