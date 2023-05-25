@@ -14,3 +14,5 @@ resources:
   - metallb-charts.yaml
   - metrics-server-charts.yaml
   - stakater-charts.yaml
+  - grafana-charts.yaml
+  - prometheus-community-charts.yaml
