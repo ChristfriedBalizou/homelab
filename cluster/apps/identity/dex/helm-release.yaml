@@ -56,17 +56,17 @@ spec:
             host: ldap.${SECRET_DOMAIN}
             startTLS: false
             insecureNoSSL: true
-            bindDN: "${SECRET_LDAP_ROOT},cn=${SECRET_GRAFANA_ADMIN_USER}"
+            bindDN: "cn=${SECRET_GRAFANA_ADMIN_USER},${SECRET_LDAP_ROOT}"
             bindPW: "${SECRET_GRAFANA_ADMIN_PASSWORD}"
             userSearch:
-              baseDN: "${SECRET_LDAP_ROOT},ou=users"
+              baseDN: "ou=users,${SECRET_LDAP_ROOT}"
               filter: "(objectClass=posixAccount)"
               username: uid
               idAttr: DN
               emailAttr: mail
               nameAttr: cn
             groupSearch:
-              baseDN: "${SECRET_LDAP_ROOT},ou=groups"
+              baseDN: "ou=groups,${SECRET_LDAP_ROOT}"
               filter: "(objectClass=posixGroup)"
               nameAttr: cn
               userMatchers:
