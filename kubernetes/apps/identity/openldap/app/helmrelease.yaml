@@ -41,11 +41,13 @@ spec:
       enabled: true
       replicas: 2
     persistence:
-      type: secret
-      existingClaim: openldap-ldif-bootstrap
-      mountPath: /ldifs/bootstrap.ldif
-      subPath: bootstrap.ldif
-      readOnly: true
+      ldif:
+        enabled: true
+        type: secret
+        existingClaim: openldap-ldif-bootstrap
+        mountPath: /ldifs/bootstrap.ldif
+        subPath: bootstrap.ldif
+        readOnly: true
     affinity:
       podAntiAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
