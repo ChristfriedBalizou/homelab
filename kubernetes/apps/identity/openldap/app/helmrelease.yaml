@@ -26,6 +26,7 @@ spec:
       LDAP_TLS: ${SECRET_LDAP_TLS}
       LDAP_ADMIN_USERNAME: ${SECRET_GRAFANA_ADMIN_USER}
       LDAP_ADMIN_PASSWORD: ${SECRET_GRAFANA_ADMIN_PASSWORD}
+      DISABLE_CHOWN: true
     resources:
       requests:
         cpu: 200m
