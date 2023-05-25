@@ -39,7 +39,7 @@ spec:
             port: 1389
     controller:
       enabled: true
-      replicas: 2
+      replicas: 1
     persistence:
       data:
         enabled: true
