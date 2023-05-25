@@ -52,8 +52,8 @@ spec:
           name: LDAP
           config:
             host: ldap.${SECRET_DOMAIN}
-            startTLS: false
-            insecureNoSSL: true
+            startTLS: true
+            insecureNoSSL: false
             bindDN: "cn=${SECRET_GRAFANA_ADMIN_USER},${SECRET_LDAP_ROOT}"
             bindPW: "${SECRET_GRAFANA_ADMIN_PASSWORD}"
             usernamePrompt: Email Address

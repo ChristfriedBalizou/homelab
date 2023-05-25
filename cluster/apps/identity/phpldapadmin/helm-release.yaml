@@ -29,8 +29,8 @@ spec:
       - "My LDAP Server":
           - server:
               - host: ldap.${SECRET_DOMAIN}
-              - port: 389
-              - tls: false
+              - port: 636
+              - tls: true
           - login:
               - bind_id: "cn=admin,dc=example,dc=org"
     ingress:
