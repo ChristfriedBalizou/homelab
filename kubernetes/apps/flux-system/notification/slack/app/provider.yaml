@@ -9,4 +9,4 @@ spec:
   channel: homelab
   address: https://slack.com/api/chat.postMessage
   secretRef:
-    name: slack-secret
+    name: slack-token
