@@ -2,5 +2,16 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - templates
   - helm-release.yaml
+configMapGenerator:
+  - name: dex-web-templates
+    files:
+      - approval.html
+      - device_success.html
+      - device.html
+      - error.html
+      - footer.html
+      - header.html
+      - login.html
+      - oob.htlm
+      - password.html
