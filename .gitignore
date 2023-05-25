@@ -5,7 +5,7 @@ Thumbs.db
 kubeconfig
 # vscode-sops
 .decrypted~*.yaml
-.config.env
+.config.env*
 *.agekey
 *.pub
 *.key
@@ -14,6 +14,36 @@ github-deploy-key*
 xanmanning.k3s*
 # Terraform
 .terraform
+.terraform.lock*
 .terraform.tfstate*
 terraform.tfstate*
+
+# Swap
+[._]*.s[a-v][a-z]
+!*.svg  # comment out if you don't need vector files
+[._]*.sw[a-p]
+[._]s[a-rt-v][a-z]
+[._]ss[a-gi-z]
+[._]sw[a-p]
+
+# Session
+Session.vim
+Sessionx.vim
+
+# Temporary
+.netrwhist
+*~
+# Auto-generated tag files
+tags
+# Persistent undo
+[._]*.un~
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
 megalinter-reports
