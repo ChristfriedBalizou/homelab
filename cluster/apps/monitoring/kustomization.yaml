@@ -5,4 +5,3 @@ resources:
   - namespace.yaml
   - kube-prometheus-stack
   - grafana
-  - notification

@@ -63,13 +63,13 @@ main() {
         envsubst < "${PROJECT_DIR}/templates/cluster/external-dns-secret.sops.yaml" \
             > "${PROJECT_DIR}/cluster/apps/networking/external-dns/secret.sops.yaml"
         envsubst < "${PROJECT_DIR}/templates/cluster/cluster-notification-secret.sops.yaml" \
-            > "${PROJECT_DIR}/cluster/apps/monitoring/notification/secret.sops.yaml"
+            > "${PROJECT_DIR}/cluster/apps/flux-system/notification/secret.sops.yaml"
         # encrypt cluster secrets
         sops --encrypt --in-place "${PROJECT_DIR}/cluster/config/cluster-secrets.sops.yaml"
         sops --encrypt --in-place "${PROJECT_DIR}/cluster/apps/networking/cert-manager/issuers/secret.sops.yaml"
         sops --encrypt --in-place "${PROJECT_DIR}/cluster/apps/networking/cloudflare-ddns/secret.sops.yaml"
         sops --encrypt --in-place "${PROJECT_DIR}/cluster/apps/networking/external-dns/secret.sops.yaml"
-        sops --encrypt --in-place "${PROJECT_DIR}/cluster/apps/monitoring/notification/secret.sops.yaml"
+        sops --encrypt --in-place "${PROJECT_DIR}/cluster/apps/flux-system/notification/secret.sops.yaml"
         # generate terraform secrets
         envsubst < "${PROJECT_DIR}/templates/terraform/secret.sops.yaml" \
             > "${PROJECT_DIR}/provision/terraform/cloudflare/secret.sops.yaml"
