@@ -22,7 +22,6 @@ spec:
       pullPolicy: IfNotPresent
     env:
       LDAP_ROOT: ${SECRET_LDAP_ROOT}
-      LDAP_ALLOW_ANON_BINDING: no
       LDAP_ADMIN_USERNAME: ${SECRET_GRAFANA_ADMIN_USER}
       LDAP_ADMIN_PASSWORD: ${SECRET_GRAFANA_ADMIN_PASSWORD}
     resources:
