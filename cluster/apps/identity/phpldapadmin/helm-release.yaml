@@ -23,3 +23,28 @@ spec:
       limits:
         cpu: 400m
         memory: 500Mi
+    ldap:
+      - ${SECRET_DOMAIN}:
+          - server:
+              - tls: false
+          - login:
+              - bind_id: "${SECRET_LDAP_ROOT},cn=${SECRET_GRAFANA_ADMIN_USER}"
+  ingress:
+    enabled: true
+    annotations:
+      cert-manager.io/cluster-issuer: "letsencrypt-production"
+      external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
+      external-dns/is-public: "true"
+      hajimari.io/enable: "true"
+      hajimari.io/group: "identity"
+      hajimari.io/name: "LDAP Admin"
+      hajimari.io/icon: "mdi:shield-crown-outline"
+    hosts:
+      - host: &host phpldapadmin.${SECRET_DOMAIN}
+        paths:
+          - path: /
+            pathType: Prefix
+    tls:
+      - hosts:
+          - *host
+        secretName: phpldapadmin-tls
