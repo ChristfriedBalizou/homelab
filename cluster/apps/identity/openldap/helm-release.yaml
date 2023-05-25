@@ -18,6 +18,9 @@ spec:
   values:
     env:
       LDAP_ROOT: ${SECRET_LDAP_ROOT}
+      LDAP_USERS: ${SECRET_GRAFANA_ADMIN_USER}
+      LDAP_PASSWORDS: ${SECRET_GRAFANA_ADMIN_PASSWORD}
+      LDAP_GROUP: "admin"
     replicaCount: 2
     adminUser: ${SECRET_GRAFANA_ADMIN_USER}
     adminPassword: ${SECRET_GRAFANA_ADMIN_PASSWORD}
