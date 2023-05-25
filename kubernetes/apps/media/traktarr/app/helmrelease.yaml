@@ -31,8 +31,8 @@ spec:
       tag: latest
     env:
       TZ: ${TIMEZONE}
-      PGID: 568
-      PUID: 568
+      PGID: 1000
+      PUID: 1000
       DELAY: 2.5
       SORT: rating
       NOSEARCH: yes
@@ -54,13 +54,6 @@ spec:
           http:
             port: 80
             protocol: TCP
-    podSecurityContext:
-      runAsUser: 568
-      runAsGroup: 568
-      fsGroup: 568
-      fsGroupChangePolicy: "OnRootMismatch"
-      supplementalGroups:
-        - 100
     persistence:
       config:
         enabled: "true"
