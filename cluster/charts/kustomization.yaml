@@ -18,4 +18,4 @@ resources:
   - prometheus-community-charts.yaml
   - dex-charts.yaml
   - loft-charts.yaml
-  - oauth2-proxy.yaml
+  - oauth2-proxy-charts.yaml
