@@ -19,7 +19,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: config-openldap
-  namespace: media
+  namespace: identity
 spec:
   accessModes:
     - ReadWriteMany
