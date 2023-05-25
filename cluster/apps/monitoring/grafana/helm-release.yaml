@@ -22,11 +22,11 @@ spec:
       GF_EXPLORE_ENABLED: true
       GF_PANELS_DISABLE_SANITIZE_HTML: true
       GF_LOG_FILTERS: rendering:debug
-    adminUser: ${GRAFANA_ADMIN_USER}
-    adminPassword: ${GRAFANA_ADMIN_PASSWORD}
+    adminUser: ${SECRET_GRAFANA_ADMIN_USER}
+    adminPassword: ${SECRET_GRAFANA_ADMIN_PASSWORD}
     grafana.ini:
       server:
-        root_url: https://grafana.${SECRET_DOMAIN}
+        root_url: "https://grafana.${SECRET_DOMAIN}"
       paths:
         data: /var/lib/grafana/data
         logs: /var/log/grafana
