@@ -53,7 +53,7 @@ spec:
       data:
         enabled: true
         existingClaim: config-openldap
-        mountPath: /bitnami/openldap/data
+        mountPath: /bitnami/openldap
       ldif:
         enabled: true
         type: secret
