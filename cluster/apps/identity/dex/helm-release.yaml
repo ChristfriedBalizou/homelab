@@ -64,13 +64,11 @@ spec:
               emailAttr: uid
               nameAttr: cn
             groupSearch:
-              baseDN: "ou=groups,${SECRET_LDAP_ROOT}"
-              filter: "(|(objectClass=posixGroup)(objectClass=groupOfNames))"
+              baseDN: "${SECRET_LDAP_ROOT}"
+              filter: "(objectClass=posixGroup)"
               userMatchers:
                 - userAttr: uid
                   groupAttr: memberUid
-                - userAttr: DN
-                  groupAttr: member
               nameAttr: cn
         - type: github
           id: github
