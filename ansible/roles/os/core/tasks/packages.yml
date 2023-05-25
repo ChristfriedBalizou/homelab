@@ -12,7 +12,7 @@
 
 - name: Packages | Install required packages
   ansible.builtin.apt:
-    name: "{{ packages | default([]) }}"
+    name: "{{ ubuntu.packages | default([]) }}"
     state: present
     update_cache: true
 

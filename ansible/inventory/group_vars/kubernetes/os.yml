@@ -25,7 +25,6 @@ ubuntu:
   packages:
     - hdparm
     - htop
-    - intel-gpu-tools
     - ipvsadm
     - lm-sensors
     - nano
@@ -33,3 +32,4 @@ ubuntu:
     - socat
     - python3-kubernetes
     - python3-yaml
+    - nfs-common

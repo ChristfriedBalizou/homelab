@@ -471,8 +471,18 @@ generate_ansible_host_secrets() {
     local node_password=
     local node_hostname=
     local node_control=
+    local master_node_ip=
     default_control_node_prefix=${BOOTSTRAP_ANSIBLE_DEFAULT_CONTROL_NODE_HOSTNAME_PREFIX:-k8s-}
     default_worker_node_prefix=${BOOTSTRAP_ANSIBLE_DEFAULT_NODE_HOSTNAME_PREFIX:-k8s-}
+
+    for var in "${!BOOTSTRAP_ANSIBLE_HOST_ADDR_@}"; do
+        node_id=$(echo "${var}" | awk -F"_" '{print $5}')
+        node_control="BOOTSTRAP_ANSIBLE_CONTROL_NODE_${node_id}"
+        if [[ "${!node_control}" == "true" ]]; then
+          master_node_ip="${!var}"
+        fi
+    done
+
     for var in "${!BOOTSTRAP_ANSIBLE_HOST_ADDR_@}"; do
         node_id=$(echo "${var}" | awk -F"_" '{print $5}')
         node_control="BOOTSTRAP_ANSIBLE_CONTROL_NODE_${node_id}"
@@ -496,9 +506,27 @@ generate_ansible_host_secrets() {
         {
             node_username="BOOTSTRAP_ANSIBLE_SSH_USERNAME_${node_id}"
             node_password="BOOTSTRAP_ANSIBLE_SUDO_PASSWORD_${node_id}"
+            node_devices="BOOTSTRAP_ANSIBLE_DEVICES_${node_id}"
+
             printf "kind: Secret\n"
             printf "ansible_user: %s\n" "${!node_username}"
             printf "ansible_become_pass: %s\n" "${!node_password}"
+
+            if [[ ! -z "${!node_devices}" ]]; then
+                printf "nfs_devices:\n"
+
+                for dev in "${!node_devices}"; do
+                    printf "  - device: /dev/%s\n" "${dev}"
+                    printf "    mount: /mnt/ssd-%s\n" "${dev}"
+
+                    if [[ "${!node_control}" == "true" ]]; then
+                        printf "    fstype: ext4\n"
+                    else
+                        printf "    fstype: nfs\n"
+                        printf "    host: %s\n" "${master_node_ip}"
+                    fi
+                done
+            fi
         } > "${PROJECT_DIR}/ansible/inventory/host_vars/${node_hostname}.sops.yml"
         sops --encrypt --in-place "${PROJECT_DIR}/ansible/inventory/host_vars/${node_hostname}.sops.yml"
     done

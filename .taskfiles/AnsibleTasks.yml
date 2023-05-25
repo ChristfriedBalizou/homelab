@@ -43,13 +43,12 @@ tasks:
       - ansible-playbook -i {{.ANSIBLE_INVENTORY_DIR}}/hosts.yml {{.ANSIBLE_PLAYBOOK_DIR}}/cluster-nuke.yml
       - task: reboot
 
-  nukerook:
-    desc: Wipe rook storage unmount drives
+  nuke-nfs:
+    desc: Wipe nfs storage unmount drives
     dir: "{{.ANSIBLE_DIR}}"
     interactive: true
     cmds:
-      - ansible-playbook -i {{.ANSIBLE_INVENTORY_DIR}}/hosts.yml {{.ANSIBLE_PLAYBOOK_DIR}}/rook-nuke.yml
-      - task: reboot
+      - ansible-playbook -i {{.ANSIBLE_INVENTORY_DIR}}/hosts.yml {{.ANSIBLE_PLAYBOOK_DIR}}/cluster-nuke-nfs.yml
 
   ping:
     desc: Ping all the hosts
