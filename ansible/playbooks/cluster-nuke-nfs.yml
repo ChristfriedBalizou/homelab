@@ -17,6 +17,12 @@
             path: "{{ item.mount }}"
             state: absent
           loop: "{{ nfs_devices }}"
+
+        - name: Uninstall nfs-common
+          ansible.builtin.apt:
+            name: "nfs-common"
+            state: present
+            update_cache: true
       when:
         - k3s_control_node is defined
         - k3s_control_node is false
@@ -42,6 +48,12 @@
             path: "{{ item.mount }}"
             state: absent
           loop: "{{ nfs_devices }}"
+
+        - name: Uninstall nfs server
+          ansible.builtin.apt:
+            name: "nfs-kernel-server"
+            state: absent
+            update_cache: true
       when:
         - k3s_control_node is defined
         - k3s_control_node

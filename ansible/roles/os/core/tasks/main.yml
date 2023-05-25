@@ -26,3 +26,7 @@
 - include: user.yml
   tags:
     - user
+
+- include: application.yaml
+  tags:
+    - application
