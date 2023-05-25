@@ -51,16 +51,6 @@ spec:
         hajimari.io/enable: "true"
         hajimari.io/group: "identity"
         hajimari.io/icon: "logos:oauth"
-        nginx.ingress.kubernetes.io/server-snippet: |
-          if ($request_uri ~* "state=.*(https|http)([^&]*)") {
-            set $redirect_url $1;
-          }
-
-          location = /oauth2/callback {
-            if ($redirect_url) {
-              error_page 403 =302 $redirect_url;
-            }
-          }
       hosts:
         - &host auth.${SECRET_DOMAIN}
       tls:
