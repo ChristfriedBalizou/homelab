@@ -18,6 +18,9 @@ spec:
   values:
     extraArgs:
       - --enable-skip-login
+      - --disable-settings-authorizer
+      - --enable-insecure-login
+      - --token-ttl=43200
     serviceAccount:
       create: true
       name: ${SECRET_GRAFANA_ADMIN_USER}
