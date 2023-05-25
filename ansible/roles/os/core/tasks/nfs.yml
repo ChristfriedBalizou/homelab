@@ -37,7 +37,7 @@
         regexp: "^{{ item.item.mount }}"
         path: /etc/exports
         state: present
-        line: "{{ item.item.mount }} *(rw,no_root_squash,insecure,async,no_subtree_check,anonuid=1000,anongid=1000)"
+        line: "{{ item.item.mount }} *(rw,all_squash,insecure,async,no_subtree_check,anonuid=1000,anongid=1000)"
       when: item.stdout_lines
       loop: "{{ uuid.results }}"
 
