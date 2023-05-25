@@ -38,6 +38,7 @@ main() {
         verify_grafana
         verify_dex
         verify_telegram
+        verify_slack
         verify_openldap
         verify_dashboard
         verify_vpn
@@ -79,9 +80,13 @@ main() {
             > "${PROJECT_DIR}/terraform/cloudflare/secret.sops.yaml"
         sops --encrypt --in-place "${PROJECT_DIR}/terraform/cloudflare/secret.sops.yaml"
 
-        envsubst < "${PROJECT_DIR}/templates/kubernetes/cluster-notification-secret.sops.yaml" \
-            > "${PROJECT_DIR}/kubernetes/apps/flux-system/notification/app/secret.sops.yaml"
-        sops --encrypt --in-place "${PROJECT_DIR}/kubernetes/apps/flux-system/notification/app/secret.sops.yaml"
+        envsubst < "${PROJECT_DIR}/templates/kubernetes/notification/cluster-telegram-secret.sops.yaml" \
+            > "${PROJECT_DIR}/kubernetes/apps/flux-system/notification/telegram/app/secret.sops.yaml"
+        sops --encrypt --in-place "${PROJECT_DIR}/kubernetes/apps/flux-system/notification/telegram/app/secret.sops.yaml"
+
+        envsubst < "${PROJECT_DIR}/templates/kubernetes/notification/cluster-slack-secret.sops.yaml" \
+            > "${PROJECT_DIR}/kubernetes/apps/flux-system/notification/slack/app/secret.sops.yaml"
+        sops --encrypt --in-place "${PROJECT_DIR}/kubernetes/apps/flux-system/notification/slack/app/secret.sops.yaml"
 
         envsubst < "${PROJECT_DIR}/templates/kubernetes/cluster-media-secret.sops.yaml" \
             > "${PROJECT_DIR}/kubernetes/apps/media/secret.sops.yaml"
@@ -421,6 +426,10 @@ verify_telegram() {
     _has_envar "TELEGRAM_CHANNEL"
     _has_envar "TELEGRAM_TOKEN"
     _has_envar "TELEGRAM_API"
+}
+
+verify_slack() {
+    _has_envar "SLACK_TOKEN"
 }
 
 verify_openldap() {

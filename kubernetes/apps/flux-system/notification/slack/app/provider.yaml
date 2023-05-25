@@ -1,0 +1,12 @@
+---
+apiVersion: notification.toolkit.fluxcd.io/v1beta1
+kind: Provider
+metadata:
+  name: slack-provider
+  namespace: flux-system
+spec:
+  type: slack
+  channel: homelab
+  address: https://slack.com/api/chat.postMessage
+  secretRef:
+    name: slack-token
