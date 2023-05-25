@@ -19,3 +19,5 @@ spec:
     replicaCount: 2
     adminUser: ${SECRET_GRAFANA_ADMIN_USER}
     adminPassword: ${SECRET_GRAFANA_ADMIN_PASSWORD}
+    service:
+      port: 1389
