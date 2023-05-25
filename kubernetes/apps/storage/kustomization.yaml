@@ -4,4 +4,4 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./db
-  - ./nfs-kasten
+  - ./nfs-kasten/ks.yaml
