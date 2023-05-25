@@ -3,7 +3,7 @@
 .taskfiles/
 .vscode/
 provision/
-tmpl/
+templates/
 .config.sample.env
 .envrc
 .gitattributes
