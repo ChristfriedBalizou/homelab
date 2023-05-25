@@ -32,6 +32,16 @@ spec:
     image:
       repository: ghcr.io/onedr0p/sonarr-develop
       tag: 4.0.0.328@sha256:8c0ff01a11ccf1149252cdf26fca1a50b2e6debdd9515adfdef36e3c052f89ec
+    env:
+      TZ: ${TIMEZONE}
+      SONARR__INSTANCE_NAME: Sonarr
+      SONARR__PORT: &port 80
+      SONARR__LOG_LEVEL: info
+    service:
+      main:
+        ports:
+          http:
+            port: *port
     ingress:
       main:
         enabled: true
