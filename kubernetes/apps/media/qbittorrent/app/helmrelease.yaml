@@ -57,3 +57,12 @@ spec:
         memory: 2Gi
       limits:
         memory: 2Gi
+    affintity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: kubernetes.io/hostname
+                  operator: In
+                  values:
+                    - k8s-3
