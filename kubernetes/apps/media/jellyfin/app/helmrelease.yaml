@@ -69,10 +69,10 @@ spec:
         requiredDuringSchedulingIgnoredDuringExecution:
           nodeSelectorTerms:
             - matchExpressions:
-                - key: intel.feature.node.kubernetes.io/gpu
+                - key: kubernetes.io/hostname
                   operator: In
                   values:
-                    - "true"
+                    - k8s-3
     resources:
       requests:
         cpu: 100m
