@@ -56,11 +56,11 @@ spec:
       resources:
         mon:
           limits:
-            cpu: "200m"
-            memory: "500m"
-          request:
-            cpu: "100m"
-            memory: "250m"
+            cpu: "1000m"
+            memory: "1Gi"
+          requests:
+            cpu: "500m"
+            memory: "1Gi"
         osd:
           limits:
             cpu: "400m"
