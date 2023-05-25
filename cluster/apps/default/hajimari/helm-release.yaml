@@ -31,6 +31,7 @@ spec:
           - networking
           - monitoring
           - identity
+          - kube-system
       name: "${SECRET_GRAFANA_ADMIN_USER}"
       lightTheme: blackboard
       darkTheme: horizon

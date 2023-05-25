@@ -20,3 +20,4 @@ resources:
   - oauth2-proxy-charts.yaml
   - christfried-charts.yaml
   - rook-charts.yaml
+  - kubernetes-dashboard-charts.yaml
