@@ -4,7 +4,7 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./secret.sops.yaml
-  - ./media.yaml
+  - ./pvc.yaml
   - ./torrent/ks.yaml
   - ./sonarr/ks.yaml
   - ./radarr/ks.yaml
