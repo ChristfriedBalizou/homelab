@@ -3,6 +3,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: dex-templates
+  namespace: identity
 data:
   approval.html: |
     ${APPROVAL_HTML}
