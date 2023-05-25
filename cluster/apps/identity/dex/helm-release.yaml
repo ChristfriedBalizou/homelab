@@ -63,7 +63,7 @@ spec:
               emailAttr: mail
               nameAttr: cn
               idAttr: DN
-              preferredUsernameAttr: givenname
+              preferredUsernameAttr: cn
             groupSearch:
               baseDN: "ou=groups,${SECRET_LDAP_ROOT}"
               filter: "(objectClass=groupOfNames)"
