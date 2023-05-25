@@ -64,6 +64,12 @@ spec:
             clientID: ${DEX_GOOGLE_CLIENT_ID}
             clientSecret: ${DEX_GOOGLE_CLIENT_SECRET}
             redirectURI: https://dex.${SECRET_DOMAIN}/callback
+      staticClients:
+        - name: Loft
+          id: ${DEX_LOFT_CLIENT_ID}
+          secret: ${DEX_LOFT_CLIENT_SECRET}
+          redirectURIs:
+            - 'https://loft.${SECRET_DOMAIN}/auth/oidc/callback'
       storage:
         type: kubernetes
         config:

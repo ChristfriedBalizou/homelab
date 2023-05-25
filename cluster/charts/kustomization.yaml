@@ -17,3 +17,4 @@ resources:
   - grafana-charts.yaml
   - prometheus-community-charts.yaml
   - dex-charts.yaml
+  - loft-charts.yaml
