@@ -70,6 +70,7 @@ spec:
         storageClass: nfs-client
       media:
         enabled: true
+        accessMode: ReadWriteMany
         storageClass: nfs-client
     resources:
       requests:
