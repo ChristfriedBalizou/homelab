@@ -13,9 +13,13 @@ spec:
     kind: GitRepository
     name: home-kubernetes
   healthChecks:
-    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
-      kind: HelmRelease
-      name: notification
+    - apiVersion: notification.toolkit.fluxcd.io/v1beta2
+      kind: Alert
+      name: telegram-alert
+      namespace: flux-system
+    - apiVersion: notification.toolkit.fluxcd.io/v1beta2
+      kind: Provider
+      name: telegram-provider
       namespace: flux-system
   interval: 30m
   retryInterval: 1m
