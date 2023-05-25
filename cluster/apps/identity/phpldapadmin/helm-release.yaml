@@ -33,7 +33,7 @@ spec:
           - server:
               - host: ldap.${SECRET_DOMAIN}
               - port: 636
-              - tls: false
+              - tls: true
           - login:
               - bind_id: "cn=admin,dc=example,dc=org"
     ingress:
