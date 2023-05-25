@@ -57,5 +57,4 @@ spec:
     persistence:
       config:
         enabled: "true"
-        type: secret
-        name: traktarr-config
+        existingClaim: config-traktarr
