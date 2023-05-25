@@ -1,0 +1,30 @@
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: media-usenets
+spec:
+  accessModes:
+    - ReadWriteMany
+  capacity:
+    storage: 250Gi
+  nfs:
+    path: /mnt/ssd-sdc/media/usenets
+    serve: ${NFS_SERVER_IP}
+  storageClassName: media-usenets
+  volumeMode: Filesystem
+  persistentVolumeReclaimPolicy: Retain
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: media-usenets
+  namespace: media
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 250Gi
+  storageClassName: media-usenets
+  volumeMode: Filesystem

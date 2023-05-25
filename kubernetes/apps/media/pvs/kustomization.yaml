@@ -5,3 +5,4 @@ resources:
   - movies.yaml
   - series.yaml
   - torrents.yaml
+  - usenets.yaml
