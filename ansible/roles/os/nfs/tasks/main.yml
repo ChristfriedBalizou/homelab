@@ -9,8 +9,8 @@
 
     - name: Mount device from fstab
       ansible.posix.mount:
-        path: "{{ item.device }}"
-        src: "{{ item.mount }}"
+        path: "{{ item.mount }}"
+        src: "{{ item.device }}"
         fstype: "{{ item.fstype }}"
         state: present
       loop: "{{ nfs_devices }}"
@@ -39,10 +39,10 @@
 
     - name: Create persistence folders
       ansible.builtin.file:
-        path: "{{ media.persistence }}/{{ item }}"
+        path: "{{ media.persistence.mount }}/{{ item }}"
         state: directory
         mode: '0766'
-      loop: "{{ media.persitence.folders }}"
+      loop: "{{ media.persistence.folders }}"
   when:
     - k3s_control_node is defined
     - k3s_control_node
