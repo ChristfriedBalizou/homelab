@@ -38,7 +38,7 @@ spec:
             port: ${SECRET_LDAP_SERVER_PORT}
     controller:
       enabled: true
-      replicas: 1
+      replicas: 2
     affinity:
       podAntiAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
