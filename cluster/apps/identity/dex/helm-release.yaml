@@ -60,7 +60,7 @@ spec:
             userSearch:
               baseDN: "ou=users,${SECRET_LDAP_ROOT}"
               filter: "(objectClass=posixAccount)"
-              username: userPrincipalName
+              username: mail
               emailAttr: mail
               nameAttr: uid
               idAttr: DN
