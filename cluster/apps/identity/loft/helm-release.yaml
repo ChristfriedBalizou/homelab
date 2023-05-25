@@ -19,7 +19,7 @@ spec:
     admin:
       create: true
       username: ${SECRET_GRAFANA_ADMIN_USER}
-      password: ${SECRET_GRAFAN_ADMIN_PASSWORD}
+      password: ${SECRET_GRAFANA_ADMIN_PASSWORD}
     ingress:
       enabled: true
       annotations:
