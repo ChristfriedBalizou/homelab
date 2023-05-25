@@ -14,8 +14,6 @@ media:
       - apps/traktarr
       - apps/openldap/database
       - apps/openldap/config
-      - apps/db/postgresql
-      - apps/db/pgadmin
   persistence:
     mount: "/mnt/nfs/volume2"
     folders:

@@ -37,14 +37,14 @@
       ansible.builtin.file:
         path: "{{ media.applications.mount }}/{{ item }}"
         state: directory
-        mode: '0766'
+        mode: '0777'
       loop: "{{ media.applications.folders }}"
 
-    - name: Create persistence folders
+    - name: Create data folders
       ansible.builtin.file:
         path: "{{ media.persistence.mount }}/{{ item }}"
         state: directory
-        mode: '0766'
+        mode: '0777'
       loop: "{{ media.persistence.folders }}"
   when:
     - k3s_control_node is defined
@@ -58,26 +58,34 @@
         state: present
         update_cache: true
 
-    - name: Mount nfs device from fstab
-      ansible.posix.mount:
-        path: "{{ item.mount }}"
-        src: "{{ item.host }}:{{ item.mount }}"
-        fstype: "{{ item.fstype }}"
-        opts: "rw"
-        state: mounted
+    - name: Configure NFSv4 IDMAPD
+      ansible.builtin.lineinfile:
+        regexp: "^{{ item.reg }}"
+        line: "{{ item.value }}"
+        path: /etc/default/nfs-common
+      loop:
+        - { reg: "NEED_IDMAPD", value: "NEED_IDMAPD=yes" }
+        - { reg: "NEED_GSSD", value: "NEED_GSSD=no" }
+
+    - name: Mount nfs device to auto.nfs
+      ansible.builtin.lineinfile:
+        path: "/etc/auto.nfs"
+        line: "{{ item.name }} -fstype={{ item.fstype }} {{ item.host }}:{{ item.mount }}"
+        create: true
       loop: "{{ nfs_devices }}"
+
+    - name: Mount nfs with auto.master
+      ansible.builtin.lineinfile:
+        path: "/etc/auto.master"
+        line: "/mnt/nfs /etc/auto.nfs"
+        create: true
+
+    - name: Restart autofs
+      ansible.builtin.systemd:
+        name: autofs.service
+        enabled: true
+        state: restarted
+      failed_when: false
   when:
     - k3s_control_node is defined
     - k3s_control_node is false
-
-- name: Configure and install admin monitors
-  block:
-    - name: Recursively change ownership of drive mount directory
-      ansible.builtin.file:
-        path: "{{ item.mount }}"
-        state: directory
-        recurse: true
-        mode: "0766"
-        owner: "{{ ansible_user }}"
-        group: "{{ ansible_user }}"
-      loop: "{{ nfs_devices }}"

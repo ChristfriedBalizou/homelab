@@ -570,14 +570,15 @@ generate_ansible_host_secrets() {
                 printf "nfs_devices:\n"
 
                 for node_device in ${!node_devices}; do
-                    IFS=',' read device mount <<< "${node_device}"
+                    IFS=',' read device name mount <<< "${node_device}"
                     printf "  - mount: %s\n" "${mount}"
+                    printf "    name: %s\n" "${name}"
 
                     if [[ "${!node_control}" == "true" ]]; then
                         printf "    device: UUID=%s\n" "${!device}"
                         printf "    fstype: ext4\n"
                     else
-                        printf "    fstype: nfs\n"
+                        printf "    fstype: nfs4\n"
                         printf "    host: %s\n" "${master_node_ip}"
                     fi
                 done

@@ -14,15 +14,34 @@
       block:
         - name: unmount nfs fstab
           ansible.posix.mount:
-            path: "{{ item.mount }}"
+            path: "/mnt/nfs"
             state: absent
-          loop: "{{ nfs_devices }}"
 
         - name: Uninstall nfs-common
           ansible.builtin.apt:
             name: "nfs-common"
             state: present
             update_cache: true
+
+        - name: Unmount nfs device to auto.nfs
+          ansible.builtin.file:
+            path: "/etc/auto.nfs"
+            state: absent
+
+        - name: Mount nfs with auto.master
+          ansible.builtin.lineinfile:
+            path: "/etc/auto.master"
+            search_string: "/mnt/nfs"
+            state: absent
+
+        - name: Remove configure NFSv4 IDMAPD
+          ansible.builtin.lineinfile:
+            regexp: "^{{ item }}"
+            state: absent
+            path: /etc/default/nfs-common
+          loop:
+            - "NEED_IDMAPD"
+            - "NEED_GSSD"
       when:
         - k3s_control_node is defined
         - k3s_control_node is false
