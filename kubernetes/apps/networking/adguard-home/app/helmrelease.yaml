@@ -72,10 +72,17 @@ spec:
             paths:
               - path: /
                 pathType: Prefix
+          - host: &dns "dns.${SECRET_DOMAIN}"
+            paths:
+              - path: /dns-query
+                pathType: Prefix
         tls:
           - hosts:
               - *host
             secretName: adguard-home-tls
+          - hosts:
+              - *dns
+            secretName: dns-tls
     persistence:
       config:
         enabled: true
@@ -85,3 +92,9 @@ spec:
         enabled: true
         existingClaim: data-adguard-home
         mountPath: /opt/adguardhome/work
+      tls:
+        enabled: true
+        existingClaim: dns-tls
+        type: secret
+        mountPath: /etc/tls/adguard-home
+        readOnly: true
