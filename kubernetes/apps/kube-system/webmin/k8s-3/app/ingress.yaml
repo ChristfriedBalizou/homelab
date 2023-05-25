@@ -19,10 +19,13 @@ spec:
     - host: &host "k8s-3.${SECRET_DOMAIN}"
       http:
         paths:
-        - backend:
-            serviceName: k8s-3
-            servicePort: 80
-          path: /
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: k8s-3
+              port:
+                number: 80
   tls:
     - hosts:
         - *host
