@@ -30,6 +30,7 @@ spec:
           - default
           - networking
           - monitoring
+          - identity
       name: "${SECERT_GRAFANA_ADMIN_USER}"
       lightTheme: blackboard
       darkTheme: horizon
