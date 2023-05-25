@@ -2,29 +2,29 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: media-movies
+  name: media
 spec:
   accessModes:
     - ReadWriteMany
   capacity:
-    storage: 250Gi
+    storage: 1Mi
   nfs:
-    path: /mnt/ssd-sdb/media/movies
+    path: /mnt/ssd-sdb/media
     server: ${NFS_SERVER_IP}
-  storageClassName: media-movies
+  storageClassName: media
   volumeMode: Filesystem
   persistentVolumeReclaimPolicy: Retain
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: media-movies
+  name: media
   namespace: media
 spec:
   accessModes:
     - ReadWriteMany
   resources:
     requests:
-      storage: 250Gi
-  storageClassName: media-movies
+      storage: 1Mi
+  storageClassName: media
   volumeMode: Filesystem

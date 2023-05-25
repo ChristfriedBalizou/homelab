@@ -44,14 +44,10 @@ spec:
       fsGroup: 568
       fsGroupChangePolicy: OnRootMismatch
     persistence:
-      movies:
+      media:
         enabled: true
-        mountPath: /media/movies
-        existingClaim: media-movies
-      series:
-        enabled: true
-        mountPath: /media/series
-        existingClaim: media-series
+        mountPath: /media
+        existingClaim: media
     resources:
       requests:
         cpu: 10m

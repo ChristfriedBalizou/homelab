@@ -55,10 +55,10 @@ spec:
       config:
         enabled: true
         existingClaim: config-qbittorrent
-      downloads:
+      media:
         enabled: true
-        mountPath: /downloads
-        existingClaim: media-torrents
+        mountPath: /media
+        existingClaim: media
     podAnnotations:
       setGateway: "true"
     resources:

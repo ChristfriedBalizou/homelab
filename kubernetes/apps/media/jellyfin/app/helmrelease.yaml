@@ -57,14 +57,10 @@ spec:
       config:
         enabled: true
         existingClaim: config-jellyfin
-      movies:
+      media:
         enabled: true
-        mountPath: /movies
-        existingClaim: media-movies
-      series:
-        enabled: true
-        mountPath: /series
-        existingClaim: media-series
+        mountPath: /media
+        existingClaim: media
       transcode:
         enabled: true
         type: emptyDir

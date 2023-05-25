@@ -98,18 +98,10 @@ spec:
       config:
         enabled: true
         existingClaim: config-radarr
-      movies:
+      media:
         enabled: true
-        mountPath: /movies
-        existingClaim: media-movies
-      torrents:
-        enabled: true
-        mountPath: /downloads
-        existingClaim: media-torrents
-      usenets:
-        enabled: true
-        mountPath: /usenets
-        existingClaim: media-usenets
+        mountPath: /media
+        existingClaim: media
     resources:
       requests:
         cpu: 10m

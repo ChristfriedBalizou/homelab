@@ -94,18 +94,10 @@ spec:
       config:
         enabled: true
         existingClaim: config-prowlarr
-      movies:
+      media:
         enabled: true
-        mountPath: /movies
-        existingClaim: media-movies
-      series:
-        enabled: true
-        mountPath: /series
-        existingClaim: media-series
-      downloads:
-        enabled: true
-        mountPath: /downloads
-        existingClaim: media-torrents
+        mountPath: /media
+        existingClaim: media
     resources:
       requests:
         cpu: 10m

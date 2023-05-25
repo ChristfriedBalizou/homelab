@@ -45,10 +45,10 @@ spec:
       config:
         enabled: true
         existingClaim: config-nzbget
-      usenets:
+      media:
         enabled: true
-        mountPath: /usenets
-        existingClaim: media-usenets
+        mountPath: /media
+        existingClaim: media
     podSecurityContext:
       runAsUser: 568
       runAsGroup: 568
