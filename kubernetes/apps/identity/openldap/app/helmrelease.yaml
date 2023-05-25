@@ -40,6 +40,12 @@ spec:
       enabled: true
       replicas: 1
     affinity:
+      podAntiAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchLabels:
+                name: openldap
+            topologyKey: kubernetes.io/hostname
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
           nodeSelectorTerms:
@@ -47,4 +53,6 @@ spec:
                 - key: kubernetes.io/hostname
                   operator: In
                   values:
+                    - k8s-0
+                    - k8s-1
                     - k8s-3
