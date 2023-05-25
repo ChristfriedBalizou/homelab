@@ -84,7 +84,7 @@ main() {
             > "${PROJECT_DIR}/kubernetes/apps/flux-system/notification/telegram/app/secret.sops.yaml"
         sops --encrypt --in-place "${PROJECT_DIR}/kubernetes/apps/flux-system/notification/telegram/app/secret.sops.yaml"
 
-        envsubst < "${PROJECT_DIR}/templates/kubernetes/notification/cluster-slack-secret.sops.yaml" \
+        envsubst < "${PROJECT_DIR}/templates/kubernetes/notification/cluster-slack-webhook-secret.sops.yaml" \
             > "${PROJECT_DIR}/kubernetes/apps/flux-system/notification/slack/app/secret.sops.yaml"
         sops --encrypt --in-place "${PROJECT_DIR}/kubernetes/apps/flux-system/notification/slack/app/secret.sops.yaml"
 
@@ -430,6 +430,7 @@ verify_telegram() {
 
 verify_slack() {
     _has_envar "SLACK_TOKEN"
+    _has_envar "SLACK_WEBHOOK"
 }
 
 verify_openldap() {
