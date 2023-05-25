@@ -45,9 +45,9 @@ spec:
       config:
         enabled: true
         existingClaim: config-nzbget
-      downloads:
+      usenets:
         enabled: true
-        mountPath: /downloads
+        mountPath: /usenets
         existingClaim: media-usenets
     podSecurityContext:
       runAsUser: 568
