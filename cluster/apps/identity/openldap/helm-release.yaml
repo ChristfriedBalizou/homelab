@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://christfriedbalizou.github.io/helm-charts
       chart: openldap
-      version: 0.2.2
+      version: 0.2.3
       sourceRef:
         kind: HelmRepository
         name: christfried-charts
@@ -37,3 +37,4 @@ spec:
     persistence:
       enabled: true
       existingClaim: "openldap-filesystem"
+      mountPath: /bitnami/openldap/data
