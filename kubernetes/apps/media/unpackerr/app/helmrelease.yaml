@@ -29,7 +29,7 @@ spec:
         secretKeyRef:
           name: cluster-media-secrets
           key: SONARR_0_API_KEY
-      UN_RADARR_0_URL: https://radarr.media
+      UN_RADARR_0_URL: http://radarr.media
       UN_RADARR_0_PATHS_0: /media/movies
       UN_RADARR_0_API_KEY:
         secretKeyRef:
