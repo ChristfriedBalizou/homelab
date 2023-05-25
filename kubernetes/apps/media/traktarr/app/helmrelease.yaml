@@ -47,7 +47,7 @@ spec:
       NOSEARCH: yes
       NOTIFICATIONS: yes
       BLACKLIST: yes
-      RUNNOW: yes
+      RUNNOW: no
       SKIPUPDATE: yes
       APP_BRANCH: master
     probes:
