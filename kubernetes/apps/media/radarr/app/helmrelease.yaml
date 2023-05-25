@@ -70,7 +70,7 @@ spec:
               return 200;
             }
 
-            if ( $proxy_upstream_name ~* "media-(sonarr|radarr|prowlarr|jellyfin|jellyseerr)" ) {
+            if ( $proxy_upstream_name ~* "media\-(sonarr|radarr|prowlarr|jellyfin|jellyseerr)" ) {
               return 200;
             }
           nginx.ingress.kubernetes.io/auth-url: https://auth.${SECRET_DOMAIN}/oauth2/auth?allowed_groups=admin
