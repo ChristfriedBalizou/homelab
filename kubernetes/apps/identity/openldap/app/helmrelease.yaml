@@ -43,6 +43,10 @@ spec:
       enabled: true
       replicas: 2
     persistence:
+      data:
+        enabled: true
+        existingClaim: config-openldap
+        mountPath: /bitnami/openldap
       ldif:
         enabled: true
         type: secret

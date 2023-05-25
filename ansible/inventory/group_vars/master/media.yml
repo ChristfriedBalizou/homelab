@@ -11,6 +11,7 @@ media:
       - apps/jellyseerr
       - apps/unpackerr
       - apps/nzbget
+      - apps/openldap
       - apps/db/postgresql
       - apps/db/pgadmin
   persistence:
