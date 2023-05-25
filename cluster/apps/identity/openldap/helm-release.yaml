@@ -17,8 +17,8 @@ spec:
         namespace: flux-system
   values:
     replicaCount: 2
-    adminUser: ${GRAFANA_ADMIN_USER}
-    adminPassword: ${GRAFANA_ADMIN_PASSWORD}
+    adminUser: ${SECRET_GRAFANA_ADMIN_USER}
+    adminPassword: ${SECRET_GRAFANA_ADMIN_PASSWORD}
     ingress:
       enabled: true
       ingressClassName: "nginx"
