@@ -10,9 +10,7 @@ packages:
   - apt-listchanges
   - hdparm
   - htop
-  - intel-gpu-tools
   - ipvsadm
   - nano
   - nvme-cli
   - socat
-  - python3-libselinux
