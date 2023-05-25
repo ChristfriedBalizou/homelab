@@ -79,6 +79,10 @@ spec:
         enabled: true
         mountPath: /series
         existingClaim: media-series
+      downloads:
+        enabled: true
+        mountPath: /downloads
+        existingClaim: media-torrents
     resources:
       requests:
         cpu: 10m
