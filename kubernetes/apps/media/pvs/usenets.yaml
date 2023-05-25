@@ -9,7 +9,7 @@ spec:
   capacity:
     storage: 250Gi
   nfs:
-    path: /mnt/ssd-sdc/media/usenets
+    path: /mnt/ssd-sdb/media/usenets
     server: ${NFS_SERVER_IP}
   storageClassName: media-usenets
   volumeMode: Filesystem
