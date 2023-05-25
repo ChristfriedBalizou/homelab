@@ -26,7 +26,3 @@
 - include: user.yml
   tags:
     - user
-
-- include: nfs.yml
-  tags:
-    - nfs
