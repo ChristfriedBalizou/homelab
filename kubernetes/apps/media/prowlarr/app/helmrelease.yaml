@@ -98,6 +98,10 @@ spec:
         enabled: true
         mountPath: /movies
         existingClaim: media-movies
+      series:
+        enabled: true
+        mountPath: /series
+        existingClaim: media-series
       downloads:
         enabled: true
         mountPath: /downloads

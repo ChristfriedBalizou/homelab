@@ -10,3 +10,4 @@ resources:
   - ./radarr/ks.yaml
   - ./prowlarr/ks.yaml
   - ./jellyfin/ks.yaml
+  - ./unpackerr/ks.yaml
