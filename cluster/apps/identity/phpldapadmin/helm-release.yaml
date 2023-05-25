@@ -57,6 +57,9 @@ spec:
         - hosts:
             - *host
           secretName: "phpldapadmin-tls"
+    volumeMounts:
+      - name: "ldap-tls"
+        mountPath: "/container/service/ldap-client/assets/certs"
     volumes:
       - name: "ldap-tls"
         secret:
