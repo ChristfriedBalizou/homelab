@@ -30,6 +30,12 @@ spec:
           cert-manager.io/cluster-issuer: "letsencrypt-production"
           external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
           external-dns.home.arpa/enabled: "true"
+          nginx.ingress.kubernetes.io/auth-snippet: |
+            if ( $proxy_upstream_name ~* "media-(sonarr|radarr|prowlarr|jellyfin|jellyseerr)" ) {
+              return 200;
+            }
+          nginx.ingress.kubernetes.io/auth-url: https://auth.${SECRET_DOMAIN}/oauth2/auth?allowed_groups=admin
+          nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}/oauth2/start
           hajimari.io/enable: 'true'
           hajimari.io/icon: simple-icons:jellyfin
           hajimari.io/group: Media
