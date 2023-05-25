@@ -76,7 +76,7 @@ spec:
           - hosts:
               - *host
             secretName: adguard-home-tls
-    peristence:
+    persistence:
       config:
         enabled: true
         existingClaim: config-adguard-home
