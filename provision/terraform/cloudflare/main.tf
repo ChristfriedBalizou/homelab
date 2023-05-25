@@ -176,7 +176,7 @@ resource "cloudflare_record" "ldap" {
   name    = "ldap"
   zone_id = lookup(data.cloudflare_zones.domain.zones[0], "id")
   value   = "ipv4.${data.sops_file.cloudflare_secrets.data["cloudflare_domain"]}"
-  proxied = false
+  proxied = true
   type    = "CNAME"
   ttl     = 1
 }
@@ -185,7 +185,7 @@ resource "cloudflare_record" "rook" {
   name    = "rook"
   zone_id = lookup(data.cloudflare_zones.domain.zones[0], "id")
   value   = "ipv4.${data.sops_file.cloudflare_secrets.data["cloudflare_domain"]}"
-  proxied = false
+  proxied = true
   type    = "CNAME"
   ttl     = 1
 }
