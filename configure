@@ -45,6 +45,7 @@ main() {
         verify_vpn
         verify_nfs
         verify_media
+        verify_smtp
         verify_success
     else
         # generate sops configuration file
@@ -240,6 +241,16 @@ verify_addressing() {
         exit 1
     fi
 }
+
+
+verify_smtp() {
+  _has_envar "SMTP_PORT"
+  _has_envar "SMTP_HOST"
+  _has_envar "SMTP_DOMAIN"
+  _has_envar "SMTP_USER"
+  _has_envar "SMTP_PASSWORD"
+}
+
 
 verify_age() {
     _has_envar "BOOTSTRAP_AGE_PUBLIC_KEY"
