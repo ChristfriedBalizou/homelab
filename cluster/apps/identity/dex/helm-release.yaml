@@ -53,24 +53,24 @@ spec:
           id: ldap
           name: LDAP
           config:
-          host: ldap.${SECRET_DOMAIN}
-          startTLS: true
-          bindDN: "${SECRET_LDAP_ROOT},cn=${SECRET_GRAFANA_ADMIN_USER}"
-          bindPW: ${SECRET_GRAFANA_ADMIN_PASSWORD}
-          userSearch:
-            baseDN: "${SECRET_LDAP_ROOT},ou=users"
-            filter: "(objectClass=posixAccount)"
-            username: uid
-            idAttr: uid
-            emailAttr: mail
-            nameAttr: name
-          groupSearch:
-            baseDN: "${SECRET_LDAP_ROOT},ou=groups"
-            filter: "(objectClass=posixGroup)"
-            nameAttr: name
-          userMatchers:
-            - userAttr: uid
-              groupAttr: member
+            host: ldap.${SECRET_DOMAIN}
+            startTLS: true
+            bindDN: "${SECRET_LDAP_ROOT},cn=${SECRET_GRAFANA_ADMIN_USER}"
+            bindPW: ${SECRET_GRAFANA_ADMIN_PASSWORD}
+            userSearch:
+              baseDN: "${SECRET_LDAP_ROOT},ou=users"
+              filter: "(objectClass=posixAccount)"
+              username: uid
+              idAttr: uid
+              emailAttr: mail
+              nameAttr: name
+            groupSearch:
+              baseDN: "${SECRET_LDAP_ROOT},ou=groups"
+              filter: "(objectClass=posixGroup)"
+              nameAttr: name
+            userMatchers:
+              - userAttr: uid
+                groupAttr: member
         - type: github
           id: github
           name: GitHub
