@@ -23,3 +23,22 @@ spec:
     adminPassword: ${SECRET_GRAFANA_ADMIN_PASSWORD}
     service:
       port: 1389
+    ingress:
+      enabled: true
+      ingressClassName: "nginx"
+      annotations:
+        external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
+        external-dns/is-public: "true"
+        hajimari.io/enable: "true"
+        hajimari.io/icon: "carbon:gateway-user-access"
+      hosts:
+        - &host "ldap.${SECRET_DOMAIN}"
+      path: /
+      pathType: Prefix
+    resources:
+      requests:
+        cpu: 200m
+        memory: 300Mi
+      limits:
+        cpu: 400m
+        memory: 500Mi

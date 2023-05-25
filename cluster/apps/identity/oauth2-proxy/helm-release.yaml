@@ -46,7 +46,7 @@ spec:
         external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
         external-dns/is-public: "true"
         hajimari.io/enable: "true"
-        hajimari.io/icon: "logos:oauth"
+        hajimari.io/icon: "logos:oauth0"
       hosts:
         - &host auth.${SECRET_DOMAIN}
       tls:
