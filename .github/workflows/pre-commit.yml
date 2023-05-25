@@ -1,0 +1,52 @@
+---
+name: pre-commit
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  pre-commit:
+    runs-on: ubuntu-latest
+    env:
+      yq-version: v4.25.2
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: 3.x
+
+      - name: Cache yq
+        id: cache-yq
+        uses: actions/cache@v3
+        with:
+          path: bin/yq
+          key: yq-${{ env.yq-version }}
+
+      - name: Install yq
+        if: steps.cache-yq.outputs.cache-hit != 'true'
+        run: |
+          mkdir -p bin
+          wget https://github.com/mikefarah/yq/releases/download/${{ env.yq-version }}/yq_linux_amd64 -O bin/yq
+          chmod +x bin/yq
+
+      - name: Cache deduplicated pre-commit config
+        id: cache-precommitconfig
+        uses: actions/cache@v3
+        with:
+          path: .pre-commit-config.yaml
+          key: precommitconfig-${{ hashFiles('.pre-commit-config.yaml') }}
+
+      - name: Remove duplicates from pre-commit config
+        if: steps.cache-precommitconfig.outputs.cache-hit != 'true'
+        run: |
+          bin/yq 'del(.repos.[].hooks[] | select(.id == "shellcheck" or .id == "yamllint" or .id == "kustomize" or .id == "gitleaks"))' .pre-commit-config.yaml > .github/.pre-commit-config.yaml
+
+      - uses: pre-commit/action@v3.0.0
+        with:
+          extra_args: -c .pre-commit-config.yaml
