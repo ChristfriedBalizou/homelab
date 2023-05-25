@@ -29,9 +29,9 @@ spec:
     env:
       PHPLDAPADMIN_SERVER_ADMIN: ${SECRET_CLOUDFLARE_EMAIL}
       PHPLDAPADMIN_LDAP_CLIENT_TLS: "true"
-      PHPLDAPADMIN_LDAP_CLIENT_TLS_CRT_FILENAME: "/container/certificates/tls.crt"
-      PHPLDAPADMIN_LDAP_CLIENT_TLS_KEY_FILENAME: "/container/certificates/tls.key"
-      PHPLDAPADMIN_LDAP_CLIENT_TLS_CA_CRT_FILENAME: "/container/certificates/tls.crt"
+      PHPLDAPADMIN_LDAP_CLIENT_TLS_CRT_FILENAME: "tls.crt"
+      PHPLDAPADMIN_LDAP_CLIENT_TLS_KEY_FILENAME: "tls.key"
+      PHPLDAPADMIN_LDAP_CLIENT_TLS_CA_CRT_FILENAME: "tls.crt"
     ldap:
       - "My LDAP Server":
           - server:
@@ -62,7 +62,7 @@ spec:
           secretName: "phpldapadmin-tls"
     volumeMounts:
       - name: "ldap-tls"
-        mountPath: "/container/certificates"
+        mountPath: "/container/service/ldap-client/assets/certs"
         readOnly: true
     volumes:
       - name: "ldap-tls"
