@@ -53,6 +53,7 @@ spec:
         ports:
           http:
             port: 80
+            protocol: TCP
     podSecurityContext:
       runAsUser: 568
       runAsGroup: 568
