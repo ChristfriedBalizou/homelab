@@ -54,7 +54,8 @@ spec:
           name: LDAP
           config:
             host: ldap.${SECRET_DOMAIN}
-            startTLS: true
+            startTLS: false
+            insecureNoSSL: true
             bindDN: "${SECRET_LDAP_ROOT},cn=${SECRET_GRAFANA_ADMIN_USER}"
             bindPW: ${SECRET_GRAFANA_ADMIN_PASSWORD}
             userSearch:
@@ -68,9 +69,9 @@ spec:
               baseDN: "${SECRET_LDAP_ROOT},ou=groups"
               filter: "(objectClass=posixGroup)"
               nameAttr: name
-            userMatchers:
-              - userAttr: uid
-                groupAttr: member
+              userMatchers:
+                - userAttr: uid
+                  groupAttr: member
         - type: github
           id: github
           name: GitHub
