@@ -26,5 +26,12 @@ spec:
     replicaCount: 1
     adminUser: ${SECRET_GRAFANA_ADMIN_USER}
     adminPassword: ${SECRET_GRAFANA_ADMIN_PASSWORD}
+    resources:
+      requests:
+        cpu: 200m
+        memory: 300Mi
+      limits:
+        cpu: 400m
+        memory: 500Mi
     service:
       port: 1389
