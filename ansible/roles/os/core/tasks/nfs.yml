@@ -28,7 +28,6 @@
         path: "{{ item.item.mount }}"
         src: "UUID={{ item.stdout_lines[0] }}"
         fstype: "{{ item.item.fstype }}"
-        opts: "vers=3"
         state: present
       when: item.stdout_lines
       loop: "{{ uuid.results }}"
@@ -56,7 +55,7 @@
         path: "{{ item.mount }}"
         src: "{{ item.host }}:{{ item.mount }}"
         fstype: "{{ item.fstype }}"
-        opts: "rw,vers=3"
+        opts: "rw"
         state: mounted
       loop: "{{ nfs_devices }}"
   when:
