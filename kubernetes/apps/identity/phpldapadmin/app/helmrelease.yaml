@@ -54,7 +54,7 @@ spec:
           - hosts:
               - *host
             secretName: "phpldapadmin-tls"
-    persistene:
+    persistence:
       ldap:
         enabled: true
         type: secret
