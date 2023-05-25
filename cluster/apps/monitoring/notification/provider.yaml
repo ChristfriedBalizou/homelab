@@ -1,0 +1,11 @@
+---
+apiVersion: notification.toolkit.fluxcd.io/v1beta1
+kind: Provider
+metadata:
+  name: telegram-provider
+  namespace: monitoring
+spec:
+  type: telegram
+  channel: "${SECRET_TELEGRAM_CHANNEL}"
+  secretRef:
+    name: telegram-token
