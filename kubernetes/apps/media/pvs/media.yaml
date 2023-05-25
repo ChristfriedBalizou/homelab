@@ -12,6 +12,7 @@ spec:
     path: /mnt/ssd-sdb
     server: ${NFS_SERVER_IP}
   storageClassName: media
+  volumeMode: Filesystem
   persistentVolumeReclaimPolicy: Retain
 ---
 apiVersion: v1
@@ -26,3 +27,4 @@ spec:
     requests:
       storage: 250Gi
   storageClassName: media
+  volumeMode: Filesystem
