@@ -61,10 +61,10 @@ spec:
               filter: "(objectClass=posixAccount)"
               username: uid
               idAttr: DN
-              emailAttr: uid
+              emailAttr: mail
               nameAttr: cn
             groupSearch:
-              baseDN: "${SECRET_LDAP_ROOT}"
+              baseDN: "ou=groups,${SECRET_LDAP_ROOT}"
               filter: "(objectClass=posixGroup)"
               userMatchers:
                 - userAttr: uid
