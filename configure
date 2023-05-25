@@ -39,6 +39,7 @@ main() {
         verify_dex
         verify_telegram
         verify_slack
+        verify_traktarr
         verify_openldap
         verify_dashboard
         verify_vpn
@@ -435,6 +436,14 @@ verify_telegram() {
 verify_slack() {
     _has_envar "SLACK_TOKEN"
     _has_envar "SLACK_WEBHOOK"
+}
+
+
+verify_traktarr() {
+    _has_envar "SLACK_MEDIA_WEBHOOK"
+    _has_envar "TRAKT_CLIENT_ID"
+    _has_envar "TRAKT_CLIENT_SECRET"
+    _has_envar "OMDB_API_KEY"
 }
 
 verify_openldap() {
