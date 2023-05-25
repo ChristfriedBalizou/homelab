@@ -6,7 +6,6 @@ resources:
   - default
   - flux-system
   - kube-system
-  - kube-tools
   - networking
   - monitoring
   - identity
