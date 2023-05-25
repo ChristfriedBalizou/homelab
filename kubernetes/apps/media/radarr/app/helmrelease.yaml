@@ -26,6 +26,7 @@ spec:
   uninstall:
     keepHistory: false
   values:
+    replicaCount: 0
     image:
       repository: ghcr.io/onedr0p/radarr-develop
       tag: 4.3.2.6857@sha256:3505169067b62bdeb722aea4dd55446592307a24eec7298bd88001e0b7510007
