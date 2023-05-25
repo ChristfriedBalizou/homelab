@@ -7,7 +7,7 @@ metadata:
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
-  path: ./kubernetes/apps/storage/nfs/pgadmin/app
+  path: ./kubernetes/apps/storage/nfs/app
   prune: true
   sourceRef:
     kind: GitRepository
@@ -15,11 +15,11 @@ spec:
   healthChecks:
     - apiVersion: helm.toolkit.fluxcd.io/v2beta1
       kind: HelmRelease
-      name: nfs-pgadmin
+      name: nfs
       namespace: storage
     - apiVersion: storage.k8s.io/v1
       kind: StorageClass
-      name: nfs-pgadmin
+      name: nfs
       namespace: storage
   interval: 30m
   retryInterval: 1m
