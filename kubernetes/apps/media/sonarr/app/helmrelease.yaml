@@ -65,9 +65,6 @@ spec:
               - "sonarr.${SECRET_DOMAIN}"
             secretName: sonarr-tls
     persistence:
-      config:
-        enabled: true
-        storageClass: nfs-client
       media:
         enabled: true
         mountPath: /media
