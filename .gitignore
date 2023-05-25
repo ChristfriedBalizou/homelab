@@ -50,3 +50,6 @@ megalinter-reports
 
 # LDAP
 *.ldif
+
+# Ignore dashboard secrets
+.dashboard-secret
