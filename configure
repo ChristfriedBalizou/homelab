@@ -37,6 +37,7 @@ main() {
         verify_cloudflare
         verify_grafana
         verify_dex
+        verify_openldap
         verify_success
     else
         # generate sops configuration file
@@ -356,6 +357,10 @@ verify_dex() {
     _has_envar "DEX_LOFT_CLIENT_SECRET"
     _has_envar "DEX_OAUTH2_PROXY_CLIENT_ID"
     _has_envar "DEX_OAUTH2_PROXY_CLIENT_SECRET"
+}
+
+verify_openldap() {
+    _has_envar "LDAP_ROOT"
 }
 
 verify_ansible_hosts() {
