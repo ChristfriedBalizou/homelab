@@ -31,6 +31,8 @@ spec:
               - host: ldap.${SECRET_DOMAIN}
               - port: 389
               - tls: false
+          - login:
+              - bind_id: "cn=admin,dc=example,dc=org"
     ingress:
       enabled: true
       annotations:
