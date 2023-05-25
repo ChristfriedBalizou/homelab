@@ -15,8 +15,6 @@ spec:
         name: k8s-at-home
         namespace: flux-system
   dependsOn:
-    - name: media-apps-config
-      namespace: storage
     - name: vpn-gateway
       namespace: networking
   values:

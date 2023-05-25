@@ -25,9 +25,6 @@ spec:
       retries: 3
   uninstall:
     keepHistory: false
-  dependsOn:
-    - name: media-apps-config
-      namespace: storage
   values:
     image:
       repository: ghcr.io/onedr0p/radarr-develop
