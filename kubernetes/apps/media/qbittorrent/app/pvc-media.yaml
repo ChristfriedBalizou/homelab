@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: qbittorent-media
+  name: qbittorrent-media
   namespace: media
   annotations:
     volumeType: local
