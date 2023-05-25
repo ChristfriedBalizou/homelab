@@ -31,6 +31,7 @@ spec:
         externalTrafficPolicy: Local
         annotations:
           metallb.universe.tf/loadBalancerIPs: "${ADGUARD_ADDR}"
+          metallb.universe.tf/ip-allocated-from-pool: default-pool
         ports:
           dns-tcp:
             enabled: true
@@ -43,6 +44,7 @@ spec:
         externalTrafficPolicy: Local
         annotations:
           metallb.universe.tf/loadBalancerIPs: "${ADGUARD_ADDR}"
+          metallb.universe.tf/ip-allocated-from-pool: default-pool
         ports:
           dns-udp:
             enabled: true
