@@ -1,0 +1,74 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: kasten
+  namespace: kasten-io
+spec:
+  releaseName: kasten
+  interval: 10m
+  chart:
+    spec:
+      chart: kasten
+      version: 5.5.6
+      sourceRef:
+        kind: HelmRepository
+        name: kasten
+        namespace: flux-system
+  maxHistory: 3
+  install:
+    remediation:
+      retries: 3
+    crds: CreateReplace
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+    crds: CreateReplace
+  uninstall:
+    keepHistory: false
+  values:
+    eula:
+      accept: true
+      company: ${SECRET_DOMAIN}
+      email: ${SECRET_CLOUDFLARE_EMAIL}
+    networkPolicy:
+      create: false
+    global:
+      persistence:
+        storageClass: nfs-kasten
+    auth:
+      kastenAdminUsers:
+        - ${SECRET_CLOUDFLARE_EMAIL}
+      oidcAuth:
+        enabled: true
+        providerURL: https://dex.${SECRET_DOMAIN}
+        redirectURL: https://k10.${SECRET_DOMAIN}
+        scopes: profile email
+        clientID: ${DEX_KASTEN_CLIENT_ID}
+        clientSecret: ${DEX_KASTEN_CLIENT_SECRET}
+        usernameClaim: email
+        groupClaim: groups
+    prometheus:
+      networkPolicy:
+        enabled: false
+    grafana:
+      enabled: false
+    clusterName: k8s
+    ingress:
+      create: true
+      class: nginx
+      host: &host k10.${SECRET_DOMAIN}
+      annotations:
+        cert-manager.io/cluster-issuer: "letsencrypt-production"
+        external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
+        external-dns.home.arpa/enabled: "true"
+        hajimari.io/enable: 'true'
+        hajimari.io/icon: iconoir:database-backup
+        hajimari.io/group: "System"
+      urlPath: k10
+      hosts:
+        - *host
+      tls:
+        enabled: true
+        secretName: k10-tls
