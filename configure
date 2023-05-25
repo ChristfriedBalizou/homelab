@@ -35,6 +35,7 @@ main() {
         verify_age
         verify_git_repository
         verify_cloudflare
+        verify_grafana
         verify_success
     else
         # generate sops configuration file
@@ -338,6 +339,11 @@ verify_cloudflare() {
         _log "ERROR" "Unable to get Cloudflare Account and Zone information ${errors}"
         exit 1
     fi
+}
+
+verify_grafana() {
+    _has_envar "GRAFANA_ADMIN_USER"
+    _has_envar "GRAFANA_ADMIN_PASSWORD"
 }
 
 verify_ansible_hosts() {
