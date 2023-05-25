@@ -5,7 +5,7 @@ metadata:
   name: pgadmin
   namespace: storage
   annotations:
-    nfs.io/storage-path: "volume1/apps/pgadmin"
+    nfs.io/storage-path: "volume1/apps/db/pgadmin"
 spec:
   accessModes:
     - ReadWriteMany
