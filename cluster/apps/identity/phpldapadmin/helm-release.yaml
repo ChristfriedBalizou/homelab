@@ -26,11 +26,13 @@ spec:
     env:
       PHPLDAPADMIN_SERVER_ADMIN: ${SECRET_CLOUDFLARE_EMAIL}
     ldap:
-      - "identity/openldap:1389":
+      - "My LDAP Server":
           - server:
+              - host: ldap.${SECRET_DOMAIN}
+              - port: 389
               - tls: false
           - login:
-              - bind_id: "${SECRET_LDAP_ROOT}"
+              - bind_id: "cn=admin,dc=example,dc=org"
     ingress:
       enabled: true
       annotations:
