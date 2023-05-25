@@ -24,18 +24,11 @@ spec:
       LDAP_ORGANISATION: ${SECRET_LDAP_ORGANIZATION}
       LDAP_DOMAIN: ${SECRET_DOMAIN}
       LDAP_TLS: ${SECRET_LDAP_TLS}
+      LDAP_OPENLDAP_UID: 1000
+      LDAP_OPENLDAP_GID: 1000
       LDAP_ADMIN_USERNAME: ${SECRET_GRAFANA_ADMIN_USER}
       LDAP_ADMIN_PASSWORD: ${SECRET_GRAFANA_ADMIN_PASSWORD}
       DISABLE_CHOWN: true
-      LDAP_OPENLDAP_UID: 568
-      LDAP_OPENLDAP_GID: 568
-    podSecurityContext:
-      runAsUser: 568
-      runAsGroup: 568
-      fsGroup: 568
-      fsGroupChangePolicy: "OnRootMismatch"
-      supplementalGroups:
-        - 100
     resources:
       requests:
         cpu: 200m
