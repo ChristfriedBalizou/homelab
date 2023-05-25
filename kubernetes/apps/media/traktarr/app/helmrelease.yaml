@@ -39,7 +39,7 @@ spec:
       NOTIFICATIONS: yes
       BLACKLIST: yes
       RUNNOW: no
-      SKIPUPDATE: no
+      SKIPUPDATE: yes
       APP_BRANCH: master
     probes:
       liveness:
@@ -57,4 +57,5 @@ spec:
     persistence:
       config:
         enabled: "true"
-        existingClaim: config-traktarr
+        type: secret
+        name: traktarr-config
