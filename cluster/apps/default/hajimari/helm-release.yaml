@@ -31,7 +31,7 @@ spec:
           - networking
           - monitoring
           - identity
-      name: "${SECERT_GRAFANA_ADMIN_USER}"
+      name: "${SECRET_GRAFANA_ADMIN_USER}"
       lightTheme: blackboard
       darkTheme: horizon
       customApps:
