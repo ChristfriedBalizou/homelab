@@ -45,8 +45,7 @@ spec:
       main:
         ports:
           http:
-            enableb: false
-            port: 80
+            enabled: false
     podSecurityContext:
       runAsUser: 568
       runAsGroup: 568
