@@ -45,15 +45,3 @@
       when:
         - k3s_control_node is defined
         - k3s_control_node
-
-    - name: Cleaning
-      block:
-        - name: Pausing for 5 seconds...
-          ansible.builtin.pause:
-            seconds: 5
-
-        - name: remove directory clutter
-          ansible.builtin.file:
-            path: "{{ item.mount }}"
-            state: absent
-          loop: "{{ nfs_devices }}"
