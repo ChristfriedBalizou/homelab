@@ -18,7 +18,6 @@ spec:
   values:
     replicaCount: 2
     adminUser: ${SECRET_GRAFANA_ADMIN_USER}
-    adminPassword: ${SECRET_GRAFANA_ADMIN_PASSORD}
     ingress:
       enabled: true
       ingressClassName: "nginx"
