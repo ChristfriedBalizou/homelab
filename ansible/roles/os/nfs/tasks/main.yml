@@ -17,11 +17,10 @@
 
     - name: Configure NFS server
       ansible.builtin.lineinfile:
-        regexp: "^{{ item.mount }}"
+        regexp: "^/mnt/nfs"
         path: /etc/exports
         state: present
-        line: "{{ item.mount }} *(rw,all_squash,insecure,async,no_subtree_check,anonuid=1000,anongid=1000)"
-      loop: "{{ nfs_devices }}"
+        line: "/mnt/nfs *(rw,all_squash,insecure,async,no_subtree_check,anonuid=1000,anongid=1000)"
 
     - name: Start nfs-kernel-server
       ansible.builtin.systemd:

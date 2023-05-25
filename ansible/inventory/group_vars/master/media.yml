@@ -1,7 +1,7 @@
 ---
 media:
   applications:
-    mount: "/mnt/volume1"
+    mount: "/mnt/nfs/volume1"
     folders:
       - apps/qbittorrent
       - apps/sonarr
@@ -17,11 +17,11 @@ media:
       - apps/db/postgresql
       - apps/db/pgadmin
   persistence:
-    mount: "/mnt/volume2"
+    mount: "/mnt/nfs/volume2"
     folders:
       - media/movies
       - media/series
       - media/downloads/torrents
       - media/downloads/usenets
   backup:
-    mount: "/mnt/volume3"
+    mount: "/mnt/nfs/volume3"
