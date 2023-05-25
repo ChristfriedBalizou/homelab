@@ -1,0 +1,37 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: openldap
+  namespace: identity
+spec:
+  interval: 10m
+  chart:
+    spec:
+      # renovate: registryUrl=https://christfriedbalizou.github.io/helm-charts
+      chart: openldap
+      version: 0.1.1
+      sourceRef:
+        kind: HelmRepository
+        name: openldap
+        namespace: flux-system
+  values:
+    replicaCount: 2
+    adminUser: ${GRAFANA_ADMIN_USER}
+    adminPassword: ${GRAFANA_ADMIN_PASSWORD}
+    ingress:
+      enabled: true
+      ingressClassName: "nginx"
+      annotations:
+        cert-manager.home.arpa/enabled: "true"
+        external-dns.home.arpa/enabled: "false"
+        hajimari.io/enable: "true"
+        hajimari.io/icon: "carbon:gateway-user-access"
+      hosts:
+        - &host ldap.${SECRET_DOMAIN}
+      path: /
+      pathType: Prefix
+      tls:
+        - hosts:
+            - *host
+          secretName: "openldap-tls"

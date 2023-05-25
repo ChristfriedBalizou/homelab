@@ -20,3 +20,4 @@ resources:
   - loft-charts.yaml
   - oauth2-proxy-charts.yaml
   - kyverno-charts.yaml
+  - openldap-charts.yaml
