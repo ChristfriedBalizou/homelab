@@ -19,7 +19,7 @@ spec:
   values:
     image:
       repository: ghcr.io/onedr0p/unpackerr
-      tag: 0.11.1@sha256:abd5d66d1404eb6814937fb2d2051b7d6dbb83e8ae46040ef330f99231cd487e
+      tag: 0.11.1@sha256:8aa2e192f27fe2f6c22b4c73ec780507f2b26cfed26d4c906b1852f53a18d27d
 
     env:
       TZ: "${TIMEZONE}"
