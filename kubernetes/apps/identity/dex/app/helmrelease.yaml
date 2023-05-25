@@ -54,7 +54,7 @@ spec:
           id: ldap
           name: LDAP
           config:
-            host: openldap.identity:1389
+            host: "openldap.identity:${SECRET_LDAP_SERVER_PORT}"
             startTLS: false
             insecureNoSSL: true
             bindDN: "cn=${SECRET_GRAFANA_ADMIN_USER},${SECRET_LDAP_ROOT}"
