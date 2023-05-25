@@ -2,7 +2,7 @@
 apiVersion: kyverno.io/v1
 kind: ClusterPolicy
 metadata:
-  name: ingress-annotations
+  name: annotations
   annotations:
     policies.kyverno.io/title: Ingress annotations
     policies.kyverno.io/subject: Ingress
