@@ -245,10 +245,11 @@ verify_addressing() {
 
 verify_smtp() {
   _has_envar "SMTP_PORT"
-  _has_envar "SMTP_HOST"
+  _has_envar "SMTP_SERVER"
   _has_envar "SMTP_DOMAIN"
-  _has_envar "SMTP_USER"
+  _has_envar "SMTP_USERNAME"
   _has_envar "SMTP_PASSWORD"
+  _has_envar "SMTP_RELAY_ADDR"
 }
 
 
