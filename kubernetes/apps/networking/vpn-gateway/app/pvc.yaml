@@ -4,10 +4,12 @@ kind: PersistentVolumeClaim
 metadata:
   name: pod-gateway-data
   namespace: networking
+  annotations:
+    nfs.io/storage-path: "volume1/apps/vpn"
 spec:
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
       storage: 100Mi
-  storageClassName: local-path
+  storageClassName: nfs
