@@ -27,7 +27,7 @@ spec:
     keepHistory: false
   values:
     initContainers:
-      - name: copy
+      copy:
         image: busybox
         command: ["/bin/sh", "-c", "cp /traktarrconfig/config.json /config/config.json"]
         volumeMounts:
