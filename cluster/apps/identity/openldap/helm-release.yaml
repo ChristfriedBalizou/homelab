@@ -34,5 +34,6 @@ spec:
       limits:
         cpu: 400m
         memory: 500Mi
-    ingress:
-      enable: true
+    persistence:
+      enabled: true
+      storageClassName: local-path
