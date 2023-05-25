@@ -8,9 +8,8 @@ spec:
     - ReadWriteOnce
   capacity:
     storage: 5Gi
-  nfs:
+  hostPath:
     path: /mnt/nfs/volume1/apps/db/pgadmin
-    server: ${NFS_SERVER_IP}
   storageClassName: pgadmin
   volumeMode: Filesystem
   persistentVolumeReclaimPolicy: Retain
