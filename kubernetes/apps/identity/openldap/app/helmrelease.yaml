@@ -47,6 +47,15 @@ spec:
     controller:
       enabled: true
       replicas: 1
+    persistence:
+      database:
+        enabled: true
+        existingClaim: database-openldap
+        mountPath: /var/lib/ldap
+      config:
+        enabled: true
+        existingClaim: config-openldap
+        mountPath: /etc/ldap/slapd.d
     affinity:
       podAntiAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
