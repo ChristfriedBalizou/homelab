@@ -6,7 +6,6 @@ metadata:
   namespace: storage
 spec:
   interval: 10m
-  replicaCount: 3
   chart:
     spec:
       chart: nfs-subdir-external-provisioner
@@ -27,6 +26,7 @@ spec:
     timeout: 10m
     recreate: true
   values:
+    replicaCount: 3
     image:
       repository: k8s.gcr.io/sig-storage/nfs-subdir-external-provisioner
       tag: v4.0.2
