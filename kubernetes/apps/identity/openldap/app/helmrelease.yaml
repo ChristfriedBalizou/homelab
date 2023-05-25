@@ -1,0 +1,62 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: openldap
+  namespace: identity
+spec:
+  interval: 10m
+  chart:
+    spec:
+      # renovate: registryUrl=https://christfriedbalizou.github.io/helm-charts
+      chart: openldap
+      version: 1.0.1
+      sourceRef:
+        kind: HelmRepository
+        name: christfried
+        namespace: flux-system
+  values:
+    env:
+      LDAP_ROOT: ${SECRET_LDAP_ROOT}
+      LDAP_ALLOW_ANON_BINDING: "no"
+      LDAP_CUSTOM_LDIF_DIR: "/ldifs"
+    adminUser: ${SECRET_GRAFANA_ADMIN_USER}
+    adminPassword: ${SECRET_GRAFANA_ADMIN_PASSWORD}
+    resources:
+      requests:
+        cpu: 200m
+        memory: 100Mi
+      limits:
+        cpu: 200m
+        memory: 100Mi
+    service:
+      ports:
+        - name: ldap
+          port: 1389
+    volumeMounts:
+      - name: "ldif"
+        mountPath: "/ldifs/bootstrap.ldif"
+        subPath: "bootstrap.ldif"
+        readOnly: true
+    volumes:
+      - name: "ldif"
+        secret:
+          secretName: "openldap-ldif-bootstrap"
+    replicaCount: 3
+    affinity:
+      podAntiAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchLabels:
+                name: openldap
+            topologyKey: kubernetes.io/hostname
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: kubernetes.io/hostname
+                  operator: In
+                  values:
+                    - k8s-0
+                    - k8s-1
+                    - k8s-3

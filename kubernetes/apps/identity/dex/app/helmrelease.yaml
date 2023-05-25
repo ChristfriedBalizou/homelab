@@ -1,0 +1,101 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: dex
+  namespace: identity
+spec:
+  releaseName: dex
+  interval: 10m
+  chart:
+    spec:
+      chart: dex
+      version: 0.12.1
+      sourceRef:
+        kind: HelmRepository
+        name: dex
+        namespace: flux-system
+  dependsOn:
+    - name: openldap
+      namespace: identity
+  values:
+    image:
+      repository: ghcr.io/dexidp/dex
+      tag: v2.35.3
+    ingress:
+      enabled: true
+      annotations:
+        cert-manager.io/cluster-issuer: "letsencrypt-production"
+        external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
+        external-dns.home.arpa/enabled: "true"
+      hosts:
+        - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
+          paths:
+            - path: /
+              pathType: Prefix
+      tls:
+        - hosts:
+            - *host
+          secretName: "{{ .Release.Name }}-tls"
+    resources:
+      requests:
+        cpu: 50m
+        memory: 200Mi
+      limits:
+        cpu: 200m
+        memory: 200Mi
+    # see https://github.com/dexidp/dex/issues/2082
+    env:
+      KUBERNETES_POD_NAMESPACE: identity
+    config:
+      issuer: "https://{{ .Release.Name }}.${SECRET_DOMAIN}"
+      connectors:
+        - type: ldap
+          id: ldap
+          name: LDAP
+          config:
+            host: openldap.identity:1389
+            startTLS: false
+            insecureNoSSL: true
+            bindDN: "cn=${SECRET_GRAFANA_ADMIN_USER},${SECRET_LDAP_ROOT}"
+            bindPW: "${SECRET_GRAFANA_ADMIN_PASSWORD}"
+            usernamePrompt: Email Address
+            userSearch:
+              baseDN: "ou=users,${SECRET_LDAP_ROOT}"
+              filter: "(objectClass=posixAccount)"
+              username: mail
+              emailAttr: mail
+              nameAttr: uid
+              idAttr: DN
+              preferredUsernameAttr: cn
+            groupSearch:
+              baseDN: "ou=groups,${SECRET_LDAP_ROOT}"
+              filter: "(objectClass=groupOfNames)"
+              userMatchers:
+                - userAttr: DN
+                  groupAttr: member
+              nameAttr: cn
+      staticClients:
+        - name: oauth2-proxy
+          id: ${DEX_OAUTH2_PROXY_CLIENT_ID}
+          secret: ${DEX_OAUTH2_PROXY_CLIENT_SECRET}
+          redirectURIs:
+            - https://auth.${SECRET_DOMAIN}/oauth2/callback
+      storage:
+        type: kubernetes
+        config:
+          inCluster: true
+      frontend:
+        theme: dark
+        issuer: Final Space
+        issuerUrl: https://${SECRET_DOMAIN}
+        logoUrl: https://imgur.com/Idzzln9.png
+      expiry:
+        signingKeys: 6h
+        idTokens: 24h
+      logger:
+        level: debug
+        format: json
+      oauth2:
+        responseTypes: ["code", "token", "id_token"]
+        skipApprovalScreen: true

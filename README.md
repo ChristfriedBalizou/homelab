@@ -8,7 +8,7 @@
 <br />
 <div align="center">
 
-[![Discord](https://img.shields.io/badge/discord-chat-7289DA.svg?maxAge=60&style=plastic&logo=discord)](https://discord.gg/DNCynrJ) [![k3s](https://img.shields.io/badge/k3s-v1.25.4-blue?style=plastic&logo=kubernetes)](https://k3s.io/) [![GitHub last commit](https://img.shields.io/github/last-commit/christfriedbalizou/homelab?color=purple&style=plastic)](https://github.com/christfriedbalizou/homelab/commits/main) [![Lint](https://github.com/ChristfriedBalizou/homelab/actions/workflows/lint.yaml/badge.svg)](https://github.com/ChristfriedBalizou/homelab/actions/workflows/lint.yaml) [![pre-commit](https://github.com/ChristfriedBalizou/homelab/actions/workflows/pre-commit.yml/badge.svg)](https://github.com/ChristfriedBalizou/homelab/actions/workflows/pre-commit.yml)
+[![Discord](https://img.shields.io/badge/discord-chat-7289DA.svg?maxAge=60&style=plastic&logo=discord)](https://discord.gg/DNCynrJ) [![k3s](https://img.shields.io/badge/k3s-v1.25.4-blue?style=plastic&logo=kubernetes)](https://k3s.io/) [![GitHub last commit](https://img.shields.io/github/last-commit/christfriedbalizou/homelab?color=purple&style=plastic)](https://github.com/christfriedbalizou/homelab/commits/main)
 
 </div>
 
