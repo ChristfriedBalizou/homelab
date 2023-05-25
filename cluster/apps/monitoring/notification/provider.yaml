@@ -3,7 +3,7 @@ apiVersion: notification.toolkit.fluxcd.io/v1beta1
 kind: Provider
 metadata:
   name: telegram-provider
-  namespace: monitoring
+  namespace: flux-system
 spec:
   type: telegram
   channel: "@${TELEGRAM_CHANNEL}"
