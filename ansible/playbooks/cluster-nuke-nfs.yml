@@ -27,6 +27,23 @@
         - k3s_control_node is defined
         - k3s_control_node
 
+    - name: Remove Webmin source.list file
+      ansible.builtin.lineinfile:
+        path: /etc/apt/sources.list
+        regexp: "^deb.*webmin.*"
+        state: absent
+      when:
+        - k3s_control_node is defined
+        - k3s_control_node
+
+    - name: Remove Webmin Apt signing key
+      ansible.builtin.apt_key:
+        url: http://www.webmin.com/jcameron-key.asc
+        state: absent
+      when:
+        - k3s_control_node is defined
+        - k3s_control_node
+
     - name: unmount device from fstab
       ansible.builtin.lineinfile:
         path: /etc/fstab
