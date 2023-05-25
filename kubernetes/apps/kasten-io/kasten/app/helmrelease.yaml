@@ -17,6 +17,7 @@ spec:
       interval: 10m
   maxHistory: 3
   install:
+    timeout: 10m
     remediation:
       retries: 3
     crds: CreateReplace
