@@ -26,6 +26,15 @@ spec:
   uninstall:
     keepHistory: false
   values:
+    initContainers:
+      - name: copy
+        image: busybox
+        command: ["/bin/sh", "-c", "cp /traktarrconfig/config.json /config/config.json"]
+        volumeMounts:
+          - name: traktarr
+            mountPath: /traktarrconfig
+          - name: config
+            mountPath: /config
     image:
       repository: eafxx/traktarr
       tag: latest
@@ -64,4 +73,4 @@ spec:
         enabled: "true"
         type: secret
         name: traktarr-config
-        mountPath: /config
+        mountPath: /traktarrconfig
