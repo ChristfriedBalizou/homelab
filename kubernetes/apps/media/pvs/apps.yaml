@@ -19,7 +19,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: media-apps
-  namespace: media-apps
+  namespace: media
 spec:
   accessModes:
     - ReadWriteMany
