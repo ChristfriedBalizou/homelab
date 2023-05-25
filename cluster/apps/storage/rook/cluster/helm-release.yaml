@@ -52,7 +52,7 @@ spec:
       dashboard:
         enabled: true
         urlPrefix: /
-        ssl: true
+        ssl: false
       network:
         provider: host
       resources:
