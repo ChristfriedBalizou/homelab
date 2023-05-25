@@ -7,13 +7,25 @@ spec:
   accessModes:
     - ReadWriteMany
   capacity:
-    storage: 50Gi
-  nfs:
+    storage: 5Gi
+  local:
     path: /mnt/nfs/volume1/apps/db/pgadmin
-    server: ${NFS_SERVER_IP}
-  storageClassName: pgadmin
+  storageClassName: ssd
   volumeMode: Filesystem
   persistentVolumeReclaimPolicy: Retain
+  claimRef:
+    apiVersion: v1
+    kind: PersistentVolumeClaim
+    name: pgadmin
+    namespace: storage
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - "k8s-3"
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -26,5 +38,3 @@ spec:
   resources:
     requests:
       storage: 5Gi
-  storageClassName: pgadmin
-  volumeMode: Filesystem
