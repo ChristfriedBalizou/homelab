@@ -44,4 +44,3 @@ spec:
     storageClass:
       name: media-apps-config
       defaultClass: false
-      pathPattern: "${.PVC.namespace}-${.PVC.name}"
