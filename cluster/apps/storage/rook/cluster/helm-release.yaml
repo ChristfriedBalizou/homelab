@@ -18,6 +18,17 @@ spec:
     - name: rook-ceph
       namespace: storage
   values:
+    toolbox:
+      enabled: true
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/hostname
+                    operator: In
+                    values:
+                      - k8s-3
     operatorNamespace: storage
     monitoring:
       enabled: true
@@ -40,7 +51,6 @@ spec:
           - hosts:
               - *host
             secretName: "rook-tls"
-
     cephFileSystems:
       - name: ceph-filesystem
         spec:
