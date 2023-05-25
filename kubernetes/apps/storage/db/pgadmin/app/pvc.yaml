@@ -1,13 +1,31 @@
 ---
 apiVersion: v1
-kind: PersistentVolumeClaim
+kind: PersistentVolume
 metadata:
-  name: pgadmin-config
-  namespace: storage
+  name: pgadmin
 spec:
   accessModes:
     - ReadWriteOnce
+    - ReadWriteMany
+  capacity:
+    storage: 1Mi
+  nfs:
+    path: /mnt/volume1/apps/db/pgadmin
+    server: ${NFS_SERVER_IP}
+  storageClassName: pgadmin
+  volumeMode: Filesystem
+  persistentVolumeReclaimPolicy: Retain
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pgadmin
+  namespace: storage
+spec:
+  accessModes:
+    - ReadWriteMany
   resources:
     requests:
-      storage: 1Gi
-  storageClassName: local-path
+      storage: 1Mi
+  storageClassName: pgadmin
+  volumeMode: Filesystem
