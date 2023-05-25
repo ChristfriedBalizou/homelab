@@ -23,9 +23,6 @@ spec:
     remediation:
       retries: 5
   values:
-    image:
-      repository: ghcr.io/toboshii/hajimari
-      tag: v0.3.1
     hajimari:
       defaultEnable: false
       namespaceSelector:
