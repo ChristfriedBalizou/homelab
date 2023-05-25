@@ -26,23 +26,23 @@ spec:
             port: 3000
             protocol: TCP
       dns-tcp:
-          enabled: true
-          type: LoadBalancer
-          externalTrafficPolicy: Local
-          annotations:
-            metallb.universe.tf/loadBalancerIPs: ${ADGUARD_ADDR}
-          ports:
-            dns-tcp:
-              enabled: true
-              port: &dns-port 53
-              protocol: TCP
-              targetPort: *dns-port
+        enabled: true
+        type: LoadBalancer
+        externalTrafficPolicy: Local
+        annotations:
+          metallb.universe.tf/loadBalancerIPs: "${ADGUARD_ADDR}"
+        ports:
+          dns-tcp:
+            enabled: true
+            port: &dns-port 53
+            protocol: TCP
+            targetPort: *dns-port
       dns-udp:
         enabled: true
         type: LoadBalancer
         externalTrafficPolicy: Local
         annotations:
-          metallb.universe.tf/loadBalancerIPs: ${ADGUARD_ADDR}
+          metallb.universe.tf/loadBalancerIPs: "${ADGUARD_ADDR}"
         ports:
           dns-udp:
             enabled: true
