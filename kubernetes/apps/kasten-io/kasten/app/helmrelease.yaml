@@ -8,7 +8,7 @@ spec:
   interval: 10m
   chart:
     spec:
-      chart: kasten
+      chart: k10
       version: 5.5.6
       sourceRef:
         kind: HelmRepository
