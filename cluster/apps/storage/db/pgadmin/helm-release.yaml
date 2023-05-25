@@ -15,11 +15,6 @@ spec:
         name: runix
         namespace: flux-system
   values:
-    image:
-      repository: dpage/pgadmin4
-      tag: "6.18"
-    strategy:
-      type: Recreate
     env:
       email: ${SECRET_CLOUDFLARE_EMAIL}
       password: ${SECRET_GRAFANA_ADMIN_PASSWORD}
