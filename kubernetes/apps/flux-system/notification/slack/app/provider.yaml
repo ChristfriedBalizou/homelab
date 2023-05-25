@@ -7,5 +7,6 @@ metadata:
 spec:
   type: slack
   channel: homelab
+  address: https://slack.com/api/chat.postMessage
   secretRef:
     name: slack-token
