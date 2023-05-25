@@ -58,7 +58,7 @@ spec:
             command:
               - sh
               - -c
-              - if [ $(wget --no-check-certificate -q -O - https://ipinfo.io/country 2>&1) = '${VPN_COUNTRY}' ]; then exit 0; else exit $?; fi
+              - if [ $(wget -q -O- https://ipinfo.io/country) == "${VPN_COUNTRY}" ]; then exit 0; else exit $?; fi
           initialDelaySeconds: 30
           periodSeconds: 60
           failureThreshold: 1
@@ -75,15 +75,15 @@ spec:
                 - ipBlock:
                     cidr: ${K8S_CLUSTER_CIDR}
                 - ipBlock:
-                    cidr: ${K8S_SERVER_CIDR}
+                    cidr: ${K8S_SERVICE_CIDR}
     routed_namespaces:
       - media
     settings:
       VPN_INTERFACE: wg0
       VPN_BLOCK_OTHER_TRAFFIC: false
       VPN_TRAFFIC_PORT: ${VPN_PORT}
-      NOT_ROUTED_TO_GATEWAY_CIDRS: ${K8S_CLUSTER_CIDR} ${K8S_SERVER_CIDR}
-      VPN_LOCAL_CIDRS: ${K8S_CLUSTER_CIDR} ${K8S_SERVER_CIDR}
+      NOT_ROUTED_TO_GATEWAY_CIDRS: ${K8S_CLUSTER_CIDR} ${K8S_SERVICE_CIDR} ${SERVER_CIDR}
+      VPN_LOCAL_CIDRS: ${K8S_CLUSTER_CIDR} ${K8S_SERVICE_CIDR} ${SERVER_CIDR}
     publicPorts:
       - hostname: qbittorrent
         IP: 10

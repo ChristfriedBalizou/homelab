@@ -388,6 +388,7 @@ verify_vpn() {
     _has_envar "VPN_PORT"
     _has_envar "VPN_FORWARDED_PORT_1"
     _has_envar "CLUSTER_CIDR"
+    _has_envar "SERVICE_CIDR"
     _has_envar "SERVER_CIDR"
 }
 
