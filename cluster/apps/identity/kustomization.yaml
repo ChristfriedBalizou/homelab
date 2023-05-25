@@ -6,5 +6,4 @@ resources:
   - openldap
   - phpldapadmin
   - dex
-  - loft
   - oauth2-proxy

@@ -87,11 +87,6 @@ spec:
             clientSecret: ${DEX_GOOGLE_CLIENT_SECRET}
             redirectURI: https://dex.${SECRET_DOMAIN}/callback
       staticClients:
-        - name: Loft
-          id: ${DEX_LOFT_CLIENT_ID}
-          secret: ${DEX_LOFT_CLIENT_SECRET}
-          redirectURIs:
-            - https://loft.${SECRET_DOMAIN}/auth/oidc/callback
         - name: oauth2-proxy
           id: ${DEX_OAUTH2_PROXY_CLIENT_ID}
           secret: ${DEX_OAUTH2_PROXY_CLIENT_SECRET}
