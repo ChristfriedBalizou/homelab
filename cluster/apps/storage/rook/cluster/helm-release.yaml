@@ -118,6 +118,16 @@ spec:
         disable: false
       mon:
         count: 3
+      placement:
+        osd:
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+                - matchExpressions:
+                    - key: kubernetes.io/hostname
+                      operator: In
+                      values:
+                        - k8s-3
       storage:
         useAllNodes: false
         useAllDevice: false
