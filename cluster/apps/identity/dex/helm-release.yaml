@@ -66,8 +66,8 @@ spec:
             groupSearch:
               baseDN: "ou=groups,${SECRET_LDAP_ROOT}"
               filter: "(objectClass=posixGroup)"
-              userAttr: DN
-              groupAttr: memberuid
+              userAttr: uid
+              groupAttr: memberUid
               nameAttr: cn
         - type: github
           id: github
