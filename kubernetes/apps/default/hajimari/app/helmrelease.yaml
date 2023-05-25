@@ -31,6 +31,7 @@ spec:
           - monitoring
           - identity
           - kube-system
+          - flux-system
           - storage
       name: "${SECRET_GRAFANA_ADMIN_USER}"
       lightTheme: blackboard
