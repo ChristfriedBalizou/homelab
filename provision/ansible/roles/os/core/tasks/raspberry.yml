@@ -1,0 +1,29 @@
+---
+- name: Raspberry pi | Test for raspberry pi /proc/cpuinfo
+  command: grep -E "Raspberry Pi|BCM2708|BCM2709|BCM2835|BCM2836" /proc/cpuinfo
+  register: grep_cpuinfo_raspberrypi
+  failed_when: false
+  changed_when: false
+
+- name: Raspberry pi | Test for raspberry pi /proc/device-tree/model
+  command: grep -E "Raspberry Pi" /proc/device-tree/model
+  register: grep_device_tree_model_raspberrypi
+  failed_when: false
+  changed_when: false
+
+- name: Raspberry pi | Activating cgroup support
+  lineinfile:
+    path: /boot/firmware/cmdline.txt
+    regexp: '^((?!.*\bcgroup_enable=cpuset cgroup_memory=1 cgroup_enable=memory\b).*)$'
+    line: '\1 cgroup_enable=cpuset cgroup_memory=1 cgroup_enable=memory'
+    backrefs: true
+  when: grep_cpuinfo_raspberrypi.rc == 0
+
+- name: Raspberry pi | Enable ARM 64 bit
+  lineinfile:
+    path: /boot/firmware/config.txt
+    search_string: 'arm_64bit=1'
+    insertafter: 'EOF'
+    line: 'arm_64bit=1'
+  when: grep_cpuinfo_raspberrypi.rc == 0
+  notify: Reboot

@@ -10,42 +10,17 @@
   retries: 5
   until: apt_upgrade is success
 
-- name: Install common packages
+- name: Packages | Install required packages
   ansible.builtin.apt:
-    name:
-      - apt-transport-https
-      - arptables
-      - ebtables
-      - ca-certificates
-      - curl
-      - ebtables
-      - gdisk
-      - hdparm
-      - htop
-      - iputils-ping
-      - ipvsadm
-      - lvm2
-      - nano
-      - net-tools
-      - nfs-common
-      - nvme-cli
-      - open-iscsi
-      - psmisc
-      - smartmontools
-      - socat
-      - software-properties-common
-      - unattended-upgrades
-      - unzip
-    install_recommends: false
+    name: "{{ packages | default([]) }}"
+    state: present
     update_cache: true
-    cache_valid_time: 3600
-    autoclean: true
-    autoremove: true
-  register: apt_install_common
-  retries: 5
-  until: apt_install_common is success
 
-- name: Copy 20auto-upgrades unattended-upgrades config
+- name: Packages | Remove leaf packages
+  ansible.builtin.apt:
+    autoremove: true
+
+- name: Packages | Copy 20auto-upgrades unattended-upgrades config
   ansible.builtin.blockinfile:
     path: /etc/apt/apt.conf.d/20auto-upgrades
     mode: 0644
@@ -56,7 +31,7 @@
       APT::Periodic::AutocleanInterval "7";
       APT::Periodic::Unattended-Upgrade "1";
 
-- name: Copy 50unattended-upgrades unattended-upgrades config
+- name: Packages | Copy 50unattended-upgrades unattended-upgrades config
   ansible.builtin.blockinfile:
     path: /etc/apt/apt.conf.d/50unattended-upgrades
     mode: 0644
@@ -70,13 +45,13 @@
           "${distro_id} ${distro_codename}-updates";
       };
 
-- name: Start unattended-upgrades service
+- name: Packages | Start unattended-upgrades service
   ansible.builtin.systemd:
     name: unattended-upgrades
     enabled: true
     state: started
 
-- name: Restart unattended-upgrades service
+- name: Packages | Restart unattended-upgrades service
   ansible.builtin.service:
     name: unattended-upgrades.service
     daemon_reload: true

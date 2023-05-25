@@ -7,7 +7,11 @@
   tags:
     - packages
 
-- import_tasks: kernel.yml
+- include: raspberry.yml
+  tags:
+    - raspberry
+
+- include: kernel.yml
   tags:
     - kernel
 

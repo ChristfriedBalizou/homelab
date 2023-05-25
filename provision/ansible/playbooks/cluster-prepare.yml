@@ -10,5 +10,4 @@
       ansible.builtin.pause:
         seconds: 5
   roles:
-    - "os/ubuntu"
     - "os/core"
