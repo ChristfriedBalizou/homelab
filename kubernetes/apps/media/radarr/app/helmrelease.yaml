@@ -102,10 +102,14 @@ spec:
         enabled: true
         mountPath: /movies
         existingClaim: media-movies
-      downloads:
+      torrents:
         enabled: true
         mountPath: /downloads
         existingClaim: media-torrents
+      usenets:
+        enabled: true
+        mountPath: /usenets
+        existingClaim: media-usenets
     resources:
       requests:
         cpu: 10m
