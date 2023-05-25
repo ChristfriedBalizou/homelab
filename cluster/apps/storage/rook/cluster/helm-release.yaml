@@ -113,6 +113,7 @@ spec:
             csi.storage.k8s.io/node-stage-secret-name: rook-csi-cephfs-node
             csi.storage.k8s.io/node-stage-secret-namespace: storage
             csi.storage.k8s.io/fstype: ext4
+
     cephClusterSpec:
       crashCollector:
         disable: true
@@ -132,6 +133,9 @@ spec:
         useAllNodes: false
         useAllDevice: false
         nodes:
+          - name: k8s-1
+            devices:
+              - name: "sdb"
           - name: k8s-3
             devices:
               - name: "sdb"
