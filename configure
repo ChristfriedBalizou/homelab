@@ -91,6 +91,10 @@ main() {
             > "${PROJECT_DIR}/kubernetes/apps/media/secret.sops.yaml"
         sops --encrypt --in-place "${PROJECT_DIR}/kubernetes/apps/media/secret.sops.yaml"
 
+        envsubst < "${PROJECT_DIR}/templates/kubernetes/cluster-phpldapadmin-secret.sops.yaml" \
+            > "${PROJECT_DIR}/kubernetes/apps/identity/phpldapadmin/app/secret.sops.yaml"
+        sops --encrypt --in-place "${PROJECT_DIR}/kubernetes/apps/identity/phpldapadmin/app/secret.sops.yaml"
+
         # generate ansible settings
         envsubst < "${PROJECT_DIR}/templates/ansible/kube-vip.yml" \
             > "${PROJECT_DIR}/ansible/inventory/group_vars/kubernetes/kube-vip.yml"
@@ -426,6 +430,11 @@ verify_telegram() {
 verify_openldap() {
     _has_envar "LDAP_ROOT"
     _has_envar "LDAP_LDIF"
+	  _has_envar "SECRET_LDAP_DOMAIN"
+	  _has_envar "SECRET_LDAP_SERVER"
+	  _has_envar "SECRET_LDAP_SERVER_PORT"
+	  _has_envar "SECRET_LDAP_TLS"
+	  _has_envar "SECRET_LDAP_BIND_ID"
 }
 
 verify_ansible_hosts() {
