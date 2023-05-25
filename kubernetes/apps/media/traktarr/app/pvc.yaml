@@ -9,7 +9,7 @@ spec:
   capacity:
     storage: 5Gi
   nfs:
-    path: /mnt/volume1/apps/traktarr
+    path: /mnt/nfs/volume1/apps/traktarr
     server: ${NFS_SERVER_IP}
   storageClassName: config-traktarr
   volumeMode: Filesystem

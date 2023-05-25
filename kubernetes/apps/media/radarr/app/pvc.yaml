@@ -9,7 +9,7 @@ spec:
   capacity:
     storage: 5Gi
   nfs:
-    path: /mnt/volume1/apps/radarr
+    path: /mnt/nfs/volume1/apps/radarr
     server: ${NFS_SERVER_IP}
   storageClassName: config-radarr
   volumeMode: Filesystem

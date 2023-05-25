@@ -9,7 +9,7 @@ spec:
   capacity:
     storage: 50Gi
   nfs:
-    path: /mnt/volume1/apps/jellyfin
+    path: /mnt/nfs/volume1/apps/jellyfin
     server: ${NFS_SERVER_IP}
   storageClassName: config-jellyfin
   volumeMode: Filesystem
