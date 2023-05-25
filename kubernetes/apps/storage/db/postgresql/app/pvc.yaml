@@ -13,6 +13,11 @@ spec:
   storageClassName: ssd
   volumeMode: Filesystem
   persistentVolumeReclaimPolicy: Retain
+  claimRef:
+    apiVersion: v1
+    kind: PersistentVolumeClaim
+    name: postgresql
+    namespace: storage
   nodeAffinity:
     required:
       nodeSelectorTerms:
@@ -33,4 +38,3 @@ spec:
   resources:
     requests:
       storage: 150Gi
-  storageClassName: postgresql
