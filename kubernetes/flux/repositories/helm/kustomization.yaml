@@ -20,3 +20,4 @@ resources:
   - ./runix.yaml
   - ./grafana.yaml
   - ./prometheus-community.yaml
+  - ./k8s-at-home.yaml
