@@ -23,6 +23,8 @@ spec:
       limits:
         cpu: 400m
         memory: 500Mi
+    env:
+      PHPLDAPADMIN_SERVER_ADMIN: ${SECRET_CLOUDFLARE_EMAIL}
     ldap:
       - ${SECRET_DOMAIN}:
           - server:
