@@ -9,7 +9,7 @@ spec:
   capacity:
     storage: 250Gi
   nfs:
-    path: /mnt/ssd-sdb/movies
+    path: /mnt/ssd-sdb/media/movies
     server: ${NFS_SERVER_IP}
   storageClassName: media-movies
   volumeMode: Filesystem

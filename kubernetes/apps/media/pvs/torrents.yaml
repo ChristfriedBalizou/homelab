@@ -9,7 +9,7 @@ spec:
   capacity:
     storage: 250Gi
   nfs:
-    path: /mnt/ssd-sdb/torrents
+    path: /mnt/ssd-sdb/media/torrents
     server: ${NFS_SERVER_IP}
   storageClassName: media-torrents
   volumeMode: Filesystem
