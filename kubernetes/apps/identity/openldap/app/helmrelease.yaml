@@ -45,7 +45,7 @@ spec:
             port: ${SECRET_LDAP_SERVER_PORT}
     controller:
       enabled: true
-      replicas: 2
+      replicas: 1
     persistence:
       database:
         enabled: true
