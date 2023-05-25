@@ -64,7 +64,11 @@ spec:
       - name: copy-tls
         image: busybox
         tag: latest
-        command: '["/bin/sh", "-c", "cat /container/service/tls/tls.key > /container/service/ldap-client/assets/certs/debug.txt"]'
+        command:
+          - sh
+          - "-c"
+          - echo
+          - test
     volumeMounts:
       - name: "tls"
         mountPath: "/container/service/tls"
