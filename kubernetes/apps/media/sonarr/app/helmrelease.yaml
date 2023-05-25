@@ -74,7 +74,7 @@ spec:
     persistence:
       config:
         enabled: true
-        existingClaim: media-apps
+        storageClass: media-apps-config
       series:
         enabled: true
         mountPath: /series

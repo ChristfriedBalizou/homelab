@@ -50,7 +50,7 @@ spec:
     persistence:
       config:
         enabled: true
-        existingClaim: media-apps
+        storageClass: media-apps-config
       downloads:
         enabled: true
         mountPath: /downloads

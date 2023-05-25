@@ -53,7 +53,7 @@ spec:
     persistence:
       config:
         enabled: true
-        existingClaim: media-apps
+        storageClass: media-apps-config
     podSecurityContext:
       runAsUser: 1000
       runAsGroup: 1000
