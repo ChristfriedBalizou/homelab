@@ -42,12 +42,11 @@ spec:
       - name: "ldif"
         secret:
           secretName: "openldap-ldif-bootstrap"
+    replicaCount: 3
     affinity:
-      nodeAffinity:
+      podAntiAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-            - matchExpressions:
-                - key: kubernetes.io/hostname
-                  operator: In
-                  values:
-                    - k8s-3
+          - labelSelector:
+              matchLabels:
+                name: openldap
+            topologyKey: kubernetes.io/hostname
