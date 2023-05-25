@@ -37,7 +37,13 @@ spec:
         mountPath: "/ldifs/bootstrap.ldif"
         subPath: "bootstrap.ldif"
         readOnly: true
+      - name: "ldap-tls"
+        mountPath: "/container/certificates"
+        readOnly: true
     volumes:
       - name: "ldif"
         secret:
           secretName: "openldap-ldif-bootstrap"
+      - name: "ldap-tls"
+        secret:
+          secretName: "ldap-tls"
