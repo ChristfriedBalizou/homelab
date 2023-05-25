@@ -49,12 +49,6 @@ spec:
         existingClaim: config-openldap
         mountPath: /etc/ldap/slapd.d
     affinity:
-      podAntiAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          - labelSelector:
-              matchLabels:
-                name: openldap
-            topologyKey: kubernetes.io/hostname
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
           nodeSelectorTerms:
@@ -62,6 +56,4 @@ spec:
                 - key: kubernetes.io/hostname
                   operator: In
                   values:
-                    - k8s-0
-                    - k8s-1
                     - k8s-3
