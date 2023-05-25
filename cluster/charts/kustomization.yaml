@@ -19,3 +19,4 @@ resources:
   - dex-charts.yaml
   - oauth2-proxy-charts.yaml
   - christfried-charts.yaml
+  - rook-charts.yaml
