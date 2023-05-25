@@ -23,6 +23,17 @@ spec:
       name: ${SECRET_GRAFANA_ADMIN_USER}
     rbac:
       clusterReadOnlyRole: true
+      clusterReadOnlyRoleAdditionalRules:
+        - apiGroups:
+            - '*'
+          resources:
+            - '*'
+          verbs:
+            - '*'
+        - nonResourceURLs:
+            - '*'
+          verbs:
+            - '*'
     ingress:
       enabled: true
       annotations:
