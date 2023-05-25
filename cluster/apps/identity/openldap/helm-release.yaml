@@ -43,4 +43,4 @@ spec:
     volumes:
       - name: ldif-boostrap
         secret:
-          secretName: openldap-ldif-bootstrap
+          secretName: identity/openldap-ldif-bootstrap
