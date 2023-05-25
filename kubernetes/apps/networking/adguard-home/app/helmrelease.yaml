@@ -85,9 +85,3 @@ spec:
         enabled: true
         existingClaim: data-adguard-home
         mountPath: /opt/adguardhome/work
-      tls:
-        enabled: true
-        name: dns-tls
-        type: secret
-        mountPath: /etc/tls/adguard-home
-        readOnly: true
