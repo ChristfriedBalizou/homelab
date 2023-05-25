@@ -28,7 +28,7 @@ spec:
       cookieSecret: ${DEX_OAUTH2_PROXY_COOKIE_SECRET}
       configFile: |-
         provider = "oidc"
-        scope = "profile groups"
+        scope = "openid profile groups"
         oidc_groups_claim = "groups"
         oidc_issuer_url = "https://dex.${SECRET_DOMAIN}"
         auth_logging = true
