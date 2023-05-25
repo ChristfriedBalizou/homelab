@@ -30,7 +30,7 @@ spec:
           type: LoadBalancer
           externalTrafficPolicy: Local
           annotations:
-            metallb.universe.tf/loadBalancerIPs: ${METALLB_INGRESS_ADDR}
+            metallb.universe.tf/loadBalancerIPs: ${ADGUARD_ADDR}
           ports:
             dns-tcp:
               enabled: true
@@ -42,7 +42,7 @@ spec:
         type: LoadBalancer
         externalTrafficPolicy: Local
         annotations:
-          metallb.universe.tf/loadBalancerIPs: ${METALLB_INGRESS_ADDR}
+          metallb.universe.tf/loadBalancerIPs: ${ADGUARD_ADDR}
         ports:
           dns-udp:
             enabled: true
