@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://christfriedbalizou.github.io/helm-charts
       chart: openldap
-      version: 0.2.3
+      version: 0.2.4
       sourceRef:
         kind: HelmRepository
         name: christfried-charts
@@ -28,6 +28,8 @@ spec:
     adminPassword: ${SECRET_GRAFANA_ADMIN_PASSWORD}
     service:
       port: 1389
+    debug:
+      enabled: true
     persistence:
       enabled: true
       existingClaim: "openldap-filesystem"
