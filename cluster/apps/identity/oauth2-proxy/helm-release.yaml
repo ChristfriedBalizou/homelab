@@ -51,6 +51,10 @@ spec:
         hajimari.io/enable: "true"
         hajimari.io/group: "identity"
         hajimari.io/icon: "logos:oauth"
+        nginx.ingress.kubernetes.io/server-snippet: |
+          location /oauth2/ {
+            error_page 403 =302 $redirect_url
+          }
       hosts:
         - &host auth.${SECRET_DOMAIN}
       tls:
