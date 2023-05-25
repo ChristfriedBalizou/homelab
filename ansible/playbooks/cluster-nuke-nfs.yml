@@ -10,32 +10,50 @@
         seconds: 5
 
   tasks:
-    - name: remove nfs configuration
-      ansible.builtin.lineinfile:
-        regexp: "^{{ item.mount }}"
-        path: /etc/exports
-        state: absent
-      loop: "{{ nfs_devices }}"
+    - name: workers nfs devices
+      block:
+        - name: unmount nfs fstab
+          ansible.posix.mount:
+            path: "{{ item.mount }}"
+            state: absent
+          loop: "{{ nfs_devices }}"
+      when:
+        - k3s_control_node is defined
+        - k3s_control_node is false
 
-    - name: Stop nfs-kernel-server
-      ansible.builtin.systemd:
-        name: nfs-server.service
-        enabled: false
-        state: stopped
-      failed_when: false
+    - name: main nfs device
+      block:
+        - name: remove nfs configuration
+          ansible.builtin.lineinfile:
+            regexp: "^{{ item.mount }}"
+            path: /etc/exports
+            state: absent
+          loop: "{{ nfs_devices }}"
+
+        - name: Stop nfs-kernel-server
+          ansible.builtin.systemd:
+            name: nfs-server.service
+            enabled: false
+            state: stopped
+          failed_when: false
+
+        - name: unmount nfs fstab
+          ansible.posix.mount:
+            path: "{{ item.mount }}"
+            state: absent
+          loop: "{{ nfs_devices }}"
       when:
         - k3s_control_node is defined
         - k3s_control_node
 
-    - name: unmount device from fstab
-      ansible.builtin.lineinfile:
-        path: /etc/fstab
-        regex: ".*{{ item.mount }}.*"
-        state: absent
-      loop: "{{ nfs_devices }}"
+    - name: Cleaning
+      block:
+        - name: Pausing for 5 seconds...
+          ansible.builtin.pause:
+            seconds: 5
 
-    - name: remove directory clutter
-      ansible.builtin.file:
-        path: "{{ item.mount }}"
-        state: absent
-      loop: "{{ nfs_devices }}"
+        - name: remove directory clutter
+          ansible.builtin.file:
+            path: "{{ item.mount }}"
+            state: absent
+          loop: "{{ nfs_devices }}"

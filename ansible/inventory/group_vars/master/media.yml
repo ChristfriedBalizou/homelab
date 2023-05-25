@@ -1,14 +1,26 @@
 ---
 media:
-  mount: "/mnt/ssd-sdb"
   applications:
-    - qbittorrent
-    - sonarr
-    - radarr
-    - prowlarr
-    - jellyfin
-  directories:
-    - music
-    - movies
-    - series
-    - torrents
+    mount: "/mnt/volume1"
+    folders:
+      - apps/qbittorrent
+      - apps/sonarr
+      - apps/radarr
+      - apps/prowlarr
+      - apps/jellyfin
+      - apps/jellyseerr
+      - apps/unpackerr
+      - apps/nzbget
+      - apps/db/postgresql
+      - apps/db/pgadmin
+  persistence:
+    mount: "/mnt/volume2"
+    folders:
+      - media/movies
+      - media/series
+      - media/download/torrents
+      - media/download/usenets
+  backup:
+    mount: "/mnt/volume3"
+    folders:
+      - apps

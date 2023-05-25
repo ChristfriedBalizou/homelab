@@ -36,19 +36,19 @@
         state: started
       failed_when: false
 
-    - name: Create applications config location
+    - name: Create applications config folders
       ansible.builtin.file:
-        path: "{{ media.mount }}/apps/{{ item }}"
+        path: "{{ media.applications.mount }}/{{ item }}"
         state: directory
         mode: '0766'
-      loop: "{{ media.applications }}"
+      loop: "{{ media.applications.folders }}"
 
-    - name: Create applications media location
+    - name: Create persistence folders
       ansible.builtin.file:
-        path: "{{ media.mount }}/media/{{ item }}"
+        path: "{{ media.persistence }}/{{ item }}"
         state: directory
         mode: '0766'
-      loop: "{{ media.directories }}"
+      loop: "{{ media.persitence.folders }}"
   when:
     - k3s_control_node is defined
     - k3s_control_node
