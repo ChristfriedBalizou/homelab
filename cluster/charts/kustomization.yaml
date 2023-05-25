@@ -16,3 +16,4 @@ resources:
   - stakater-charts.yaml
   - grafana-charts.yaml
   - prometheus-community-charts.yaml
+  - dex-charts.yaml
