@@ -50,10 +50,6 @@ spec:
       supplementalGroups:
         - 100
     persistence:
-      data:
-        enabled: true
-        existingClaim: config-openldap
-        mountPath: /bitnami/openldap
       ldif:
         enabled: true
         type: secret
