@@ -56,8 +56,8 @@ spec:
       resources:
         mon:
           limits:
-            cpu: "200m"
-            memory: "500m"
+            cpu: "500m"
+            memory: "800m"
           request:
             cpu: "200m"
             memory: "500m"
