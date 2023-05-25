@@ -42,11 +42,10 @@ spec:
         hajimari.io/name: "LDAP Admin"
         hajimari.io/icon: "mdi:shield-crown-outline"
       hosts:
-        - host: &host phpldapadmin.${SECRET_DOMAIN}
-          paths:
-            - path: /
-              pathType: Prefix
+        - &host "phpldapadmin.${SECRET_DOMAIN}"
+      path: /
+      pathType: Prefix
       tls:
         - hosts:
             - *host
-          secretName: phpldapadmin-tls
+          secretName: "phpldapadmin-tls"
