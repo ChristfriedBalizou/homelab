@@ -352,6 +352,8 @@ verify_dex() {
     _has_envar "DEX_GITHUB_CLIENT_SECRET"
     _has_envar "DEX_GOOGLE_CLIENT_ID"
     _has_envar "DEX_GOOGLE_CLIENT_SECRET"
+    _has_envar "DEX_LOFT_CLIENT_ID"
+    _has_envar "DEX_LOFT_CLIENT_SECRET"
 }
 
 verify_ansible_hosts() {
