@@ -47,7 +47,7 @@ spec:
         existingClaim: torrent-config
       media:
         enabled: true
-        existingClaim: torrent-media
+        existingClaim: media
         mountPath: /media
     podAnnotations:
       setGateway: "true"
