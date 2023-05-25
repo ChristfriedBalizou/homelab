@@ -21,7 +21,9 @@ spec:
       tag: 1.3.0
     env:
       TZ: ${TIMEZONE}
+      JELLYSEER__INSTANCE_NAME: Jellyseerr
       NAME: Jellyseerr
+      INSTANCE_NAME: Jellyseerr
       LOG_LEVEL: "info"
       PORT: &port 80
     service:
