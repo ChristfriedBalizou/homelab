@@ -36,11 +36,11 @@ spec:
     service:
       port: 1389
     volumeMounts:
-      - name: "ldif-bootstrap"
+      - name: "ldif"
         mountPath: "/container/ldifs/bootstrap.ldif"
         subPath: "bootstrap.ldif"
         readOnly: true
     volumes:
-      - name: "ldif-bootstrap"
+      - name: "ldif"
         secret:
           secretName: "identity/openldap-ldif-bootstrap"
