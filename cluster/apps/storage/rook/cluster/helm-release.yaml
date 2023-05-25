@@ -115,7 +115,7 @@ spec:
             csi.storage.k8s.io/fstype: ext4
     cephClusterSpec:
       crashCollector:
-        disable: false
+        disable: true
       mon:
         count: 3
       placement:
