@@ -10,7 +10,7 @@ spec:
     storage: 250Gi
   nfs:
     path: /mnt/ssd-sdc/media/usenets
-    serve: ${NFS_SERVER_IP}
+    server: ${NFS_SERVER_IP}
   storageClassName: media-usenets
   volumeMode: Filesystem
   persistentVolumeReclaimPolicy: Retain
