@@ -21,7 +21,7 @@ spec:
     operatorNamespace: storage
     monitoring:
       enabled: true
-      createPrometheusRules: true
+      createPrometheusRules: false
     ingress:
       dashboard:
         annotations:
