@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://christfriedbalizou.github.io/helm-charts
       chart: phpldapadmin
-      version: 0.2.0
+      version: 0.2.1
       sourceRef:
         kind: HelmRepository
         name: christfried-charts
@@ -60,11 +60,22 @@ spec:
         - hosts:
             - *host
           secretName: "phpldapadmin-tls"
+    initContainers:
+      - name: copy-tls
+        image: busybox
+        tag: latest
+        commands:
+          - cp
+          - "/container/service/tls/tls*"
+          - "/container/service/ldap-client/assets/certs/"
     volumeMounts:
-      - name: "ldap-tls"
-        mountPath: "/container/certs"
+      - name: "tls"
+        mountPath: "/container/service/tls"
+      - name: "certs"
+        mountPath: "/container/service/ldap-client/assets/certs/"
     volumes:
-      - name: "ldap-tls"
+      - name: "tls"
         secret:
           secretName: "ldap-tls"
-          defaultMode: 0777
+      - name: certs
+        emptyDir: {}
