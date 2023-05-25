@@ -16,6 +16,18 @@ spec:
         name: kubernetes-dashboard-charts
         namespace: flux-system
   values:
+    extraVolumes:
+      - name: basicauth
+        secret:
+          secretName: cluster-dashboard-secrets
+    extraVolumeMounts:
+      - name: basicauth
+        mountPath: /etc/kubernetes/auth/auth.csv
+        subPath: auth.csv
+        readOnly: true
+    extraArgs:
+      - --authentication-mode=basic
+      - --basic-auth-file=/etc/kubernetes/auth/auth.csv
     serviceAccount:
       create: true
       name: ${SECRET_GRAFANA_ADMIN_USER}
