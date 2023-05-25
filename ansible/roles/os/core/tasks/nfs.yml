@@ -102,6 +102,13 @@
         line: "ssl=0"
         backrefs: true
 
+    - name: Refere webmin to node
+      ansible.builtin.lineinfile:
+        path: /etc/webmin/config
+        regexp: "^referers={{ ansible_host }}.*"
+        line: "referers={{ ansible_host }}.{{ secret_domain }}"
+        backrefs: true
+
     - name: Restart Webmin service
       ansible.builtin.service:
         name: webmin.service

@@ -91,6 +91,7 @@ main() {
         # generate ansible hosts file and secrets
         generate_ansible_hosts
         generate_ansible_host_secrets
+        generate_ansible_group_secrets
         setup_github_webhook
         setup_weave_gitops
         success
@@ -468,6 +469,15 @@ verify_success() {
     _log "INFO" "All checks passed!"
     _log "INFO" "Run the script without --verify to template all the files out"
     exit 0
+}
+
+
+generate_ansible_group_secrets() {
+    {
+      printf -- "---\n"
+      printf "secret_domain: %s\n" "${BOOTSTRAP_CLOUDFLARE_DOMAIN}"
+    } > "${PROJECT_DIR}/ansible/inventory/group_vars/kubernetes/secrets.sops.yml"
+    sops --encrypt --in-place "${PROJECT_DIR}/ansible/inventory/group_vars/kubernetes/secrets.sops.yml"
 }
 
 generate_ansible_host_secrets() {
