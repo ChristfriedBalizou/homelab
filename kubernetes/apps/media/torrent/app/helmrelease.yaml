@@ -50,11 +50,11 @@ spec:
     persistence:
       config:
         enabled: true
-        existingClaim: torrent-config
-      media:
+        existingClaim: media-apps
+      downloads:
         enabled: true
-        existingClaim: media
-        mountPath: /media
+        mountPath: /downloads
+        existingClaim: media-torrents
     podAnnotations:
       setGateway: "true"
     resources:

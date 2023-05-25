@@ -1,0 +1,12 @@
+---
+media:
+  mount: "/mnt/ssd-sdb"
+  applications:
+    - qtbittorrent
+    - sonarr
+    - jackett
+  directories:
+    - music
+    - movies
+    - series
+    - torrents

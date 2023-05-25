@@ -1,0 +1,30 @@
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: media-torrents
+spec:
+  accessModes:
+    - ReadWriteMany
+  capacity:
+    storage: 250Gi
+  nfs:
+    path: /mnt/ssd-sdb/torrents
+    server: ${NFS_SERVER_IP}
+  storageClassName: media-torrents
+  volumeMode: Filesystem
+  persistentVolumeReclaimPolicy: Retain
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: media-torrents
+  namespace: media-torrents
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 250Gi
+  storageClassName: media-torrents
+  volumeMode: Filesystem

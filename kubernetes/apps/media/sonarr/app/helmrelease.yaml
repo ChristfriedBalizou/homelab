@@ -74,11 +74,11 @@ spec:
     persistence:
       config:
         enabled: true
-        storageClass: nfs-client
-      media:
+        existingClaim: media-apps
+      series:
         enabled: true
-        mountPath: /media
-        existingClaim: media
+        mountPath: /series
+        existingClaim: media-series
     resources:
       requests:
         cpu: 10m

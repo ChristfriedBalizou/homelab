@@ -39,6 +39,22 @@
     - k3s_control_node is defined
     - k3s_control_node
 
+- name: Configure media server
+  block:
+    - name: Create applications config location
+      ansible.builtin.file:
+        path: "{{ media.mount }}/apps/{{ item }}"
+        state: directory
+        mode: '0766'
+      loop: "{{ media.applications }}"
+
+    - name: Create applications media location
+      ansible.builtin.file:
+        path: "{{ media.mount }}/media/{{ item }}"
+        state: directory
+        mode: '0766'
+      loop: "{{ media.directories }}"
+
 - name: Mount NFS on workers fstab
   block:
     - name: Mount nfs device from fstab

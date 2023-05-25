@@ -1,0 +1,30 @@
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: media-series
+spec:
+  accessModes:
+    - ReadWriteMany
+  capacity:
+    storage: 250Gi
+  nfs:
+    path: /mnt/ssd-sdb/series
+    server: ${NFS_SERVER_IP}
+  storageClassName: media-series
+  volumeMode: Filesystem
+  persistentVolumeReclaimPolicy: Retain
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: media-series
+  namespace: media-series
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 250Gi
+  storageClassName: media-series
+  volumeMode: Filesystem
