@@ -70,10 +70,12 @@ spec:
               preferredUsernameAttr: cn
             groupSearch:
               baseDN: "ou=groups,${SECRET_LDAP_ROOT}"
-              filter: "(objectClass=groupOfNames)"
+              filter: "(|(objectClass=groupOfNames)(objectClass=posixGroup))"
               userMatchers:
                 - userAttr: DN
                   groupAttr: member
+                - userAttr: gidNumber
+                  groupAttr: memberUid
               nameAttr: cn
       staticClients:
         - name: oauth2-proxy
