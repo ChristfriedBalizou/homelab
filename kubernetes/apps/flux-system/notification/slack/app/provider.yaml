@@ -6,5 +6,7 @@ metadata:
   namespace: flux-system
 spec:
   type: slack
+  channel: homelab
+  address: https://slack.com/api/chat.postMessage
   secretRef:
     name: slack-secret
