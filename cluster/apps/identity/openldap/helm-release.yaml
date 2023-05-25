@@ -28,9 +28,7 @@ spec:
     adminPassword: ${SECRET_GRAFANA_ADMIN_PASSWORD}
     service:
       port: 1389
-    debug:
-      enabled: true
     persistence:
       enabled: true
-      existingClaim: "default/openldap-filesystem"
+      existingClaim: "openldap-filesystem"
       mountPath: "/foobar"
