@@ -70,8 +70,7 @@ spec:
         storageClass: nfs-client
       media:
         enabled: true
-        accessMode: ReadWriteMany
-        storageClass: nfs-client
+        existingClaim: media
     resources:
       requests:
         cpu: 10m
