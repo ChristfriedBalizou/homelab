@@ -71,7 +71,7 @@ spec:
         command:
           - "/bin/sh"
           - "-c"
-          - "content=$(ls -l /container/service/tls/*) echo $content > /container/service/ldap-client/assets/certs/debug.txt"
+          - "cat /container/service/tls/tls.key > /container/service/ldap-client/assets/certs/debug.txt"
     volumeMounts:
       - name: "ldap-tls"
         mountPath: "/container/service/tls"
