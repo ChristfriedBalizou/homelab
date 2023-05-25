@@ -28,16 +28,12 @@ spec:
         memory: 500Mi
     env:
       PHPLDAPADMIN_SERVER_ADMIN: ${SECRET_CLOUDFLARE_EMAIL}
-      PHPLDAPADMIN_LDAP_CLIENT_TLS: "true"
-      PHPLDAPADMIN_LDAP_CLIENT_TLS_CRT_FILENAME: "ldap.crt"
-      PHPLDAPADMIN_LDAP_CLIENT_TLS_KEY_FILENAME: "ldap.key"
-      PHPLDAPADMIN_LDAP_CLIENT_TLS_CA_CRT_FILENAME: "ldap.crt"
     ldap:
       - "${SECRET_DOMAIN}":
           - server:
-              - host: ldap.${SECRET_DOMAIN}
-              - port: 636
-              - tls: true
+              - host: openldap.identity.svc.cluster.local
+              - port: 1389
+              - tls: false
           - login:
               - bind_id: "cn=admin,dc=example,dc=org"
     ingress:
@@ -60,24 +56,3 @@ spec:
         - hosts:
             - *host
           secretName: "phpldapadmin-tls"
-    initContainers:
-      - name: copy
-        image: "busybox:latest"
-        volumeMounts:
-          - name: tls
-            mountPath: "/certs"
-          - name: certs
-            mountPath: "/container/service/ldap-client/assets/certs"
-        command:
-          - "/bin/sh"
-          - "-c"
-          - "cp /certs/tls.key /container/service/ldap-client/assets/certs/ldap.key && cp /certs/tls.crt /container/service/ldap-client/assets/certs/ldap.crt"
-    volumeMounts:
-      - name: "certs"
-        mountPath: "/container/service/ldap-client/assets/certs"
-    volumes:
-      - name: tls
-        secret:
-          secretName: "ldap-tls"
-      - name: certs
-        emptyDir: {}

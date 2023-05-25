@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://christfriedbalizou.github.io/helm-charts
       chart: openldap
-      version: 0.3.0
+      version: 1.0.0
       sourceRef:
         kind: HelmRepository
         name: christfried-charts
@@ -20,10 +20,6 @@ spec:
       LDAP_ROOT: ${SECRET_LDAP_ROOT}
       LDAP_ALLOW_ANON_BINDING: "no"
       LDAP_CUSTOM_LDIF_DIR: "/ldifs"
-      LDAP_ENABLE_TLS: "yes"
-      LDAP_TLS_CERT_FILE: "/container/certificates/tls.crt"
-      LDAP_TLS_KEY_FILE: "/container/certificates/tls.key"
-      LDAP_TLS_CA_FILE: "/container/certificates/tls.crt"
     replicaCount: 1
     adminUser: ${SECRET_GRAFANA_ADMIN_USER}
     adminPassword: ${SECRET_GRAFANA_ADMIN_PASSWORD}
@@ -35,19 +31,15 @@ spec:
         cpu: 400m
         memory: 500Mi
     service:
-      port: 1636
+      ports:
+        - name: ldap
+          port: 1389
     volumeMounts:
       - name: "ldif"
         mountPath: "/ldifs/bootstrap.ldif"
         subPath: "bootstrap.ldif"
         readOnly: true
-      - name: "ldap-tls"
-        mountPath: "/container/certificates"
-        readOnly: true
     volumes:
       - name: "ldif"
         secret:
           secretName: "openldap-ldif-bootstrap"
-      - name: "ldap-tls"
-        secret:
-          secretName: "ldap-tls"

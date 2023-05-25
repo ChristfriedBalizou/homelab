@@ -51,7 +51,7 @@ spec:
           id: ldap
           name: LDAP
           config:
-            host: ldap.${SECRET_DOMAIN}:636
+            host: openldap.identity.svc.cluster.local
             bindDN: "cn=${SECRET_GRAFANA_ADMIN_USER},${SECRET_LDAP_ROOT}"
             bindPW: "${SECRET_GRAFANA_ADMIN_PASSWORD}"
             usernamePrompt: Email Address
