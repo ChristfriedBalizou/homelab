@@ -28,6 +28,8 @@ spec:
     - name: cert-manager-issuers
       namespace: networking
   values:
+    tcp:
+      389: "identity/openldap:1389"
     controller:
       replicaCount: 1
       extraEnvs:
