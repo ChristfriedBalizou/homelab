@@ -19,11 +19,11 @@ This repo is my home Kubernetes cluster declared using yaml files and contains e
 
 ## :computer:&nbsp; Hardware
 
-| Device              | Count | Memory    | Role           | Storage             | Notes                                                    |
-|:-------------------:|:-----:|:---------:|:--------------:|:-------------------:|:--------------------------------------------------------:|
-| Ιntel Celeron J4125 |   1   |  4GB DDR4 |   K3s master   |    128GB M.2 SSD    |  1TB SSD plugged in to provide nfs storage via rook-ceph |
-| Ιntel Celeron J4125 |   1   |  8GB DDR4 |   K3s worker   |    128GB M.2 SSD    |  2TB SSD plugged in to provide nfs storage via rook-ceph |
-| Raspberry Pi 4B     |   1   |    4GB    |   K3s worker   |        64GB         |                                                          |
+| Device              | Count | Memory    | Role           | Storage             | Notes                                      |
+|:-------------------:|:-----:|:---------:|:--------------:|:-------------------:|:------------------------------------------:|
+| Ιntel Celeron J4125 |   1   |  4GB DDR4 |   K3s master   |    128GB M.2 SSD    |  1TB SSD plugged in to provide nfs storage |
+| Ιntel Celeron J4125 |   1   |  8GB DDR4 |   K3s worker   |    128GB M.2 SSD    |  2TB SSD plugged in to provide nfs storage |
+| Raspberry Pi 4B     |   1   |    4GB    |   K3s worker   |        64GB         |                                            |
 
 And some standby Rasbpberry Pi's 4B awaiting resurection when needed!
 
