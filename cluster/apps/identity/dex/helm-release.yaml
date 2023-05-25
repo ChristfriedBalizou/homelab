@@ -44,15 +44,6 @@ spec:
     # see https://github.com/dexidp/dex/issues/2082
     env:
       KUBERNETES_POD_NAMESPACE: identity
-    volumes:
-      - name: templates
-        configMap:
-          namespace: identity
-          name: dex-web-templates
-    volumesMounts:
-      - name: templates
-        mountPath: /container/templates
-        readOnly: true
     config:
       issuer: https://dex.${SECRET_DOMAIN}
       connectors:
@@ -92,7 +83,6 @@ spec:
         config:
           inCluster: true
       frontend:
-        dir: /container/templates
         theme: dark
         issuer: Final Space
         issuerUrl: https://${SECRET_DOMAIN}
