@@ -42,6 +42,13 @@ spec:
     controller:
       enabled: true
       replicas: 2
+    podSecurityContext:
+      runAsUser: 568
+      runAsGroup: 568
+      fsGroup: 568
+      fsGroupChangePolicy: "OnRootMismatch"
+      supplementalGroups:
+        - 100
     persistence:
       data:
         enabled: true
