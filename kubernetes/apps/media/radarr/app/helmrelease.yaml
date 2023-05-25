@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: sonarr
+  name: radarr
   namespace: media
 spec:
   interval: 10m
@@ -30,13 +30,13 @@ spec:
       namespace: storage
   values:
     image:
-      repository: ghcr.io/onedr0p/sonarr-develop
-      tag: 4.0.0.328@sha256:8c0ff01a11ccf1149252cdf26fca1a50b2e6debdd9515adfdef36e3c052f89ec
+      repository: ghcr.io/onedr0p/radarr-develop
+      tag: 4.3.2.6857@sha256:3505169067b62bdeb722aea4dd55446592307a24eec7298bd88001e0b7510007
     env:
       TZ: ${TIMEZONE}
-      SONARR__INSTANCE_NAME: Sonarr
-      SONARR__PORT: &port 80
-      SONARR__LOG_LEVEL: info
+      RADARR__INSTANCE_NAME: Radarr
+      RADARR__PORT: &port 80
+      RADARR__LOG_LEVEL: info
     service:
       main:
         ports:
@@ -53,17 +53,17 @@ spec:
           nginx.ingress.kubernetes.io/auth-url: https://auth.${SECRET_DOMAIN}/oauth2/auth?allowed_groups=admin
           nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}/oauth2/start
           hajimari.io/enable: 'true'
-          hajimari.io/icon: mdi:television-classic
+          hajimari.io/icon: mdi:filmstrip
           hajimari.io/group: Media
         hosts:
-          - host: "sonarr.${SECRET_DOMAIN}"
+          - host: "radarr.${SECRET_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
         tls:
           - hosts:
-              - "sonarr.${SECRET_DOMAIN}"
-            secretName: sonarr-tls
+              - "radarr.${SECRET_DOMAIN}"
+            secretName: radarr-tls
     podSecurityContext:
       runAsUser: 568
       runAsGroup: 568
@@ -75,10 +75,10 @@ spec:
       config:
         enabled: true
         existingClaim: media-apps
-      series:
+      movies:
         enabled: true
-        mountPath: /series
-        existingClaim: media-series
+        mountPath: /movies
+        existingClaim: media-movies
     resources:
       requests:
         cpu: 10m

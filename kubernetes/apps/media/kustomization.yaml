@@ -6,4 +6,5 @@ resources:
   - ./pvs
   - ./torrent/ks.yaml
   - ./sonarr/ks.yaml
+  - ./radarr/ks.yaml
   - ./jackett/ks.yaml
