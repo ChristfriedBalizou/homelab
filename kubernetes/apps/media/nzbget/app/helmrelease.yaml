@@ -1,0 +1,86 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: nzbget
+  namespace: media
+spec:
+  interval: 10m
+  chart:
+    spec:
+      # renovate: registryUrl=https://k8s-at-home.com/charts/
+      chart: nzbget
+      version: 12.4.2
+      sourceRef:
+        kind: HelmRepository
+        name: k8s-at-home
+        namespace: flux-system
+  values:
+    image:
+      repository: ghcr.io/k8s-at-home/nzbget
+      tag: v21.1
+    env:
+      TZ: "${TIMEZONE}"
+    ingress:
+      main:
+        enabled: true
+        annotations:
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
+          external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
+          external-dns.home.arpa/enabled: "true"
+          nginx.ingress.kubernetes.io/auth-snippet: |
+            if ( $http_user_agent ~* "(Sonarr|Radarr)" ) {
+              return 200;
+            }
+          nginx.ingress.kubernetes.io/auth-url: https://auth.${SECRET_DOMAIN}/oauth2/auth?allowed_groups=admin
+          nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}/oauth2/start
+          hajimari.io/enable: 'true'
+          hajimari.io/icon: download-box
+          hajimari.io/group: Media
+        hosts:
+          - host: &host "nzbget.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - *host
+            secretName: nzbget-tls
+    persistence:
+      config:
+        enabled: true
+        existingClaim: config-nzbget
+      movies:
+        enabled: true
+        mountPath: /movies
+        existingClaim: media-movies
+      series:
+        enabled: true
+        mountPath: /series
+        existingClaim: media-series
+      downloads:
+        enabled: true
+        mountPath: /downloads
+        existingClaim: media-torrents
+    podSecurityContext:
+      runAsUser: 568
+      runAsGroup: 568
+      fsGroup: 568
+      fsGroupChangePolicy: "OnRootMismatch"
+      supplementalGroups:
+        - 100
+    resources:
+      requests:
+        memory: 300Mi
+        cpu: 25m
+      limits:
+        memory: 2Gi
+    affintity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: kubernetes.io/hostname
+                  operator: In
+                  values:
+                    - k8s-3

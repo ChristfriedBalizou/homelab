@@ -12,3 +12,4 @@ resources:
   - ./jellyfin/ks.yaml
   - ./jellyseerr/ks.yaml
   - ./unpackerr/ks.yaml
+  - ./nzbget/ks.yaml
