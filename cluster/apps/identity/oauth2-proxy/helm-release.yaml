@@ -1,0 +1,55 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: oauth2-proxy
+  namespace: networking
+spec:
+  interval: 10m
+  chart:
+    spec:
+      chart: oauth2-proxy
+      version: 6.3.0
+      sourceRef:
+        kind: HelmRepository
+        name: oauth2-proxy
+        namespace: flux-system
+  values:
+    image:
+      repository: quay.io/oauth2-proxy/oauth2-proxy
+      tag: v7.4.0
+    authenticatedEmailsFile:
+      enabled: true
+      restricted_access: |-
+        ${SECRET_CLOUDFLARE_EMAIL}
+    config:
+      clientID: ${DEX_OAUTH2_PROXY_CLIENT_ID}
+      clientSecret: ${DEX_OAUTH2_PROXY_CLIENT_SECRET}
+      cookieSecret: ${OAUTH2_PROXY_COOKIE_SECRET}
+      configFile: |-
+        provider = "oidc"
+        oidc_issuer_url = "https://dex.${SECRET_DOMAIN}"
+        auth_logging = true
+        cookie_domains = ".${SECRET_DOMAIN}"
+        cookie_secure = true
+        email_domains = []
+        pass_access_token = true
+        pass_authorization_header = true
+        whitelist_domains = ".${SECRET_DOMAIN}"
+    ingress:
+      enabled: true
+      className: nginx
+      path: /oauth2
+      pathType: Prefix
+      annotations:
+        cert-manager.io/cluster-issuer: "letsencrypt-production"
+        external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
+        external-dns/is-public: "true"
+        hajimari.io/enable: "true"
+        hajimari.io/icon: "logos:oauth"
+      hosts:
+        - &host auth.${SECRET_DOMAIN}
+      tls:
+        - hosts:
+            - *host
+          secretName: auth-tls

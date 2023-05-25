@@ -69,7 +69,12 @@ spec:
           id: ${DEX_LOFT_CLIENT_ID}
           secret: ${DEX_LOFT_CLIENT_SECRET}
           redirectURIs:
-            - 'https://loft.${SECRET_DOMAIN}/auth/oidc/callback'
+            - https://loft.${SECRET_DOMAIN}/auth/oidc/callback
+        - name: oauth2-proxy
+          id: ${DEX_OAUTH2_PROXY_CLIENT_ID}
+          secret: ${DEX_OAUTH2_PROXY_CLIENT_SECRET}
+          redirectURIs:
+            - https://auth.${SECRET_DOMAIN}/oauth2/callback
       storage:
         type: kubernetes
         config:
