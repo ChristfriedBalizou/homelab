@@ -45,8 +45,8 @@ spec:
           secretName: "openldap-ldif-bootstrap"
     affinity:
       podAntiAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            - labelSelector:
-                matchLabels:
-                  name: openldap
-              topologyKey: kubernetes.io/hostname
+        requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchLabels:
+                name: openldap
+            topologyKey: kubernetes.io/hostname
