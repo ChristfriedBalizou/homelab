@@ -22,6 +22,8 @@ spec:
       enabled: true
       restricted_access: |-
         ${SECRET_CLOUDFLARE_EMAIL}
+    readinessProbe:
+      enabled: false
     config:
       clientID: ${DEX_OAUTH2_PROXY_CLIENT_ID}
       clientSecret: ${DEX_OAUTH2_PROXY_CLIENT_SECRET}
