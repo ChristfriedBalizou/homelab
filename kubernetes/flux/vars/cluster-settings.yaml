@@ -6,8 +6,6 @@ metadata:
   namespace: flux-system
 data:
   TIMEZONE: "Europe/London"
-  K8S_CLUSTER_CIDR: "10.42.0.0/16"
-  K8S_SERVICE_CIDR: "10.43.0.0/16"
   KUBE_VIP_ADDR: "192.168.1.155"
   METALLB_LB_RANGE: "192.168.1.70-192.168.1.99"
   METALLB_K8S_GATEWAY_ADDR: "192.168.1.70"
