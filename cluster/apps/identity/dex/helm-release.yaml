@@ -47,6 +47,14 @@ spec:
     config:
       issuer: https://dex.${SECRET_DOMAIN}
       connectors:
+        - type: oidc
+          id: google
+          name: Google
+          config:
+            issuer: https://accounts.google.com
+            clientID: ${DEX_GOOGLE_CLIENT_ID}
+            clientSecret: ${DEX_GOOGLE_CLIENT_SECRET}
+            redirectURI: https://dex.${SECRET_DOMAIN}/callback
         - type: ldap
           id: ldap
           name: LDAP
