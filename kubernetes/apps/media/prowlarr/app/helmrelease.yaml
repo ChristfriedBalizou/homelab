@@ -39,7 +39,7 @@ spec:
       PROWLARR__LOG_LEVEL: info
       PROWLARR__POSTGRES_HOST: "postgresql.storage"
       PROWLARR__POSTGRES_MAIN_DB: "prowlarr"
-      PROWLARR__POSTGRES_LOG_DB: "prowlarr.log"
+      PROWLARR__POSTGRES_LOG_DB: "prowlarr-log"
       PROWLARR__POSTGRES_PASSWORD: "${PROWLARR_POSTGRES_PASSWORD}"
       PROWLARR__POSTGRES_USER: "${PROWLARR_POSTGRES_USER}"
     service:
