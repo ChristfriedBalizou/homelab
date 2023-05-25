@@ -15,6 +15,9 @@ spec:
         kind: HelmRepository
         name: dex
         namespace: flux-system
+  dependsOn:
+    - name: openldap
+      namespace: identity
   values:
     image:
       repository: ghcr.io/dexidp/dex
