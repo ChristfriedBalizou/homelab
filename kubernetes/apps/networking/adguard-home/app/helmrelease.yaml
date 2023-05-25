@@ -93,4 +93,4 @@ spec:
           - labelSelector:
               matchLabels:
                 name: adguard-home
-                topologyKey: kubernetes.io/hostname
+            topologyKey: kubernetes.io/hostname
