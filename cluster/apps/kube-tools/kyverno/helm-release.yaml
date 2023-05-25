@@ -15,6 +15,7 @@ spec:
         name: kyverno
         namespace: flux-system
   values:
+    installCRDs: true
     replicaCount: 2
     serviceMonitor:
       enabled: true
