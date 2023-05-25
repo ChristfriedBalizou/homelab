@@ -105,11 +105,18 @@
     - name: Refere webmin to node
       ansible.builtin.lineinfile:
         path: /etc/webmin/config
-        regexp: "^referers={{ ansible_host }}.*"
-        line: "referers={{ ansible_host }}.{{ secret_domain }}"
+        line: "referers={{ inventory_hostname }}.{{ secret_domain }}"
+        state: present
+
+    - name: Enable Referers webmin
+      ansible.builtin.lineinfile:
+        path: /etc/webmin/config
+        regexp: "^referers_none=1"
+        line: "referers_none=0"
         backrefs: true
 
     - name: Restart Webmin service
-      ansible.builtin.service:
+      ansible.builtin.systemd:
         name: webmin.service
         state: restarted
+        enabled: true

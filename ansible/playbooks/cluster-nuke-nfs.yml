@@ -32,17 +32,23 @@
         path: /etc/apt/sources.list
         regexp: "^deb.*webmin.*"
         state: absent
-      when:
-        - k3s_control_node is defined
-        - k3s_control_node
+
+    - name: Stop and disable Webmin service
+      ansible.builtin.systemd:
+        name: webmin.service
+        state: stopped
+        enabled: false
 
     - name: Remove Webmin Apt signing key
       ansible.builtin.apt_key:
         url: http://www.webmin.com/jcameron-key.asc
         state: absent
-      when:
-        - k3s_control_node is defined
-        - k3s_control_node
+
+    - name: De-refere webmin to node
+      ansible.builtin.lineinfile:
+        path: /etc/webmin/config
+        line: "referers={{ inventory_hostname }}.{{ secret_domain }}"
+        state: absent
 
     - name: unmount device from fstab
       ansible.builtin.lineinfile:
