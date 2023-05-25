@@ -64,9 +64,15 @@ spec:
       transcode:
         enabled: true
         type: emptyDir
-    nodeSelector:
-      node-role.kubernetes.io/worker: "true"
-      intel.feature.node.kubernetes.io/gpu: "true"
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: intel.feature.node.kubernetes.io/gpu
+                  operator: In
+                  values:
+                    - "true"
     resources:
       requests:
         gpu.intel.com/i915: 1
