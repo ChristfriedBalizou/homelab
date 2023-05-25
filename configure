@@ -42,6 +42,7 @@ main() {
         verify_dashboard
         verify_vpn
         verify_nfs
+        verify_db
         verify_success
     else
         # generate sops configuration file
@@ -393,6 +394,16 @@ verify_vpn() {
 
 verify_nfs() {
     _has_envar "NFS_SERVER_IP"
+}
+
+
+verify_db() {
+    _has_envar "PROWLARR_POSTGRES_PASSWORD"
+    _has_envar "PROWLARR_POSTGRES_USER"
+    _has_envar "SONARR_POSTGRES_PASSWORD"
+    _has_envar "SONARR_POSTGRES_USER"
+    _has_envar "RADARR_POSTGRES_PASSWORD"
+    _has_envar "RADARR_POSTGRES_USER"
 }
 
 verify_dashboard() {
