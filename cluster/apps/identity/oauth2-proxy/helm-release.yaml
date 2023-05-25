@@ -33,7 +33,7 @@ spec:
         cookie_domains = ".${SECRET_DOMAIN}"
         cookie_secure = true
         cookie_name = "oauth2_proxy"
-        email_domains = ["${SECRET_DOMAIN}", "google.com"]
+        email_domains = ["${SECRET_DOMAIN}", "gmail.com"]
         pass_access_token = true
         pass_authorization_header = true
         whitelist_domains = ".${SECRET_DOMAIN}"
