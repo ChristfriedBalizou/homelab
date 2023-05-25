@@ -16,6 +16,9 @@ spec:
         name: christfried-charts
         namespace: flux-system
   values:
+    env:
+      LDAP_ORGANISATION: "ChristfriedBalizou Inc."
+      LDAP_DOMAIN: ${SECRET_DOMAIN}
     replicaCount: 2
     adminUser: ${SECRET_GRAFANA_ADMIN_USER}
     adminPassword: ${SECRET_GRAFANA_ADMIN_PASSWORD}
