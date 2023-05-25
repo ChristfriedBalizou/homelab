@@ -29,7 +29,7 @@ spec:
       namespace: networking
   values:
     tcp:
-      "8389": "identity/openldap:1389"
+      "389": "identity/openldap:1389"
     controller:
       replicaCount: 1
       extraEnvs:
