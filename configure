@@ -361,6 +361,7 @@ verify_dex() {
 
 verify_openldap() {
     _has_envar "LDAP_ROOT"
+    _has_envar "LDAP_LDIF"
 }
 
 verify_ansible_hosts() {
