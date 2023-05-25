@@ -40,4 +40,4 @@ spec:
 
     nfs:
       server: "${NFS_SERVER_IP}"
-      path: /
+      path: /mnt/ssd-sdb
