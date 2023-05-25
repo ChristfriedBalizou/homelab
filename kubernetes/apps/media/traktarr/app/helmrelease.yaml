@@ -54,6 +54,8 @@ spec:
           http:
             port: 80
             protocol: TCP
+    podAnnotations:
+      secret.reloader.stakater.com/reload: "traktarr-config"
     persistence:
       config:
         enabled: "true"
