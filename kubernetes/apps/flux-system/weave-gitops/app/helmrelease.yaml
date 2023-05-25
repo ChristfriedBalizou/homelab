@@ -24,7 +24,6 @@ spec:
   values:
     adminUser:
       create: true
-      createSecret: false
       username: admin
       passwordHash: "${WEAVE_GITOPS_ADMIN_PASSWORD}"
     ingress:
