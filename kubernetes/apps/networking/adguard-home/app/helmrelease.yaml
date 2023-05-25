@@ -18,8 +18,6 @@ spec:
     image:
       repository: adguard/adguardhome
       tag: v0.107.26
-    controller:
-      replicas: 2
     service:
       main:
         enabled: true
@@ -87,10 +85,3 @@ spec:
         enabled: true
         existingClaim: data-adguard-home
         mountPath: /opt/adguardhome/work
-    affinity:
-      podAntiAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          - labelSelector:
-              matchLabels:
-                name: adguard-home
-            topologyKey: kubernetes.io/hostname
