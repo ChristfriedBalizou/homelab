@@ -42,6 +42,7 @@ spec:
           - hosts:
               - *host
             secretName: "rook-tls"
+
     cephFileSystems:
       - name: ceph-filesystem
         spec:
@@ -81,6 +82,8 @@ spec:
             csi.storage.k8s.io/node-stage-secret-namespace: rook-ceph
             csi.storage.k8s.io/fstype: ext4
     cephClusterSpec:
+      crashCollector:
+        disable: true
       mon:
         count: 1
       storage:
