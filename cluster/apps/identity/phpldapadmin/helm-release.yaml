@@ -71,12 +71,7 @@ spec:
         command:
           - "/bin/sh"
           - "-c"
-          - "cp"
-          - "/certs/tls.key"
-          - "/container/service/ldap-client/assets/certs/ldap.key;"
-          - "cp"
-          - "/certs/tls.key"
-          - "/container/service/ldap-client/assets/certs/ldap.key"
+          - "cp /certs/tls.key /container/service/ldap-client/assets/certs/ldap.key && cp /certs/tls.crt /container/service/ldap-client/assets/certs/ldap.crt"
     volumeMounts:
       - name: "certs"
         mountPath: "/container/service/ldap-client/assets/certs"
