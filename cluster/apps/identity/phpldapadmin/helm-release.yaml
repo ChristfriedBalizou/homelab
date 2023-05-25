@@ -28,7 +28,7 @@ spec:
         memory: 500Mi
     env:
       PHPLDAPADMIN_SERVER_ADMIN: ${SECRET_CLOUDFLARE_EMAIL}
-      PHPLDAPADMIN_LDAP_CLIENT_TLS: "false"
+      PHPLDAPADMIN_LDAP_CLIENT_TLS: "true"
       PHPLDAPADMIN_LDAP_CLIENT_TLS_CRT_FILENAME: "tls.crt"
       PHPLDAPADMIN_LDAP_CLIENT_TLS_KEY_FILENAME: "tls.key"
       PHPLDAPADMIN_LDAP_CLIENT_TLS_CA_CRT_FILENAME: "tls.crt"
@@ -67,3 +67,4 @@ spec:
       - name: "ldap-tls"
         secret:
           secretName: "ldap-tls"
+          defaultMode: 0644
