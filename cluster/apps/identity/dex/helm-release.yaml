@@ -62,15 +62,15 @@ spec:
               baseDN: "${SECRET_LDAP_ROOT},ou=users"
               filter: "(objectClass=posixAccount)"
               username: uid
-              idAttr: uid
+              idAttr: DN
               emailAttr: mail
-              nameAttr: name
+              nameAttr: cn
             groupSearch:
               baseDN: "${SECRET_LDAP_ROOT},ou=groups"
               filter: "(objectClass=posixGroup)"
-              nameAttr: name
+              nameAttr: cn
               userMatchers:
-                - userAttr: uid
+                - userAttr: DN
                   groupAttr: member
         - type: github
           id: github
