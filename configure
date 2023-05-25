@@ -41,6 +41,7 @@ main() {
         verify_openldap
         verify_dashboard
         verify_vpn
+        verify_nfs
         verify_success
     else
         # generate sops configuration file
@@ -390,6 +391,10 @@ verify_vpn() {
     _has_envar "CLUSTER_CIDR"
     _has_envar "SERVICE_CIDR"
     _has_envar "SERVER_CIDR"
+}
+
+verify_nfs() {
+    _has_envar "NFS_SERVER_IP"
 }
 
 verify_dashboard() {
