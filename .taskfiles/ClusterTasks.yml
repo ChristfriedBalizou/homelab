@@ -44,6 +44,11 @@ tasks:
     cmds:
       - kubectl get pods {{.CLI_ARGS | default "-A"}}
 
+  services:
+    desc: List all the services in your cluster
+    cmds:
+      - kubectl get services {{.CLI_ARGS | default "-A"}}
+
   kustomizations:
     desc: List all the kustomizations in your cluster
     cmds:
