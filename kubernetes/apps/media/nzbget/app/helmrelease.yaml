@@ -49,6 +49,8 @@ spec:
         enabled: true
         mountPath: /media
         existingClaim: media
+    podAnnotations:
+      setGateway: "true"
     podSecurityContext:
       runAsUser: 568
       runAsGroup: 568
