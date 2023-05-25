@@ -35,4 +35,4 @@ spec:
     storageClass:
       name: nfs-pgadmin
       defaultClass: false
-      pathPattern: "${.PVC.name}"
+      pathPattern: "pgadmin"
