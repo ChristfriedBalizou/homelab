@@ -5,27 +5,15 @@ metadata:
   name: postgresql
 spec:
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   capacity:
     storage: 150Gi
-  local:
+  nfs:
     path: /mnt/nfs/volume1/apps/db/postgresql
-  storageClassName: ssd
+    server: ${NFS_SERVER_IP}
+  storageClassName: postgresql
   volumeMode: Filesystem
   persistentVolumeReclaimPolicy: Retain
-  claimRef:
-    apiVersion: v1
-    kind: PersistentVolumeClaim
-    name: postgresql
-    namespace: storage
-  nodeAffinity:
-    required:
-      nodeSelectorTerms:
-        - matchExpressions:
-            - key: kubernetes.io/hostname
-              operator: In
-              values:
-                - "k8s-3"
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -38,4 +26,5 @@ spec:
   resources:
     requests:
       storage: 150Gi
-  storageClassName: ssd
+  storageClassName: postgresql
+  volumeMode: Filesystem
