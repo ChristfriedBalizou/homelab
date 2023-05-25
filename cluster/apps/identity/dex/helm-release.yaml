@@ -81,7 +81,7 @@ spec:
           inCluster: true
       frontend:
         theme: coreos
-        issuer: Milky Way
+        issuer: Final Space
         issuerUrl: https://${SECRET_DOMAIN}
         logoUrl: https://imgur.com/Idzzln9.png
       expiry:
