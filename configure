@@ -520,7 +520,7 @@ generate_ansible_host_secrets() {
             if [[ ! -z "${!node_devices}" ]]; then
                 printf "nfs_devices:\n"
 
-                for dev in "${!node_devices}"; do
+                for dev in ${!node_devices}; do
                     printf "  - device: /dev/%s\n" "${dev}"
                     printf "    mount: /mnt/ssd-%s\n" "${dev}"
 
