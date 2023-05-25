@@ -53,7 +53,7 @@ spec:
         hajimari.io/icon: "logos:oauth"
         nginx.ingress.kubernetes.io/server-snippet: |
           location = /oauth2/callback {
-            error_page 403 =302 $redirect_url;
+            error_page 403 =302 $request_uri;
           }
       hosts:
         - &host auth.${SECRET_DOMAIN}
