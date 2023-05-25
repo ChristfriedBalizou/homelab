@@ -46,7 +46,7 @@ spec:
       ldif:
         enabled: true
         type: secret
-        existingClaim: openldap-ldif-bootstrap
+        name: openldap-ldif-bootstrap
         mountPath: /ldifs/bootstrap.ldif
         subPath: bootstrap.ldif
         readOnly: true
