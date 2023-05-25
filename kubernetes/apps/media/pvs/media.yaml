@@ -13,7 +13,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
 ---
 apiVersion: v1
-kind: PersistentVolume
+kind: PersistentVolumeClaim
 metadata:
   name: media
   namespace: media
