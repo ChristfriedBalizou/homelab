@@ -109,26 +109,8 @@ resource "cloudflare_record" "hajimari" {
   ttl     = 1
 }
 
-resource "cloudflare_record" "echo-server" {
-  name    = "echo-server"
-  zone_id = lookup(data.cloudflare_zones.domain.zones[0], "id")
-  value   = "ipv4.${data.sops_file.cloudflare_secrets.data["cloudflare_domain"]}"
-  proxied = true
-  type    = "CNAME"
-  ttl     = 1
-}
-
 resource "cloudflare_record" "grafana" {
   name    = "grafana"
-  zone_id = lookup(data.cloudflare_zones.domain.zones[0], "id")
-  value   = "ipv4.${data.sops_file.cloudflare_secrets.data["cloudflare_domain"]}"
-  proxied = true
-  type    = "CNAME"
-  ttl     = 1
-}
-
-resource "cloudflare_record" "alertmanager" {
-  name    = "alertmanager"
   zone_id = lookup(data.cloudflare_zones.domain.zones[0], "id")
   value   = "ipv4.${data.sops_file.cloudflare_secrets.data["cloudflare_domain"]}"
   proxied = true
@@ -154,26 +136,8 @@ resource "cloudflare_record" "dex" {
   ttl     = 1
 }
 
-resource "cloudflare_record" "loft" {
-  name    = "loft"
-  zone_id = lookup(data.cloudflare_zones.domain.zones[0], "id")
-  value   = "ipv4.${data.sops_file.cloudflare_secrets.data["cloudflare_domain"]}"
-  proxied = true
-  type    = "CNAME"
-  ttl     = 1
-}
-
 resource "cloudflare_record" "phpldapadmin" {
   name    = "phpldapadmin"
-  zone_id = lookup(data.cloudflare_zones.domain.zones[0], "id")
-  value   = "ipv4.${data.sops_file.cloudflare_secrets.data["cloudflare_domain"]}"
-  proxied = true
-  type    = "CNAME"
-  ttl     = 1
-}
-
-resource "cloudflare_record" "ldap" {
-  name    = "ldap"
   zone_id = lookup(data.cloudflare_zones.domain.zones[0], "id")
   value   = "ipv4.${data.sops_file.cloudflare_secrets.data["cloudflare_domain"]}"
   proxied = true
