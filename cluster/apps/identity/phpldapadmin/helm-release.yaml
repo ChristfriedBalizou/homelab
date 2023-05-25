@@ -26,19 +26,21 @@ spec:
     env:
       PHPLDAPADMIN_SERVER_ADMIN: ${SECRET_CLOUDFLARE_EMAIL}
     ldap:
-      - ${SECRET_DOMAIN}:
+      - "identity/openldap:1389":
           - server:
               - tls: false
           - login:
-              - bind_id: "${SECRET_LDAP_ROOT},cn=${SECRET_GRAFANA_ADMIN_USER}"
+              - bind_id: "${SECRET_LDAP_ROOT}"
     ingress:
       enabled: true
       annotations:
         cert-manager.io/cluster-issuer: "letsencrypt-production"
         external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
         external-dns/is-public: "true"
+        nginx.ingress.kubernetes.io/auth-url: https://auth.${SECRET_DOMAIN}/oauth2/auth
+        nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}/oauth2/start
         hajimari.io/enable: "true"
-        hajimari.io/group: "identity"
+        hajimari.io/group: "Identity"
         hajimari.io/name: "LDAP Admin"
         hajimari.io/icon: "mdi:shield-crown-outline"
       hosts:
