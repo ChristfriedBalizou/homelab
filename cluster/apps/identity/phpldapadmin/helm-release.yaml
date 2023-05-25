@@ -64,7 +64,7 @@ spec:
       - name: copy
         image: "busybox:latest"
         volumeMounts:
-          - name: "tls"
+          - name: "ldap-tls"
             mountPath: "/container/service/tls"
           - name: "certs"
             mountPath: "/container/service/ldap-client/assets/certs"
@@ -76,7 +76,7 @@ spec:
       - name: "certs"
         mountPath: "/container/service/ldap-client/assets/certs"
     volumes:
-      - name: "tls"
+      - name: "ldap-tls"
         secret:
           secretName: "ldap-tls"
       - name: certs
