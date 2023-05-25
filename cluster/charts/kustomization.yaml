@@ -20,4 +20,4 @@ resources:
   - christfried-charts.yaml
   - rook-charts.yaml
   - kubernetes-dashboard-charts.yaml
-  - longhorn-charts.yaml
+  - runix-charts.yaml
