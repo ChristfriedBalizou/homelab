@@ -18,6 +18,7 @@ spec:
   values:
     admin:
       create: true
+      email: ${SECRET_CLOUDFLARE_EMAIL}
       username: ${SECRET_GRAFANA_ADMIN_USER}
       password: ${SECRET_GRAFANA_ADMIN_PASSWORD}
     ingress:
