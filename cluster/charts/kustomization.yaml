@@ -19,3 +19,4 @@ resources:
   - dex-charts.yaml
   - loft-charts.yaml
   - oauth2-proxy-charts.yaml
+  - kyverno-charts.yaml
