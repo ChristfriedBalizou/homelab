@@ -38,7 +38,7 @@ spec:
         ports:
           http:
             protocol: TCP
-            port: ${SECRET_LDAP_SERVER_PORT}
+            port: 389
     controller:
       enabled: true
       replicas: 1
