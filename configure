@@ -40,6 +40,7 @@ main() {
         verify_telegram
         verify_openldap
         verify_success
+        verify_dashboard
     else
         # generate sops configuration file
         envsubst < "${PROJECT_DIR}/templates/.sops.yaml" \
@@ -66,6 +67,8 @@ main() {
             > "${PROJECT_DIR}/cluster/apps/flux-system/notification/secret.sops.yaml"
         envsubst < "${PROJECT_DIR}/templates/cluster/cluster-openldap-secret.sops.yaml" \
             > "${PROJECT_DIR}/cluster/apps/identity/openldap/secret.sops.yaml"
+        envsubst < "${PROJECT_DIR}/templates/cluster/cluster-dashboard-secret.sops.yaml" \
+            > "${PROJECT_DIR}/cluster/apps/kube-system/kube-dashboard/secret.sops.yaml"
 
         envsubst < "${PROJECT_DIR}/templates/cluster/dex/configmap.yaml" \
             > "${PROJECT_DIR}/cluster/apps/identity/dex/configmap.yaml"
@@ -76,6 +79,7 @@ main() {
         sops --encrypt --in-place "${PROJECT_DIR}/cluster/apps/networking/external-dns/secret.sops.yaml"
         sops --encrypt --in-place "${PROJECT_DIR}/cluster/apps/flux-system/notification/secret.sops.yaml"
         sops --encrypt --in-place "${PROJECT_DIR}/cluster/apps/identity/openldap/secret.sops.yaml"
+        sops --encrypt --in-place "${PROJECT_DIR}/cluster/apps/kube-system/kube-dashboard/secret.sops.yaml"
         # generate terraform secrets
         envsubst < "${PROJECT_DIR}/templates/terraform/secret.sops.yaml" \
             > "${PROJECT_DIR}/provision/terraform/cloudflare/secret.sops.yaml"
@@ -370,6 +374,10 @@ verify_dex() {
     _has_envar "DEX_TEMPLATES_LOGIN"
     _has_envar "DEX_TEMPLATES_OOB"
     _has_envar "DEX_TEMPLATES_PASSWORD"
+}
+
+verify_dashboard() {
+    _has_envar "SECRET_DASHBOARD"
 }
 
 verify_telegram() {
