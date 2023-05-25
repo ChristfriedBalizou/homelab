@@ -22,3 +22,5 @@ resources:
   - ./prometheus-community.yaml
   - ./k8s-at-home.yaml
   - ./nfs-subdir-external-provisioner.yaml
+  - ./intel.yaml
+  - ./node-feature-discovery.yaml
