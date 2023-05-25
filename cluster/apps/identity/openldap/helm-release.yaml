@@ -20,6 +20,10 @@ spec:
       LDAP_ROOT: ${SECRET_LDAP_ROOT}
       LDAP_ALLOW_ANON_BINDING: "no"
       LDAP_CUSTOM_LDIF_DIR: "/ldifs"
+      LDAP_ENABLE_TLS: "yes"
+      LDAP_TLS_CERT_FILE: "/container/certificates/tls.crt"
+      LDAP_TLS_KEY_FILE: "/container/certificates/tls.key"
+      LDAP_TLS_CA_FILE: "/container/certificates/tls.crt"
     replicaCount: 1
     adminUser: ${SECRET_GRAFANA_ADMIN_USER}
     adminPassword: ${SECRET_GRAFANA_ADMIN_PASSWORD}
@@ -31,7 +35,7 @@ spec:
         cpu: 400m
         memory: 500Mi
     service:
-      port: 1389
+      port: 1636
     volumeMounts:
       - name: "ldif"
         mountPath: "/ldifs/bootstrap.ldif"
