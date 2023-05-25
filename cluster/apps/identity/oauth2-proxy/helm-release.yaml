@@ -32,8 +32,9 @@ spec:
         auth_logging = true
         cookie_domains = ".${SECRET_DOMAIN}"
         cookie_secure = true
+        cookie_csrf_per_request = true
+        cookie_csrf_expire = "5m"
         email_domains = []
-        cookie_samesite = "lax"
         pass_access_token = true
         pass_authorization_header = true
         whitelist_domains = ".${SECRET_DOMAIN}"
