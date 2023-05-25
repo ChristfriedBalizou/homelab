@@ -65,10 +65,11 @@ spec:
         image: busybox
         tag: latest
         command:
-          - sh
+          - "/bin/sh"
           - "-c"
-          - echo
-          - test
+          - "cp"
+          - "/container/service/tls/*"
+          - "/container/service/ldap-client/assets/certs"
     volumeMounts:
       - name: "tls"
         mountPath: "/container/service/tls"
