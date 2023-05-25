@@ -6,6 +6,6 @@ metadata:
   namespace: monitoring
 spec:
   type: telegram
-  channel: "${SECRET_TELEGRAM_CHANNEL}"
+  channel: "${TELEGRAM_CHANNEL}"
   secretRef:
     name: telegram-token
