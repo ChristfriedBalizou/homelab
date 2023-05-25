@@ -34,3 +34,6 @@ spec:
       limits:
         cpu: 400m
         memory: 500Mi
+    persistence:
+      enabled: true
+      existingClaim: "openldap-filesystem"
