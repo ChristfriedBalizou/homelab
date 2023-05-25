@@ -28,6 +28,7 @@ spec:
       cookieSecret: ${DEX_OAUTH2_PROXY_COOKIE_SECRET}
       configFile: |-
         provider = "oidc"
+        oidc_groups_claim = "groups"
         oidc_issuer_url = "https://dex.${SECRET_DOMAIN}"
         auth_logging = true
         cookie_domains = ".${SECRET_DOMAIN}"
