@@ -37,8 +37,21 @@ spec:
       RADARR__POSTGRES_HOST: "postgresql.storage"
       RADARR__POSTGRES_MAIN_DB: "radarr"
       RADARR__POSTGRES_LOG_DB: "radarr-log"
-      RADARR__POSTGRES_PASSWORD: "${RADARR_POSTGRES_PASSWORD}"
-      RADARR__POSTGRES_USER: "${RADARR_POSTGRES_USER}"
+      RADARR__POSTGRES_PASSWORD:
+        valueFrom:
+          secretKeyRef:
+            name: cluster-media-secrets
+            key: "${RADARR_0_POSTGRES_PASSWORD}"
+      RADARR__POSTGRES_USER:
+        valueFrom:
+          secretKeyRef:
+            name: cluster-media-secrets
+            key: "${RADARR_0_POSTGRES_USER}"
+      RADARR__API_KEY:
+        valueFrom:
+          secretKeyRef:
+            name: cluster-media-secrets
+            key: "${RADARR_0_API_KEY}"
     service:
       main:
         ports:

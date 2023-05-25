@@ -42,7 +42,7 @@ main() {
         verify_dashboard
         verify_vpn
         verify_nfs
-        verify_db
+        verify_media
         verify_success
     else
         # generate sops configuration file
@@ -86,6 +86,10 @@ main() {
         envsubst < "${PROJECT_DIR}/templates/kubernetes/cluster-openldap-secret.sops.yaml" \
             > "${PROJECT_DIR}/kubernetes/apps/identity/openldap/app/secret.sops.yaml"
         sops --encrypt --in-place "${PROJECT_DIR}/kubernetes/apps/identity/openldap/app/secret.sops.yaml"
+
+        envsubst < "${PROJECT_DIR}/templates/kubernetes/cluster-media-secret.sops.yaml" \
+            > "${PROJECT_DIR}/kubernetes/apps/media/secret.sops.yaml"
+        sops --encrypt --in-place "${PROJECT_DIR}/kubernetes/apps/media/secret.sops.yaml"
 
         # generate ansible settings
         envsubst < "${PROJECT_DIR}/templates/ansible/kube-vip.yml" \
@@ -397,13 +401,16 @@ verify_nfs() {
 }
 
 
-verify_db() {
-    _has_envar "PROWLARR_POSTGRES_PASSWORD"
-    _has_envar "PROWLARR_POSTGRES_USER"
-    _has_envar "SONARR_POSTGRES_PASSWORD"
-    _has_envar "SONARR_POSTGRES_USER"
-    _has_envar "RADARR_POSTGRES_PASSWORD"
-    _has_envar "RADARR_POSTGRES_USER"
+verify_media() {
+    _has_envar "SONARR_0_API_KEY"
+    _has_envar "SONARR_0_POSTGRES_PASSWORD"
+    _has_envar "SONARR_0_POSTGRES_USER"
+    _has_envar "RADARR_0_API_KEY"
+    _has_envar "RADARR_0_POSTGRES_PASSWORD"
+    _has_envar "RADARR_0_POSTGRES_USER"
+    _has_envar "PROWLARR_0_API_KEY"
+    _has_envar "PROWLARR_0_POSTGRES_PASSWORD"
+    _has_envar "PROWLARR_0_POSTGRES_USER"
 }
 
 verify_dashboard() {
