@@ -57,7 +57,7 @@ spec:
           }
 
           location = /oauth2/callback {
-            if($redirect_url){
+            if ($redirect_url) {
               error_page 403 =302 $redirect_url;
             }
           }
