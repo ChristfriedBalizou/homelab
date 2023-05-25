@@ -26,7 +26,7 @@ spec:
         external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
         external-dns/is-public: "true"
         hajimari.io/enable: "true"
-        hajimari.io/icon: "two-factor-authentication"
+        hajimari.io/icon: "carbon:two-factor-authentication"
       hosts:
         - host: &host dex.${SECRET_DOMAIN}
           paths:
