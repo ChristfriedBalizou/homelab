@@ -27,7 +27,7 @@ spec:
           hajimari.io/icon: "alert"
           hajimari.io/appName: "Alert Manager"
         hosts:
-          - &host-alert-manager alertmanager.${DOMAIN}
+          - &host-alert-manager alertmanager.${SECRET_DOMAIN}
         paths:
           - /
         pathType: Prefix
