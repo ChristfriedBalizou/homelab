@@ -53,3 +53,18 @@ spec:
         ssl: true
       network:
         provider: host
+      resources:
+        mon:
+          limits:
+            cpu: "200m"
+            memory: "500m"
+          request:
+            cpu: "200m"
+            memory: "500m"
+        osd:
+          limits:
+            cpu: "400m"
+            memory: "1Gi"
+          requests:
+            cpu: "200m"
+            memory: "500m"
