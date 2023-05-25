@@ -39,4 +39,4 @@ spec:
           secretName: pgadmin-tls
     persistentVolume:
       enabled: true
-      existingClaim: pgadmin-config
+      existingClaim: pgadmin
