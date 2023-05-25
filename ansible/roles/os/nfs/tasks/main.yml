@@ -35,12 +35,7 @@
         enabled: true
         state: started
       failed_when: false
-  when:
-    - k3s_control_node is defined
-    - k3s_control_node
 
-- name: Configure media server
-  block:
     - name: Create applications config location
       ansible.builtin.file:
         path: "{{ media.mount }}/apps/{{ item }}"
@@ -54,6 +49,9 @@
         state: directory
         mode: '0766'
       loop: "{{ media.directories }}"
+  when:
+    - k3s_control_node is defined
+    - k3s_control_node
 
 - name: Mount NFS on workers fstab
   block:
