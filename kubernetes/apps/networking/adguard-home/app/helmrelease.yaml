@@ -80,10 +80,4 @@ spec:
       config:
         enabled: true
         existingClaim: config-adguard-home
-        subPath: conf
-        mountPath: /opt/adguardhome/conf
-      data:
-        enabled: true
-        existingClaim: config-adguard-home
-        subPath: data
-        mountPath: /opt/adguardhome/work
+        mountPath: /opt/adguardhome
