@@ -83,10 +83,6 @@ main() {
             > "${PROJECT_DIR}/kubernetes/apps/flux-system/notification/app/secret.sops.yaml"
         sops --encrypt --in-place "${PROJECT_DIR}/kubernetes/apps/flux-system/notification/app/secret.sops.yaml"
 
-        envsubst < "${PROJECT_DIR}/templates/kubernetes/cluster-openldap-secret.sops.yaml" \
-            > "${PROJECT_DIR}/kubernetes/apps/identity/openldap/app/secret.sops.yaml"
-        sops --encrypt --in-place "${PROJECT_DIR}/kubernetes/apps/identity/openldap/app/secret.sops.yaml"
-
         envsubst < "${PROJECT_DIR}/templates/kubernetes/cluster-media-secret.sops.yaml" \
             > "${PROJECT_DIR}/kubernetes/apps/media/secret.sops.yaml"
         sops --encrypt --in-place "${PROJECT_DIR}/kubernetes/apps/media/secret.sops.yaml"

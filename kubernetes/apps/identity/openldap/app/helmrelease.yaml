@@ -46,13 +46,6 @@ spec:
         enabled: true
         existingClaim: config-openldap
         mountPath: /bitnami/openldap
-      ldif:
-        enabled: true
-        type: secret
-        name: openldap-ldif-bootstrap
-        mountPath: /ldifs/bootstrap.ldif
-        subPath: bootstrap.ldif
-        readOnly: true
     affinity:
       podAntiAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
