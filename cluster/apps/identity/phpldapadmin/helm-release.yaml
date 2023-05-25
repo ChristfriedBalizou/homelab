@@ -33,7 +33,7 @@ spec:
       PHPLDAPADMIN_LDAP_CLIENT_TLS_KEY_FILENAME: "ldap.key"
       PHPLDAPADMIN_LDAP_CLIENT_TLS_CA_CRT_FILENAME: "ldap.crt"
     ldap:
-      - "My LDAP Server":
+      - "${SECRET_DOMAIN}":
           - server:
               - host: ldap.${SECRET_DOMAIN}
               - port: 636
