@@ -8,9 +8,8 @@ spec:
   interval: 10m
   chart:
     spec:
-      # renovate: registryUrl=https://prometheus-community.github.io/helm-charts
       chart: kube-prometheus-stack
-      version: 41.7.31
+      version: 41.7.3
       sourceRef:
         kind: HelmRepository
         name: prometheus-community-charts
@@ -28,13 +27,14 @@ spec:
           hajimari.io/icon: "alert"
           hajimari.io/appName: "Alert Manager"
         hosts:
-          - &host-alertmanager "alertmanager.${SECRET_DOMAIN}"
-        path: /
+          - &host-alert-manager alertmanager.${DOMAIN}
+        paths:
+          - /
         pathType: Prefix
         tls:
           - hosts:
-              - *host-alertmanager
-            secretName: "alertmanager-tls"
+              - *host-alert-manager
+            secretName: alertmanager-tls
       alertManagerSpec:
         storage:
           volumeClaimTemplate:
@@ -44,9 +44,10 @@ spec:
                 - ReadWriteOnce
               resources:
                 requests:
-                  storage: 1Gi
+                  storage: 2Gi
     grafana:
       enabled: false
+      forceDeployDashboards: true
     kubelet:
       serviceMonitor:
         metricRelabelings:
@@ -63,17 +64,17 @@ spec:
     kubeProxy:
       enabled: false
     kube-state-metrics:
-      fullnameOverride: kube-state-metrics
-    nodeExporter:
-      enabled: true
-      serviceMonitor:
-        relabelings:
-          - action: replace
-            sourceLabels:
-              - __meta_kubernetes_pod_node_name
-            targetLabel: kubernetes_node
-    prometheus-node-exporter:
-      fullnameOverride: prometheus-node-exporter
+      metricLabelsAllowlist:
+        - "persistentvolumeclaims=[*]"
+      prometheus:
+        monitor:
+          relabelings:
+            - action: replace
+              regex: (.*)
+              replacement: $1
+              sourceLabels:
+                - __meta_kubernetes_pod_node_name
+              targetLabel: kubernetes_node
     prometheus:
       ingress:
         enabled: true
@@ -86,19 +87,22 @@ spec:
           hajimari.io/icon: "clipboard-text"
           hajimari.io/appName: "Prometheus"
         hosts:
-          - &host-prometheus "prometheus.${SECRET_DOMAIN}"
-        path: /
+          - &host-prometheus prometheus.${SECRET_DOMAIN}
+        paths:
+          - /
         pathType: Prefix
         tls:
           - hosts:
               - *host-prometheus
-            secretName: "prometheus-tls"
+            secretName: prometheus-tls
       prometheusSpec:
         enableAdminAPI: true
         ruleSelectorNilUsesHelmValues: false
         serviceMonitorSelectorNilUsesHelmValues: false
         podMonitorSelectorNilUsesHelmValues: false
+        probeSelectorNilUsesHelmValues: false
         retention: 2d
+        retentionSize: "5GB"
         walCompression: true
         storageSpec:
           volumeClaimTemplate:
