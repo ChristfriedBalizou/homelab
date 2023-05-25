@@ -34,19 +34,6 @@ spec:
       PROWLARR__INSTANCE_NAME: Prowlarr
       PROWLARR__PORT: &port 80
       PROWLARR__LOG_LEVEL: info
-      PROWLARR__POSTGRES_HOST: "postgresql.storage"
-      PROWLARR__POSTGRES_MAIN_DB: "prowlarr"
-      PROWLARR__POSTGRES_LOG_DB: "prowlarr-log"
-      PROWLARR__POSTGRES_PASSWORD:
-        valueFrom:
-          secretKeyRef:
-            name: cluster-media-secrets
-            key: "PROWLARR_0_POSTGRES_PASSWORD"
-      PROWLARR__POSTGRES_USER:
-        valueFrom:
-          secretKeyRef:
-            name: cluster-media-secrets
-            key: "PROWLARR_0_POSTGRES_USER"
       PROWLARR__API_KEY:
         valueFrom:
           secretKeyRef:

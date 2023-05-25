@@ -34,19 +34,6 @@ spec:
       SONARR__INSTANCE_NAME: Sonarr
       SONARR__PORT: &port 80
       SONARR__LOG_LEVEL: info
-      SONARR__POSTGRES_HOST: "postgresql.storage"
-      SONARR__POSTGRES_MAIN_DB: "sonarr"
-      SONARR__POSTGRES_LOG_DB: "sonarr-log"
-      SONARR__POSTGRES_PASSWORD:
-        valueFrom:
-          secretKeyRef:
-            name: cluster-media-secrets
-            key: "SONARR_0_POSTGRES_PASSWORD"
-      SONARR__POSTGRES_USER:
-        valueFrom:
-          secretKeyRef:
-            name: cluster-media-secrets
-            key: "SONARR_0_POSTGRES_USER"
       SONARR__API_KEY:
         valueFrom:
           secretKeyRef:
