@@ -12,17 +12,6 @@
       loop: "{{ nfs_devices }}"
       register: uuid
 
-    - name: Format block device to ext4
-      community.general.filesystem:
-        fstype: "{{ item.item.fstype }}"
-        dev: "{{ item.item.device }}"
-      loop: "{{ uuid.results }}"
-
-    - name: Check available device to mount
-      ansible.builtin.command: lsblk {{ item.device }} -no UUID
-      loop: "{{ nfs_devices }}"
-      register: uuid
-
     - name: Mount device from fstab
       ansible.posix.mount:
         path: "{{ item.item.mount }}"
@@ -34,12 +23,11 @@
 
     - name: Configure NFS server
       ansible.builtin.lineinfile:
-        regexp: "^{{ item.item.mount }}"
+        regexp: "^{{ item.mount }}"
         path: /etc/exports
         state: present
-        line: "{{ item.item.mount }} *(rw,all_squash,insecure,async,no_subtree_check,anonuid=1000,anongid=1000)"
-      when: item.stdout_lines
-      loop: "{{ uuid.results }}"
+        line: "{{ item.mount }} *(rw,all_squash,insecure,async,no_subtree_check,anonuid=1000,anongid=1000)"
+      loop: "{{ nfs_devices }}"
 
     - name: Start nfs-kernel-server
       ansible.builtin.systemd:

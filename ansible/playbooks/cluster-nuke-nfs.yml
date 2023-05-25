@@ -19,7 +19,7 @@
 
     - name: Stop nfs-kernel-server
       ansible.builtin.systemd:
-        name: nfs-kernel-server.service
+        name: nfs-server.service
         enabled: false
         state: stopped
       failed_when: false
@@ -27,38 +27,11 @@
         - k3s_control_node is defined
         - k3s_control_node
 
-    - name: Remove Webmin source.list file
-      ansible.builtin.lineinfile:
-        path: /etc/apt/sources.list
-        regexp: "^deb.*webmin.*"
-        state: absent
-
-    - name: Stop and disable Webmin service
-      ansible.builtin.systemd:
-        name: webmin.service
-        state: stopped
-        enabled: false
-
-    - name: Remove Webmin Apt signing key
-      ansible.builtin.apt_key:
-        url: http://www.webmin.com/jcameron-key.asc
-        state: absent
-
-    - name: De-refere webmin to node
-      ansible.builtin.lineinfile:
-        path: /etc/webmin/config
-        line: "referers={{ inventory_hostname }}.{{ secret_domain }}"
-        state: absent
-
     - name: unmount device from fstab
       ansible.builtin.lineinfile:
         path: /etc/fstab
         regex: ".*{{ item.mount }}.*"
         state: absent
-      loop: "{{ nfs_devices }}"
-
-    - name: wipe the block device
-      ansible.builtin.command: wipefs -af {{ item.device }}
       loop: "{{ nfs_devices }}"
 
     - name: remove directory clutter
