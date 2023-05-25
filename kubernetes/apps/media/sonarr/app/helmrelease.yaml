@@ -64,6 +64,9 @@ spec:
           - hosts:
               - "sonarr.${SECRET_DOMAIN}"
             secretName: sonarr-tls
+    podSecurityContext:
+      runAsUser: 1000
+      runAsGroup: 1000
     persistence:
       media:
         enabled: true
