@@ -56,3 +56,6 @@ spec:
         - hosts:
             - *host
           secretName: "phpldapadmin-tls"
+    volumes:
+      - name: certs
+        emptyDir: {}
