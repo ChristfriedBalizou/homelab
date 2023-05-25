@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://christfriedbalizou.github.io/helm-charts
       chart: openldap
-      version: 0.2.5
+      version: 0.3.0
       sourceRef:
         kind: HelmRepository
         name: christfried-charts
