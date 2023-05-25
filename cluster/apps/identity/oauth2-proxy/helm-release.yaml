@@ -31,7 +31,9 @@ spec:
         oidc_issuer_url = "https://dex.${SECRET_DOMAIN}"
         auth_logging = true
         cookie_domains = ".${SECRET_DOMAIN}"
-        cookie_secure = false
+        cookie_secure = true
+        cookie_csrf_per_request = true
+        cookie_csrf_expire = "5m"
         email_domains = []
         pass_access_token = true
         pass_authorization_header = true
