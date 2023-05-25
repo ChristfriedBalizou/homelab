@@ -2,7 +2,7 @@
 media:
   mount: "/mnt/ssd-sdb"
   applications:
-    - qtbittorrent
+    - qbittorrent
     - sonarr
     - radarr
     - prowlarr
