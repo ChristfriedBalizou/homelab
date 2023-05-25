@@ -30,7 +30,9 @@ spec:
           - default
           - networking
           - monitoring
-      name: "you"
+      name: "${SECERT_GRAFANA_ADMIN_USER}"
+      lightTheme: blackboard
+      darkTheme: horizon
       customApps:
         - name: Some External Cluster Service
           url: http://192.168.1.100:5000
