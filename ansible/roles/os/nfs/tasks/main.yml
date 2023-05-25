@@ -7,19 +7,13 @@
         state: present
         update_cache: true
 
-    - name: Check available device to mount
-      ansible.builtin.command: lsblk {{ item.device }} -no UUID
-      loop: "{{ nfs_devices }}"
-      register: uuid
-
     - name: Mount device from fstab
       ansible.posix.mount:
-        path: "{{ item.item.mount }}"
-        src: "UUID={{ item.stdout_lines[0] }}"
-        fstype: "{{ item.item.fstype }}"
+        path: "{{ item.device }}"
+        src: "{{ item.mount }}"
+        fstype: "{{ item.fstype }}"
         state: present
-      when: item.stdout_lines
-      loop: "{{ uuid.results }}"
+      loop: "{{ nfs_devices }}"
 
     - name: Configure NFS server
       ansible.builtin.lineinfile:

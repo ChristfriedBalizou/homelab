@@ -547,10 +547,10 @@ generate_ansible_host_secrets() {
 
                 for node_device in ${!node_devices}; do
                     IFS=',' read device mount <<< "${node_device}"
-                    printf "  - device: %s\n" "${device}"
-                    printf "    mount: %s\n" "${mount}"
+                    printf "  - mount: %s\n" "${mount}"
 
                     if [[ "${!node_control}" == "true" ]]; then
+                        printf "    device: UUID=%s\n" "${!device}"
                         printf "    fstype: ext4\n"
                     else
                         printf "    fstype: nfs\n"
