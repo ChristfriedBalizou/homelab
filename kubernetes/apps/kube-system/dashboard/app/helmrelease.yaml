@@ -47,7 +47,8 @@ spec:
         nginx.ingress.kubernetes.io/auth-url: https://auth.${SECRET_DOMAIN}/oauth2/auth?allowed_groups=admin
         nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}/oauth2/start
         hajimari.io/enable: "true"
-        hajimari.io/name: "Kubernetes Dashboard"
+        hajimari.io/appNname: "Kubernetes Dashboard"
+        hajimari.io/group: "System"
         hajimari.io/icon: "ant-design:cluster-outlined"
       hosts:
         - &host "kubernetes.${SECRET_DOMAIN}"

@@ -24,6 +24,10 @@ spec:
   values:
     hajimari:
       defaultEnable: false
+      showAppGroups: true
+      showAppUrls: false
+      alwaysTargetBlank: true
+      showGlobalBookmarks: true
       namespaceSelector:
         matchNames:
           - default
@@ -37,8 +41,13 @@ spec:
       name: "${SECRET_GRAFANA_ADMIN_USER}"
       lightTheme: blackboard
       darkTheme: horizon
-      showGlobalBookmarks: false
-
+      globalBookmarks:
+        - group: Second Brain
+          bookmarks:
+            - name: Github Repo
+              url: "https://github.com/ChristfriedBalizou/homelab"
+            - name: Cloudflare
+              url: "https://www.cloudflare.com/"
     ingress:
       main:
         enabled: true
