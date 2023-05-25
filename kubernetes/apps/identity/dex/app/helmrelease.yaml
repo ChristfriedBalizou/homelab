@@ -72,7 +72,7 @@ spec:
               baseDN: "ou=groups,${SECRET_LDAP_ROOT}"
               filter: "(objectClass=posixGroup)"
               userMatchers:
-                - userAttr: cn
+                - userAttr: uid
                   groupAttr: memberUid
               nameAttr: cn
       staticClients:
