@@ -66,6 +66,9 @@ main() {
             > "${PROJECT_DIR}/cluster/apps/flux-system/notification/secret.sops.yaml"
         envsubst < "${PROJECT_DIR}/templates/cluster/cluster-openldap-secret.sops.yaml" \
             > "${PROJECT_DIR}/cluster/apps/identity/openldap/secret.sops.yaml"
+
+        envsubst < "${PROJECT_DIR}/templates/cluster/dex/configmap.yaml" \
+            > "${PROJECT_DIR}/cluster/apps/identity/dex/configmap.yaml"
         # encrypt cluster secrets
         sops --encrypt --in-place "${PROJECT_DIR}/cluster/config/cluster-secrets.sops.yaml"
         sops --encrypt --in-place "${PROJECT_DIR}/cluster/apps/networking/cert-manager/issuers/secret.sops.yaml"
@@ -358,6 +361,15 @@ verify_grafana() {
 verify_dex() {
     _has_envar "DEX_OAUTH2_PROXY_CLIENT_ID"
     _has_envar "DEX_OAUTH2_PROXY_CLIENT_SECRET"
+    _has_envar "DEX_TEMPLATES_APPROVAL"
+    _has_envar "DEX_TEMPLATES_DEVICE"
+    _has_envar "DEX_TEMPLATES_DEVIDE_SUCCESS"
+    _has_envar "DEX_TEMPLATES_ERROR"
+    _has_envar "DEX_TEMPLATES_FOOTER"
+    _has_envar "DEX_TEMPLATES_HEADER"
+    _has_envar "DEX_TEMPLATES_LOGIN"
+    _has_envar "DEX_TEMPLATES_OOB"
+    _has_envar "DEX_TEMPLATES_PASSWORD"
 }
 
 verify_telegram() {
