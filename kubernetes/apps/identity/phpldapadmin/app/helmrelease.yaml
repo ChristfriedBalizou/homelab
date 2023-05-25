@@ -33,6 +33,7 @@ spec:
     env:
       PHPLDAPADMIN_SERVER_ADMIN: ${SECRET_CLOUDFLARE_EMAIL}
       PHPLDAPADMIN_HTTPS: false
+      LDAP_BASE_DN: ${SECRET_LDAP_ROOT}
     ingress:
       main:
         enabled: true
