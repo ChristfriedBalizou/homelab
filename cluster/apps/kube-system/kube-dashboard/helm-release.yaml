@@ -19,7 +19,8 @@ spec:
     serviceAccount:
       create: true
       name: ${SECRET_GRAFANA_ADMIN_USER}
-    clusterReadOnlyRole: true
+    rbac:
+      clusterReadOnlyRole: true
     ingress:
       enabled: true
       annotations:
