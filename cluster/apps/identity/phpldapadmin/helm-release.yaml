@@ -28,16 +28,12 @@ spec:
         memory: 500Mi
     env:
       PHPLDAPADMIN_SERVER_ADMIN: ${SECRET_CLOUDFLARE_EMAIL}
-      PHPLDAPADMIN_LDAP_CLIENT_TLS: "true"
-      PHPLDAPADMIN_LDAP_CLIENT_TLS_CRT_FILENAME: "/container/certificates/tls.crt"
-      PHPLDAPADMIN_LDAP_CLIENT_TLS_KEY_FILENAME: "/container/certificates/tls.key"
-      PHPLDAPADMIN_LDAP_CLIENT_TLS_CA_CRT_FILENAME: "/container/certificates/tls.crt"
     ldap:
       - "My LDAP Server":
           - server:
               - host: ldap.${SECRET_DOMAIN}
               - port: 636
-              - tls: true
+              - tls: false
           - login:
               - bind_id: "cn=admin,dc=example,dc=org"
     ingress:
