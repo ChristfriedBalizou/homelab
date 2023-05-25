@@ -30,6 +30,14 @@ spec:
       LDAP_ADMIN_PASSWORD: ${SECRET_GRAFANA_ADMIN_PASSWORD}
       LDAP_CONFIG_PASSWORD: ${SECRET_GRAFANA_ADMIN_PASSWORD}
       DISABLE_CHOWN: true
+      CONTAINER_LOG_LEVEL: debug
+    resources:
+      requests:
+        cpu: 200m
+        memory: 100Mi
+      limits:
+        cpu: 200m
+        memory: 100Mi
     service:
       main:
         ports:
