@@ -56,6 +56,8 @@ main() {
             > "${PROJECT_DIR}/kubernetes/flux/config/cluster.yaml"
 
         # generate secrets
+        setup_weave_gitops
+
         envsubst < "${PROJECT_DIR}/templates/kubernetes/cluster-secrets.sops.yaml" \
             > "${PROJECT_DIR}/kubernetes/flux/vars/cluster-secrets.sops.yaml"
         sops --encrypt --in-place "${PROJECT_DIR}/kubernetes/flux/vars/cluster-secrets.sops.yaml"
@@ -93,7 +95,6 @@ main() {
         generate_ansible_host_secrets
         generate_ansible_group_secrets
         setup_github_webhook
-        setup_weave_gitops
         success
     fi
 }
@@ -341,10 +342,6 @@ setup_weave_gitops() {
 
     # Convert password to bcrypt hash
     export BOOTSTRAP_WEAVE_GITOPS_ADMIN_PASSWORD="$(echo -n "${BOOTSTRAP_WEAVE_GITOPS_ADMIN_PASSWORD}" | gitops get bcrypt-hash)"
-
-    envsubst < "${PROJECT_DIR}/templates/kubernetes/weave-gitops-secret.sops.yaml" \
-        > "${PROJECT_DIR}/kubernetes/apps/flux-system/weave-gitops/app/secret.sops.yaml"
-    sops --encrypt --in-place "${PROJECT_DIR}/kubernetes/apps/flux-system/weave-gitops/app/secret.sops.yaml"
 }
 
 verify_cloudflare() {
