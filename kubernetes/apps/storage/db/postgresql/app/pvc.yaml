@@ -8,7 +8,7 @@ spec:
     - ReadWriteOnce
     - ReadWriteMany
   capacity:
-    storage: 1Mi
+    storage: 150Gi
   nfs:
     path: /mnt/volume1/apps/db/postgresql
     server: ${NFS_SERVER_IP}
@@ -26,6 +26,6 @@ spec:
     - ReadWriteMany
   resources:
     requests:
-      storage: 1Mi
+      storage: 150Gi
   storageClassName: postgresql
   volumeMode: Filesystem

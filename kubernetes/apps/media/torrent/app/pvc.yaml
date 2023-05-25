@@ -7,7 +7,7 @@ spec:
   accessModes:
     - ReadWriteMany
   capacity:
-    storage: 1Mi
+    storage: 5Gi
   nfs:
     path: /mnt/volume1/apps/qbittorrent
     server: ${NFS_SERVER_IP}
@@ -25,6 +25,6 @@ spec:
     - ReadWriteMany
   resources:
     requests:
-      storage: 1Mi
+      storage: 5Gi
   storageClassName: config-qbittorrent
   volumeMode: Filesystem
