@@ -29,6 +29,7 @@ spec:
         matchNames:
           - default
           - networking
+          - monitoring
       name: "you"
       customApps:
         - name: Some External Cluster Service
