@@ -7,4 +7,4 @@ metadata:
 spec:
   type: slack
   secretRef:
-    name: slack-webhook
+    name: slack-secret
