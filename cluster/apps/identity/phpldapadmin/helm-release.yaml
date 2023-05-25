@@ -31,11 +31,11 @@ spec:
     ldap:
       - "${SECRET_DOMAIN}":
           - server:
-              - host: openldap.identity.svc.cluster.local
+              - host: openldap.identity
               - port: 1389
               - tls: false
           - login:
-              - bind_id: "cn=admin,dc=example,dc=org"
+              - bind_id: "cn=${SECRET_GRAFANA_ADMIN_USER},${SECRET_LDAP_ROOT}"
     ingress:
       enabled: true
       annotations:
