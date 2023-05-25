@@ -35,3 +35,12 @@ spec:
         memory: 500Mi
     service:
       port: 1389
+    volumeMounts:
+      - name: ldif-bootstrap
+        mountPath: /container/ldifs/bootstrap.ldif
+        subPath: bootstrap.ldif
+        readOnly: true
+    volumes:
+      - name: ldif-boostrap
+        secret:
+          secretName: openldap-ldif-bootstrap
