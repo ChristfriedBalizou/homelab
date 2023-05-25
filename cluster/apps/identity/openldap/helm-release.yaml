@@ -20,7 +20,7 @@ spec:
       LDAP_ROOT: ${SECRET_LDAP_ROOT}
       LDAP_ALLOW_ANON_BINDING: "no"
       LDAP_CUSTOM_LDIF_DIR: "/ldifs"
-    replicaCount: 1
+    replicaCount: 2
     adminUser: ${SECRET_GRAFANA_ADMIN_USER}
     adminPassword: ${SECRET_GRAFANA_ADMIN_PASSWORD}
     resources:
@@ -44,11 +44,9 @@ spec:
         secret:
           secretName: "openldap-ldif-bootstrap"
     affinity:
-      nodeAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-            - matchExpressions:
-                - key: kubernetes.io/hostname
-                  operator: In
-                  values:
-                    - k8s-1
+      podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchLabels:
+                  name: openldap
+              topologyKey: kubernetes.io/hostname
