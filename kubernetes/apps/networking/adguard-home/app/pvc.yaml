@@ -11,7 +11,7 @@ spec:
   capacity:
     storage: 5Gi
   hostPath:
-    path: /mnt/nfs/volume1/apps/adguard-home
+    path: /mnt/nfs/volume1/apps/adguard-home/conf
   storageClassName: config-adguard-home
 ---
 apiVersion: v1
@@ -26,3 +26,31 @@ spec:
     requests:
       storage: 5Gi
   storageClassName: config-adguard-home
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: data-adguard-home
+  labels:
+    type: local
+spec:
+  accessModes:
+    - ReadWriteMany
+  capacity:
+    storage: 5Gi
+  hostPath:
+    path: /mnt/nfs/volume1/apps/adguard-home/data
+  storageClassName: data-adguard-home
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: data-adguard-home
+  namespace: networking
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 5Gi
+  storageClassName: data-adguard-home
