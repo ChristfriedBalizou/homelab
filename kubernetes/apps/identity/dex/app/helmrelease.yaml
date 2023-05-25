@@ -81,6 +81,11 @@ spec:
           secret: ${DEX_OAUTH2_PROXY_CLIENT_SECRET}
           redirectURIs:
             - https://auth.${SECRET_DOMAIN}/oauth2/callback
+        - name: kasten
+          id: ${DEX_KASTEN_CLIENT_ID}
+          secret: ${DEX_KASTEN_CLIENT_SECRET}
+          redirectURIs:
+            - https://kasten.${SECRET_DOMAIN}/k10/auth-svc/v0/oidc/redirect
       storage:
         type: kubernetes
         config:
