@@ -41,17 +41,17 @@ spec:
         valueFrom:
           secretKeyRef:
             name: cluster-media-secrets
-            key: "${PROWLARR_0_POSTGRES_PASSWORD}"
+            key: "PROWLARR_0_POSTGRES_PASSWORD"
       PROWLARR__POSTGRES_USER:
         valueFrom:
           secretKeyRef:
             name: cluster-media-secrets
-            key: "${PROWLARR_0_POSTGRES_USER}"
+            key: "PROWLARR_0_POSTGRES_USER"
       PROWLARR__API_KEY:
         valueFrom:
           secretKeyRef:
             name: cluster-media-secrets
-            key: "${PROWLARR_0_API_KEY}"
+            key: "PROWLARR_0_API_KEY"
     service:
       main:
         ports:
