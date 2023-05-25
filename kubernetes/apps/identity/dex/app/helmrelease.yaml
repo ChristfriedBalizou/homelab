@@ -75,7 +75,7 @@ spec:
                 - userAttr: DN
                   groupAttr: member
                 - userAttr: gidNumber
-                  groupAttr: memberUid
+                  groupAttr: gidNumber
               nameAttr: cn
       staticClients:
         - name: oauth2-proxy
