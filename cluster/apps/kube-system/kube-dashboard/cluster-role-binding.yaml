@@ -10,4 +10,4 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     namespace: kube-system
-    name: ${SECRET_GRAFANA_ADMIN_USER}
+    name: "system:${SECRET_GRAFANA_ADMIN_USER}"
