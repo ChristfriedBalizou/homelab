@@ -57,7 +57,7 @@ spec:
             host: "openldap.identity:${SECRET_LDAP_SERVER_PORT}"
             startTLS: false
             insecureNoSSL: true
-            bindDN: "cn=${SECRET_GRAFANA_ADMIN_USER},${SECRET_LDAP_ROOT}"
+            bindDN: "cn=${SECRET_LDAP_ADMIN_USER},${SECRET_LDAP_ROOT}"
             bindPW: "${SECRET_GRAFANA_ADMIN_PASSWORD}"
             usernamePrompt: Email Address
             userSearch:

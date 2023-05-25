@@ -430,6 +430,7 @@ verify_openldap() {
 	  _has_envar "LDAP_SERVER_PORT"
 	  _has_envar "LDAP_TLS"
 	  _has_envar "LDAP_BIND_ID"
+	  _has_envar "LDAP_ADMIN_USER"
 }
 
 verify_ansible_hosts() {
