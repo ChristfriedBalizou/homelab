@@ -8,4 +8,3 @@ resources:
   - networking
   - monitoring
   - identity
-  - kyverno
