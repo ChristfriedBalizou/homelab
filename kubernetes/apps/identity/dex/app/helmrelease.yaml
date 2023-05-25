@@ -70,10 +70,8 @@ spec:
               preferredUsernameAttr: cn
             groupSearch:
               baseDN: "ou=groups,${SECRET_LDAP_ROOT}"
-              filter: "(|(objectClass=groupOfNames)(objectClass=posixGroup))"
+              filter: "(objectClass=posixGroup)"
               userMatchers:
-                - userAttr: DN
-                  groupAttr: member
                 - userAttr: gidNumber
                   groupAttr: gidNumber
               nameAttr: cn
