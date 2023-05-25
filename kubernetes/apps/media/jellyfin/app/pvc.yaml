@@ -7,9 +7,9 @@ spec:
   accessModes:
     - ReadWriteMany
   capacity:
-    storage: 50Gi
+    storage: 1Mi
   nfs:
-    path: /mnt/ssd-sdc/apps/jellyfin
+    path: /mnt/volume1/apps/jellyfin
     server: ${NFS_SERVER_IP}
   storageClassName: config-jellyfin
   volumeMode: Filesystem
@@ -25,6 +25,6 @@ spec:
     - ReadWriteMany
   resources:
     requests:
-      storage: 50Gi
+      storage: 1Mi
   storageClassName: config-jellyfin
   volumeMode: Filesystem

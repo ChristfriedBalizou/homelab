@@ -9,7 +9,7 @@ spec:
   capacity:
     storage: 1Mi
   nfs:
-    path: /mnt/ssd-sdc/apps/nzbget
+    path: /mnt/volume1/apps/nzbget
     server: ${NFS_SERVER_IP}
   storageClassName: config-nzbget
   volumeMode: Filesystem

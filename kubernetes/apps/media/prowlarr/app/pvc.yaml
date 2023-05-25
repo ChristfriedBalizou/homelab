@@ -7,9 +7,9 @@ spec:
   accessModes:
     - ReadWriteMany
   capacity:
-    storage: 1Gi
+    storage: 1Mi
   nfs:
-    path: /mnt/ssd-sdb/apps/prowlarr
+    path: /mnt/volume1/apps/prowlarr
     server: ${NFS_SERVER_IP}
   storageClassName: config-prowlarr
   volumeMode: Filesystem
@@ -25,6 +25,6 @@ spec:
     - ReadWriteMany
   resources:
     requests:
-      storage: 1Gi
+      storage: 1Mi
   storageClassName: config-prowlarr
   volumeMode: Filesystem

@@ -9,7 +9,7 @@ spec:
   capacity:
     storage: 1Mi
   nfs:
-    path: /mnt/ssd-sdc/apps/jellyseerr
+    path: /mnt/volume1/apps/jellyseerr
     server: ${NFS_SERVER_IP}
   storageClassName: config-jellyseerr
   volumeMode: Filesystem
