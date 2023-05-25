@@ -9,7 +9,7 @@ spec:
   capacity:
     storage: 5Gi
   nfs:
-    path: /mnt/volume1/apps/openldap/config
+    path: /mnt/nfs/volume1/apps/openldap/config
     server: ${NFS_SERVER_IP}
   storageClassName: config-openldap
   volumeMode: Filesystem
@@ -40,7 +40,7 @@ spec:
   capacity:
     storage: 5Gi
   nfs:
-    path: /mnt/volume1/apps/openldap/database
+    path: /mnt/nfs/volume1/apps/openldap/database
     server: ${NFS_SERVER_IP}
   storageClassName: database-openldap
   volumeMode: Filesystem
