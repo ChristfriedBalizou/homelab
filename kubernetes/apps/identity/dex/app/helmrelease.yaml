@@ -29,14 +29,14 @@ spec:
         external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
         external-dns.home.arpa/enabled: "true"
       hosts:
-        - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
+        - host: &host "dex.${SECRET_DOMAIN}"
           paths:
             - path: /
               pathType: Prefix
       tls:
         - hosts:
             - *host
-          secretName: "{{ .Release.Name }}-tls"
+          secretName: "dex-tls"
     resources:
       requests:
         cpu: 50m
@@ -48,7 +48,7 @@ spec:
     env:
       KUBERNETES_POD_NAMESPACE: identity
     config:
-      issuer: "https://{{ .Release.Name }}.${SECRET_DOMAIN}"
+      issuer: "https://dex.${SECRET_DOMAIN}"
       connectors:
         - type: ldap
           id: ldap
