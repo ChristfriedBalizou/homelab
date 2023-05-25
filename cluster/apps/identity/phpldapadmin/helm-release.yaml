@@ -29,9 +29,9 @@ spec:
     env:
       PHPLDAPADMIN_SERVER_ADMIN: ${SECRET_CLOUDFLARE_EMAIL}
       PHPLDAPADMIN_LDAP_CLIENT_TLS: "true"
-      PHPLDAPADMIN_LDAP_CLIENT_TLS_CRT_FILENAME: "tls.crt"
-      PHPLDAPADMIN_LDAP_CLIENT_TLS_KEY_FILENAME: "tls.key"
-      PHPLDAPADMIN_LDAP_CLIENT_TLS_CA_CRT_FILENAME: "tls.crt"
+      PHPLDAPADMIN_LDAP_CLIENT_TLS_CRT_FILENAME: "ldap.crt"
+      PHPLDAPADMIN_LDAP_CLIENT_TLS_KEY_FILENAME: "ldap.key"
+      PHPLDAPADMIN_LDAP_CLIENT_TLS_CA_CRT_FILENAME: "ldap.crt"
     ldap:
       - "My LDAP Server":
           - server:
@@ -64,21 +64,21 @@ spec:
       - name: copy
         image: "busybox:latest"
         volumeMounts:
-          - name: "ldap-tls"
-            mountPath: "/container/service/tls"
-          - name: "certs"
+          - name: tls
+            mountPath: "/certs"
+          - name: certs
             mountPath: "/container/service/ldap-client/assets/certs"
         command:
           - "/bin/sh"
           - "-c"
-          - "cat /container/service/tls/tls.key > /container/service/ldap-client/assets/certs/ldap.key"
+          - "cat /certs/tls.key > /container/service/ldap-client/assets/certs/ldap.key"
+          - "&&"
+          - "cat /certs/tls.crt > /container/service/ldap-client/assets/certs/ldap.crt"
     volumeMounts:
-      - name: "ldap-tls"
-        mountPath: "/container/service/tls"
       - name: "certs"
         mountPath: "/container/service/ldap-client/assets/certs"
     volumes:
-      - name: "ldap-tls"
+      - name: tls
         secret:
           secretName: "ldap-tls"
       - name: certs
