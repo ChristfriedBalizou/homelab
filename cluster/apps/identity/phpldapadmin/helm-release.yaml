@@ -63,7 +63,6 @@ spec:
     volumeMounts:
       - name: "ldap-tls"
         mountPath: "/container/service/ldap-client/assets/certs"
-        readOnly: true
     volumes:
       - name: "ldap-tls"
         secret:
