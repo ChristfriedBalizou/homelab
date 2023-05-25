@@ -16,7 +16,7 @@ spec:
         namespace: flux-system
   values:
     controller:
-      replicas: 3
+      replicas: 2
     image:
       repository: adguard/adguardhome
       tag: v0.107.26
@@ -101,7 +101,5 @@ spec:
                 - key: kubernetes.io/hostname
                   operator: In
                   values:
-                    - k8s-0
-                    - k8s-1
                     - k8s-2
                     - k8s-3
