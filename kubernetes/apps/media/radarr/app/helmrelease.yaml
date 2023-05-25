@@ -37,6 +37,11 @@ spec:
       RADARR__INSTANCE_NAME: Radarr
       RADARR__PORT: &port 80
       RADARR__LOG_LEVEL: info
+      RADARR__POSTGRES_HOST: "postgresql.storage"
+      RADARR__POSTGRES_MAIN_DB: "radarr"
+      RADARR__POSTGRES_LOG_DB: "radarr-log"
+      RADARR__POSTGRES_PASSWORD: "${RADARR_POSTGRES_PASSWORD}"
+      RADARR__POSTGRES_USER: "${RADARR_POSTGRES_USER}"
     service:
       main:
         ports:
