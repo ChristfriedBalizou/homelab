@@ -67,4 +67,4 @@ spec:
       - name: "ldap-tls"
         secret:
           secretName: "ldap-tls"
-          defaultMode: 644
+          defaultMode: 0777
