@@ -33,6 +33,7 @@ spec:
         cookie_domains = ".${SECRET_DOMAIN}"
         cookie_secure = true
         email_domains = []
+        cookie_samesite = "lax"
         pass_access_token = true
         pass_authorization_header = true
         whitelist_domains = ".${SECRET_DOMAIN}"
