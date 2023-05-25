@@ -16,7 +16,6 @@ spec:
         name: bjw-s
         namespace: flux-system
   values:
-    replicaCount: 0
     image:
       repository: docker.io/fallenbagel/jellyseerr
       tag: 1.3.0

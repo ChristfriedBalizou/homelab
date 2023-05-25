@@ -16,7 +16,6 @@ spec:
         name: k8s-at-home
         namespace: flux-system
   values:
-    replicaCount: 0
     image:
       repository: jellyfin/jellyfin
       tag: 10.8.7

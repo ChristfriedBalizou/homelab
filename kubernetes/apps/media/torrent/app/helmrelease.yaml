@@ -18,7 +18,6 @@ spec:
     - name: vpn-gateway
       namespace: networking
   values:
-    replicaCount: 0
     image:
       repository: ghcr.io/k8s-at-home/qbittorrent
       tag: v4.4.3.1
