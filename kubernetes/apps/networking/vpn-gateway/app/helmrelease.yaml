@@ -105,3 +105,12 @@ spec:
       data:
         enabled: true
         existingClaim: pod-gateway-data
+    affintity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: kubernetes.io/hostname
+                  operator: In
+                  values:
+                    - k8s-3
