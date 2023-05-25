@@ -18,11 +18,8 @@ spec:
   values:
     env:
       LDAP_ROOT: ${SECRET_LDAP_ROOT}
-      LDAP_USERS: ${SECRET_GRAFANA_ADMIN_USER}
-      LDAP_PASSWORDS: ${SECRET_GRAFANA_ADMIN_PASSWORD}
-      LDAP_GROUP: "admin"
       LDAP_ALLOW_ANON_BINDING: "no"
-      BITNAMI_DEBUG: 1
+      LDAP_CUSTOM_LDIF_DIR: "/ldifs"
     replicaCount: 1
     adminUser: ${SECRET_GRAFANA_ADMIN_USER}
     adminPassword: ${SECRET_GRAFANA_ADMIN_PASSWORD}
@@ -37,7 +34,7 @@ spec:
       port: 1389
     volumeMounts:
       - name: "ldif"
-        mountPath: "/container/ldifs/bootstrap.ldif"
+        mountPath: "/ldifs/bootstrap.ldif"
         subPath: "bootstrap.ldif"
         readOnly: true
     volumes:
