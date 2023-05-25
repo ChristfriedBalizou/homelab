@@ -33,6 +33,7 @@ spec:
           - kube-system
           - flux-system
           - storage
+          - media
       name: "${SECRET_GRAFANA_ADMIN_USER}"
       lightTheme: blackboard
       darkTheme: horizon
