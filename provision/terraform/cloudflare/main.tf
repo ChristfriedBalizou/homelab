@@ -153,3 +153,12 @@ resource "cloudflare_record" "rook" {
   type    = "CNAME"
   ttl     = 1
 }
+
+resource "cloudflare_record" "pgadmin" {
+  name    = "pgadmin"
+  zone_id = lookup(data.cloudflare_zones.domain.zones[0], "id")
+  value   = "ipv4.${data.sops_file.cloudflare_secrets.data["cloudflare_domain"]}"
+  proxied = true
+  type    = "CNAME"
+  ttl     = 1
+}
