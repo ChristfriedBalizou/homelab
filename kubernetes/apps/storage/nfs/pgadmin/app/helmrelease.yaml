@@ -35,3 +35,4 @@ spec:
     storageClass:
       name: nfs-pgadmin
       defaultClass: false
+      pathPattern: ""
