@@ -11,6 +11,7 @@ media:
       - apps/jellyseerr
       - apps/unpackerr
       - apps/nzbget
+      - apps/traktarr
       - apps/openldap/database
       - apps/openldap/config
       - apps/db/postgresql
