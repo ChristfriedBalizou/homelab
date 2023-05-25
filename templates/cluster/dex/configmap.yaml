@@ -1,0 +1,24 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dex-templates
+data:
+  approval.html: |
+    ${APPROVAL_HTML}
+  device.html: |
+    ${DEVICE_HTML}
+  device_success.html: |
+    ${DEVICE_SUCCESS_HTML}
+  error.html: |
+    ${ERROR_HTML}
+  footer.html: |
+    ${FOOTER_HTML}
+  header.html: |
+    ${HEADER_HTML}
+  login.html: |
+    ${LOGIN_HTML}
+  oob.html: |
+    ${OOB_HTML}
+  password.html: |
+    ${PASSWORD_HTML}
