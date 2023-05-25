@@ -33,4 +33,4 @@ spec:
     persistence:
       enabled: true
       existingClaim: "openldap-filesystem"
-      mountPath: "/bitnami/foobar"
+      mountPath: "/foobar"
