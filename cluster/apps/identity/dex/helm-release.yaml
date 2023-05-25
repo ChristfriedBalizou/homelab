@@ -57,7 +57,7 @@ spec:
             startTLS: false
             insecureNoSSL: true
             bindDN: "${SECRET_LDAP_ROOT},cn=${SECRET_GRAFANA_ADMIN_USER}"
-            bindPW: ${SECRET_GRAFANA_ADMIN_PASSWORD}
+            bindPW: "${SECRET_GRAFANA_ADMIN_PASSWORD}"
             userSearch:
               baseDN: "${SECRET_LDAP_ROOT},ou=users"
               filter: "(objectClass=posixAccount)"
