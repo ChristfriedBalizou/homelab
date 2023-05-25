@@ -34,9 +34,11 @@ spec:
         cpu: 200m
         memory: 100Mi
     service:
-      ports:
-        - name: ldap
-          port: 1389
+      main:
+        ports:
+          http:
+            protocol: TCP
+            port: 1389
     controller:
       enabled: true
       replicas: 2
