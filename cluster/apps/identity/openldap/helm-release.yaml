@@ -51,4 +51,4 @@ spec:
                 - key: kubernetes.io/hostname
                   operator: In
                   values:
-                    - k8s-2
+                    - k8s-1
