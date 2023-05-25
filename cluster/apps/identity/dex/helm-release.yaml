@@ -106,4 +106,5 @@ spec:
         level: debug
         format: json
       oauth2:
+        responseTypes: ["code"]
         skipApprovalScreen: true
