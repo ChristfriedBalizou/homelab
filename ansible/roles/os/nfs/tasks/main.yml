@@ -24,7 +24,7 @@
       loop: "{{ nfs_devices }}"
 
     - name: Export nfs config
-      ansible.builtin.command: exportfs -ra
+      ansible.builtin.command: /usr/sbin/exportfs -ra
 
     - name: Start nfs-kernel-server
       ansible.builtin.systemd:
