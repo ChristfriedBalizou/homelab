@@ -1,0 +1,25 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: phpldapadmin
+  namespace: identity
+spec:
+  interval: 10m
+  chart:
+    spec:
+      # renovate: registryUrl=https://christfriedbalizou.github.io/helm-charts
+      chart: phpldapadmin
+      version: 0.0.1
+      sourceRef:
+        kind: HelmRepository
+        name: christfried-charts
+        namespace: flux-system
+  values:
+    resources:
+      requests:
+        cpu: 200m
+        memory: 300Mi
+      limits:
+        cpu: 400m
+        memory: 500Mi

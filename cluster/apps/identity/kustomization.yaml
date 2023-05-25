@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
   - namespace.yaml
   - openldap
+  - phpldapadmin
   - dex
   - loft
   - oauth2-proxy
