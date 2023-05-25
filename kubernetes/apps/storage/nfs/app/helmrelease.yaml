@@ -6,7 +6,7 @@ metadata:
   namespace: storage
 spec:
   interval: 10m
-  replicas: 3
+  replicaCount: 3
   chart:
     spec:
       chart: nfs-subdir-external-provisioner
@@ -32,7 +32,7 @@ spec:
       tag: v4.0.2
     nfs:
       server: "192.168.1.122"
-      path: /mnt/nfs/
+      path: /mnt/nfs
     storageClass:
       name: nfs
       defaultClass: false
