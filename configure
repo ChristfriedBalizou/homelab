@@ -39,9 +39,9 @@ main() {
         verify_dex
         verify_telegram
         verify_openldap
-        verify_success
         verify_dashboard
         verify_vpn
+        verify_success
     else
         # generate sops configuration file
         envsubst < "${PROJECT_DIR}/templates/.sops.yaml" \
@@ -387,6 +387,9 @@ verify_vpn() {
     _has_envar "VPN_COUNTRY"
     _has_envar "VPN_PORT"
     _has_envar "VPN_FORWARDED_PORT_1"
+    _has_envar "BOOTSTRAP_CLUSTER_CIDR"
+    _has_envar "BOOTSTRAP_SERVICE_CIDR"
+    _has_envar "BOOTSTRAP_K8S_GATEWAY_ADDR"
 }
 
 verify_dashboard() {
