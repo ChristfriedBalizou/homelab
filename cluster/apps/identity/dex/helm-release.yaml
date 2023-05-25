@@ -56,12 +56,13 @@ spec:
             insecureNoSSL: true
             bindDN: "cn=${SECRET_GRAFANA_ADMIN_USER},${SECRET_LDAP_ROOT}"
             bindPW: "${SECRET_GRAFANA_ADMIN_PASSWORD}"
+            usernamePrompt: Email Address
             userSearch:
               baseDN: "ou=users,${SECRET_LDAP_ROOT}"
               filter: "(objectClass=posixAccount)"
-              username: uid
+              username: userPrincipalName
               emailAttr: mail
-              nameAttr: cn
+              nameAttr: uid
               idAttr: DN
               preferredUsernameAttr: cn
             groupSearch:
