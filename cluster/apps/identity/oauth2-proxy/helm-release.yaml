@@ -47,7 +47,7 @@ spec:
         external-dns/is-public: "true"
         hajimari.io/enable: "true"
         hajimari.io/group: "identity"
-        hajimari.io/icon: "logos:auth0"
+        hajimari.io/icon: "logos:oauth"
       hosts:
         - &host auth.${SECRET_DOMAIN}
       tls:
