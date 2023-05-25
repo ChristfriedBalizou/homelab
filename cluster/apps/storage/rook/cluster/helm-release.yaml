@@ -40,6 +40,8 @@ spec:
           - hosts:
               - *host
     cephClusterSpec:
+      mon:
+        count: 1
       storage:
         useAllNodes: false
         useAllDevice: false
