@@ -70,6 +70,7 @@ spec:
         storageClass: nfs-client
       media:
         enabled: true
+        mountPath: /media
         existingClaim: media
     resources:
       requests:
