@@ -9,7 +9,7 @@ spec:
   capacity:
     storage: 250Gi
   nfs:
-    path: /mnt/ssd-sdb/media
+    path: /mnt/ssd-sdb
     server: ${NFS_SERVER_IP}
   storageClassName: media
   persistentVolumeReclaimPolicy: Retain
