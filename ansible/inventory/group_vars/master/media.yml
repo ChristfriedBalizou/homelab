@@ -4,7 +4,8 @@ media:
   applications:
     - qtbittorrent
     - sonarr
-    - jackett
+    - radarr
+    - prowlarr
   directories:
     - music
     - movies

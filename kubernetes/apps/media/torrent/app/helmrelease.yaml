@@ -52,7 +52,7 @@ spec:
     persistence:
       config:
         enabled: true
-        storageClass: media-apps-config
+        existingClaim: config-qbittorrent
       downloads:
         enabled: true
         mountPath: /downloads

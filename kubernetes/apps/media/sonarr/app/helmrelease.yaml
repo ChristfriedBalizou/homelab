@@ -78,7 +78,7 @@ spec:
     persistence:
       config:
         enabled: true
-        storageClass: media-apps-config
+        existingClaim: config-sonarr
       series:
         enabled: true
         mountPath: /series
