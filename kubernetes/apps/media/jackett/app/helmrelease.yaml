@@ -33,7 +33,7 @@ spec:
           external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
           external-dns.home.arpa/enabled: "true"
           nginx.ingress.kubernetes.io/auth-snippet: |
-            if ( $request_uri ~* "api\/v2.0\/indexers" ) {
+            if ( $http_user_agent ~* "Sonarr" ) {
               return 200;
             }
           nginx.ingress.kubernetes.io/auth-url: https://auth.${SECRET_DOMAIN}/oauth2/auth?allowed_groups=admin
