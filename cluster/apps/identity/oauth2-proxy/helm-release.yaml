@@ -53,12 +53,12 @@ spec:
         hajimari.io/icon: "logos:oauth"
         nginx.ingress.kubernetes.io/server-snippet: |
           if ($request_uri ~* "state=.*(https|http)([^&]*)") {
-            set $redirect_url "https://google.com/?search=$1";
+            set $redirect_url $1;
           }
 
           location = /oauth2/callback {
             if ($redirect_url) {
-              error_page 403 = $redirect_url;
+              error_page 403 =302 $redirect_url;
             }
           }
       hosts:
