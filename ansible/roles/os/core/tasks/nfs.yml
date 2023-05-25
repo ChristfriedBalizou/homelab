@@ -41,9 +41,12 @@
       when: item.stdout_lines
       loop: "{{ uuid.results }}"
 
-    - name: Reboot
-      ansible.builtin.reboot:
-        msg: Rebooting node
+    - name: Start nfs-kernel-server
+      ansible.builtin.systemd:
+        name: nfs-kernel-server.service
+        enabled: true
+        state: started
+      failed_when: false
   when:
     - k3s_control_node is defined
     - k3s_control_node
@@ -61,3 +64,15 @@
   when:
     - k3s_control_node is defined
     - k3s_control_node is false
+
+- name: Fix mounted directories permission
+  block:
+    - name: Recursively change ownership of drive mount directory
+      ansible.builtin.file:
+        path: "{{ item.mount }}"
+        state: directory
+        recurse: true
+        mode: "0766"
+        owner: "{{ ansible_user }}"
+        group: "{{ ansible_user }}"
+      loop: "{{ nfs_devices }}"

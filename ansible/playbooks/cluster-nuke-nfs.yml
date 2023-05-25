@@ -17,21 +17,9 @@
         state: absent
       loop: "{{ nfs_devices }}"
 
-    - name: Check available device to mount
-      ansible.builtin.command: lsblk {{ item.device }} -no UUID
-      loop: "{{ nfs_devices }}"
-      register: uuid
-      failed_when: false
-
-    - name: Uninstall nfs server packages
-      ansible.builtin.apt:
-        name: "nfs-kernel-server"
-        state: absent
-        update_cache: true
-
-    - name: Stop nfs-server
+    - name: Stop nfs-kernel-server
       ansible.builtin.systemd:
-        name: nfs-server.service
+        name: nfs-kernel-server.service
         enabled: false
         state: stopped
       failed_when: false
@@ -40,18 +28,15 @@
         - k3s_control_node
 
     - name: unmount device from fstab
-      ansible.posix.mount:
-        path: "{{ item.item.mount }}"
-        src: "UUID={{ item.stdout_lines[0] }}"
-        fstype: "{{ item.item.fstype }}"
+      ansible.builtin.lineinfile:
+        path: /etc/fstab
+        regex: ".*{{ item.mount }}.*"
         state: absent
-      when: item.stdout_lines
-      loop: "{{ uuid.results }}"
+      loop: "{{ nfs_devices }}"
 
     - name: wipe the block device
-      ansible.builtin.command: wipefs -af {{ item.item.device }}
-      when: item.stdout_lines
-      loop: "{{ uuid.results }}"
+      ansible.builtin.command: wipefs -af {{ item.device }}
+      loop: "{{ nfs_devices }}"
 
     - name: remove directory clutter
       ansible.builtin.file:
