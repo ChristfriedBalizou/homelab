@@ -18,6 +18,8 @@ spec:
     image:
       repository: adguard/adguardhome
       tag: v0.107.26
+    controller:
+      replicas: 2
     service:
       main:
         enabled: true
@@ -64,7 +66,7 @@ spec:
           nginx.ingress.kubernetes.io/auth-url: https://auth.${SECRET_DOMAIN}/oauth2/auth?allowed_groups=admin
           nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}/oauth2/start
           hajimari.io/enable: "true"
-          hajimari.io/icon: shiedl-check
+          hajimari.io/icon: shield-check
           hajimari.io/group: Network
           hajimari.io/appName: adguard
         hosts:
@@ -85,3 +87,10 @@ spec:
         enabled: true
         existingClaim: data-adguard-home
         mountPath: /opt/adguardhome/work
+    affinity:
+      podAntiAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchLabels:
+                name: adguard-home
+                topologyKey: kubernetes.io/hostname
