@@ -10,3 +10,4 @@ resources:
   - ./metallb/ks.yaml
   - ./vpn-gateway/ks.yaml
   - ./adguard-home/ks.yaml
+  - ./smtp-relay/ks.yaml
