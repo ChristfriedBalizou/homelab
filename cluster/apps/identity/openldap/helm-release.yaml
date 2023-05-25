@@ -41,6 +41,6 @@ spec:
         subPath: bootstrap.ldif
         readOnly: true
     volumes:
-      - name: ldif-boostrap
+      - name: ldif-bootstrap
         secret:
           secretName: identity/openldap-ldif-bootstrap
