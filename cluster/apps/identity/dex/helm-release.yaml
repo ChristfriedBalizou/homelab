@@ -1,0 +1,84 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: dex
+  namespace: identity
+spec:
+  releaseName: dex
+  interval: 10m
+  chart:
+    spec:
+      chart: dex
+      version: 0.12.1
+      sourceRef:
+        kind: HelmRepository
+        name: dex
+        namespace: flux-system
+  values:
+    image:
+      repository: ghcr.io/dexidp/dex
+      tag: v2.35.3
+    ingress:
+      enabled: true
+      annotations:
+        cert-manager.io/cluster-issuer: "letsencrypt-production"
+        external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
+        external-dns/is-public: "true"
+        hajimari.io/enable: "true"
+        hajimari.io/icon: "two-factor-authentication"
+      hosts:
+        - host: &host dex.${SECRET_DOMAIN}
+          paths:
+            - path: /
+              pathType: Prefix
+      tls:
+        - hosts:
+            - *host
+          secretName: dex-tls
+    resources:
+      requests:
+        cpu: 50m
+        memory: 200Mi
+      limits:
+        cpu: 200m
+        memory: 200Mi
+    # see https://github.com/dexidp/dex/issues/2082
+    env:
+      KUBERNETES_POD_NAMESPACE: identity
+    config:
+      issuer: https://dex.${SECRET_DOMAIN}
+      connectors:
+        - type: github
+          id: github
+          name: GitHub
+          config:
+            clientID: ${DEX_GITHUB_CLIENT_ID}
+            clientSecret: ${DEX_GITHUB_CLIENT_SECRET}
+            redirectURI: https://dex.${SECRET_DOMAIN}/callback
+        - type: oidc
+          id: google
+          name: Google
+          config:
+            issuer: https://accounts.google.com
+            clientID: ${DEX_GOOGLE_CLIENT_ID}
+            clientSecret: ${DEX_GOOGLE_CLIENT_SECRET}
+            redirectURI: https://dex.${SECRET_DOMAIN}/callback
+      storage:
+        type: kubernetes
+        config:
+          inCluster: true
+      frontend:
+        theme: coreos
+        issuer: Milky Way
+        issuerUrl: https://${SECRET_DOMAIN}
+        logoUrl: https://imgur.com/Idzzln9.png
+      expiry:
+        signingKeys: 6h
+        idTokens: 24h
+      logger:
+        level: debug
+        format: json
+      oauth2:
+        responseTypes: ["code", "token", "id_token"]
+        skipApprovalScreen: true
