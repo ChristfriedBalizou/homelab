@@ -44,4 +44,4 @@ spec:
         tls:
           - hosts:
               - *host
-          - secretName: status-tls
+            secretName: status-tls
