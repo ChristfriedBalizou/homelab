@@ -6,6 +6,7 @@ media:
     - sonarr
     - radarr
     - prowlarr
+    - jellyfin
   directories:
     - music
     - movies
