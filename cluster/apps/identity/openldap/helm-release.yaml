@@ -50,3 +50,13 @@ spec:
               matchLabels:
                 name: openldap
             topologyKey: kubernetes.io/hostname
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: kubernetes.io/hostname
+                  operator: In
+                  values:
+                    - k8s-0
+                    - k8s-1
+                    - k8s-3
