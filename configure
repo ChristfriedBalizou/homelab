@@ -425,12 +425,11 @@ verify_telegram() {
 
 verify_openldap() {
     _has_envar "LDAP_ROOT"
-    _has_envar "LDAP_LDIF"
-	  _has_envar "SECRET_LDAP_DOMAIN"
-	  _has_envar "SECRET_LDAP_SERVER"
-	  _has_envar "SECRET_LDAP_SERVER_PORT"
-	  _has_envar "SECRET_LDAP_TLS"
-	  _has_envar "SECRET_LDAP_BIND_ID"
+	  _has_envar "LDAP_DOMAIN"
+	  _has_envar "LDAP_SERVER"
+	  _has_envar "LDAP_SERVER_PORT"
+	  _has_envar "LDAP_TLS"
+	  _has_envar "LDAP_BIND_ID"
 }
 
 verify_ansible_hosts() {

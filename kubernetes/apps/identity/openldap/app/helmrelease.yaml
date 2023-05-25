@@ -16,12 +16,14 @@ spec:
         namespace: flux-system
   values:
     image:
-      # From repository https://github.com/bitnami/openldap
-      repository: bitnami/openldap
-      tag: 2.6.3
+      # From repository https://hub.docker.com/r/osixia/openldap
+      repository: osixia/openldap
+      tag: 1.5.0
       pullPolicy: IfNotPresent
     env:
-      LDAP_ROOT: ${SECRET_LDAP_ROOT}
+      LDAP_ORGANISATION: ${SECRET_LDAP_ORGANIZATION}
+      LDAP_DOMAIN: ${SECRET_DOMAIN}
+      LDAP_TLS: ${SECRET_LDAP_TLS}
       LDAP_ADMIN_USERNAME: ${SECRET_GRAFANA_ADMIN_USER}
       LDAP_ADMIN_PASSWORD: ${SECRET_GRAFANA_ADMIN_PASSWORD}
     resources:
@@ -36,15 +38,19 @@ spec:
         ports:
           http:
             protocol: TCP
-            port: 1389
+            port: ${SECRET_LDAP_SERVER_PORT}
     controller:
       enabled: true
       replicas: 1
     persistence:
-      data:
+      database:
+        enabled: true
+        existingClaim: database-openldap
+        mountPath: /var/lib/ldap
+      config:
         enabled: true
         existingClaim: config-openldap
-        mountPath: /bitnami/openldap
+        mountPath: /etc/ldap/slapd.d
     affinity:
       podAntiAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:

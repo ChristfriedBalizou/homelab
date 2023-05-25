@@ -9,7 +9,7 @@ spec:
   capacity:
     storage: 5Gi
   nfs:
-    path: /mnt/volume1/apps/openldap
+    path: /mnt/volume1/apps/openldap/config
     server: ${NFS_SERVER_IP}
   storageClassName: config-openldap
   volumeMode: Filesystem
@@ -27,4 +27,35 @@ spec:
     requests:
       storage: 5Gi
   storageClassName: config-openldap
+  volumeMode: Filesystem
+
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: database-openldap
+spec:
+  accessModes:
+    - ReadWriteMany
+  capacity:
+    storage: 5Gi
+  nfs:
+    path: /mnt/volume1/apps/openldap/database
+    server: ${NFS_SERVER_IP}
+  storageClassName: database-openldap
+  volumeMode: Filesystem
+  persistentVolumeReclaimPolicy: Retain
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: database-openldap
+  namespace: identity
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 5Gi
+  storageClassName: database-openldap
   volumeMode: Filesystem
