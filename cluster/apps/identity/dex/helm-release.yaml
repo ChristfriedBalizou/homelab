@@ -106,5 +106,5 @@ spec:
         level: debug
         format: json
       oauth2:
-        responseTypes: ["openid", "profile", "groups"]
+        responseTypes: ["profile", "groups"]
         skipApprovalScreen: true
