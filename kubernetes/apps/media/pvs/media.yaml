@@ -11,7 +11,7 @@ spec:
   nfs:
     path: /mnt/ssd-sdb/media
     server: ${NFS_SERVER_IP}
-  storageClassName: nfs-client
+  storageClassName: media
   persistentVolumeReclaimPolicy: Retain
 ---
 apiVersion: v1
