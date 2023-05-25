@@ -32,6 +32,7 @@ spec:
           - monitoring
           - identity
           - kube-system
+          - storage
       name: "${SECRET_GRAFANA_ADMIN_USER}"
       lightTheme: blackboard
       darkTheme: horizon
