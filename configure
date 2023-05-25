@@ -387,9 +387,7 @@ verify_vpn() {
     _has_envar "VPN_COUNTRY"
     _has_envar "VPN_PORT"
     _has_envar "VPN_FORWARDED_PORT_1"
-    _has_envar "BOOTSTRAP_CLUSTER_CIDR"
-    _has_envar "BOOTSTRAP_SERVICE_CIDR"
-    _has_envar "BOOTSTRAP_K8S_GATEWAY_ADDR"
+    _has_envar "CLUSTER_CIDR"
 }
 
 verify_dashboard() {
