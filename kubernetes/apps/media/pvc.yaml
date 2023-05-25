@@ -9,7 +9,7 @@ spec:
   capacity:
     storage: 1Mi
   nfs:
-    path: /mnt/media
+    path: /mnt/volume2/media
     server: ${NFS_SERVER_IP}
   storageClassName: media
   volumeMode: Filesystem
