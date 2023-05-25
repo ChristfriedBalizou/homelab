@@ -20,7 +20,7 @@ spec:
       create: true
       name: ${SECRET_GRAFANA_ADMIN_USER}
     ingress:
-      enabled: false
+      enabled: true
       annotations:
         cert-manager.io/cluster-issuer: "letsencrypt-production"
         external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
