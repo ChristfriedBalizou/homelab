@@ -71,9 +71,7 @@ spec:
         command:
           - "/bin/sh"
           - "-c"
-          - "cp"
-          - "/container/service/tls/*"
-          - "/container/service/ldap-client/assets/certs"
+          - "echo 'tester' > /container/service/ldap-client/assets/certs/debug.txt"
     volumeMounts:
       - name: "certs"
         mountPath: "/container/service/ldap-client/assets/certs"
