@@ -27,7 +27,7 @@ spec:
         readOnly: true
     extraArgs:
       - --authentication-mode=basic
-      - --basic-auth-file=/etc/kubernetes/auth/auth.csv
+      - --token-auth-file=/etc/kubernetes/auth/auth.csv
     serviceAccount:
       create: true
       name: ${SECRET_GRAFANA_ADMIN_USER}
