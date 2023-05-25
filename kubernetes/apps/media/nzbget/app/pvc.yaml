@@ -1,15 +1,29 @@
 ---
 apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: config-nzbget
+spec:
+  accessModes:
+    - ReadWriteMany
+  capacity:
+    storage: 50Gi
+  nfs:
+    path: /mnt/nfs/volume1/apps/nzbget
+    server: ${NFS_SERVER_IP}
+  storageClassName: config-nzbget
+  volumeMode: Filesystem
+  persistentVolumeReclaimPolicy: Retain
+---
+apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: config-nzbget
   namespace: media
-  annotations:
-    nfs.io/storage-path: "volume1/apps/nzbget"
 spec:
   accessModes:
     - ReadWriteMany
   resources:
     requests:
       storage: 5Gi
-  storageClassName: nfs
+  storageClassName: config-nzbget
