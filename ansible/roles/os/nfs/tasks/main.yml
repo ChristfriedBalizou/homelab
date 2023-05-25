@@ -50,8 +50,8 @@
   block:
     - name: Mount nfs device from fstab
       ansible.posix.mount:
-        path: "{{ item.mount }}"
-        src: "{{ item.host }}:{{ item.mount }}"
+        path: "/mnt/nfs"
+        src: "{{ item.host }}:/mnt/nfs"
         fstype: "{{ item.fstype }}"
         opts: "rw"
         state: mounted
@@ -62,16 +62,6 @@
 
 - name: Configure and install admin monitors
   block:
-    - name: Recursively change ownership of drive mount directory
-      ansible.builtin.file:
-        path: "{{ item.mount }}"
-        state: directory
-        recurse: true
-        mode: "0766"
-        owner: "{{ ansible_user }}"
-        group: "{{ ansible_user }}"
-      loop: "{{ nfs_devices }}"
-
     - name: Add Webmin source.list file
       ansible.builtin.lineinfile:
         path: /etc/apt/sources.list
