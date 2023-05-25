@@ -38,6 +38,7 @@ spec:
         pass_access_token = true
         pass_authorization_header = true
         whitelist_domains = ".${SECRET_DOMAIN}"
+        skip_provider_button = true
     ingress:
       enabled: true
       className: nginx
