@@ -22,7 +22,7 @@ spec:
       LDAP_PASSWORDS: ${SECRET_GRAFANA_ADMIN_PASSWORD}
       LDAP_GROUP: "admin"
       LDAP_ALLOW_ANON_BINDING: "no"
-    replicaCount: 2
+    replicaCount: 1
     adminUser: ${SECRET_GRAFANA_ADMIN_USER}
     adminPassword: ${SECRET_GRAFANA_ADMIN_PASSWORD}
     service:
