@@ -37,7 +37,8 @@ spec:
       port: 1389
     volumeMounts:
       - name: "ldif"
-        mountPath: "/container/ldifs"
+        mountPath: "/container/ldifs/bootstrap.ldif"
+        subPath: "bootstrap.ldif"
         readOnly: true
     volumes:
       - name: "ldif"
