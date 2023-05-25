@@ -26,12 +26,11 @@ spec:
     env:
       PHPLDAPADMIN_SERVER_ADMIN: ${SECRET_CLOUDFLARE_EMAIL}
     ldap:
-      PHPLDAPADMIN_LDAP_HOSTS:
-        - ${SECRET_DOMAIN}:
-            - server:
-                - tls: false
-            - login:
-                - bind_id: "${SECRET_LDAP_ROOT},cn=${SECRET_GRAFANA_ADMIN_USER}"
+      - ${SECRET_DOMAIN}:
+          - server:
+              - tls: false
+          - login:
+              - bind_id: "${SECRET_LDAP_ROOT},cn=${SECRET_GRAFANA_ADMIN_USER}"
     ingress:
       enabled: true
       annotations:
