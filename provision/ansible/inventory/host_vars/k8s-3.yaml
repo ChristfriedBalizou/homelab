@@ -1,0 +1,3 @@
+---
+rook_ceph_devices:
+  - /dev/sdb

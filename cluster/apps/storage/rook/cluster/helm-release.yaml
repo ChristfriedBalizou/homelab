@@ -122,7 +122,7 @@ spec:
         useAllNodes: false
         useAllDevice: false
         nodes:
-          - name: k8s-1
+          - name: k8s-3
             devices:
               - name: "sdb"
       dashboard:
