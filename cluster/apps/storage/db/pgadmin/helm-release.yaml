@@ -9,15 +9,12 @@ spec:
   chart:
     spec:
       chart: pgadmin4
-      version: 1.13.10
+      version: 1.13.9
       sourceRef:
         kind: HelmRepository
         name: runix
         namespace: flux-system
   values:
-    image:
-      repository: dpage/pgadmin4
-      tag: "6.18"
     strategy:
       type: Recreate
     env:
