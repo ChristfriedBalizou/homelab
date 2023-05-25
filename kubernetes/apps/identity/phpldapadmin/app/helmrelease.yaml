@@ -36,6 +36,7 @@ spec:
     ingress:
       main:
         enabled: true
+        ingressClassName: nginx
         annotations:
           cert-manager.io/cluster-issuer: "letsencrypt-production"
           external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
@@ -47,13 +48,20 @@ spec:
           hajimari.io/group: "Authentication"
           hajimari.io/icon: "mdi:shield-crown-outline"
         hosts:
-          - &host "phpldapadmin.${SECRET_DOMAIN}"
-        path: /
-        pathType: Prefix
+          - host: &host "phpldapadmin.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
         tls:
           - hosts:
               - *host
-            secretName: "phpldapadmin-tls"
+            secretName: phpldapadmin-tls
+    service:
+      main:
+        ports:
+          http:
+            port: 80
+            targetPort: 80
     persistence:
       ldap:
         enabled: true
