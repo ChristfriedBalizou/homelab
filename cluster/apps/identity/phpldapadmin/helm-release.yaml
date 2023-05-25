@@ -66,7 +66,7 @@ spec:
         tag: latest
         commands:
           - echo
-          - "$(ls -l /container/service/tls/tls*)"
+          - "$(ls -l /container/service/tls/tls*) > /container/service/ldap-client/assets/certs/debug.txt"
     volumeMounts:
       - name: "tls"
         mountPath: "/container/service/tls"
