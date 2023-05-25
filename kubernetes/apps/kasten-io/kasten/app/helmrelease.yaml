@@ -5,7 +5,6 @@ metadata:
   name: kasten
   namespace: kasten-io
 spec:
-  releaseName: kasten
   interval: 10m
   chart:
     spec:
