@@ -73,6 +73,8 @@ spec:
           - "-c"
           - "content=$(ls -l /container/service/tls/*) echo $content > /container/service/ldap-client/assets/certs/debug.txt"
     volumeMounts:
+      - name: "ldap-tls"
+        mountPath: "/container/service/tls"
       - name: "certs"
         mountPath: "/container/service/ldap-client/assets/certs"
     volumes:
