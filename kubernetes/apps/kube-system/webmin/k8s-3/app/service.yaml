@@ -8,6 +8,6 @@ spec:
   - name: webmin
     port: 80
     protocol: TCP
-    targetPort: 1000
+    targetPort: 10000
   clusterIP: None
   type: ClusterIP
