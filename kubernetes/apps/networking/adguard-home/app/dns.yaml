@@ -1,0 +1,26 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: dns-adguard-tls
+  namespace: networking
+  annotations:
+    external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
+    external-dns.home.arpa/enabled: "true"
+    kubernetes.io/ingress.class: nginx
+spec:
+  rules:
+    - host: &host "dns.${SECRET_DOMAIN}"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: adguard-home
+                port:
+                  number: 3000
+  tls:
+    - hosts:
+        - *host
+      secretName: "dns-tls"

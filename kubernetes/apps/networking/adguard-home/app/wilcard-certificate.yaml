@@ -1,0 +1,14 @@
+---
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: dns-adguard-tls
+spec:
+  secretName: dns-tls
+  issuerRef:
+    kind: Issuer
+    name: letsencrypt-production
+  commonName: "${SECRET_DOMAINE}"
+  dnsNames:
+    - "*.${SECRET_DOMAIN}"
+    - "${SECRET_DOMAIN}"
