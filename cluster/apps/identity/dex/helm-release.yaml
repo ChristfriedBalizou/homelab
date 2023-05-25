@@ -83,7 +83,7 @@ spec:
         config:
           inCluster: true
       frontend:
-        theme: coreos
+        theme: dark
         issuer: Final Space
         issuerUrl: https://${SECRET_DOMAIN}
         logoUrl: https://imgur.com/Idzzln9.png
