@@ -1,0 +1,4 @@
+---
+- name: Reboot
+  ansible.builtin.reboot:
+    msg: Rebooting nodes
