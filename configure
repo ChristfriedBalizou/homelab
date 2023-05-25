@@ -41,6 +41,7 @@ main() {
         verify_openldap
         verify_success
         verify_dashboard
+        verify_vpn
     else
         # generate sops configuration file
         envsubst < "${PROJECT_DIR}/templates/.sops.yaml" \
@@ -376,6 +377,16 @@ verify_grafana() {
 verify_dex() {
     _has_envar "DEX_OAUTH2_PROXY_CLIENT_ID"
     _has_envar "DEX_OAUTH2_PROXY_CLIENT_SECRET"
+}
+
+verify_vpn() {
+    _has_envar "VPN_INTERFACE_PRIVATE_KEY"
+    _has_envar "VPN_DNS"
+    _has_envar "VPN_PEER_PUBLIC_KEY"
+    _has_envar "VPN_PEER_ENDPOINT"
+    _has_envar "VPN_COUNTRY"
+    _has_envar "VPN_PORT"
+    _has_envar "VPN_FORWARDED_PORT_1"
 }
 
 verify_dashboard() {
