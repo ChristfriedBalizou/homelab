@@ -41,10 +41,18 @@ spec:
       RUNNOW: no
       SKIPUPDATE: no
       APP_BRANCH: master
+    probes:
+      liveness:
+        enabled: false
+      readiness:
+        enabled: false
+      startup:
+        enabled: false
     service:
       main:
         ports:
           http:
+            primary: false
             enabled: false
     podSecurityContext:
       runAsUser: 568
