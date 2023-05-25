@@ -4,12 +4,12 @@ kind: Kustomization
 configMapGenerator:
   - name: dex-web-templates
     files:
-      - templates/approval.html
-      - templates/device_success.html
-      - templates/device.html
-      - templates/error.html
-      - templates/footer.html
-      - templates/header.html
-      - templates/login.html
-      - templates/oob.htlm
-      - templates/password.html
+      - approval.html
+      - device_success.html
+      - device.html
+      - error.html
+      - footer.html
+      - header.html
+      - login.html
+      - oob.htlm
+      - password.html
