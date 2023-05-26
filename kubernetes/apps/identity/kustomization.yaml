@@ -7,3 +7,4 @@ resources:
   - ./phpldapadmin/ks.yaml
   - ./dex/ks.yaml
   - ./oauth2-proxy/ks.yaml
+  - ./glauth/ks.yaml

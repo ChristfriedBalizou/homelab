@@ -14,6 +14,7 @@ media:
       - apps/traktarr
       - apps/openldap/database
       - apps/openldap/config
+      - apps/glauth
   persistence:
     mount: "/mnt/nfs/volume2"
     folders:
