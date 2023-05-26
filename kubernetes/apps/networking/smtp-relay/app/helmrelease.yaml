@@ -36,7 +36,7 @@ spec:
       tag: 0.6.2
     env:
       DEBUG: "true"
-      SMTP_DOMAIN: ${SECRET_DOMAINE}
+      SMTP_DOMAIN: ${SMTP_DOMAIN}
       SMTP_PORT: ${SMTP_PORT}
       SMTP_SERVER: ${SMTP_SERVER}
       SMTP_USERNAME: ${SMTP_USERNAME}
