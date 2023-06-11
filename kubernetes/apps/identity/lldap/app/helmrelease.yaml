@@ -58,6 +58,12 @@ spec:
       LLDAP_LDAP_USER_EMAIL: "${LLDAP_LDAP_USER_EMAIL}"
       LLDAP_SERVER_KEY_SEED: "${LLDAP_SERVER_KEY_SEED}"
       LLDAP_DATABASE_URL: "postgres://${LLDAP_POSTGRES_USER}:${LLDAP_POSTGRES_PASS}@postgresql.storage.svc.cluster.local/lldap"
+
+      LLDAP_SMTP_OPTIONS__ENABLE_PASSWORD_RESET: "true"
+      LLDAP_SMTP_OPTIONS__SERVER: "${SMTP_SERVER}"
+      LLDAP_SMTP_OPTIONS__PORT: "${SMTP_PORT}"
+      LLDAP_SMTP_OPTIONS__FROM: "noreply@${SECRET_DOMAIN}"
+      LLDAP_SMTP_OPTIONS__TO: "noreply@${SECRET_DOMAIN}"
     service:
       main:
         ports:
