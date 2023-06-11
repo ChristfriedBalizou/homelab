@@ -1,0 +1,183 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: &app authelia
+  namespace: identity
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 1.5.1
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  maxHistory: 2
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  dependsOn:
+    - name: lldap
+      namespace: identity
+    - name: redis
+      namespace: storage
+  values:
+    initContainers:
+      01-init-db:
+        image: ghcr.io/onedr0p/postgres-init:14.8
+        imagePullPolicy: IfNotPresent
+        env:
+          INIT_POSTGRES_DBNAME: &db authelia
+          INIT_POSTGRES_HOST: &postgres postgresql.storage.svc.cluster.local
+          INIT_POSTGRES_USER: "${AUTHELIA_STORAGE_POSTGRES_USERNAME}"
+          INIT_POSTGRES_PASS: "${AUTHELIA_STORAGE_POSTGRES_PASSWORD}"
+          INIT_POSTGRES_SUPER_PASS: "${POSTGRES_SUPER_PASS}"
+    controller:
+      replicas: 2
+      strategy: RollingUpdate
+      annotations:
+        reloader.stakater.com/auto: "true"
+    image:
+      repository: ghcr.io/authelia/authelia
+      tag: master@sha256:a3647c3dd136402745c7639e446944004145630c822f27e22f999c414c234d2f
+    args: ["--config", "/config/configuration.yml", "--config.experimental.filters", "expand-env"]
+    env:
+      AUTHELIA_AUTHENTICATION_BACKEND_LDAP_ADDITIONAL_GROUPS_DN: ou=groups
+      AUTHELIA_AUTHENTICATION_BACKEND_LDAP_ADDITIONAL_USERS_DN: ou=people
+      AUTHELIA_AUTHENTICATION_BACKEND_LDAP_BASE_DN: ${SECRET_LDAP_ROOT}
+      AUTHELIA_AUTHENTICATION_BACKEND_LDAP_DISPLAY_NAME_ATTRIBUTE: displayName
+      AUTHELIA_AUTHENTICATION_BACKEND_LDAP_GROUPS_FILTER: (member={dn})
+      AUTHELIA_AUTHENTICATION_BACKEND_LDAP_GROUP_NAME_ATTRIBUTE: cn
+      AUTHELIA_AUTHENTICATION_BACKEND_LDAP_IMPLEMENTATION: custom
+      AUTHELIA_AUTHENTICATION_BACKEND_LDAP_MAIL_ATTRIBUTE: mail
+      AUTHELIA_AUTHENTICATION_BACKEND_LDAP_START_TLS: "false"
+      AUTHELIA_AUTHENTICATION_BACKEND_LDAP_TIMEOUT: 5s
+      AUTHELIA_AUTHENTICATION_BACKEND_LDAP_URL: ldap://lldap.storage.svc.cluster.local:389
+      AUTHELIA_AUTHENTICATION_BACKEND_LDAP_USER: "${LLDAP_USER_DN}"
+      AUTHELIA_AUTHENTICATION_BACKEND_LDAP_PASSWORD: "${LLDAP_USER_PASS}"
+      AUTHELIA_AUTHENTICATION_BACKEND_LDAP_USERNAME_ATTRIBUTE: uid
+      AUTHELIA_AUTHENTICATION_BACKEND_LDAP_USERS_FILTER: (&({mail_attribute}={input})(objectClass=person))
+      AUTHELIA_AUTHENTICATION_BACKEND_PASSWORD_RESET_DISABLE: "true"
+      AUTHELIA_AUTHENTICATION_BACKEND_REFRESH_INTERVAL: 1m
+      AUTHELIA_DEFAULT_REDIRECTION_URL: https://auth.${SECRET_DOMAIN}
+      AUTHELIA_DUO_API_DISABLE: "true"
+      AUTHELIA_LOG_LEVEL: info
+      AUTHELIA_NOTIFIER_DISABLE_STARTUP_CHECK: "true"
+      AUTHELIA_NOTIFIER_SMTP_DISABLE_REQUIRE_TLS: "true"
+      AUTHELIA_NOTIFIER_SMTP_HOST: ${SMTP_SERVER}
+      AUTHELIA_NOTIFIER_SMTP_PORT: ${SMTP_PORT}
+      AUTHELIA_NOTIFIER_SMTP_SENDER: Authelia <noreply@${SECRET_DOMAIN}>
+      AUTHELIA_SERVER_DISABLE_HEALTHCHECK: "true"
+      AUTHELIA_SERVER_PORT: &port 80
+      AUTHELIA_SESSION_DOMAIN: ${SECRET_DOMAIN}
+      AUTHELIA_SESSION_NAME: authelia-homelab
+      AUTHELIA_SESSION_REDIS_DATABASE_INDEX: 14
+      AUTHELIA_SESSION_REDIS_HOST: redis.storage.svc.cluster.local
+      AUTHELIA_TELEMETRY_METRICS_ADDRESS: tcp://0.0.0.0:8080
+      AUTHELIA_TELEMETRY_METRICS_ENABLED: "true"
+      AUTHELIA_THEME: dark
+      AUTHELIA_TOTP_ISSUER: authelia.com
+      AUTHELIA_WEBAUTHN_DISABLE: "true"
+      AUTHELIA_IDENTITY_PROVIDERS_OIDC_HMAC_SECRET: "${AUTHELIA_IDENTITY_PROVIDERS_OIDC_HMAC_SECRET}"
+      AUTHELIA_IDENTITY_PROVIDERS_OIDC_ISSUER_PRIVATE_KEY: "${AUTHELIA_IDENTITY_PROVIDERS_OIDC_ISSUER_PRIVATE_KEY}"
+      AUTHELIA_JWT_SECRET: "${AUTHELIA_JWT_SECRET}"
+      AUTHELIA_SESSION_SECRET: "${AUTHELIA_SESSION_SECRET}"
+      AUTHELIA_STORAGE_POSTGRES_HOST: *postgres
+      AUTHELIA_STORAGE_ENCRYPTION_KEY: "${AUTHELIA_STORAGE_ENCRYPTION_KEY}"
+      AUTHELIA_STORAGE_POSTGRES_DATABASE: *db
+      AUTHELIA_STORAGE_POSTGRES_USERNAME: "${AUTHELIA_STORAGE_POSTGRES_USERNAME}"
+      AUTHELIA_STORAGE_POSTGRES_PASSWORD: "${AUTHELIA_STORAGE_POSTGRES_PASSWORD}"
+    enableServiceLinks: false
+    service:
+      main:
+        ports:
+          http:
+            port: *port
+          metrics:
+            enabled: true
+            port: 8080
+    serviceMonitor:
+      main:
+        enabled: true
+        endpoints:
+          - port: metrics
+            scheme: http
+            path: /metrics
+            interval: 1m
+            scrapeTimeout: 10s
+    probes:
+      liveness: &probes
+        enabled: true
+        custom: true
+        spec:
+          httpGet:
+            path: /api/health
+            port: *port
+          initialDelaySeconds: 0
+          periodSeconds: 10
+          timeoutSeconds: 1
+          failureThreshold: 3
+      readiness: *probes
+      startup:
+        enabled: false
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: nginx
+        annotations:
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
+          external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
+          external-dns.home.arpa/enabled: "true"
+          nginx.ingress.kubernetes.io/configuration-snippet: |
+            add_header Cache-Control "no-store";
+            add_header Pragma "no-cache";
+            add_header X-Frame-Options "SAMEORIGIN";
+            add_header X-XSS-Protection "1; mode=block";
+          hajimari.io/enable: "true"
+          hajimari.io/name: "Authelia"
+          hajimari.io/group: "Authentication"
+          hajimari.io/icon: mdi:shield-account
+        hosts:
+          - host: &host auth.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - *host
+            secretName: authelia-tls
+    podSecurityContext:
+      runAsUser: 568
+      runAsGroup: 568
+      fsGroup: 568
+      fsGroupChangePolicy: OnRootMismatch
+    persistence:
+      config:
+        enabled: true
+        type: configMap
+        name: authelia-configmap
+        subPath: configuration.yml
+        mountPath: /config/configuration.yml
+        readOnly: false
+    topologySpreadConstraints:
+      - maxSkew: 1
+        topologyKey: kubernetes.io/hostname
+        whenUnsatisfiable: DoNotSchedule
+        labelSelector:
+          matchLabels:
+            app.kubernetes.io/name: *app
+    resources:
+      requests:
+        cpu: 5m
+        memory: 10Mi
+      limits:
+        memory: 200Mi

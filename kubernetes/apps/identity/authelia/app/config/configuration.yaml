@@ -1,0 +1,26 @@
+---
+session:
+  redis:
+    high_availability:
+      sentinel_name: redis-master
+      nodes:
+        - host: redis-node-0.redis-headless.database.svc.cluster.local
+          port: 26379
+        - host: redis-node-1.redis-headless.database.svc.cluster.local
+          port: 26379
+        - host: redis-node-2.redis-headless.database.svc.cluster.local
+          port: 26379
+
+access_control:
+  default_policy: two_factor
+  networks:
+    - name: internal
+      networks: ["10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16"]
+  rules: []
+
+identity_providers:
+  oidc:
+    cors:
+      endpoints: ["authorization", "token", "revocation", "introspection"]
+      allowed_origins_from_client_redirect_uris: true
+    clients: []
