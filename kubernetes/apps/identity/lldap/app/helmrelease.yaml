@@ -33,8 +33,8 @@ spec:
         env:
           INIT_POSTGRES_DBNAME: lldap
           INIT_POSTGRES_HOST: postgres.storage.svc.cluster.local
-          INIT_POSTGRES_USER: "${POSTGRES_USER}"
-          INIT_POSTGRES_PASS: "${POSTGRES_PASS}"
+          INIT_POSTGRES_USER: "${LLDAP_POSTGRES_USER}"
+          INIT_POSTGRES_PASS: "${LLDAP_POSTGRES_PASS}"
           INIT_POSTGRES_SUPER_PASS: "${POSTGRES_SUPER_PASS}"
     controller:
       replicas: 2
@@ -57,7 +57,7 @@ spec:
       LLDAP_USER_DN: "${LLDAP_USER_DN}"
       LLDAP_LDAP_USER_EMAIL: "${LLDAP_LDAP_USER_EMAIL}"
       LLDAP_SERVER_KEY_SEED: "${LLDAP_SERVER_KEY_SEED}"
-      LLDAP_DATABASE_URL: "postgres://${POSTGRES_USER}:${POSTGRES_PASS}@postgres.storage.svc.cluster.local/lldap"
+      LLDAP_DATABASE_URL: "postgres://${LLDAP_POSTGRES_USER}:${LLDAP_POSTGRES_PASS}@postgres.storage.svc.cluster.local/lldap"
     service:
       main:
         ports:
