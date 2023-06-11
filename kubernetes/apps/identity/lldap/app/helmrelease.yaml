@@ -71,7 +71,13 @@ spec:
         enabled: true
         ingressClassName: nginx
         annotations:
-          external-dns.alpha.kubernetes.io/target: ingress.devbu.io
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
+          external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
+          external-dns.home.arpa/enabled: "true"
+          hajimari.io/enable: "true"
+          hajimari.io/name: "LDAP Admin"
+          hajimari.io/group: "Authentication"
+          hajimari.io/icon: "mdi:dictionary"
         hosts:
           - host: &host "lldap.${SECRET_DOMAIN}"
             paths:
