@@ -10,7 +10,6 @@ metadata:
       This policy creates annotations on ingresses for external-dns,
       cert-manager and authentication based on custom annotations.
 spec:
-  mutateExistingOnPolicyUpdate: true
   generateExistingOnPolicyUpdate: true
   rules:
     - name: external-dns
