@@ -20,6 +20,9 @@ access_control:
     - domain: ["jellyfin.${SECRET_DOMAIN}"]
       resources: ["^/metrics.*$"]
       policy: deny
+    - domain: ["hajimari.${SECRET_DOMAIN}"]
+      subject:
+        - ["group:admin"]
 
 identity_providers:
   oidc:
