@@ -50,7 +50,7 @@ spec:
               +(nginx.ingress.kubernetes.io/auth-method): |-
                 GET
               +(nginx.ingress.kubernetes.io/auth-url): |-
-                http://authelia.default.svc.cluster.local/api/verify
+                http://authelia.identity.svc.cluster.local/api/verify
               +(nginx.ingress.kubernetes.io/auth-signin): |-
                 https://oauth.${SECRET_DOMAIN}?rm=$request_method
               +(nginx.ingress.kubernetes.io/auth-response-headers): |-
