@@ -53,3 +53,6 @@ megalinter-reports
 
 # Ignore dashboard secrets
 .dashboard-secret
+
+# private key
+.*.pem
