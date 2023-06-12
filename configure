@@ -94,6 +94,10 @@ main() {
             > "${PROJECT_DIR}/kubernetes/apps/identity/phpldapadmin/app/secret.sops.yaml"
         sops --encrypt --in-place "${PROJECT_DIR}/kubernetes/apps/identity/phpldapadmin/app/secret.sops.yaml"
 
+        envsubst < "${PROJECT_DIR}/templates/kubernetes/cluster-authelia-secret.sops.yaml" \
+            > "${PROJECT_DIR}/kubernetes/apps/identity/authelia/app/secret.sops.yaml"
+        sops --encrypt --in-place "${PROJECT_DIR}/kubernetes/apps/identity/authelia/app/secret.sops.yaml"
+
         envsubst < "${PROJECT_DIR}/templates/kubernetes/cluster-media-traktarr-secret.sops.yaml" \
             > "${PROJECT_DIR}/kubernetes/apps/media/traktarr/app/secret.sops.yaml"
         sops --encrypt --in-place "${PROJECT_DIR}/kubernetes/apps/media/traktarr/app/secret.sops.yaml"
