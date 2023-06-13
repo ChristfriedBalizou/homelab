@@ -24,6 +24,11 @@ access_control:
       policy: two_factor
       subject:
         - ["group:admin"]
+    - domain_regex: "k8s-([0-9]+).${SECRET_DOMAIN}"
+      policy: two_factor
+      subject:
+        - ["group:admin"]
+
 
 identity_providers:
   oidc:
