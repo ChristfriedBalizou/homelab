@@ -45,7 +45,7 @@ identity_providers:
         userinfo_signing_algorithm: none
       - id: pgadmin
         description: PG Admin
-        secret: "${PG_OAUTH_CLIENT_SECRET}"
+        secret: "${PG_OAUTH2_CLIENT_SECRET}"
         public: false
         authorization_policy: two_factor
         pre_configured_consent_duration: 1y
