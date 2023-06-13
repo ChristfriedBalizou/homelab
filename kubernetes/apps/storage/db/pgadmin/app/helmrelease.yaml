@@ -16,16 +16,19 @@ spec:
         namespace: flux-system
   values:
     env:
-      email: ${SECRET_CLOUDFLARE_EMAIL}
-      password: ${SECRET_GRAFANA_ADMIN_PASSWORD}
+      AUTHENTICATION_SOURCES: ["oauth2"]
+      OAUTH2_NAME: "authelia"
+      OAUTH2_DISPLAY_NAME: "Authelia"
+      OAUTH2_CLIENT_ID: "pgadmin"
+      OAUTH2_CLIENT_SECRET: ${PG_OAUTH2_CLIENT_SECRET}
+      OAUTH2_TOKEN_URL: https://oauth.${SECRET_DOMAIN}/api/oidc/token
+      OAUTH2_AUTHORIZATION_URL: https://oauth.${SECRET_DOMAIN}/api/oidc/authorization
+      OAUTH2_USERINFO_ENDPOINT: https://oauth.${SECRET_DOMAIN}/api/oidc/userinfo
+      OAUTH2_AUTO_CREATE_USER: "false"
     ingress:
       enabled: true
       annotations:
-        cert-manager.io/cluster-issuer: "letsencrypt-production"
-        external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
         external-dns.home.arpa/enabled: "true"
-        nginx.ingress.kubernetes.io/auth-url: https://auth.${SECRET_DOMAIN}/oauth2/auth?allowed_groups=admin
-        nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}/oauth2/start
         hajimari.io/enable: "true"
         hajimari.io/icon: "simple-icons:postgresql"
       hosts:
