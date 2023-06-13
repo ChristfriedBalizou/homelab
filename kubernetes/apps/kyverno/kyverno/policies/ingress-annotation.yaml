@@ -17,7 +17,6 @@ spec:
         any:
           - resources:
               kinds: ["Ingress"]
-              namespaces: ["*"]
               annotations:
                 external-dns.home.arpa/enabled: "true"
       mutate:
@@ -31,7 +30,6 @@ spec:
         any:
           - resources:
               kinds: ["Ingress"]
-              namespaces: ["*"]
               annotations:
                 cert-manager.home.arpa/enabled: "true"
       mutate:
@@ -44,7 +42,6 @@ spec:
         any:
           - resources:
               kinds: ["Ingress"]
-              namespaces: ["*"]
               annotations:
                 auth.home.arpa/enabled: "true"
       mutate:
