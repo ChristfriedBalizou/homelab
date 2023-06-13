@@ -61,7 +61,7 @@ spec:
 
       LLDAP_SMTP_OPTIONS__ENABLE_PASSWORD_RESET: "true"
       LLDAP_SMTP_OPTIONS__SERVER: smtp-relay.networking.svc.cluster.local
-      LLDAP_SMTP_OPTIONS__PORT: "${SMPT_RELAY_PORT}"
+      LLDAP_SMTP_OPTIONS__PORT: "${SMTP_RELAY_PORT}"
       LLDAP_SMTP_OPTIONS__FROM: "noreply@${SECRET_DOMAIN}"
       LLDAP_SMTP_OPTIONS__TO: "noreply@${SECRET_DOMAIN}"
     service:
