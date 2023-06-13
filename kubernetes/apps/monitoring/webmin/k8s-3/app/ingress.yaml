@@ -2,8 +2,8 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: k8s-1
-  namespace: kube-system
+  name: k8s-3
+  namespace: monitoring
   annotations:
     external-dns.home.arpa/enabled: "true"
     auth.home.arpa/enabled: "true"
@@ -12,17 +12,17 @@ metadata:
     hajimari.io/group: "Nodes"
 spec:
   rules:
-    - host: &host "k8s-1.${SECRET_DOMAIN}"
+    - host: &host "k8s-3.${SECRET_DOMAIN}"
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: k8s-1
+                name: k8s-3
                 port:
                   number: 10000
   tls:
     - hosts:
         - *host
-      secretName: "k8s-1-tls"
+      secretName: "k8s-3-tls"

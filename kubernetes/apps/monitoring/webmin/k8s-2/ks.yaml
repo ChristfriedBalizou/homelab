@@ -7,7 +7,7 @@ metadata:
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
-  path: ./kubernetes/apps/kube-system/webmin/k8s-2/app
+  path: ./kubernetes/apps/monitoring/webmin/k8s-2/app
   prune: true
   sourceRef:
     kind: GitRepository
@@ -16,15 +16,15 @@ spec:
     - apiVersion: networking.k8s.io/v1
       kind: Ingress
       name: k8s-2
-      namespace: kube-system
+      namespace: monitoring
     - apiVersion: v1
       kind: Endpoints
       name: k8s-2
-      namespace: kube-system
+      namespace: monitoring
     - apiVersion: v1
       kind: Service
       name: k8s-2
-      namespace: kube-system
+      namespace: monitoring
   interval: 30m
   retryInterval: 1m
   timeout: 3m

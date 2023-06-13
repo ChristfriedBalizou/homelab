@@ -2,12 +2,12 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: cluster-apps-k8s-0
+  name: cluster-apps-k8s-1
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
-  path: ./kubernetes/apps/kube-system/webmin/k8s-0/app
+  path: ./kubernetes/apps/monitoring/webmin/k8s-1/app
   prune: true
   sourceRef:
     kind: GitRepository
@@ -15,16 +15,16 @@ spec:
   healthChecks:
     - apiVersion: networking.k8s.io/v1
       kind: Ingress
-      name: k8s-0
-      namespace: kube-system
+      name: k8s-1
+      namespace: monitoring
     - apiVersion: v1
       kind: Endpoints
-      name: k8s-0
-      namespace: kube-system
+      name: k8s-1
+      namespace: monitoring
     - apiVersion: v1
       kind: Service
-      name: k8s-0
-      namespace: kube-system
+      name: k8s-1
+      namespace: monitoring
   interval: 30m
   retryInterval: 1m
   timeout: 3m
