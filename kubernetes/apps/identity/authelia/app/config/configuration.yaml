@@ -27,8 +27,6 @@ access_control:
       policy: two_factor
       subject:
         - ["group:admin"]
-    - domain:
-
 
 identity_providers:
   oidc:
