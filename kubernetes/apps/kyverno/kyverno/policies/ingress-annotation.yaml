@@ -17,6 +17,7 @@ spec:
         any:
           - resources:
               kinds: ["Ingress"]
+              namespaces: ["*"]
               annotations:
                 external-dns.home.arpa/enabled: "true"
       mutate:
@@ -24,11 +25,13 @@ spec:
           metadata:
             annotations:
               +(external-dns.alpha.kubernetes.io/target): ipv4.${SECRET_DOMAIN}
+              +(cert-manager.io/cluster-issuer): letsencrypt-production
     - name: cert-manager
       match:
         any:
           - resources:
               kinds: ["Ingress"]
+              namespaces: ["*"]
               annotations:
                 cert-manager.home.arpa/enabled: "true"
       mutate:
@@ -41,6 +44,7 @@ spec:
         any:
           - resources:
               kinds: ["Ingress"]
+              namespaces: ["*"]
               annotations:
                 auth.home.arpa/enabled: "true"
       mutate:
