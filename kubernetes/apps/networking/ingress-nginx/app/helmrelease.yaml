@@ -57,7 +57,7 @@ spec:
       metrics:
         enabled: false
       podAnnotations:
-        configmap.reloader.stakater.com/reload: "cloudflare-networks"
+        configmap.reloader.stakater.com/reload: "cloudflare-networks,ingress-nginx-controller"
       resources:
         requests:
           cpu: 10m
