@@ -52,8 +52,8 @@ spec:
         keep-alive: 120
         keep-alive-requests: 10000
         proxy-body-size: "100M"
-        proxy_buffers: "8 16k"
-        proxy_buffer_size: "16k"
+        proxy_buffers: "8 2m"
+        proxy_buffer_size: "2m"
         ssl-protocols: "TLSv1.3 TLSv1.2"
         use-forwarded-headers: "true"
       metrics:
