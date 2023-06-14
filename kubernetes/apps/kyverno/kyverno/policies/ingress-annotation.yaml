@@ -83,8 +83,6 @@ spec:
           metadata:
             annotations:
               nginx.ingress.kubernetes.io/auth-snippet: |-
-                proxy_set_header X-Forwarded-Method $request_method;
-
                 if ( $http_user_agent ~* "(Sonarr|Radarr|Prowlarr)" ) {
                   return 200;
                 }
