@@ -84,5 +84,9 @@ spec:
             annotations:
               nginx.ingress.kubernetes.io/auth-snippet: |-
                 proxy_set_header X-Forwarded-Method $request_method;
+
+                if ( $proxy_upstream_name ~* "media\-(sonarr|radarr|prowlarr|jellyfin|jellyseerr)" ) {
+                  return 200;
+                }
               +(hajimari.io/enable): "true"
               +(hajimari.io/group): Media
