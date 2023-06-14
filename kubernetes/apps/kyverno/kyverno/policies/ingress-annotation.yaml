@@ -10,6 +10,7 @@ metadata:
       This policy creates annotations on ingresses for external-dns,
       cert-manager and authentication based on custom annotations.
 spec:
+  mutateExistingOnPolicyUpdate: true
   generateExistingOnPolicyUpdate: true
   rules:
     - name: external-dns
@@ -33,6 +34,9 @@ spec:
               annotations:
                 cert-manager.home.arpa/enabled: "true"
       mutate:
+        targets:
+          - apiVersion: networking.k8s.io/v1
+            kind: Ingress
         patchStrategicMerge:
           metadata:
             annotations:
@@ -45,6 +49,9 @@ spec:
               annotations:
                 auth.home.arpa/enabled: "true"
       mutate:
+        targets:
+          - apiVersion: networking.k8s.io/v1
+            kind: Ingress
         patchStrategicMerge:
           metadata:
             annotations:
@@ -66,10 +73,13 @@ spec:
               annotations:
                 media.home.arpa/enabled: "true"
       mutate:
+        targets:
+          - apiVersion: networking.k8s.io/v1
+            kind: Ingress
         patchStrategicMerge:
           metadata:
             annotations:
-              (nginx.ingress.kubernetes.io/auth-snippet): |-
+              nginx.ingress.kubernetes.io/auth-snippet: |-
                 proxy_set_header X-Forwarded-Method $request_method;
 
                 if ( $http_user_agent ~* "(Sonarr|Radarr|Prowlarr)" ) {
