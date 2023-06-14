@@ -10,7 +10,6 @@ metadata:
       This policy creates annotations on ingresses for external-dns,
       cert-manager and authentication based on custom annotations.
 spec:
-  mutateExistingOnPolicyUpdate: true
   generateExistingOnPolicyUpdate: true
   rules:
     - name: external-dns
@@ -21,9 +20,6 @@ spec:
               annotations:
                 external-dns.home.arpa/enabled: "true"
       mutate:
-        targets:
-          - apiVersion: networking.k8s.io/v1
-            kind: Ingress
         patchStrategicMerge:
           metadata:
             annotations:
@@ -37,9 +33,6 @@ spec:
               annotations:
                 cert-manager.home.arpa/enabled: "true"
       mutate:
-        targets:
-          - apiVersion: networking.k8s.io/v1
-            kind: Ingress
         patchStrategicMerge:
           metadata:
             annotations:
@@ -52,9 +45,6 @@ spec:
               annotations:
                 auth.home.arpa/enabled: "true"
       mutate:
-        targets:
-          - apiVersion: networking.k8s.io/v1
-            kind: Ingress
         patchStrategicMerge:
           metadata:
             annotations:
