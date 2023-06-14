@@ -16,6 +16,8 @@ spec:
         namespace: flux-system
   values:
     env:
+      email: ${SECRET_CLOUDFLARE_EMAIL}
+      password: ${SECRET_GRAFANA_ADMIN_PASSWORD}
       AUTHENTICATION_SOURCES: ["oauth2"]
       OAUTH2_NAME: "authelia"
       OAUTH2_DISPLAY_NAME: "Authelia"
