@@ -70,10 +70,6 @@ spec:
             if ( $http_user_agent ~* "Prowlarr" ) {
               return 200;
             }
-
-            if ( $proxy_upstream_name ~* "media-jellyseerr" ) {
-              return 200;
-            }
           hajimari.io/enable: 'true'
           hajimari.io/icon: mdi:filmstrip
           hajimari.io/group: Media
