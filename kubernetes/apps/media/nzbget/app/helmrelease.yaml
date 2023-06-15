@@ -26,10 +26,14 @@ spec:
       main:
         enabled: true
         annotations:
-          cert-manager.io/cluster-issuer: "letsencrypt-production"
-          external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
           external-dns.home.arpa/enabled: "true"
-          nginx.ingress.kubernetes.io/proxy-add-original-uri-header: "false"
+          auth.home.arpa/enabled: "true"
+          nginx.ingress.kubernetes.io/auth-snippet: |-
+            proxy_set_header X-Forwarded-Method $request_method;
+
+            if ( $proxy_upstream_name ~* "media\-(prowlarr|radarr|sonarr)" ) {
+              return 200;
+            }
           hajimari.io/enable: 'true'
           hajimari.io/icon: download-box
           hajimari.io/group: Media
