@@ -71,7 +71,7 @@ spec:
               return 200;
             }
 
-            if ( $proxy_upstream_name ~* "jellyseerr" ) {
+            if ( $proxy_upstream_name ~* "media-jellyseerr" ) {
               return 200;
             }
           hajimari.io/enable: 'true'
