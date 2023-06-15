@@ -30,8 +30,7 @@ spec:
           auth.home.arpa/enabled: "true"
           nginx.ingress.kubernetes.io/auth-snippet: |-
             proxy_set_header X-Forwarded-Method $request_method;
-
-            if ( $proxy_upstream_name ~* "media\-(prowlarr|radarr|sonarr)" ) {
+            if ( $http_user_agent ~* "(Sonarr|Radarr|Prowlarr)" ) {
               return 200;
             }
           hajimari.io/enable: 'true'
