@@ -20,6 +20,13 @@ access_control:
     - domain: ["jellyfin.${SECRET_DOMAIN}"]
       resources: ["^/metrics.*$"]
       policy: deny
+    - domain_regex: "(sonarr|radarr).${SECRET_DOMAIN}"
+      resources: ["^/api"]
+      policy: bypass
+      query:
+        - - operator: "pattern"
+            key: "apikey"
+            value: "(${SONARR_API_KEY}|${RADARR_API_KEY})"
     - domain: "hajimari.${SECRET_DOMAIN}"
       domain_regex:
         - "k8s-([0-9]+).${SECRET_DOMAIN}"
