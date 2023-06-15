@@ -25,7 +25,7 @@ access_control:
         - "k8s-([0-9]+).${SECRET_DOMAIN}"
         - "(status|kubernetes|prometheus).${SECRET_DOMAIN}"
         - "(sonarr|radarr|prowlarr).${SECRET_DOMAIN}"
-      policy: one_factor
+      policy: two_factor
       subject:
         - ["group:admin"]
 
