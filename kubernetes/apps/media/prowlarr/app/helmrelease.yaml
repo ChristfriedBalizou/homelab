@@ -67,7 +67,7 @@ spec:
           nginx.ingress.kubernetes.io/auth-snippet: |-
             proxy_set_header X-Forwarded-Method $request_method;
 
-            if ( $proxy_upstream_name ~* "media\-(radarr|sonarr|jellyseerr)" ) {
+            if ( $http_user_agent ~* "(Sonarr|Radarr)" ) {
               return 200;
             }
           hajimari.io/enable: 'true'
