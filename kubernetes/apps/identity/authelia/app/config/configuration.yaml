@@ -24,7 +24,7 @@ access_control:
       domain_regex:
         - "k8s-([0-9]+).${SECRET_DOMAIN}"
         - "(status|kubernetes|prometheus).${SECRET_DOMAIN}"
-        - "(sonarr|radarr|prowlarr).${SECRET_DOMAIN}"
+        - "(torrent|nzbget|sonarr|radarr|prowlarr).${SECRET_DOMAIN}"
       policy: two_factor
       subject:
         - ["group:admin"]
