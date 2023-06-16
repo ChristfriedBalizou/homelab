@@ -44,9 +44,9 @@ spec:
         - name: OAUTH2_USERNAME_CLAIM
           value: "email"
         - name: OAUTH2_AUTO_CREATE_USER
-          value: "true"
+          value: "false"
         - name: MASTER_PASSWORD
-          value: "true"
+          value: "false"
     ingress:
       enabled: true
       annotations:
