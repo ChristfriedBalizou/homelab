@@ -16,39 +16,26 @@ spec:
         namespace: flux-system
   values:
     env:
-      email: ${SECRET_CLOUDFLARE_EMAIL}
-      password: ${SECRET_GRAFANA_ADMIN_PASSWORD}
+      password:
       variables:
         - name: AUTHENTICATION_SOURCES
-          value: ["oauth2"]
-        - name: OAUTH2_NAME
-          value: "authelia"
-        - name: OAUTH2_DISPLAY_NAME
-          value: "Authelia"
-        - name: OAUTH2_CLIENT_ID
-          value: "pgadmin"
-        - name: OAUTH2_CLIENT_SECRET
-          value: "${PG_OAUTH2_CLIENT_SECRET}"
-        - name: OAUTH2_TOKEN_URL
-          value: "https://auth.${SECRET_DOMAIN}/api/oidc/token"
-        - name: OAUTH2_API_BASE_URL
-          value: "https://auth.${SECRET_DOMAIN}/api"
-        - name: OAUTH2_AUTHORIZATION_URL
-          value: "https://auth.${SECRET_DOMAIN}/api/oidc/authorization"
-        - name: OAUTH2_USERINFO_ENDPOINT
-          value: "https://auth.${SECRET_DOMAIN}/api/oidc/userinfo"
-        - name: OAUTH2_SCOPE
-          value: "openid email profile"
-        - name: OAUTH2_ICON
-          value: "fa-id-badge"
-        - name: OAUTH2_BUTTON_COLOR
-          value: "#E24329"
-        - name: OAUTH2_USERNAME_CLAIM
-          value: "email"
-        - name: OAUTH2_AUTO_CREATE_USER
+          value: ["ldap", "internal"]
+        - name: LDAP_AUTO_CREATE_USER
           value: "false"
-        - name: MASTER_PASSWORD
-          value: "false"
+        - name: LDAP_SERVER_URI
+          value: "lldap.identity.svc.cluster.local:389"
+        - name: LDAP_USERNAME_ATTRIBUTE
+          value: mail
+        - name: LDAP_BIND_USER
+          value: ${LLDAP_LDAP_USER}
+        - name: LDAP_BIND_PASSWORD
+          value: ${LLDAP_LDAP_USER_PASS}
+        - name: LDAP_BASE_DN
+          value: "${SECRET_LDAP_ROOT}"
+        - name: LDAP_SEARCH_BASE_DN
+          value: "ou=people,${SECRET_LDAP_ROOT}"
+        - name: LDAP_SEARCH_FILTER
+          value: "(memberOf=cn=admin,ou=groups,${SECRET_LDAP_ROOT})"
     ingress:
       enabled: true
       annotations:
