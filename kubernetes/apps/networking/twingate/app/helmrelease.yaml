@@ -8,8 +8,8 @@ spec:
   interval: 10m
   chart:
     spec:
-      chart: twingate
-      version: master
+      chart: connector
+      version: 0.1.16
       sourceRef:
         kind: HelmRepository
         name: twingate
