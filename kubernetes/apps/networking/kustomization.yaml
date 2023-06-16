@@ -11,3 +11,4 @@ resources:
   - ./vpn-gateway/ks.yaml
   - ./adguard-home/ks.yaml
   - ./smtp-relay/ks.yaml
+  - ./twingate/ks.yaml
