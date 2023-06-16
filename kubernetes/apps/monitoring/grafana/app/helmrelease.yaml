@@ -24,10 +24,10 @@ spec:
       GF_DATE_FORMATS_USE_BROWSER_LOCALE: true
       GF_FEATURE_TOGGLES_ENABLE: publicDashboards
       GF_AUTH_GENERIC_OAUTH_CLIENT_SECRET: ${GRAFANA_OAUTH_CLIENT_SECRET}
-      GF_AUTH_GENERIC_OAUTH_API_URL: https://oauth.${SECRET_DOMAIN}/api/oidc/userinfo
-      GF_AUTH_GENERIC_OAUTH_AUTH_URL: https://oauth.${SECRET_DOMAIN}/api/oidc/authorization
+      GF_AUTH_GENERIC_OAUTH_API_URL: https://auth.${SECRET_DOMAIN}/api/oidc/userinfo
+      GF_AUTH_GENERIC_OAUTH_AUTH_URL: https://auth.${SECRET_DOMAIN}/api/oidc/authorization
       GF_AUTH_GENERIC_OAUTH_CLIENT_ID: grafana
-      GF_AUTH_GENERIC_OAUTH_TOKEN_URL: https://oauth.${SECRET_DOMAIN}/api/oidc/token
+      GF_AUTH_GENERIC_OAUTH_TOKEN_URL: https://auth.${SECRET_DOMAIN}/api/oidc/token
       GF_SECURITY_COOKIE_SAMESITE: grafana
       GF_SERVER_ROOT_URL: https://grafana.${SECRET_DOMAIN}
     adminUser: ${SECRET_GRAFANA_ADMIN_USER}

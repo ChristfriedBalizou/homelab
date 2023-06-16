@@ -53,7 +53,7 @@ spec:
               +(nginx.ingress.kubernetes.io/auth-url): |-
                 http://authelia.identity.svc.cluster.local/api/verify
               +(nginx.ingress.kubernetes.io/auth-signin): |-
-                https://oauth.${SECRET_DOMAIN}?rm=$request_method
+                https://auth.${SECRET_DOMAIN}?rm=$request_method
               +(nginx.ingress.kubernetes.io/auth-response-headers): |-
                 Remote-User,Remote-Name,Remote-Groups,Remote-Email
               +(nginx.ingress.kubernetes.io/auth-snippet): |-

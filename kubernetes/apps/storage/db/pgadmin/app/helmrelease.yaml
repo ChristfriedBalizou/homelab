@@ -23,9 +23,9 @@ spec:
       OAUTH2_DISPLAY_NAME: "Authelia"
       OAUTH2_CLIENT_ID: "pgadmin"
       OAUTH2_CLIENT_SECRET: ${PG_OAUTH2_CLIENT_SECRET}
-      OAUTH2_TOKEN_URL: https://oauth.${SECRET_DOMAIN}/api/oidc/token
-      OAUTH2_AUTHORIZATION_URL: https://oauth.${SECRET_DOMAIN}/api/oidc/authorization
-      OAUTH2_USERINFO_ENDPOINT: https://oauth.${SECRET_DOMAIN}/api/oidc/userinfo
+      OAUTH2_TOKEN_URL: https://auth.${SECRET_DOMAIN}/api/oidc/token
+      OAUTH2_AUTHORIZATION_URL: https://auth.${SECRET_DOMAIN}/api/oidc/authorization
+      OAUTH2_USERINFO_ENDPOINT: https://auth.${SECRET_DOMAIN}/api/oidc/userinfo
       OAUTH2_AUTO_CREATE_USER: "false"
     ingress:
       enabled: true
