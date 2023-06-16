@@ -36,11 +36,9 @@ main() {
         verify_git_repository
         verify_cloudflare
         verify_grafana
-        verify_dex
         verify_telegram
         verify_slack
         verify_traktarr
-        verify_openldap
         verify_dashboard
         verify_vpn
         verify_nfs
@@ -89,10 +87,6 @@ main() {
         envsubst < "${PROJECT_DIR}/templates/kubernetes/cluster-media-secret.sops.yaml" \
             > "${PROJECT_DIR}/kubernetes/apps/media/secret.sops.yaml"
         sops --encrypt --in-place "${PROJECT_DIR}/kubernetes/apps/media/secret.sops.yaml"
-
-        envsubst < "${PROJECT_DIR}/templates/kubernetes/cluster-phpldapadmin-secret.sops.yaml" \
-            > "${PROJECT_DIR}/kubernetes/apps/identity/phpldapadmin/app/secret.sops.yaml"
-        sops --encrypt --in-place "${PROJECT_DIR}/kubernetes/apps/identity/phpldapadmin/app/secret.sops.yaml"
 
         envsubst < "${PROJECT_DIR}/templates/kubernetes/cluster-authelia-secret.sops.yaml" \
             > "${PROJECT_DIR}/kubernetes/apps/identity/authelia/app/secret.sops.yaml"
@@ -400,10 +394,6 @@ verify_grafana() {
     _has_envar "GRAFANA_ADMIN_PASSWORD"
 }
 
-verify_dex() {
-    _has_envar "DEX_OAUTH2_PROXY_CLIENT_ID"
-    _has_envar "DEX_OAUTH2_PROXY_CLIENT_SECRET"
-}
 
 verify_vpn() {
     _has_envar "VPN_INTERFACE_PRIVATE_KEY"
@@ -458,15 +448,6 @@ verify_traktarr() {
     _has_envar "OMDB_API_KEY"
 }
 
-verify_openldap() {
-    _has_envar "LDAP_ROOT"
-	  _has_envar "LDAP_DOMAIN"
-	  _has_envar "LDAP_SERVER"
-	  _has_envar "LDAP_SERVER_PORT"
-	  _has_envar "LDAP_TLS"
-	  _has_envar "LDAP_BIND_ID"
-	  _has_envar "LDAP_ADMIN_USER"
-}
 
 verify_ansible_hosts() {
     local node_id=
