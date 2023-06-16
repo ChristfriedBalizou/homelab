@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: twingate
-      version: stable
+      version: master
       sourceRef:
         kind: HelmRepository
         name: twingate
