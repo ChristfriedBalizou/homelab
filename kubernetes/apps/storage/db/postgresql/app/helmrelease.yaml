@@ -25,7 +25,8 @@ spec:
     primary:
       persistence:
         enabled: true
-        existingClaim: postgresql
+        existingClaim: storage
+        subPath: postgresql
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
