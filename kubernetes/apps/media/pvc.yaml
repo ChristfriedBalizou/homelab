@@ -9,10 +9,12 @@ spec:
   accessModes:
     - ReadWriteMany
   capacity:
-    storage: 50Gi
-  hostPath:
-    path: /mnt/nfs/volume2/media
+    storage: 1Mi
+  nfs:
+    path: /volume1/apps/storage
+    server: ${NFS_SERVER}
   storageClassName: media
+
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
