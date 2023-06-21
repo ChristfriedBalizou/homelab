@@ -68,7 +68,8 @@ spec:
     persistence:
       config:
         enabled: true
-        existingClaim: "config-traktarr"
+        existingClaim: apps-media
+        subPath: traktarr
       traktarr:
         enabled: "true"
         type: secret
