@@ -13,7 +13,6 @@ spec:
     path: /volume1/apps/storage
     server: ${NFS_SERVER}
   storageClassName: storage
-  persistentVolumeReclaimPolicy: Retain
 
 ---
 apiVersion: v1
