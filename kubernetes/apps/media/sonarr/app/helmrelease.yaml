@@ -92,7 +92,8 @@ spec:
     persistence:
       config:
         enabled: true
-        existingClaim: config-sonarr
+        existingClaim: apps-media
+        subPath: sonarr
       media:
         enabled: true
         mountPath: /media

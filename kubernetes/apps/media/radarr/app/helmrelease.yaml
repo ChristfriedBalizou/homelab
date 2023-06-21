@@ -92,7 +92,8 @@ spec:
     persistence:
       config:
         enabled: true
-        existingClaim: config-radarr
+        existingClaim: apps-media
+        subPath: radarr
       media:
         enabled: true
         mountPath: /media

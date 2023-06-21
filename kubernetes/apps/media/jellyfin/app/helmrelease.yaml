@@ -50,7 +50,8 @@ spec:
     persistence:
       config:
         enabled: true
-        existingClaim: config-jellyfin
+        existingClaim: apps-media
+        subPath: jellyfin
       media:
         enabled: true
         mountPath: /media

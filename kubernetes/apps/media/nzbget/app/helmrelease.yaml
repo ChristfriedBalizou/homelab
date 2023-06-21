@@ -42,7 +42,8 @@ spec:
     persistence:
       config:
         enabled: true
-        existingClaim: config-nzbget
+        existingClaim: apps-media
+        subPath: nzbget
       media:
         enabled: true
         mountPath: /media

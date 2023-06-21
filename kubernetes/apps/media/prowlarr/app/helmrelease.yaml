@@ -92,7 +92,8 @@ spec:
     persistence:
       config:
         enabled: true
-        existingClaim: config-prowlarr
+        existingClaim: apps-media
+        subPath: prowlarr
       media:
         enabled: true
         mountPath: /media

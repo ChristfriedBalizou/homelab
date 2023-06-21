@@ -62,7 +62,8 @@ spec:
       config:
         enabled: true
         mountPath: /app/config
-        existingClaim: config-jellyseerr
+        existingClaim: apps-media
+        subPath: jellyseerr
     resources:
       requests:
         cpu: 10m
