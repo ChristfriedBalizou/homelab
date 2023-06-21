@@ -18,14 +18,13 @@ spec:
     image:
       repository: bitnami/postgresql
       tag: 14.6.0
-    volumePermissions:
-      enabled: true
     auth:
       postgresPassword: ${SECRET_GRAFANA_ADMIN_PASSWORD}
     primary:
       persistence:
         enabled: true
-        existingClaim: postgresql
+        existingClaim: storage
+        subPath: postgresql
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
