@@ -49,7 +49,7 @@ spec:
         enabled: true
         type: configMap
         name: recyclarr-configmap
-        subPath: recyclarr.yml
+        subPath: recyclarr.yaml
         mountPath: /config/recyclarr.yml
         defaultMode: 0775
         readOnly: true
