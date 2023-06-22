@@ -39,8 +39,9 @@ spec:
     args:
       - sync
     envFrom:
-      secretRef:
-        name: cluster-media-secrets
+      - secretRef:
+          name: cluster-media-secrets
+          namespace: media
     service:
       main:
         enabled: false
