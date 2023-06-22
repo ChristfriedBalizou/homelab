@@ -39,7 +39,7 @@ spec:
     args:
       - sync
     envFrom:
-      secretKeyRef:
+      secretRef:
         name: cluster-media-secrets
     service:
       main:
