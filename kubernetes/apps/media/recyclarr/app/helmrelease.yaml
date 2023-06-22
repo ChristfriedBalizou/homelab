@@ -27,6 +27,8 @@ spec:
   values:
     controller:
       type: cronjob
+      annotations:
+        reloader.stakater.com/auto: "true"
       cronjob:
         schedule: "@daily"
         ttlSecondsAfterFinished: 86400
