@@ -1,7 +1,7 @@
 ---
 sonarr:
   standard:
-    base_url: http://sonarr.media:8989
+    base_url: http://sonarr.media:80
     api_key: !env_var SONARR_0_API_KEY
     delete_old_custom_formats: true
     quality_definition:
@@ -186,7 +186,7 @@ sonarr:
           - 07a32f77690263bb9fda1842db7e273f  # VOSTFR
 radarr:
   standard:
-    base_url: http://radarr.media:7878
+    base_url: http://radarr.media:80
     api_key: !env_var RADARR_0_API_KEY
     delete_old_custom_formats: true
     quality_definition:
