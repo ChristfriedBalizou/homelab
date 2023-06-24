@@ -44,7 +44,8 @@ spec:
     service:
       main:
         type: LoadBalancer
-        externalIPs: ["${SMTP_RELAY_ADDR}"]
+        externalIPs:
+          - "${SMTP_RELAY_ADDR}"
         externalTrafficPolicy: Local
         ports:
           http:
