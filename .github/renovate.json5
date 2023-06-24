@@ -1,28 +1,27 @@
 {
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:base",
     "docker:enableMajor",
     ":disableRateLimiting",
     ":dependencyDashboard",
     ":semanticCommits",
-    ":enablePreCommit",
     ":automergeDigest",
     ":automergeBranch",
-    "github>onedr0p/flux-cluster-template//.github/renovate/autoMerge.json5",
-    "github>onedr0p/flux-cluster-template//.github/renovate/commitMessage.json5",
-    "github>onedr0p/flux-cluster-template//.github/renovate/labels.json5",
-    "github>onedr0p/flux-cluster-template//.github/renovate/semanticCommits.json5",
+    "github>ChristfriedBalizou/homelab//.github/renovate/allowedVersions.json5",
+    "github>ChristfriedBalizou/homelab//.github/renovate/autoMerge.json5",
+    "github>ChristfriedBalizou/homelab//.github/renovate/commitMessage.json5",
+    "github>ChristfriedBalizou/homelab//.github/renovate/groups.json5",
+    "github>ChristfriedBalizou/homelab//.github/renovate/labels.json5",
+    "github>ChristfriedBalizou/homelab//.github/renovate/semanticCommits.json5",
     "helpers:pinGitHubActionDigests"
   ],
-  "dependencyDashboard": true,
+  "platform": "github",
+  "onboarding": false,
+  "requireConfig": "optional",
   "dependencyDashboardTitle": "Renovate Dashboard 🤖",
   "suppressNotifications": ["prIgnoreNotification"],
-  "rebaseWhen": "conflicted",
-  "schedule": ["every saturday"],
-  "automergeStrategy": "rebase",
-  "pre-commit": {
-    "enabled": true
-  },
+  "ignorePaths": ["archive/**"],
   "flux": {
     "fileMatch": ["kubernetes/.+\\.ya?ml$"]
   },
@@ -34,7 +33,17 @@
   },
   "regexManagers": [
     {
-      "description": "Process various other dependencies",
+      "description": "Process Tekton dependencies",
+      "fileMatch": [
+        "kubernetes/.+\\.ya?ml$"
+      ],
+      "matchStrings": [
+        "depName=(?<depName>\\S+)?\n.*?(?<currentValue>v\\d+\\.\\d+\\.\\d+)"
+      ],
+      "datasourceTemplate": "github-releases"
+    },
+    {
+      "description": "Process custom dependencies",
       "fileMatch": [
         "ansible/.+\\.ya?ml$",
         "kubernetes/.+\\.ya?ml$"
@@ -44,6 +53,25 @@
       ],
       "datasourceTemplate": "{{#if datasource}}{{{datasource}}}{{else}}github-releases{{/if}}",
       "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
+    },
+    {
+      "description": "Process imageName values",
+      "fileMatch": [
+        "kubernetes/.+\\.ya?ml$"
+      ],
+      "matchStrings": [
+        "imageName: (?<depName>\\S+):(?<currentValue>.*\\-.*)"
+      ],
+      "datasourceTemplate": "docker",
+      "versioningTemplate": "redhat"
+    }
+  ],
+  "packageRules": [
+    {
+      "description": "Loose versioning for non-semver packages",
+      "matchDatasources": ["docker"],
+      "versioning": "loose",
+      "matchPackagePatterns": ["qbittorrent"]
     }
   ]
 }
