@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 1.5.1
+      version: 1.4.0
       sourceRef:
         kind: HelmRepository
         name: bjw-s
@@ -28,7 +28,7 @@ spec:
   values:
     image:
       repository: ghcr.io/onedr0p/radarr-develop
-      tag: 4.6.2.7490@sha256:689342f7dfe06d7403d59097cab2f688639108de2e555cf532f7255fe84d51b5
+      tag: 4.5.0.7106@sha256:4e53a92bf36435d32a1c186903e3c542db2e06fde6a4e79d6663682958e33b63
     env:
       TZ: ${TIMEZONE}
       RADARR__INSTANCE_NAME: Radarr
