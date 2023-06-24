@@ -5,3 +5,4 @@ resources:
   - ./namespace.yaml
   - ./pvc.yaml
   - ./db
+  - ./synology/ks.yaml
