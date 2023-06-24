@@ -68,10 +68,19 @@
   ],
   "packageRules": [
     {
-      "description": "Loose versioning for non-semver packages",
       "matchDatasources": ["docker"],
-      "versioning": "loose",
-      "matchPackagePatterns": ["qbittorrent"]
+      "matchUpdateTypes": ["minor", "patch", "digest"],
+      "matchPackageNames": [
+        "ghcr.io/recyclarr/recyclarr",
+        "ghcr.io/onedr0p/nzbget",
+        "ghcr.io/onedr0p/qbittorrent",
+        "ghcr.io/onedr0p/unpackerr",
+        "ghcr.io/onedr0p/sonarr-develop",
+        "ghcr.io/onedr0p/radarr-develop",
+        "ghcr.io/onedr0p/prowlarr-nightly",
+      ],
+      "automerge": true,
+      "ignoreTests": true,
     }
   ]
 }
