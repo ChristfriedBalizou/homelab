@@ -80,6 +80,17 @@
       ],
       "automerge": true,
       "ignoreTests": true,
+    },
+    {
+      "matchDatasources": ["helm"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "matchPackageNames": [
+        "grafana",
+        "kube-prometheus-stack",
+        "kubernetes-dashboard"
+      ],
+      "automerge": true,
+      "ignoreTests": true,
     }
   ]
 }
