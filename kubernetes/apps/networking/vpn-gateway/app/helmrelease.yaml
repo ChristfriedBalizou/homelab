@@ -104,4 +104,5 @@ spec:
     persistence:
       data:
         enabled: true
-        existingClaim: pod-gateway-data
+        existingClaim: apps-networking
+        subPath: vpn
