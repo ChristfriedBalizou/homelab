@@ -20,6 +20,7 @@ spec:
             backend:
               service:
                 name: synology
+                port: 5000
   tls:
     - hosts:
         - *host
