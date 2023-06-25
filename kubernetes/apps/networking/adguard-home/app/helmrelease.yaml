@@ -82,11 +82,13 @@ spec:
       config:
         enabled: true
         existingClaim: apps-networking
-        subPath:
-          - path: adguard-home-conf
-            mountPath: /opt/adguardhome/conf
-          - path: adguard-home-data
-            mountPath: /opt/adguardhome/work
+        subPath: adguard-home-conf
+        mountPath: /opt/adguardhome/conf
+      data:
+        enabled: true
+        existingClaim: apps-networking
+        subPath: adguard-home-data
+        mountPath: /opt/adguardhome/work
     affinity:
       podAntiAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
