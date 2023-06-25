@@ -17,9 +17,6 @@ spec:
   values:
     controller:
       replicas: 2
-      strategy: RollingUpdate
-      annotations:
-        reloader.stakater.com/auto: "true"
     image:
       repository: adguard/adguardhome
       tag: v0.107.26
@@ -81,13 +78,11 @@ spec:
     persistence:
       config:
         enabled: true
-        existingClaim: apps-networking
-        subPath: adguard-home-conf
+        existingClaim: config-adguard-home
         mountPath: /opt/adguardhome/conf
       data:
         enabled: true
-        existingClaim: apps-networking
-        subPath: adguard-home-data
+        existingClaim: data-adguard-home
         mountPath: /opt/adguardhome/work
     affinity:
       podAntiAffinity:
