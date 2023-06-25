@@ -78,8 +78,7 @@ spec:
     persistence:
       config:
         enabled: true
-        existingClaim: apps-networking
-        subPath: adguard-conf
+        existingClaim: config-adguard-home
         mountPath: /opt/adguardhome/conf
       data:
         enabled: true
