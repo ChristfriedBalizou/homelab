@@ -79,8 +79,11 @@ spec:
       shared:
         enabled: true
         existingClaim: apps-networking
-        subPath: adguard-home
-        mountPath: /opt/adguardhome
+        subPath:
+          - path: adguard-home
+            mountPath: /opt/adguardhome/work
+          - path: adguard-home
+            mountPath: /opt/adguardhome/conf
     affinity:
       podAntiAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
