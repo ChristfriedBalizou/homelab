@@ -78,11 +78,13 @@ spec:
     persistence:
       config:
         enabled: true
-        existingClaim: config-adguard-home
+        existingClaim: apps-networking
+        subPath: adguard-conf
         mountPath: /opt/adguardhome/conf
       data:
         enabled: true
-        existingClaim: data-adguard-home
+        existingClaim: apps-networking
+        subPath: adguard-data
         mountPath: /opt/adguardhome/work
     affinity:
       podAntiAffinity:
