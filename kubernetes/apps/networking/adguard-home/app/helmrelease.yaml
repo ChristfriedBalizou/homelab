@@ -76,7 +76,7 @@ spec:
               - *host
             secretName: adguard-home-tls
     persistence:
-      shared:
+      config:
         enabled: true
         existingClaim: apps-networking
         subPath:
