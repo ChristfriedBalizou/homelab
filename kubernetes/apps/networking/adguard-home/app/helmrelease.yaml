@@ -80,12 +80,8 @@ spec:
         type: pvc
         enabled: true
         existingClaim: apps-networking
-        mountPath: "-"
-        subPath:
-          - path: adguard-home
-            mountPath: /opt/adguardhome/work
-          - path: adguard-home
-            mountPath: /opt/adguardhome/conf
+        subPath: adguard-home
+        mountPath: /opt/adguardhome/conf
     affinity:
       podAntiAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
