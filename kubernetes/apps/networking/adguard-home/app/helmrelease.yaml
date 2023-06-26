@@ -77,10 +77,14 @@ spec:
             secretName: adguard-home-tls
     persistence:
       config:
+        type: pvc
         enabled: true
         existingClaim: apps-networking
-        subPath: adguard-home
-        mountPath: /opt/adguardhome/conf
+        subPath:
+          - path: adguard-home
+            mountPath: /opt/adguardhome/work
+          - path: adguard-home
+            mountPath: /opt/adguardhome/conf
     affinity:
       podAntiAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
