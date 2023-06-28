@@ -17,7 +17,7 @@ spec:
       match:
         any:
           - resources:
-              kinds: ["Pod"]
+              kinds: ["Deployment"]
               namespaces: ["storage"]
       preconditions:
         all:
@@ -29,13 +29,14 @@ spec:
       mutate:
         targets:
           - apiVersion: v1
-            kind: Pod
+            kind: Deployment
             namespace: storage
         patchStrategicMerge:
           spec:
-            containers:
-              - (name): "pgadmin4"
-                volumeMounts:
-                  - (name): "pgadmin-data"
-                    subPath: |-
-                      pgadmin
+            template:
+              spec:
+                containers:
+                  - (name): "pgadmin4"
+                    volumeMounts:
+                      - (name): "pgadmin-data"
+                        subPath: pgadmin

@@ -42,7 +42,7 @@ spec:
                 - ""
               resources:
                 - ingresses
-                - pods
+                - deployments
     cleanupController:
       serviceMonitor:
         enabled: true
@@ -60,7 +60,7 @@ spec:
                 - ""
               resources:
                 - ingresses
-                - pods
+                - deployments
               verbs:
                 - create
                 - update
