@@ -30,8 +30,10 @@ spec:
                     - key: "{{ element.name }}"
                       operator: Equals
                       value: "pgadmin-data"
-                patchesJson6902: |-
-                  - path: /spec/containers/{{elementIndex0}}/volumeMounts/{{elementIndex}}
-                    op: add
-                    value:
-                      subPath: pgadmin
+                patchStrategicMerge:
+                  spec:
+                    containers:
+                      - (name): "{{ element0.name }}"
+                        volumeMounts:
+                          - (name): "{{ element.name }}"
+                            +(subPath): pgadmin
