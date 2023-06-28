@@ -28,7 +28,7 @@ spec:
               - UPDATE
       mutate:
         targets:
-          - apiVersion: v1
+          - apiVersion: apps/v1
             kind: Deployment
             namespace: storage
         patchStrategicMerge:
