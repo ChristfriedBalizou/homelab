@@ -17,6 +17,8 @@ spec:
   values:
     podSecurityContext:
       enabled: false
+    containerSecurityContext:
+      enabled: false
     image:
       repository: bitnami/postgresql
       tag: 14.6.0
