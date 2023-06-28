@@ -18,22 +18,11 @@ spec:
           - resources:
               kinds: ["Pod"]
               namespaces: ["storage"]
-              annotations:
-                app.kubernetes.io/name: "pgadmin4"
       mutate:
-        foreach:
-          - list: request.object.spec.containers[]
-            foreach:
-              - list: element.volumeMounts[]
-                preconditions:
-                  any:
-                    - key: "{{ element.name }}"
-                      operator: Equals
-                      value: "pgadmin-data"
-                patchStrategicMerge:
-                  spec:
-                    containers:
-                      - (name): "{{ element0.name }}"
-                        volumeMounts:
-                          - (name): "{{ element.name }}"
-                            +(subPath): pgadmin
+        patchStrategicMerge:
+          spec:
+            containers:
+              - (name): "pgadmin4"
+                volumeMounts:
+                  - (name): "pgadmin-data"
+                    +(subPath): pgadmin
