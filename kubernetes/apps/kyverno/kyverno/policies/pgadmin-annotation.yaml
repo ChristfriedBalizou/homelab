@@ -18,6 +18,13 @@ spec:
           - resources:
               kinds: ["Pod"]
               namespaces: ["storage"]
+      preconditions:
+        all:
+          - key: "{{request.operation || 'BACKGROUND'}}"
+            operator: AnyIn
+            value:
+              - CREATE
+              - UPDATE
       mutate:
         patchStrategicMerge:
           spec:
