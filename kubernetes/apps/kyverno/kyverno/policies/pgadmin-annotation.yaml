@@ -28,9 +28,9 @@ spec:
               - UPDATE
       mutate:
         targets:
-          - resources:
-              kinds: ["Pod"]
-              namespaces: ["storage"]
+          - apiVersion: v1
+            kind: Pod
+            namespace: storage
         patchStrategicMerge:
           spec:
             containers:
