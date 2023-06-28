@@ -58,7 +58,7 @@ spec:
     extraVolumes:
       - name: pgadmin-storage
         persistentVolumeClaim:
-          claimName: apps-storage
+          claimName: storage
 
     extraVolumeMounts:
       - name: pgadmin-storage
