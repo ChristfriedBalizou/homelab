@@ -10,6 +10,7 @@ metadata:
       The pgadmin chart persistence does not support subpath
       using this annotation to for the subpath.
 spec:
+  mutateExistingOnPolicyUpdate: true
   generateExistingOnPolicyUpdate: true
   rules:
     - name: pgadmin-data
@@ -26,6 +27,10 @@ spec:
               - CREATE
               - UPDATE
       mutate:
+        targets:
+          - resources:
+              kinds: ["Pod"]
+              namespaces: ["storage"]
         patchStrategicMerge:
           spec:
             containers:
