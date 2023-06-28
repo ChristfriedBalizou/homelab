@@ -19,7 +19,7 @@ spec:
               kinds: ["Pod"]
               namespaces: ["storage"]
               annotations:
-                pgadmin-data.home.arpa/enabled: "true"
+                app.kubernetes.io/name: "pgadmin4"
       mutate:
         foreach:
           - list: request.object.spec.containers[]
