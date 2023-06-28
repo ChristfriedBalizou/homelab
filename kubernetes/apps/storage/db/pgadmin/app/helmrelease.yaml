@@ -15,8 +15,6 @@ spec:
         name: runix
         namespace: flux-system
   values:
-    annotations:
-      pgadmin-data.home.arpa/enabled: "true"
     env:
       password:
       variables:
