@@ -16,7 +16,7 @@ spec:
       match:
         any:
           - resources:
-              kinds: ["Deployment"]
+              kinds: ["Pod"]
               namespaces: ["storage"]
               annotations:
                 pgadmin-data.home.arpa/enabled: "true"
