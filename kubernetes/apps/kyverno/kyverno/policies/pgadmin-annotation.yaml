@@ -39,4 +39,4 @@ spec:
                   - (name): "pgadmin4"
                     volumeMounts:
                       - (name): "pgadmin-data"
-                        subPath: pgadmin
+                        +(subPath): "pgadmin"
