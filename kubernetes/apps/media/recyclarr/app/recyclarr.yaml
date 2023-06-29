@@ -4,6 +4,7 @@ sonarr:
     base_url: http://sonarr.media:80
     api_key: !env_var SONARR_0_API_KEY
     replace_existing_custom_formats: true
+    delete_old_custom_formats: true
     quality_definition:
       type: series
     quality_profiles:
@@ -189,6 +190,7 @@ radarr:
     base_url: http://radarr.media:80
     api_key: !env_var RADARR_0_API_KEY
     replace_existing_custom_formats: true
+    delete_old_custom_formats: true
     quality_definition:
       type: movie
     quality_profiles:
