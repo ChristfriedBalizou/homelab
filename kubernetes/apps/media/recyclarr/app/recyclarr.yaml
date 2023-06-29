@@ -254,6 +254,7 @@ radarr:
       - quality_profiles:
           - name: HD
           - name: HD - French
+          - name: HD - French Multi Language Only
         trash_ids:
           # HQ Release Groups
           - ed27ebfef2f323e964fb1f61391bcb35  # HD Bluray Tier 01
@@ -262,6 +263,7 @@ radarr:
       - quality_profiles:
           - name: UHD
           - name: UHD - French
+          - name: UHD - French Multi Language Only
         trash_ids:
           # HQ Release Groups
           - 4d74ac4c4db0b64bff6ce0cffef99bf0  # UHD Bluray Tier 01
@@ -322,6 +324,7 @@ radarr:
           # HQ Release Groups
           - 64f8f12bbf7472a6ccf838bfd6b5e3e8  # FR UHD Bluray Tier 01
           - 0dcf0c8a386d82e3f2d424189af14065  # FR UHD Bluray Tier 02
+        # Common Multi Language
       - quality_profiles:
           - name: HD - French Multi Language Only
           - name: UHD - French Multi Language Only
