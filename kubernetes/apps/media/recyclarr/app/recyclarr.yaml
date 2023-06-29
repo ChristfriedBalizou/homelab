@@ -200,6 +200,10 @@ radarr:
         reset_unmatched_scores: true
       - name: UHD - French
         reset_unmatched_scores: true
+      - name: HD - French Multi Language Only
+        reset_unmatched_scores: true
+      - name: UHD - French Multi Language Only
+        reset_unmatched_scores: true
     custom_formats:
       # Common
       - quality_profiles:
@@ -207,6 +211,8 @@ radarr:
           - name: UHD
           - name: HD - French
           - name: UHD - French
+          - name: HD - French Multi Language Only
+          - name: UHD - French Multi Language Only
         trash_ids:
           # Movie Versions
           - 0f12c086e289cf966fa5948eac571f44  # Hybrid
@@ -304,13 +310,22 @@ radarr:
           - d5f3a1afdb77e6b95e489f7654532d04  # Multi-French
       - quality_profiles:
           - name: HD - French
+          - name: HD - French Multi Language Only
         trash_ids:
           # HQ Release Groups
           - 5322da05b19d857acc1e75be3edf47b3  # FR HD Bluray Tier 01
           - 57f34251344be2e283fc30e00e458be6  # FR HD Bluray Tier 02
       - quality_profiles:
           - name: UHD - French
+          - name: UHD - French Multi Language Only
         trash_ids:
           # HQ Release Groups
           - 64f8f12bbf7472a6ccf838bfd6b5e3e8  # FR UHD Bluray Tier 01
           - 0dcf0c8a386d82e3f2d424189af14065  # FR UHD Bluray Tier 02
+      - quality_profiles:
+          - name: HD - French Multi Language Only
+          - name: UHD - French Multi Language Only
+        trash_ids:
+          # Multi Audio
+          - 72b1548df1ac3175ca105a9ce7043c91  # Multi-Audio
+          - d5f3a1afdb77e6b95e489f7654532d04  # Multi-French
