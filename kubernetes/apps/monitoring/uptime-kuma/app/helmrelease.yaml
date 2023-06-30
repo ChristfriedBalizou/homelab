@@ -21,7 +21,8 @@ spec:
     persistence:
       data:
         enabled: true
-        existingClaim: config-uptime-kuma
+        existingClaim: monitoring
+        subPath: uptime-kuma
     ingress:
       main:
         enabled: true
