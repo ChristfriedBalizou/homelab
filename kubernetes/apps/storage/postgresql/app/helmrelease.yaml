@@ -25,4 +25,5 @@ spec:
     primary:
       persistence:
         enabled: true
-        existingClaim: postgresql-data
+        existingClaim: storage
+        subPath: postgresql
