@@ -15,17 +15,16 @@ spec:
         name: bitnami
         namespace: flux-system
   values:
-    podSecurityContext:
-      enabled: false
-    containerSecurityContext:
-      enabled: false
     image:
       repository: bitnami/postgresql
       tag: 14.6.0
+    volumePermissions:
+      enabled: true
+    podSecurityContext:
+      runAsUser: 0
     auth:
       postgresPassword: ${SECRET_GRAFANA_ADMIN_PASSWORD}
     primary:
       persistence:
         enabled: true
-        existingClaim: storage
-        subPath: postgresql
+        existingClaim: postgresql-data
