@@ -26,10 +26,6 @@ spec:
         pullPolicy: Always
       securityContext:
         runAsUser: 0
-    securityContext:
-      enabled: true
-      fsGroup: ${PGID}
-      runAsUser: ${PUID}
     auth:
       postgresPassword: ${SECRET_GRAFANA_ADMIN_PASSWORD}
     primary:
@@ -37,3 +33,10 @@ spec:
         enabled: true
         existingClaim: storage
         subPath: postgresql
+      containerSecurityContext:
+        enabled: true
+        runAsUser: ${PUID}
+        runAsNonRoot: true
+      podSecurityContext:
+        enabled: true
+        fsGroup: ${PGID}
