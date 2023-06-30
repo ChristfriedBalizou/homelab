@@ -22,6 +22,8 @@ spec:
       enabled: true
     podSecurityContext:
       runAsUser: 0
+    containerSecurityContext:
+      runAsUser: 0
     auth:
       postgresPassword: ${SECRET_GRAFANA_ADMIN_PASSWORD}
     primary:
