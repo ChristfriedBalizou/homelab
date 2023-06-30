@@ -15,6 +15,10 @@ spec:
         name: k8s-at-home
         namespace: flux-system
   values:
+    env:
+      TZ: "${TIMEZONE}"
+      PGID: ${PGID}
+      PUID: ${PUID}
     image:
       repository: louislam/uptime-kuma
       tag: 1.21.3
