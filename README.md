@@ -19,11 +19,12 @@ This repo is my home Kubernetes cluster declared using yaml files and contains e
 
 ## :computer:&nbsp; Hardware
 
-| Device              | Count | Memory    | Role           | Storage             | Notes                                      |
-|:-------------------:|:-----:|:---------:|:--------------:|:-------------------:|:------------------------------------------:|
-| Ιntel NUC7i7BNH     |   1   | 16GB DDR4 |   K3s master   |    256GB M.2 SSD    |  6TB SSD plugged in to provide nfs storage |
-| Intel NUC7i5BNH     |   1   |  8GB DDR4 |   K3s worker   |    256GB M.2 SSG    |  6TB auto.nfs                              |
-| Ιntel Celeron J4125 |   2   |  8GB DDR4 |   K3s worker   |    128GB M.2 SSD    |  6TB auto.nfs                              |
+| Device              | Count | Memory    | Role           | Storage              |
+|:-------------------:|:-----:|:---------:|:--------------:|:--------------------:|
+| Ιntel NUC7i7BNH     |   1   | 16GB DDR4 |   K3s master   |    256GB M.2 SSD     |
+| Intel NUC7i5BNH     |   1   |  8GB DDR4 |   K3s worker   |    256GB M.2 SSG     |
+| Ιntel Celeron J4125 |   2   |  8GB DDR4 |   K3s worker   |    128GB M.2 SSD     |
+| Synology NAS DS423+ |   1   |  2GB DDR4 |  Main storage  | 32TB SHR + 4TB cache |
 
 And some standby Rasbpberry Pi's 4B awaiting resurection when needed!
 
