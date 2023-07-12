@@ -8,6 +8,7 @@ resources:
   - ./torrent/ks.yaml
   - ./sonarr/ks.yaml
   - ./radarr/ks.yaml
+  - ./flaresolverr/ks.yaml
   - ./prowlarr/ks.yaml
   - ./jellyfin/ks.yaml
   - ./jellyseerr/ks.yaml
