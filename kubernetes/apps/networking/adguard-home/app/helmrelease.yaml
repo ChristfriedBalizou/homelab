@@ -17,6 +17,9 @@ spec:
   values:
     controller:
       replicas: 2
+      strategy: RollingUpdate
+      annotations:
+        reloader.stakater.com/auto: "true"
     image:
       repository: adguard/adguardhome
       tag: v0.107.26
