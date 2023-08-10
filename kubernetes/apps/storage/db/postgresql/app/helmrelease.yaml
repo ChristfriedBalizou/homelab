@@ -17,7 +17,7 @@ spec:
   values:
     image:
       repository: bitnami/postgresql
-      tag: 14.6.0
+      tag: 14.9.0
     volumePermissions:
       enabled: false
     auth:
