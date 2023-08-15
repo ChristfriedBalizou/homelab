@@ -423,6 +423,9 @@ verify_media() {
     _has_envar "PROWLARR_0_API_KEY"
     _has_envar "PROWLARR_0_POSTGRES_PASSWORD"
     _has_envar "PROWLARR_0_POSTGRES_USER"
+    _has_envar "READARR_0_API_KEY"
+    _has_envar "READARR_0_POSTGRES_PASSWORD"
+    _has_envar "READARR_0_POSTGRES_USER"
 }
 
 verify_dashboard() {
