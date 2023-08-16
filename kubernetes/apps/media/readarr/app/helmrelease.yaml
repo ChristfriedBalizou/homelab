@@ -34,6 +34,11 @@ spec:
       READARR__INSTANCE_NAME: Readarr
       READARR__PORT: &port 8787
       READARR__LOG_LEVEL: info
+      READARR__API_KEY:
+        valueFrom:
+          secretKeyRef:
+            name: cluster-media-secrets
+            key: "READARR_0_API_KEY"
     service:
       main:
         ports:
