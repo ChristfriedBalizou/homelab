@@ -32,6 +32,11 @@ access_control:
       policy: two_factor
       subject:
         - ["group:admin"]
+    - domain: "calibre.${SECRET_DOMAIN}"
+      policy: two_factor
+      subject:
+        - ["group:admin"]
+        - ["group:ebook"]
 
 identity_providers:
   oidc:

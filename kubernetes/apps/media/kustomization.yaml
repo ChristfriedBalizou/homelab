@@ -17,3 +17,4 @@ resources:
   - ./traktarr/ks.yaml
   - ./recyclarr/ks.yaml
   - ./readarr/ks.yaml
+  - ./calibre/ks.yaml

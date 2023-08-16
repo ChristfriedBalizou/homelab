@@ -1,0 +1,92 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: calibre
+  namespace: media
+spec:
+  interval: 10m
+  chart:
+    spec:
+      chart: app-template
+      version: 1.5.1
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  maxHistory: 3
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    image:
+      repository: ghcr.io/linuxserver/calibre
+      tag: 6.24.0@sha256:6433c5c051b7efaa17326d16cb9ba455990b0a47b4669ef38e431960fb3f7a98
+    env:
+      TZ: ${TIMEZONE}
+      PUID: 568
+      PGID: 568
+      UMASK_SET: 022
+      PASSWORD: ""
+    service:
+      main:
+        ports:
+          http:
+            port: 8080
+      content-server:
+        enabled: true
+        ports:
+          content-server:
+            enabled: true
+            port: 8181
+            protocol: TCP
+            targetPort: 8181
+        type: ClusterIP
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: nginx
+        annotations:
+          external-dns.home.arpa/enabled: "true"
+          auth.home.arpa/enabled: "true"
+          hajimari.io/enable: 'true'
+          hajimari.io/icon: mdi:bookshelf
+          hajimari.io/group: Media
+        hosts:
+          - host: "calibre.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - "calibre.${SECRET_DOMAIN}"
+            secretName: calibre-tls
+    podSecurityContext:
+      runAsUser: 568
+      runAsGroup: 568
+      fsGroup: 568
+      fsGroupChangePolicy: "OnRootMismatch"
+      supplementalGroups:
+        - 100
+    persistence:
+      config:
+        enabled: true
+        existingClaim: apps-media
+        subPath: calibre
+      media:
+        enabled: true
+        mountPath: /media
+        existingClaim: media
+    resources:
+      requests:
+        cpu: 10m
+        memory: 250Mi
+      limits:
+        memory: 2000Mi
