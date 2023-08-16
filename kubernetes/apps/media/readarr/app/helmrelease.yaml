@@ -26,41 +26,6 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    initContainers:
-      01-init-db:
-        image: ghcr.io/onedr0p/postgres-init:14.8
-        imagePullPolicy: IfNotPresent
-        env:
-          INIT_POSTGRES_DBNAME: readarr
-          INIT_POSTGRES_HOST: postgresql.storage.svc.cluster.local
-          INIT_POSTGRES_USER:
-            valueFrom:
-              secretKeyRef:
-                name: cluster-media-secrets
-                key: "READARR_0_POSTGRES_USER"
-          INIT_POSTGRES_PASS:
-            valueFrom:
-              secretKeyRef:
-                name: cluster-media-secrets
-                key: "READARR_0_POSTGRES_PASSWORD"
-          INIT_POSTGRES_SUPER_PASS: "${POSTGRES_SUPER_PASS}"
-      02-init-db:
-        image: ghcr.io/onedr0p/postgres-init:14.8
-        imagePullPolicy: IfNotPresent
-        env:
-          INIT_POSTGRES_DBNAME: readarr-log
-          INIT_POSTGRES_HOST: postgresql.storage.svc.cluster.local
-          INIT_POSTGRES_USER:
-            valueFrom:
-              secretKeyRef:
-                name: cluster-media-secrets
-                key: "READARR_0_POSTGRES_USER"
-          INIT_POSTGRES_PASS:
-            valueFrom:
-              secretKeyRef:
-                name: cluster-media-secrets
-                key: "READARR_0_POSTGRES_PASSWORD"
-          INIT_POSTGRES_SUPER_PASS: "${POSTGRES_SUPER_PASS}"
     image:
       repository: ghcr.io/onedr0p/readarr-develop
       tag: 0.3.1.2096@sha256:530d9f8d2033ffc1cc897edb1f0dc497a9845d6873eec2e8b3a3247c174bf24b
@@ -69,24 +34,6 @@ spec:
       READARR__INSTANCE_NAME: Readarr
       READARR__PORT: &port 8787
       READARR__LOG_LEVEL: info
-      READARR__POSTGRES_HOST: "postgresql.storage"
-      READARR__POSTGRES_MAIN_DB: "readarr"
-      READARR__POSTGRES_LOG_DB: "readarr-log"
-      READARR__POSTGRES_PASSWORD:
-        valueFrom:
-          secretKeyRef:
-            name: cluster-media-secrets
-            key: "READARR_0_POSTGRES_PASSWORD"
-      READARR__POSTGRES_USER:
-        valueFrom:
-          secretKeyRef:
-            name: cluster-media-secrets
-            key: "READARR_0_POSTGRES_USER"
-      READARR__API_KEY:
-        valueFrom:
-          secretKeyRef:
-            name: cluster-media-secrets
-            key: "READARR_0_API_KEY"
     service:
       main:
         ports:
