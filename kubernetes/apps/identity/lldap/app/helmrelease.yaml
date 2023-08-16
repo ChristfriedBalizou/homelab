@@ -64,6 +64,7 @@ spec:
       LLDAP_SMTP_OPTIONS__PORT: "${SMTP_RELAY_PORT}"
       LLDAP_SMTP_OPTIONS__FROM: "noreply@${SECRET_DOMAIN}"
       LLDAP_SMTP_OPTIONS__TO: "noreply@${SECRET_DOMAIN}"
+      LLDAP_SMTP_OPTIONS__SMTP_ENCRYPTION: "NONE"
     service:
       main:
         ports:
