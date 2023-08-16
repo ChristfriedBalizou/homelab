@@ -16,26 +16,8 @@ spec:
         namespace: flux-system
   values:
     env:
-      password:
-      variables:
-        - name: AUTHENTICATION_SOURCES
-          value: ["ldap", "internal"]
-        - name: LDAP_AUTO_CREATE_USER
-          value: "false"
-        - name: LDAP_SERVER_URI
-          value: "lldap.identity.svc.cluster.local:389"
-        - name: LDAP_USERNAME_ATTRIBUTE
-          value: mail
-        - name: LDAP_BIND_USER
-          value: ${LLDAP_LDAP_USER}
-        - name: LDAP_BIND_PASSWORD
-          value: ${LLDAP_LDAP_USER_PASS}
-        - name: LDAP_BASE_DN
-          value: "${SECRET_LDAP_ROOT}"
-        - name: LDAP_SEARCH_BASE_DN
-          value: "ou=people,${SECRET_LDAP_ROOT}"
-        - name: LDAP_SEARCH_FILTER
-          value: "(memberOf=cn=admin,ou=groups,${SECRET_LDAP_ROOT})"
+      email: ${SECRET_CLOUDFLARE_EMAIL}
+      password: ${SECRET_GRAFANA_ADMIN_PASSWORD}
     ingress:
       enabled: true
       annotations:
