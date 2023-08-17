@@ -31,8 +31,8 @@ spec:
       tag: 6.24.0@sha256:6433c5c051b7efaa17326d16cb9ba455990b0a47b4669ef38e431960fb3f7a98
     env:
       TZ: ${TIMEZONE}
-      PUID: 568
-      PGID: 568
+      PUID: ${PUID}
+      PGID: ${PGID}
       UMASK_SET: 022
       PASSWORD: ""
     service:
