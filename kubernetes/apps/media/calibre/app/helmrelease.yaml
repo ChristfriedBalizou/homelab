@@ -45,10 +45,7 @@ spec:
         ports:
           content-server:
             enabled: true
-            port: 8181
-            protocol: TCP
-            targetPort: 8181
-        type: ClusterIP
+            port: 8081
     ingress:
       main:
         enabled: true
@@ -68,6 +65,30 @@ spec:
           - hosts:
               - "calibre.${SECRET_DOMAIN}"
             secretName: calibre-tls
+      content-server:
+        enabled: true
+        ingressClassName: nginx
+        annotations:
+          external-dns.home.arpa/enabled: "true"
+          auth.home.arpa/enabled: "true"
+          nginx.ingress.kubernetes.io/auth-snippet: |-
+            proxy_set_header X-Forwarded-Method $request_method;
+
+            if ( $http_user_agent ~* "Readarr" ) {
+              return 200;
+            }
+        hosts:
+          - host: &content-server "calibre-content-server.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  name: calibre-content-server
+                  port: 8081
+        tls:
+          - hosts:
+              - *content-server
+            secretName: calibre-content-server-tls
     persistence:
       config:
         enabled: true
