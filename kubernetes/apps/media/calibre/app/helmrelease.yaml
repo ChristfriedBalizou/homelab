@@ -45,9 +45,9 @@ spec:
         ports:
           content-server:
             enabled: true
-            port: 8181
+            port: 8081
             protocol: TCP
-            targetPort: 8181
+            targetPort: 8081
         type: ClusterIP
     ingress:
       main:
