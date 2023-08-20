@@ -73,10 +73,21 @@ spec:
         enabled: true
         existingClaim: apps-media
         subPath: calibre
-      media:
+      plugins:
         enabled: true
-        mountPath: /media
+        mountPath: /plugins
         existingClaim: media
+        subPath: library/plugins
+      uploads:
+        enabled: true
+        mountPath: /uploads
+        existingClaim: media
+        subPath: library/uploads
+      books:
+        enabled: true
+        mountPath: /Calibre_Library
+        existingClaim: media
+        subPath: library/books
     resources:
       requests:
         cpu: 10m
