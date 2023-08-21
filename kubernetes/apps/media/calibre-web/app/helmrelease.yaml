@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: calibre
+  name: calibre-web
   namespace: media
 spec:
   interval: 10m
@@ -27,28 +27,17 @@ spec:
     keepHistory: false
   values:
     image:
-      repository: ghcr.io/linuxserver/calibre
-      tag: 6.25.0@sha256:eca66c63f092bc3380dc55ea9ec5556e91b174aaf7f85adb20f96cc27e53dd6d
+      repository: ghcr.io/linuxserver/calibre-web
+      tag: 0.6.20@sha256:8fd5fc5b12ecac55bb11f67f58c59ac4dac5e1f6256dab15f245b6d076e917d6
     env:
       TZ: ${TIMEZONE}
       PUID: ${PUID}
       PGID: ${PGID}
-      UMASK_SET: 022
-      PASSWORD: ""
     service:
       main:
         ports:
           http:
-            port: 8080
-      content-server:
-        enabled: true
-        ports:
-          content-server:
-            enabled: true
-            port: 8081
-            protocol: TCP
-            targetPort: 8081
-        type: ClusterIP
+            port: 8083
     ingress:
       main:
         enabled: true
@@ -57,27 +46,27 @@ spec:
           external-dns.home.arpa/enabled: "true"
           auth.home.arpa/enabled: "true"
           hajimari.io/enable: 'true'
-          hajimari.io/icon: material-symbols:book-outline
+          hajimari.io/icon: mdi:bookshelf
           hajimari.io/group: Media
         hosts:
-          - host: "calibre.${SECRET_DOMAIN}"
+          - host: "library.${SECRET_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
         tls:
           - hosts:
-              - "calibre.${SECRET_DOMAIN}"
-            secretName: calibre-tls
+              - "library.${SECRET_DOMAIN}"
+            secretName: library-tls
     persistence:
       config:
         enabled: true
         existingClaim: apps-media
-        subPath: calibre
-      media:
+        subPath: calibre-web
+      books:
         enabled: true
-        mountPath: /library
-        existingClaim: media
-        subPath: library
+        mountPath: /books
+        existingClaim: media-library
+        subPath: "books/Calibre Library"
     resources:
       requests:
         cpu: 10m
