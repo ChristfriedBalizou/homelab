@@ -37,7 +37,7 @@ spec:
             mountPath: /config
     image:
       repository: eafxx/traktarr
-      tag: latest
+      tag: latest@sha256:db064da4ed1e14aebcb57f49174deccb99e73767a6033c491b09348e0ac59474
     env:
       TZ: ${TIMEZONE}
       PGID: 1000
