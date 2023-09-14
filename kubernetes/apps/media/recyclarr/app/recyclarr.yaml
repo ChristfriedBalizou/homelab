@@ -9,17 +9,23 @@ sonarr:
       type: series
     quality_profiles:
       - name: WEB 1080p
-        reset_unmatched_scores: true
+        reset_unmatched_scores:
+          enabled: true
       - name: WEB 1080p - French
-        reset_unmatched_scores: true
+        reset_unmatched_scores:
+          enabled: true
       - name: WEB 2160p
-        reset_unmatched_scores: true
+        reset_unmatched_scores:
+          enabled: true
       - name: WEB 2160p - French
-        reset_unmatched_scores: true
+        reset_unmatched_scores:
+          enabled: true
       - name: Remux 1080p - Anime
-        reset_unmatched_scores: true
+        reset_unmatched_scores:
+          enabled: true
       - name: Remux 1080p - VOSTFR Anime
-        reset_unmatched_scores: true
+        reset_unmatched_scores:
+          enabled: true
     custom_formats:
       # Common
       - quality_profiles:
@@ -195,17 +201,23 @@ radarr:
       type: movie
     quality_profiles:
       - name: HD
-        reset_unmatched_scores: true
+        reset_unmatched_scores:
+          enabled: true
       - name: UHD
-        reset_unmatched_scores: true
+        reset_unmatched_scores:
+          enabled: true
       - name: HD - French
-        reset_unmatched_scores: true
+        reset_unmatched_scores:
+          enabled: true
       - name: UHD - French
-        reset_unmatched_scores: true
+        reset_unmatched_scores:
+          enabled: true
       - name: HD - French Multi Language Only
-        reset_unmatched_scores: true
+        reset_unmatched_scores:
+          enabled: true
       - name: UHD - French Multi Language Only
-        reset_unmatched_scores: true
+        reset_unmatched_scores:
+          enabled: true
     custom_formats:
       # Common
       - quality_profiles:
