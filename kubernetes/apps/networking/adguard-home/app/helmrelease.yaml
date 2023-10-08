@@ -82,9 +82,15 @@ spec:
       config:
         type: pvc
         enabled: true
-        existingClaim: apps-networking
-        subPath: adguard-home
+        existingClaim: apps-adguard
+        subPath: conf
         mountPath: /opt/adguardhome/conf
+      data:
+        type: pvc
+        enabled: true
+        existingClaim: apps-adguard
+        subPath: data
+        mountPath: /opt/adguardhome/work
     affinity:
       podAntiAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
