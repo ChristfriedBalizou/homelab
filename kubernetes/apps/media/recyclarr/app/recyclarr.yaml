@@ -192,7 +192,7 @@ sonarr:
           # VOSTFR
           - 07a32f77690263bb9fda1842db7e273f  # VOSTFR
 radarr:
-  main:
+  standard:
     base_url: http://radarr.media:80
     api_key: !env_var RADARR_0_API_KEY
     replace_existing_custom_formats: true
