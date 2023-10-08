@@ -10,5 +10,5 @@ resources:
   - ./k8s-gateway/ks.yaml
   - ./metallb/ks.yaml
   - ./vpn-gateway/ks.yaml
-  - ./adguard-home/ks.yaml
+  - ./adguard/ks.yaml
   - ./smtp-relay/ks.yaml
