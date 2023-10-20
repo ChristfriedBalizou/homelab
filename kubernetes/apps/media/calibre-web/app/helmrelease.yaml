@@ -28,7 +28,7 @@ spec:
   values:
     image:
       repository: ghcr.io/linuxserver/calibre-web
-      tag: 0.6.20@sha256:b7ca05d53c1f30026dcc1de7baee4c1716e0c082aaf05e19e06ee6c18c0e5636
+      tag: 0.6.20@sha256:0aaa0bc56225f763a15c66c7f6d03d5e7ed555a160280934d52fa6ace58c6a4f
     env:
       TZ: ${TIMEZONE}
       PUID: ${PUID}
