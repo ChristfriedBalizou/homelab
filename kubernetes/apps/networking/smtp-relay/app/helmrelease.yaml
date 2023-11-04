@@ -38,6 +38,7 @@ spec:
               repository: ghcr.io/foxcpp/maddy
               tag: 0.7.0
             env:
+              DEBUG: "false"
               SMTP_DOMAIN: ${SMTP_DOMAIN}
               SMTP_PORT: ${SMTP_PORT}
               SMTP_SERVER: ${SMTP_SERVER}
