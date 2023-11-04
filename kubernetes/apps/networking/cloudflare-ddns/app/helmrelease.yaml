@@ -23,7 +23,7 @@ spec:
       retries: 3
   values:
     defaultPodOptions:
-      restartPolicy: onFailure
+      restartPolicy: OnFailure
     controllers:
       main:
         type: cronjob
