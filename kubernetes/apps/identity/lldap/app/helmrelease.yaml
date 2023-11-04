@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 1.5.1
+      version: 2.0.3
       sourceRef:
         kind: HelmRepository
         name: bjw-s
@@ -26,45 +26,64 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    initContainers:
-      01-init-db:
-        image: ghcr.io/onedr0p/postgres-init:14.9
-        imagePullPolicy: IfNotPresent
-        env:
-          INIT_POSTGRES_DBNAME: lldap
-          INIT_POSTGRES_HOST: postgresql.storage.svc.cluster.local
-          INIT_POSTGRES_USER: "${LLDAP_POSTGRES_USER}"
-          INIT_POSTGRES_PASS: "${LLDAP_POSTGRES_PASS}"
-          INIT_POSTGRES_SUPER_PASS: "${POSTGRES_SUPER_PASS}"
-    controller:
-      replicas: 2
-      strategy: RollingUpdate
-      annotations:
-        reloader.stakater.com/auto: "true"
-    image:
-      repository: ghcr.io/lldap/lldap
-      # TODO: Switch to release tag on next release
-      tag: latest-alpine@sha256:a3b65be40ad4e0b8ab9073713bde6c88ae09c811ddc3ab8fcc09e95503f17da1
-    env:
-      TZ: ${TIMEZONE}
-      LLDAP_HTTP_PORT: &port 80
-      LLDAP_HTTP_URL: https://lldap.${SECRET_DOMAIN}
-      LLDAP_LDAP_PORT: &ldapPort 389
-      LLDAP_LDAP_BASE_DN: ${SECRET_LDAP_ROOT}
+    controllers:
+      main:
+        replicas: 2
+        strategy: RollingUpdate
+        annotations:
+          reloader.stakater.com/auto: "true"
+        initContainers:
+          01-init-db:
+            image:
+              repository: ghcr.io/onedr0p/postgres-init
+              tag: 14.9
+            imagePullPolicy: IfNotPresent
+            env:
+              INIT_POSTGRES_DBNAME: lldap
+              INIT_POSTGRES_HOST: postgresql.storage.svc.cluster.local
+              INIT_POSTGRES_USER: "${LLDAP_POSTGRES_USER}"
+              INIT_POSTGRES_PASS: "${LLDAP_POSTGRES_PASS}"
+              INIT_POSTGRES_SUPER_PASS: "${POSTGRES_SUPER_PASS}"
+        pod:
+          topologySpreadConstraints:
+            - maxSkew: 1
+              topologyKey: kubernetes.io/hostname
+              whenUnsatisfiable: DoNotSchedule
+              labelSelector:
+                matchLabels:
+                  app.kubernetes.io/name: *app
+          resources:
+            requests:
+              cpu: 100m
+              memory: 100Mi
+            limits:
+              memory: 500Mi
+        containers:
+          main:
+            image:
+              repository: ghcr.io/lldap/lldap
+              # TODO: Switch to release tag on next release
+              tag: latest-alpine@sha256:a3b65be40ad4e0b8ab9073713bde6c88ae09c811ddc3ab8fcc09e95503f17da1
+            env:
+              TZ: ${TIMEZONE}
+              LLDAP_HTTP_PORT: &port 80
+              LLDAP_HTTP_URL: https://lldap.${SECRET_DOMAIN}
+              LLDAP_LDAP_PORT: &ldapPort 389
+              LLDAP_LDAP_BASE_DN: ${SECRET_LDAP_ROOT}
 
-      LLDAP_JWT_SECRET: "${LLDAP_JWT_SECRET}"
-      LLDAP_LDAP_USER_PASS: "${LLDAP_LDAP_USER_PASS}"
-      LLDAP_USER_DN: "${LLDAP_USER_DN}"
-      LLDAP_LDAP_USER_EMAIL: "${LLDAP_LDAP_USER_EMAIL}"
-      LLDAP_SERVER_KEY_SEED: "${LLDAP_SERVER_KEY_SEED}"
-      LLDAP_DATABASE_URL: "postgres://${LLDAP_POSTGRES_USER}:${LLDAP_POSTGRES_PASS}@postgresql.storage.svc.cluster.local/lldap"
+              LLDAP_JWT_SECRET: "${LLDAP_JWT_SECRET}"
+              LLDAP_LDAP_USER_PASS: "${LLDAP_LDAP_USER_PASS}"
+              LLDAP_USER_DN: "${LLDAP_USER_DN}"
+              LLDAP_LDAP_USER_EMAIL: "${LLDAP_LDAP_USER_EMAIL}"
+              LLDAP_SERVER_KEY_SEED: "${LLDAP_SERVER_KEY_SEED}"
+              LLDAP_DATABASE_URL: "postgres://${LLDAP_POSTGRES_USER}:${LLDAP_POSTGRES_PASS}@postgresql.storage.svc.cluster.local/lldap"
 
-      LLDAP_SMTP_OPTIONS__ENABLE_PASSWORD_RESET: "true"
-      LLDAP_SMTP_OPTIONS__SERVER: smtp-relay.networking.svc.cluster.local
-      LLDAP_SMTP_OPTIONS__PORT: "${SMTP_RELAY_PORT}"
-      LLDAP_SMTP_OPTIONS__FROM: "noreply@${SECRET_DOMAIN}"
-      LLDAP_SMTP_OPTIONS__TO: "noreply@${SECRET_DOMAIN}"
-      LLDAP_SMTP_OPTIONS__SMTP_ENCRYPTION: "NONE"
+              LLDAP_SMTP_OPTIONS__ENABLE_PASSWORD_RESET: "true"
+              LLDAP_SMTP_OPTIONS__SERVER: smtp-relay.networking.svc.cluster.local
+              LLDAP_SMTP_OPTIONS__PORT: "${SMTP_RELAY_PORT}"
+              LLDAP_SMTP_OPTIONS__FROM: "noreply@${SECRET_DOMAIN}"
+              LLDAP_SMTP_OPTIONS__TO: "noreply@${SECRET_DOMAIN}"
+              LLDAP_SMTP_OPTIONS__SMTP_ENCRYPTION: "NONE"
     service:
       main:
         ports:
@@ -76,7 +95,7 @@ spec:
     ingress:
       main:
         enabled: true
-        ingressClassName: nginx
+        className: nginx
         annotations:
           external-dns.home.arpa/enabled: "true"
           auth.home.arpa/enabled: "true"
@@ -89,6 +108,9 @@ spec:
             paths:
               - path: /
                 pathType: Prefix
+                service:
+                  name: main
+                  path: http
         tls:
           - hosts:
               - *host
@@ -97,16 +119,3 @@ spec:
       data:
         enabled: true
         type: emptyDir
-    topologySpreadConstraints:
-      - maxSkew: 1
-        topologyKey: kubernetes.io/hostname
-        whenUnsatisfiable: DoNotSchedule
-        labelSelector:
-          matchLabels:
-            app.kubernetes.io/name: *app
-    resources:
-      requests:
-        cpu: 100m
-        memory: 100Mi
-      limits:
-        memory: 500Mi
