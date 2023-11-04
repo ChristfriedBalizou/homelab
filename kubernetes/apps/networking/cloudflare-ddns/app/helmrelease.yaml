@@ -22,23 +22,23 @@ spec:
     remediation:
       retries: 3
   values:
-    controller:
+    defaultPodOptions:
+      restartPolicy: onFailure
+    controllers:
       main:
         type: cronjob
         cronjob:
           concurrencyPolicy: Forbid
           schedule: "@hourly"
-    defaultPodOptions:
-      restartPolicy: onFailure
-    containers:
-      main:
-        image:
-          repository: ghcr.io/onedr0p/kubernetes-kubectl
-          tag: 1.27.3@sha256:fcc5372b0e1e3d51c0d3a95282fdfd80aeb389aa4077fd430276c511857313cf
-        command: ["/bin/bash", "/app/cloudflare-ddns.sh"]
-        envFrom:
-          - secretRef:
-              name: cloudflare-ddns-secret
+        containers:
+          main:
+            image:
+              repository: ghcr.io/onedr0p/kubernetes-kubectl
+              tag: 1.27.3@sha256:fcc5372b0e1e3d51c0d3a95282fdfd80aeb389aa4077fd430276c511857313cf
+            command: ["/bin/bash", "/app/cloudflare-ddns.sh"]
+            envFrom:
+              - secretRef:
+                  name: cloudflare-ddns-secret
     service:
       main:
         enabled: false
