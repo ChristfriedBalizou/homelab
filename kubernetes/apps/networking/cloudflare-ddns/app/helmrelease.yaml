@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 2.0.3
+      version: 1.5.1
       sourceRef:
         kind: HelmRepository
         name: bjw-s
@@ -22,23 +22,19 @@ spec:
     remediation:
       retries: 3
   values:
-    defaultPodOptions:
+    controller:
       restartPolicy: OnFailure
-    controllers:
-      main:
-        type: cronjob
-        cronjob:
-          concurrencyPolicy: Forbid
-          schedule: "@hourly"
-        containers:
-          main:
-            image:
-              repository: ghcr.io/onedr0p/kubernetes-kubectl
-              tag: 1.27.3@sha256:fcc5372b0e1e3d51c0d3a95282fdfd80aeb389aa4077fd430276c511857313cf
-            command: ["/bin/bash", "/app/cloudflare-ddns.sh"]
-            envFrom:
-              - secretRef:
-                  name: cloudflare-ddns-secret
+      type: cronjob
+      cronjob:
+        concurrencyPolicy: Forbid
+        schedule: "@hourly"
+    image:
+      repository: ghcr.io/onedr0p/kubernetes-kubectl
+      tag: 1.27.3@sha256:fcc5372b0e1e3d51c0d3a95282fdfd80aeb389aa4077fd430276c511857313cf
+    command: ["/bin/bash", "/app/cloudflare-ddns.sh"]
+    envFrom:
+      - secretRef:
+          name: cloudflare-ddns-secret
     service:
       main:
         enabled: false
