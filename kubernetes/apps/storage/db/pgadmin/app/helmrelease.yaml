@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: pgadmin4
-      version: 1.15.4
+      version: 1.18.2
       sourceRef:
         kind: HelmRepository
         name: runix
@@ -43,6 +43,6 @@ spec:
           claimName: storage
 
     extraVolumeMounts:
-      - name: pgadmin
+      - name: pgadmin-storage
         mountPath: /var/lib/pgadmin
         subPath: pgadmin
