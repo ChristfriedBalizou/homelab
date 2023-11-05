@@ -45,7 +45,6 @@ spec:
             envFrom:
               - secretRef:
                   name: cluster-media-secrets
-                  namespace: media
         pod:
           restartPolicy: OnFailure
     service:
