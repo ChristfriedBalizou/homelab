@@ -41,3 +41,8 @@ spec:
       - name: pgadmin-storage
         persistentVolumeClaim:
           claimName: storage
+
+    extraVolumeMounts:
+      - name: pgadmin
+        mountPath: /var/lib/pgadmin
+        subPath: pgadmin
