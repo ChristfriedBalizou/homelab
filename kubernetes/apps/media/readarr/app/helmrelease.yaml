@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 1.5.1
+      version: 2.0.3
       sourceRef:
         kind: HelmRepository
         name: bjw-s
@@ -26,19 +26,37 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    image:
-      repository: ghcr.io/onedr0p/readarr-develop
-      tag: 0.3.8.2267@sha256:b844031cf2e1ee3ac332ac5b64f1ba628157097748a405a3a11aea8c5c803561
-    env:
-      TZ: ${TIMEZONE}
-      READARR__INSTANCE_NAME: Readarr
-      READARR__PORT: &port 8787
-      READARR__LOG_LEVEL: info
-      READARR__API_KEY:
-        valueFrom:
-          secretKeyRef:
-            name: cluster-media-secrets
-            key: "READARR_0_API_KEY"
+    controllers:
+      main:
+        pod:
+          podSecurityContext:
+            runAsUser: 568
+            runAsGroup: 568
+            fsGroup: 568
+            fsGroupChangePolicy: "OnRootMismatch"
+            supplementalGroups:
+              - 100
+        containers:
+          main:
+            image:
+              repository: ghcr.io/onedr0p/readarr-develop
+              tag: 0.3.8.2267@sha256:b844031cf2e1ee3ac332ac5b64f1ba628157097748a405a3a11aea8c5c803561
+            env:
+              TZ: ${TIMEZONE}
+              READARR__INSTANCE_NAME: Readarr
+              READARR__PORT: &port 8787
+              READARR__LOG_LEVEL: info
+              READARR__API_KEY:
+                valueFrom:
+                  secretKeyRef:
+                    name: cluster-media-secrets
+                    key: "READARR_0_API_KEY"
+            resources:
+              requests:
+                cpu: 10m
+                memory: 250Mi
+              limits:
+                memory: 2000Mi
     service:
       main:
         ports:
@@ -47,7 +65,7 @@ spec:
     ingress:
       main:
         enabled: true
-        ingressClassName: nginx
+        className: nginx
         annotations:
           external-dns.home.arpa/enabled: "true"
           auth.home.arpa/enabled: "true"
@@ -65,29 +83,19 @@ spec:
             paths:
               - path: /
                 pathType: Prefix
+                service:
+                  name: main
+                  path: http
         tls:
           - hosts:
               - "readarr.${SECRET_DOMAIN}"
             secretName: readarr-tls
-    podSecurityContext:
-      runAsUser: 568
-      runAsGroup: 568
-      fsGroup: 568
-      fsGroupChangePolicy: "OnRootMismatch"
-      supplementalGroups:
-        - 100
     persistence:
       config:
         enabled: true
         existingClaim: apps-media
-        subPath: readarr
+        globalMounts:
+          - subPath: readarr
       media:
         enabled: true
-        mountPath: /media
         existingClaim: media
-    resources:
-      requests:
-        cpu: 10m
-        memory: 250Mi
-      limits:
-        memory: 2000Mi

@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 1.5.1
+      version: 2.0.3
       sourceRef:
         kind: HelmRepository
         name: bjw-s
@@ -26,32 +26,50 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    image:
-      repository: ghcr.io/onedr0p/radarr-develop
-      tag: 4.7.5.7809@sha256:f2044d2e8bd2e8d24e8a79f051404be80400f450a94b4c481cbc93cfeffbe745
-    env:
-      TZ: ${TIMEZONE}
-      RADARR__INSTANCE_NAME: Radarr
-      RADARR__PORT: &port 80
-      RADARR__LOG_LEVEL: info
-      RADARR__POSTGRES_HOST: "postgresql.storage"
-      RADARR__POSTGRES_MAIN_DB: "radarr"
-      RADARR__POSTGRES_LOG_DB: "radarr-log"
-      RADARR__POSTGRES_PASSWORD:
-        valueFrom:
-          secretKeyRef:
-            name: cluster-media-secrets
-            key: "RADARR_0_POSTGRES_PASSWORD"
-      RADARR__POSTGRES_USER:
-        valueFrom:
-          secretKeyRef:
-            name: cluster-media-secrets
-            key: "RADARR_0_POSTGRES_USER"
-      RADARR__API_KEY:
-        valueFrom:
-          secretKeyRef:
-            name: cluster-media-secrets
-            key: "RADARR_0_API_KEY"
+    controllers:
+      main:
+        pod:
+          podSecurityContext:
+            runAsUser: 568
+            runAsGroup: 568
+            fsGroup: 568
+            fsGroupChangePolicy: "OnRootMismatch"
+            supplementalGroups:
+              - 100
+        containers:
+          main:
+            image:
+              repository: ghcr.io/onedr0p/radarr-develop
+              tag: 4.7.5.7809@sha256:f2044d2e8bd2e8d24e8a79f051404be80400f450a94b4c481cbc93cfeffbe745
+            env:
+              TZ: ${TIMEZONE}
+              RADARR__INSTANCE_NAME: Radarr
+              RADARR__PORT: &port 80
+              RADARR__LOG_LEVEL: info
+              RADARR__POSTGRES_HOST: "postgresql.storage"
+              RADARR__POSTGRES_MAIN_DB: "radarr"
+              RADARR__POSTGRES_LOG_DB: "radarr-log"
+              RADARR__POSTGRES_PASSWORD:
+                valueFrom:
+                  secretKeyRef:
+                    name: cluster-media-secrets
+                    key: "RADARR_0_POSTGRES_PASSWORD"
+              RADARR__POSTGRES_USER:
+                valueFrom:
+                  secretKeyRef:
+                    name: cluster-media-secrets
+                    key: "RADARR_0_POSTGRES_USER"
+              RADARR__API_KEY:
+                valueFrom:
+                  secretKeyRef:
+                    name: cluster-media-secrets
+                    key: "RADARR_0_API_KEY"
+            resources:
+              requests:
+                cpu: 10m
+                memory: 250Mi
+              limits:
+                memory: 2000Mi
     service:
       main:
         ports:
@@ -60,7 +78,7 @@ spec:
     ingress:
       main:
         enabled: true
-        ingressClassName: nginx
+        className: nginx
         annotations:
           external-dns.home.arpa/enabled: "true"
           auth.home.arpa/enabled: "true"
@@ -78,29 +96,19 @@ spec:
             paths:
               - path: /
                 pathType: Prefix
+                service:
+                  name: main
+                  path: http
         tls:
           - hosts:
               - "radarr.${SECRET_DOMAIN}"
             secretName: radarr-tls
-    podSecurityContext:
-      runAsUser: 568
-      runAsGroup: 568
-      fsGroup: 568
-      fsGroupChangePolicy: "OnRootMismatch"
-      supplementalGroups:
-        - 100
     persistence:
       config:
         enabled: true
         existingClaim: apps-media
-        subPath: radarr
+        globalMounts:
+          - subPath: radarr
       media:
         enabled: true
-        mountPath: /media
         existingClaim: media
-    resources:
-      requests:
-        cpu: 10m
-        memory: 250Mi
-      limits:
-        memory: 2000Mi
