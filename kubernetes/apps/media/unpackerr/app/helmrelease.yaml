@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 1.5.1
+      version: 2.0.3
       interval: 10m0s
       sourceRef:
         kind: HelmRepository
@@ -17,40 +17,43 @@ spec:
         namespace: flux-system
 
   values:
-    image:
-      repository: ghcr.io/onedr0p/unpackerr
-      tag: 0.12.0@sha256:8bbf35be449b89041f07fc069812f79b4eadf56e1c7c7720935fe166016376ef
-
-    env:
-      TZ: "${TIMEZONE}"
-      UN_SONARR_0_URL: http://sonarr.media
-      UN_SONARR_0_PATHS_0: /media/series
-      UN_SONARR_0_API_KEY:
-        secretKeyRef:
-          name: cluster-media-secrets
-          key: SONARR_0_API_KEY
-      UN_RADARR_0_URL: http://radarr.media
-      UN_RADARR_0_PATHS_0: /media/movies
-      UN_RADARR_0_API_KEY:
-        secretKeyRef:
-          name: cluster-media-secrets
-          key: RADARR_0_API_KEY
+    controllers:
+      main:
+        pod:
+          podSecurityContext:
+            runAsUser: 568
+            runAsGroup: 568
+            fsGroup: 568
+            fsGroupChangePolicy: OnRootMismatch
+        containers:
+          main:
+            image:
+              repository: ghcr.io/onedr0p/unpackerr
+              tag: 0.12.0@sha256:8bbf35be449b89041f07fc069812f79b4eadf56e1c7c7720935fe166016376ef
+            env:
+              TZ: "${TIMEZONE}"
+              UN_SONARR_0_URL: http://sonarr.media
+              UN_SONARR_0_PATHS_0: /media/series
+              UN_SONARR_0_API_KEY:
+                secretKeyRef:
+                  name: cluster-media-secrets
+                  key: SONARR_0_API_KEY
+              UN_RADARR_0_URL: http://radarr.media
+              UN_RADARR_0_PATHS_0: /media/movies
+              UN_RADARR_0_API_KEY:
+                secretKeyRef:
+                  name: cluster-media-secrets
+                  key: RADARR_0_API_KEY
+            resources:
+              requests:
+                cpu: 10m
+                memory: 250Mi
+              limits:
+                memory: 1000Mi
     service:
       main:
         enabled: false
-    podSecurityContext:
-      runAsUser: 568
-      runAsGroup: 568
-      fsGroup: 568
-      fsGroupChangePolicy: OnRootMismatch
     persistence:
       media:
         enabled: true
-        mountPath: /media
         existingClaim: media
-    resources:
-      requests:
-        cpu: 10m
-        memory: 250Mi
-      limits:
-        memory: 1000Mi
