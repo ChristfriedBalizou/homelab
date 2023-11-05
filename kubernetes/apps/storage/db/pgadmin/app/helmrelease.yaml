@@ -35,14 +35,5 @@ spec:
             - *host
           secretName: pgadmin-tls
     persistentVolume:
-      enabled: false
-
-    extraVolumes:
-      - name: pgadmin-storage
-        persistentVolumeClaim:
-          claimName: storage
-
-    extraVolumeMounts:
-      - name: pgadmin
-        mountPath: /var/lib/pgadmin
-        subPath: pgadmin
+      enabled: true
+      existingClaim: storage
