@@ -33,7 +33,9 @@ spec:
             secret.reloader.stakater.com/reload: "traktarr-config"
         initContainers:
           copy:
-            image: busybox
+            image:
+              repository: busybox
+              tag: latest
             command: ["/bin/sh", "-c", "cp /traktarrconfig/config.json /config/config.json"]
             volumeMounts:
               - name: traktarr
