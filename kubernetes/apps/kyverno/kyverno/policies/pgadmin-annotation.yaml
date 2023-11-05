@@ -1,0 +1,39 @@
+---
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: pgadmin-annotations
+  annotations:
+    policies.kyverno.io/title: pgadmin annotations
+    policies.kyverno.io/subject: Pod
+    policies.kyverno.io/description: >-
+      The pgadmin chart persistence does not support subpath
+      using this annotation to for the subpath.
+spec:
+  mutateExistingOnPolicyUpdate: true
+  generateExistingOnPolicyUpdate: true
+  rules:
+    - name: pgadmin-data
+      match:
+        any:
+          - resources:
+              kinds: ["Pod"]
+              namespaces: ["storage"]
+      preconditions:
+        all:
+          - key: "{{request.operation || 'BACKGROUND'}}"
+            operator: AnyIn
+            value:
+              - CREATE
+              - UPDATE
+      mutate:
+        targets:
+          - apiVersion: v1
+            kind: Pod
+            namespace: storage
+        patchStrategicMerge:
+          spec:
+            containers:
+              - (name): "pgadmin4"
+                volumeMounts:
+                  - (name): "pgadmin-data"
