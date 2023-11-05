@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 1.5.1
+      version: 2.0.3
       sourceRef:
         kind: HelmRepository
         name: bjw-s
@@ -26,22 +26,36 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    image:
-      repository: ghcr.io/linuxserver/calibre
-      tag: 6.25.0@sha256:83e7e704c8214b1e42846d6a3e4655722784b3d5bedf3d48f25769b70eef60a7
-    env:
-      TZ: ${TIMEZONE}
-      PUID: ${PUID}
-      PGID: ${PGID}
-      UMASK_SET: 022
-      PASSWORD: ""
+    controllers:
+      main:
+        containers:
+          main:
+            image:
+              repository: ghcr.io/linuxserver/calibre
+              tag: 6.25.0@sha256:83e7e704c8214b1e42846d6a3e4655722784b3d5bedf3d48f25769b70eef60a7
+            env:
+              TZ: ${TIMEZONE}
+              PUID: ${PUID}
+              PGID: ${PGID}
+              UMASK_SET: 022
+              PASSWORD: ""
+            resources:
+              requests:
+                cpu: 10m
+                memory: 250Mi
+              limits:
+                memory: 2000Mi
     service:
       main:
+        enabled: true
+        controller: main
         ports:
           http:
+            enabled: true
             port: 8080
       content-server:
         enabled: true
+        controller: main
         ports:
           content-server:
             enabled: true
@@ -52,7 +66,7 @@ spec:
     ingress:
       main:
         enabled: true
-        ingressClassName: nginx
+        className: nginx
         annotations:
           external-dns.home.arpa/enabled: "true"
           auth.home.arpa/enabled: "true"
@@ -64,6 +78,9 @@ spec:
             paths:
               - path: /
                 pathType: Prefix
+                service:
+                  name: main
+                  path: http
         tls:
           - hosts:
               - "calibre.${SECRET_DOMAIN}"
@@ -72,15 +89,11 @@ spec:
       config:
         enabled: true
         existingClaim: apps-media
-        subPath: calibre
+        globalMounts:
+          - subPath: calibre
       media:
         enabled: true
-        mountPath: /library
         existingClaim: media
-        subPath: library
-    resources:
-      requests:
-        cpu: 10m
-        memory: 250Mi
-      limits:
-        memory: 2000Mi
+        globalMounts:
+          - path: /library
+            subPath: library
