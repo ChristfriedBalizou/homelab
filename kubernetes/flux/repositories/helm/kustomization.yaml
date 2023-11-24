@@ -25,3 +25,4 @@ resources:
   - ./intel.yaml
   - ./node-feature-discovery.yaml
   - ./kyverno.yaml
+  - ./twingate.yaml
