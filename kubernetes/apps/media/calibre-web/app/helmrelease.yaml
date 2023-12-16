@@ -37,6 +37,7 @@ spec:
               TZ: ${TIMEZONE}
               PUID: ${PUID}
               PGID: ${PGID}
+              CALIBRE_PORT: '8083'
             resources:
               requests:
                 cpu: 10m
