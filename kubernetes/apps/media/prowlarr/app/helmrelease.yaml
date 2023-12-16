@@ -44,7 +44,7 @@ spec:
               imagePullPolicy: IfNotPresent
               env:
                 INIT_POSTGRES_DBNAME: prowlarr prowlarr-log
-                INIT_POSTGRES_HOST: &postgres postgresql.storage.svc.cluster.local
+                INIT_POSTGRES_HOST: &postgres postgresql-16.storage.svc.cluster.local
                 INIT_POSTGRES_USER:
                   valueFrom:
                     secretKeyRef:
