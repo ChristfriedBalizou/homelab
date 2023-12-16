@@ -31,12 +31,10 @@ spec:
         containers:
           main:
             image:
-              repository: ghcr.io/linuxserver/calibre-web
-              tag: 0.6.21@sha256:b28792b96f1d91a8dd4d485cfe1a5eb1160da90e46a8ca67f8d328cb98deda32
+              repository: ghcr.io/bjw-s/calibre-web
+              tag: 0.6.21@sha256:10f25a6f7243be001fa320e24ae2445f3e924704b219a6cc7fd9ba27323e461f
             env:
               TZ: ${TIMEZONE}
-              PUID: ${PUID}
-              PGID: ${PGID}
             resources:
               requests:
                 cpu: 10m
@@ -70,6 +68,11 @@ spec:
           - hosts:
               - "library.${SECRET_DOMAIN}"
             secretName: library-tls
+    podSecurityContext:
+      runAsUser: ${PUID}
+      runAsGroup: ${PGID}
+      fsGroup: ${PGID}
+      fsGroupChangePolicy: "OnRootMismatch"
     persistence:
       config:
         enabled: true
