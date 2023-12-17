@@ -27,7 +27,6 @@ spec:
       namespace: cert-manager
   values:
     controller:
-      allowSnippetAnnotations: true
       replicaCount: 2
       extraEnvs:
         - name: TZ

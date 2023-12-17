@@ -57,4 +57,4 @@ spec:
               +(nginx.ingress.kubernetes.io/auth-response-headers): |-
                 Remote-User,Remote-Name,Remote-Groups,Remote-Email
               +(nginx.ingress.kubernetes.io/auth-proxy-set-headers): |-
-                networking/auth-snippet
+                kyverno/auth-snippet
