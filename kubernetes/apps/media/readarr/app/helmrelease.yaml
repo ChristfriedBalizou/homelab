@@ -69,6 +69,11 @@ spec:
         annotations:
           external-dns.home.arpa/enabled: "true"
           auth.home.arpa/enabled: "true"
+          nginx.ingress.kubernetes.io/auth-snippet: |-
+            proxy_set_header X-Forwarded-Method $request_method;
+            if ( $http_user_agent ~* "Prowlarr" ) {
+              return 200;
+            }
           hajimari.io/enable: 'true'
           hajimari.io/icon: book-open-page-variant-outline
           hajimari.io/group: Media
