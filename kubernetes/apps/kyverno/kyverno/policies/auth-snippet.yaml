@@ -1,8 +1,0 @@
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: auth-snippet
-  namespace: kyverno
-data:
-  X-Forwarded-Method: "$request_method"
