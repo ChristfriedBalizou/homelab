@@ -96,6 +96,10 @@ main() {
             > "${PROJECT_DIR}/kubernetes/apps/media/traktarr/app/secret.sops.yaml"
         sops --encrypt --in-place "${PROJECT_DIR}/kubernetes/apps/media/traktarr/app/secret.sops.yaml"
 
+        envsubst < "${PROJECT_DIR}/templates/kubernetes/cluster-cloudflared-tunnel-secret.sops.yaml" \
+            > "${PROJECT_DIR}/kubernetes/apps/networking/cloudlfared/app/secret.sops.yaml"
+        sops --encrypt --in-place "${PROJECT_DIR}/kubernetes/apps/networking/cloudflared/app/secret.sops.yaml"
+
         # generate ansible settings
         envsubst < "${PROJECT_DIR}/templates/ansible/kube-vip.yml" \
             > "${PROJECT_DIR}/ansible/inventory/group_vars/kubernetes/kube-vip.yml"
