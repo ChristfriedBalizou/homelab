@@ -14,11 +14,11 @@
     - bootstrap_cloudflare_tunnel_id
     - bootstrap_cloudflare_tunnel_secret
     - bootstrap_cluster_cidr
-    - bootstrap_flux_github_webhook_token
+    - bootstrap_flux_github_webhook_secret
     - bootstrap_github_repository_name
     - bootstrap_github_repository_branch
     - bootstrap_github_username
-    - bootstrap_internal_ingress_addr
+    - bootstrap_metallb_ingress_addr
     - bootstrap_ipv6_enabled
     - bootstrap_metallb_k8s_gateway_addr
     - bootstrap_kube_vip_addr

@@ -3,7 +3,7 @@
   ansible.builtin.uri:
     url: https://api.cloudflare.com/client/v4/zones?name={{ bootstrap_cloudflare_domain }}&status=active
     headers:
-      Authorization: Bearer {{ bootstrap_cloudflare_apikey }}
+      Authorization: Bearer {{ bootstrap_cloudflare_token }}
       Content-Type: application/json
     timeout: 5
     return_content: true
@@ -20,7 +20,7 @@
   ansible.builtin.uri:
     url: https://api.cloudflare.com/client/v4/accounts/{{ bootstrap_cloudflare_account_tag }}/cfd_tunnel/{{ bootstrap_cloudflare_tunnel_id }}
     headers:
-      Authorization: Bearer {{ bootstrap_cloudflare_apikey }}
+      Authorization: Bearer {{ bootstrap_cloudflare_token }}
       Content-Type: application/json
     timeout: 5
     return_content: true

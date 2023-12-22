@@ -105,7 +105,7 @@
         bootstrap_metallb_k8s_gateway_addr,
         bootstrap_metallb_ingress_addr,
         bootstrap_kube_vip_addr
-      ] | unique | length == 4
+      ] | unique | length == 3
     success_msg: All IP addresses are unique.
     fail_msg: All IP addresses are not unique.
 
