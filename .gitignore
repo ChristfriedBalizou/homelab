@@ -10,6 +10,7 @@ config.yaml
 *.agekey
 *.pub
 *.key
+.sops.yaml
 github-deploy-key*
 # Ansible
 xanmanning.k3s*
