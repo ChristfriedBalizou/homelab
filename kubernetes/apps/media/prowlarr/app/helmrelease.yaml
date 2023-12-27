@@ -69,7 +69,7 @@ spec:
               PROWLARR__INSTANCE_NAME: Prowlarr
               PROWLARR__PORT: &port 80
               PROWLARR__LOG_LEVEL: info
-              PROWLARR__POSTGRES_HOST: &postgres
+              PROWLARR__POSTGRES_HOST: *postgres
               PROWLARR__POSTGRES_MAIN_DB: "prowlarr"
               PROWLARR__POSTGRES_LOG_DB: "prowlarr-log"
               PROWLARR__POSTGRES_PASSWORD:

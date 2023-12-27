@@ -69,7 +69,7 @@ spec:
               SONARR__INSTANCE_NAME: Sonarr
               SONARR__PORT: &port 80
               SONARR__LOG_LEVEL: info
-              SONARR__POSTGRES_HOST: &postgres
+              SONARR__POSTGRES_HOST: *postgres
               SONARR__POSTGRES_MAIN_DB: "sonarr"
               SONARR__POSTGRES_LOG_DB: "sonarr-log"
               SONARR__POSTGRES_PASSWORD:
