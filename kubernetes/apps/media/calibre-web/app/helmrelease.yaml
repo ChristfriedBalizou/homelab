@@ -49,7 +49,7 @@ spec:
     ingress:
       main:
         enabled: true
-        className: nginx
+        className: external
         annotations:
           external-dns.home.arpa/enabled: "true"
           auth.home.arpa/enabled: "true"
@@ -67,7 +67,6 @@ spec:
         tls:
           - hosts:
               - "library.${SECRET_DOMAIN}"
-            secretName: library-tls
     podSecurityContext:
       runAsUser: ${PUID}
       runAsGroup: ${PGID}

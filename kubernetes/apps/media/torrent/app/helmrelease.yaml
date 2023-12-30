@@ -24,6 +24,7 @@ spec:
     ingress:
       main:
         enabled: true
+        ingressClassName: external
         annotations:
           external-dns.home.arpa/enabled: "true"
           hajimari.io/enable: "true"
@@ -38,7 +39,6 @@ spec:
         tls:
           - hosts:
               - *host
-            secretName: torrent-tls
     persistence:
       config:
         enabled: true

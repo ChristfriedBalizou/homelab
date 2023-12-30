@@ -28,10 +28,8 @@ spec:
       passwordHash: "${WEAVE_GITOPS_ADMIN_PASSWORD}"
     ingress:
       enabled: true
-      className: nginx
+      className: external
       annotations:
-        cert-manager.io/cluster-issuer: "letsencrypt-production"
-        external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
         external-dns.home.arpa/enabled: "true"
         hajimari.io/enable: "true"
         hajimari.io/group: "System"
@@ -44,7 +42,6 @@ spec:
       tls:
         - hosts:
             - *host
-          secretName: weave-gitops-tls
     networkPolicy:
       create: false
     metrics:

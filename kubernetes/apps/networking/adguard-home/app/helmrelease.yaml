@@ -61,7 +61,7 @@ spec:
     ingress:
       main:
         enabled: true
-        ingressClassName: nginx
+        ingressClassName: external
         annotations:
           external-dns.home.arpa/enabled: "true"
           auth.home.arpa/enabled: "true"
@@ -77,7 +77,6 @@ spec:
         tls:
           - hosts:
               - *host
-            secretName: adguard-home-tls
     persistence:
       config:
         type: pvc
