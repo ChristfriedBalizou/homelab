@@ -39,6 +39,7 @@ spec:
             - '*'
     ingress:
       enabled: true
+      ingressClassName: external
       annotations:
         external-dns.home.arpa/enabled: "true"
         auth.home.arpa/enabled: "true"
@@ -52,4 +53,3 @@ spec:
       tls:
         - hosts:
             - *host
-          secretName: "kubernetes-tls"

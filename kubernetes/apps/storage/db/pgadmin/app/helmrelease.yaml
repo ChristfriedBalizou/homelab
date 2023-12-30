@@ -20,6 +20,7 @@ spec:
       password: ${SECRET_GRAFANA_ADMIN_PASSWORD}
     ingress:
       enabled: true
+      ingressClassName: external
       annotations:
         external-dns.home.arpa/enabled: "true"
         hajimari.io/enable: "true"
@@ -33,7 +34,6 @@ spec:
       tls:
         - hosts:
             - *host
-          secretName: pgadmin-tls
     persistentVolume:
       enabled: true
       existingClaim: storage

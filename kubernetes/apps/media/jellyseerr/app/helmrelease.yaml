@@ -54,7 +54,7 @@ spec:
     ingress:
       main:
         enabled: true
-        className: nginx
+        className: external
         annotations:
           external-dns.home.arpa/enabled: "true"
           hajimari.io/enable: 'true'
@@ -71,7 +71,6 @@ spec:
         tls:
           - hosts:
               - *host
-            secretName: jellyseerr-tls
     persistence:
       config:
         enabled: true

@@ -103,7 +103,7 @@ spec:
     ingress:
       main:
         enabled: true
-        className: nginx
+        className: external
         annotations:
           external-dns.home.arpa/enabled: "true"
           auth.home.arpa/enabled: "true"
@@ -126,7 +126,6 @@ spec:
         tls:
           - hosts:
               - "sonarr.${SECRET_DOMAIN}"
-            secretName: sonarr-tls
     persistence:
       config:
         enabled: true

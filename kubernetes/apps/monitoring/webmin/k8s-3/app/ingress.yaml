@@ -4,6 +4,7 @@ kind: Ingress
 metadata:
   name: k8s-3
   namespace: monitoring
+  ingressClassName: external
   annotations:
     external-dns.home.arpa/enabled: "true"
     auth.home.arpa/enabled: "true"
@@ -25,4 +26,3 @@ spec:
   tls:
     - hosts:
         - *host
-      secretName: "k8s-3-tls"

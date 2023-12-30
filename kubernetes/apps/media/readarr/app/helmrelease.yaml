@@ -65,7 +65,7 @@ spec:
     ingress:
       main:
         enabled: true
-        className: nginx
+        className: external
         annotations:
           external-dns.home.arpa/enabled: "true"
           auth.home.arpa/enabled: "true"
@@ -88,7 +88,6 @@ spec:
         tls:
           - hosts:
               - "readarr.${SECRET_DOMAIN}"
-            secretName: readarr-tls
     persistence:
       config:
         enabled: true
