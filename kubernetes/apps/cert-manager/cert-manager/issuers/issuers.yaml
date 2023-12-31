@@ -14,7 +14,7 @@ spec:
             email: "${SECRET_CLOUDFLARE_EMAIL}"
             apiKeySecretRef:
               name: cert-manager-secret
-              key: api-key
+              key: api-token
         selector:
           dnsZones:
             - "${SECRET_DOMAIN}"
@@ -35,7 +35,7 @@ spec:
             email: "${SECRET_CLOUDFLARE_EMAIL}"
             apiKeySecretRef:
               name: cert-manager-secret
-              key: api-key
+              key: api-token
         selector:
           dnsZones:
             - "${SECRET_DOMAIN}"
