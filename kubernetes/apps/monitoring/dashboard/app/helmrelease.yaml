@@ -22,7 +22,7 @@ spec:
       - --disable-settings-authorizer
     ingress:
       enabled: true
-      className: internal
+      className: external
       annotations:
         external-dns.home.arpa/enabled: "true"
         auth.home.arpa/enabled: "true"
