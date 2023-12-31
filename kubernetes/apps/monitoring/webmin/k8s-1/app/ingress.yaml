@@ -4,7 +4,6 @@ kind: Ingress
 metadata:
   name: k8s-1
   namespace: monitoring
-  ingressClassName: external
   annotations:
     external-dns.home.arpa/enabled: "true"
     auth.home.arpa/enabled: "true"
@@ -12,6 +11,7 @@ metadata:
     hajimari.io/icon: "mdi:computer-classic"
     hajimari.io/group: "Nodes"
 spec:
+  ingressClassName: external
   rules:
     - host: &host "k8s-1.${SECRET_DOMAIN}"
       http:
