@@ -24,7 +24,6 @@ spec:
           metadata:
             annotations:
               +(external-dns.alpha.kubernetes.io/target): ipv4.${SECRET_DOMAIN}
-              +(cert-manager.io/cluster-issuer): letsencrypt-staging
     - name: cert-manager
       match:
         any:
