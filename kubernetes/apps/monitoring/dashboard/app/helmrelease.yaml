@@ -13,42 +13,27 @@ spec:
       version: 6.0.8
       sourceRef:
         kind: HelmRepository
-        name: kubernetes-dashboard-charts
+        name: kubernetes-dashboard
         namespace: flux-system
   values:
     extraArgs:
+      - --enable-insecure-login
       - --enable-skip-login
       - --disable-settings-authorizer
-      - --enable-insecure-login
-      - --token-ttl=43200
-    serviceAccount:
-      create: true
-      name: ${SECRET_GRAFANA_ADMIN_USER}
-    rbac:
-      clusterReadOnlyRole: true
-      clusterReadOnlyRoleAdditionalRules:
-        - apiGroups:
-            - '*'
-          resources:
-            - '*'
-          verbs:
-            - '*'
-        - nonResourceURLs:
-            - '*'
-          verbs:
-            - '*'
     ingress:
       enabled: true
-      ingressClassName: external
+      className: internal
       annotations:
         external-dns.home.arpa/enabled: "true"
         auth.home.arpa/enabled: "true"
         hajimari.io/enable: "true"
         hajimari.io/appNname: "Kubernetes Dashboard"
         hajimari.io/group: "System"
-        hajimari.io/icon: "ant-design:cluster-outlined"
+        hajimari.io/icon: mdi:kubernetes
       hosts:
         - &host "kubernetes.${SECRET_DOMAIN}"
       tls:
         - hosts:
             - *host
+    metricsScraper:
+      enabled: true
