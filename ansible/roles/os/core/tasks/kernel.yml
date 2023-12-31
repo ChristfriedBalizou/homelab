@@ -18,6 +18,15 @@
     - overlay
     - rbd
 
+- name: System Configuration (2) | Remove sysctls
+  ansible.posix.sysctl:
+    name: "{{ item }}"
+    state: absent
+    sysctl_file: /etc/sysctl.d/99-kubernetes.conf
+    reload: true
+  loop:
+    - kern.ipc.maxsockbuf
+
 - name: System Configuration (2) | Set sysctls
   ansible.posix.sysctl:
     name: "{{ item.key }}"
@@ -34,6 +43,7 @@
       net.ipv6.conf.all.forwarding: 1
       net.bridge.bridge-nf-call-iptables: 1
       net.bridge.bridge-nf-call-ip6tables: 1
+      net.core.rmem_max: 2500000
       fs.inotify.max_user_watches: 524288
       fs.inotify.max_user_instances: 512
 

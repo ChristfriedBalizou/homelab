@@ -1,32 +1,32 @@
 ---
-- include: locale.yml
+- include_tasks: locale.yml
   tags:
     - locale
 
-- include: packages.yml
+- include_tasks: packages.yml
   tags:
     - packages
 
-- include: raspberry.yml
+- include_tasks: raspberry.yml
   tags:
     - raspberry
 
-- include: kernel.yml
+- include_tasks: kernel.yml
   tags:
     - kernel
 
-- include: network.yml
+- include_tasks: network.yml
   tags:
     - network
 
-- include: filesystem.yml
+- include_tasks: filesystem.yml
   tags:
     - filesystem
 
-- include: user.yml
+- include_tasks: user.yml
   tags:
     - user
 
-- include: application.yaml
+- include_tasks: application.yaml
   tags:
     - application
