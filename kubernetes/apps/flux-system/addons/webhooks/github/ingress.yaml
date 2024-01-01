@@ -5,8 +5,6 @@ metadata:
   name: webhook-receiver
   namespace: flux-system
   annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-production
-    external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
     external-dns.home.arpa/enabled: "true"
     hajimari.io/enable: "false"
 spec:
