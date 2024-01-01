@@ -26,4 +26,4 @@ spec:
   tls:
     - hosts:
         - *host
-      secretName: jericho-staging-tls
+      secretName: jericho-production-tls

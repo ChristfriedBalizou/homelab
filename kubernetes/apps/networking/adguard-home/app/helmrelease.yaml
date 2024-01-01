@@ -77,7 +77,7 @@ spec:
         tls:
           - hosts:
               - *host
-            secretName: adguard-home-staging-tls
+            secretName: adguard-home-production-tls
     persistence:
       config:
         type: pvc

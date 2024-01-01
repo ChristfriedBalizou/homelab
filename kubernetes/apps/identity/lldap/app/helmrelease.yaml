@@ -117,7 +117,7 @@ spec:
         tls:
           - hosts:
               - *host
-            secretName: lldap-staging-tls
+            secretName: lldap-production-tls
     persistence:
       data:
         enabled: true

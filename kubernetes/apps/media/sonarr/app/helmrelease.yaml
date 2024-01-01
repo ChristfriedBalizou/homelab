@@ -126,7 +126,7 @@ spec:
         tls:
           - hosts:
               - "sonarr.${SECRET_DOMAIN}"
-            secretName: sonarr-staging-tls
+            secretName: sonarr-production-tls
     persistence:
       config:
         enabled: true

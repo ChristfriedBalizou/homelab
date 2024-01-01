@@ -39,7 +39,7 @@ spec:
         tls:
           - hosts:
               - *host
-            secretName: jelyfin-staging-tls
+            secretName: jelyfin-production-tls
     podSecurityContext:
       supplementalGroups:
         - 44

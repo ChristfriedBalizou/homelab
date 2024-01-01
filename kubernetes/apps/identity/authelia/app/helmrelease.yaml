@@ -184,7 +184,7 @@ spec:
         tls:
           - hosts:
               - *host
-            secretName: authelia-staging-tls
+            secretName: authelia-production-tls
     persistence:
       config:
         enabled: true

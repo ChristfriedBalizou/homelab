@@ -125,7 +125,7 @@ spec:
         tls:
           - hosts:
               - "radarr.${SECRET_DOMAIN}"
-            secretName: radarr-staging-tls
+            secretName: radarr-production-tls
     persistence:
       config:
         enabled: true

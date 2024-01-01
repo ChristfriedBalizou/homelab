@@ -42,7 +42,7 @@ spec:
       tls:
         - hosts:
             - *host
-          secretName: weave-gitops-staging-tls
+          secretName: weave-gitops-production-tls
     networkPolicy:
       create: false
     metrics:

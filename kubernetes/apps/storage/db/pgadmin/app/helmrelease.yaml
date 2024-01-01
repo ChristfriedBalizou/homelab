@@ -34,7 +34,7 @@ spec:
       tls:
         - hosts:
             - *host
-          secretName: pgadmin-staging-tls
+          secretName: pgadmin-production-tls
     persistentVolume:
       enabled: true
       existingClaim: storage

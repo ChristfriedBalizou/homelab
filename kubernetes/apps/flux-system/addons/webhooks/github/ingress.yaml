@@ -23,4 +23,4 @@ spec:
   tls:
     - hosts:
         - *host
-      secretName: flux-receiver-staging-tls
+      secretName: flux-receiver-production-tls
