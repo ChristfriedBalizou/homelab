@@ -50,7 +50,7 @@ spec:
     prometheus:
       ingress:
         enabled: true
-        ingressClassName: external
+        ingressclassName: nginx
         annotations:
           external-dns.home.arpa/enabled: "true"
           auth.home.arpa/enabled: "true"

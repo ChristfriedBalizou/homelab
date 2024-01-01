@@ -161,7 +161,7 @@ spec:
     ingress:
       main:
         enabled: true
-        className: external
+        className: nginx
         annotations:
           external-dns.home.arpa/enabled: "true"
           nginx.ingress.kubernetes.io/configuration-snippet: |
