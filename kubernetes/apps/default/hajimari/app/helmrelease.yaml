@@ -64,6 +64,7 @@ spec:
         tls:
           - hosts:
               - *host
+            secretName: hajimari-staging-tls
     podAnnotations:
       configmap.reloader.stakater.com/reload: "{{ .Release.Name }}-settings"
     persistence:

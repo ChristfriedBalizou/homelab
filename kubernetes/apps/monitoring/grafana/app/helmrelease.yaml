@@ -142,6 +142,7 @@ spec:
       tls:
         - hosts:
             - *host
+          secretName: grafana-staging-tls
     persistence:
       enabled: false
     podAnnotations:

@@ -26,3 +26,4 @@ spec:
   tls:
     - hosts:
         - *host
+      secretName: k8s-1-staging-tls

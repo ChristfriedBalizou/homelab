@@ -124,6 +124,7 @@ spec:
         tls:
           - hosts:
               - "prowlarr.${SECRET_DOMAIN}"
+            secretName: prowlarr-staging-tls
     persistence:
       config:
         enabled: true

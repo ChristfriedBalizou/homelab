@@ -67,6 +67,7 @@ spec:
         tls:
           - hosts:
               - "library.${SECRET_DOMAIN}"
+            secretName: library-staging-tls
     podSecurityContext:
       runAsUser: ${PUID}
       runAsGroup: ${PGID}

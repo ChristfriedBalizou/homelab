@@ -84,6 +84,7 @@ spec:
         tls:
           - hosts:
               - "calibre.${SECRET_DOMAIN}"
+            secretName: calibre-staging-tls
     persistence:
       config:
         enabled: true

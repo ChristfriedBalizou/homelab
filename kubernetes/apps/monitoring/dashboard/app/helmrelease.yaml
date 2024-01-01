@@ -35,5 +35,6 @@ spec:
       tls:
         - hosts:
             - *host
+          secretName: dashboard-staging-tls
     metricsScraper:
       enabled: true

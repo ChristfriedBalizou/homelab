@@ -39,6 +39,7 @@ spec:
         tls:
           - hosts:
               - *host
+            secretName: nzbget-staging-tls
     persistence:
       config:
         enabled: true

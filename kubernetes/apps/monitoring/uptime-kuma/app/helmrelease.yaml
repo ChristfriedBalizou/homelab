@@ -46,3 +46,4 @@ spec:
         tls:
           - hosts:
               - *host
+            secretName: uptime-kuma-staging-tls

@@ -71,6 +71,7 @@ spec:
         tls:
           - hosts:
               - *host
+            secretName: jellyseerr-staging-tls
     persistence:
       config:
         enabled: true

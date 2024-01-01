@@ -39,6 +39,7 @@ spec:
         tls:
           - hosts:
               - *host
+            secretName: torrent-staging-tls
     persistence:
       config:
         enabled: true
