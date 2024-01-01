@@ -61,8 +61,6 @@ spec:
         use-forwarded-headers: "true"
       metrics:
         enabled: false
-      extraArgs:
-        default-ssl-certificate: "networking/${SECRET_DOMAIN/./-}-staging-tls"
       podAnnotations:
         configmap.reloader.stakater.com/reload: "cloudflare-networks,ingress-nginx-controller"
       resources:
