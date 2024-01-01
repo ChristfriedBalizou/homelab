@@ -8,7 +8,7 @@ metadata:
     external-dns.home.arpa/enabled: "true"
     hajimari.io/enable: "false"
 spec:
-  ingressClassName: external
+  ingressclassName: nginx
   rules:
     - host: &host "flux-receiver.${SECRET_DOMAIN}"
       http:

@@ -28,7 +28,7 @@ spec:
       passwordHash: "${WEAVE_GITOPS_ADMIN_PASSWORD}"
     ingress:
       enabled: true
-      className: external
+      className: nginx
       annotations:
         external-dns.home.arpa/enabled: "true"
         hajimari.io/enable: "true"
