@@ -11,7 +11,7 @@ metadata:
     hajimari.io/icon: "mdi:computer-classic"
     hajimari.io/group: "Nodes"
 spec:
-  ingressclassName: nginx
+  ingressClassName: external
   rules:
     - host: &host "k8s-1.${SECRET_DOMAIN}"
       http:

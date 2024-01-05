@@ -11,7 +11,7 @@ metadata:
     hajimari.io/icon: "mdi:nas"
     hajimari.io/group: "Storage"
 spec:
-  ingressclassName: nginx
+  ingressClassName: external
   rules:
     - host: &host "jericho.${SECRET_DOMAIN}"
       http:

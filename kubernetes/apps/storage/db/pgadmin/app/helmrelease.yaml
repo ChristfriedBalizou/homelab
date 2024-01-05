@@ -20,7 +20,7 @@ spec:
       password: ${SECRET_GRAFANA_ADMIN_PASSWORD}
     ingress:
       enabled: true
-      ingressclassName: nginx
+      ingressClassName: external
       annotations:
         external-dns.home.arpa/enabled: "true"
         hajimari.io/enable: "true"
