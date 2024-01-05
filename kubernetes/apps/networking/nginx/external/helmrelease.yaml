@@ -32,7 +32,7 @@ spec:
   values:
     fullnameOverride: nginx-external
     controller:
-      replicaCount: 2
+      replicaCount: 1
       service:
         annotations:
           external-dns.alpha.kubernetes.io/hostname: "ipv4.${SECRET_DOMAIN}"
