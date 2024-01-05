@@ -34,14 +34,14 @@ metadata:
   namespace: flux-system
 spec:
   commonMetadata:
-      labels:
-        app.kubernetes.io/name: *app
+    labels:
+      app.kubernetes.io/name: *app
   dependsOn:
     - name: cluster-apps-cert-manager
     - name: cluster-apps-cert-manager-issuers
     - name: cluster-apps-metallb
     - name: cluster-apps-metallb-config
-  path: ./kubernetes/apps/network/nginx/external
+  path: ./kubernetes/apps/networking/nginx/external
   prune: true
   sourceRef:
     kind: GitRepository
@@ -54,7 +54,7 @@ spec:
   interval: 30m
   retryInterval: 1m
   timeout: 3m
-  
+
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
@@ -63,14 +63,14 @@ metadata:
   namespace: flux-system
 spec:
   commonMetadata:
-      labels:
-        app.kubernetes.io/name: *app
+    labels:
+      app.kubernetes.io/name: *app
   dependsOn:
     - name: cluster-apps-cert-manager
     - name: cluster-apps-cert-manager-issuers
     - name: cluster-apps-metallb
     - name: cluster-apps-metallb-config
-  path: ./kubernetes/apps/network/nginx/internal
+  path: ./kubernetes/apps/networking/nginx/internal
   prune: true
   sourceRef:
     kind: GitRepository
