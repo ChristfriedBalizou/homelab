@@ -6,6 +6,7 @@ resources:
   - ./pvc.yaml
   - ./cloudflare-ddns/ks.yaml
   - ./external-dns/ks.yaml
+  - ./cloudflared/ks.yaml
   - ./nginx/ks.yaml
   - ./k8s-gateway/ks.yaml
   - ./metallb/ks.yaml
