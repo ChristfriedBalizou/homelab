@@ -30,12 +30,9 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &app nginx-external
+  name: cluster-apps-nginx-external
   namespace: flux-system
 spec:
-  commonMetadata:
-    labels:
-      app.kubernetes.io/name: *app
   dependsOn:
     - name: cluster-apps-cert-manager
     - name: cluster-apps-cert-manager-issuers
@@ -59,12 +56,9 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &app nginx-internal
+  name: cluster-apps-nginx-internal
   namespace: flux-system
 spec:
-  commonMetadata:
-    labels:
-      app.kubernetes.io/name: *app
   dependsOn:
     - name: cluster-apps-cert-manager
     - name: cluster-apps-cert-manager-issuers
