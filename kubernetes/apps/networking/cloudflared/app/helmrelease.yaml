@@ -45,7 +45,6 @@ spec:
               TUNNEL_METRICS: 0.0.0.0:8080
               TUNNEL_TRANSPORT_PROTOCOL: quic
               TUNNEL_POST_QUANTUM: true
-              TUNNEL_ORIGIN_CERT: /etc/cloudflared/certs/cert.pem
               TUNNEL_ID:
                 valueFrom:
                   secretKeyRef:
@@ -105,7 +104,4 @@ spec:
         globalMounts:
           - path: /etc/cloudflared/creds/credentials.json
             subPath: credentials.json
-            readOnly: true
-          - path: /etc/cloudflared/certs/cert.pem
-            subPath: cert.pem
             readOnly: true
