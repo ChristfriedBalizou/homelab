@@ -8,9 +8,6 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  dependsOn:
-    - name: external-dns
-      namespace: networking
   path: ./kubernetes/apps/network/cloudflared/app
   prune: true
   sourceRef:
