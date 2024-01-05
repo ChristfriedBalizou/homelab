@@ -7,5 +7,5 @@ ingress:
     service: https://nginx-external-controller.networking.svc.cluster.local:443
     originRequest:
       originServerName: "ipv4.${SECRET_DOMAIN}"
-      noTLSVerify: true
+      noTLSVerify: true # This keeps me awake. What have I done wrong ???
   - service: http_status:404
