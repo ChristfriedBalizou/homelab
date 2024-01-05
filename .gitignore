@@ -6,7 +6,7 @@ kubeconfig
 # vscode-sops
 .decrypted~*.yaml
 .config.env*
-config.yaml
+bootstrap/vars/config.yaml
 *.agekey
 *.pub
 *.key
