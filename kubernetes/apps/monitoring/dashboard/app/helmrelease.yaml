@@ -17,9 +17,10 @@ spec:
         namespace: flux-system
   values:
     extraArgs:
-      - --enable-insecure-login
       - --enable-skip-login
       - --disable-settings-authorizer
+      - --enable-insecure-login
+      - --insecure-bind-address=0.0.0.0
     ingress:
       enabled: true
       className: external
