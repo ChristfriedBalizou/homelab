@@ -13,7 +13,7 @@ spec:
     kind: GitRepository
     name: home-kubernetes
   healthChecks:
-    - apiVersion: externaldns.k8s.io
+    - apiVersion: externaldns.k8s.io/v1alpha1
       kind: DNSEndpoint
       name: cloudflared
       namespace: networking
