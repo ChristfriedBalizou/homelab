@@ -18,7 +18,8 @@
     - bootstrap_github_repository_name
     - bootstrap_github_repository_branch
     - bootstrap_github_username
-    - bootstrap_metallb_ingress_addr
+    - bootstrap_metallb_external_ingress_addr
+    - bootstrap_metallb_internal_ingress_addr
     - bootstrap_ipv6_enabled
     - bootstrap_metallb_k8s_gateway_addr
     - bootstrap_kube_vip_addr
