@@ -41,7 +41,7 @@ spec:
         internalTrafficPolicy: Cluster
       ingressClassResource:
         name: internal
-        default: false
+        default: true
         controllerValue: k8s.io/internal
       admissionWebhooks:
         objectSelector:
