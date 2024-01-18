@@ -32,7 +32,7 @@ spec:
   values:
     fullnameOverride: nginx-internal
     controller:
-      replicaCount: 2
+      replicaCount: 1
       service:
         annotations:
           internal-dns.alpha.kubernetes.io/hostname: "ipv4.${SECRET_DOMAIN}"
