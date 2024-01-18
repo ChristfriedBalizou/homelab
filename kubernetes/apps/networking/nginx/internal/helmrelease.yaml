@@ -37,7 +37,7 @@ spec:
         annotations:
           internal-dns.alpha.kubernetes.io/hostname: "internal.${SECRET_DOMAIN}"
           metallb.universe.tf/loadBalancerIPs: |-
-            ${METALLB_INGRESS_ADDR}
+            ${METALLB_INTERNAL_INGRESS_ADDR}
         internalTrafficPolicy: Cluster
       ingressClassResource:
         name: internal
