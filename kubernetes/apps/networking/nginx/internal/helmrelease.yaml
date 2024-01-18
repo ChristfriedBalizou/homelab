@@ -35,7 +35,7 @@ spec:
       replicaCount: 1
       service:
         annotations:
-          internal-dns.alpha.kubernetes.io/hostname: "ipv4.${SECRET_DOMAIN}"
+          internal-dns.alpha.kubernetes.io/hostname: "internal.${SECRET_DOMAIN}"
           metallb.universe.tf/loadBalancerIPs: |-
             ${METALLB_INGRESS_ADDR}
         internalTrafficPolicy: Cluster
