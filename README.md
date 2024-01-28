@@ -25,7 +25,7 @@ This repo is my home Kubernetes cluster declared using yaml files and contains e
 | Ιntel NUC7i7BNH     |   1   | 16GB DDR4 |   K3s master   |    256GB M.2 SSD                      |
 | Intel NUC7i5BNH     |   1   |  8GB DDR4 |   K3s worker   |    256GB M.2 SSG                      |
 | Ιntel Celeron J4125 |   2   |  8GB DDR4 |   K3s worker   |    128GB M.2 SSD                      |
-| Synology NAS DS423+ |   1   |  2GB DDR4 |  Main storage  | 56TB(2*12TB + 2*16TB) SHR + 4TB cache |
+| Synology NAS DS423+ |   1   |  2GB DDR4 |  Main storage  | 56TB(2x12TB + 2x16TB) SHR + 4TB cache |
 
 And some standby Rasbpberry Pi's 4B awaiting resurection when needed!
 
