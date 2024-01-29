@@ -1,0 +1,85 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2beta2.json
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: minio
+  namespace: storage
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 2.5.0
+      interval: 30m
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+
+  values:
+    controllers:
+      main:
+        type: statefulset
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          main:
+            image:
+              repository: quay.io/minio/minio
+              tag: RELEASE.2024-01-29T03-56-32Z
+            args:
+              - server
+              - /data
+              - --console-address
+              - :9001
+            env:
+              MINIO_ROOT_USER: ${SECRET_GRAFANA_ADMIN_USER}
+              MINIO_ROOT_PASSWORD: ${SECRET_GRAFANA_ADMIN_PASSWORD}
+            resources:
+              requests:
+                cpu: 5m
+                memory: 128M
+            securityContext:
+              privileged: true
+              runAsUser: 0
+
+    service:
+      main:
+        ports:
+          http:
+            port: 9001
+          s3:
+            port: 9000
+
+    ingress:
+      main:
+        enabled: true
+        className: external
+        annotations:
+          external-dns.home.arpa/enabled: "true"
+          auth.home.arpa/enabled: "true"
+          hajimari.io/enable: 'true'
+          hajimari.io/icon: "mdi:pail"
+          hajimari.io/group: "Storage"
+        hosts:
+          - host: &host "minio.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                service:
+                  name: main
+                  port: http
+          - host: &host "s3.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                service:
+                  name: main
+                  port: s3
+
+    persistence:
+      data:
+        enabled: true
+        existingClaim: storage
+        subPath: minio
+        globalMounts:
+          - path: /data
