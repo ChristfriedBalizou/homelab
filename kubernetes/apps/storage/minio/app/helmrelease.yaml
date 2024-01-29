@@ -58,7 +58,6 @@ spec:
         className: external
         annotations:
           external-dns.home.arpa/enabled: "true"
-          auth.home.arpa/enabled: "true"
           hajimari.io/enable: 'true'
           hajimari.io/icon: "mdi:pail"
           hajimari.io/group: "Storage"
@@ -85,6 +84,6 @@ spec:
       data:
         enabled: true
         existingClaim: storage
-        subPath: minio
         globalMounts:
-          - path: /data
+          - subPath: minio
+            path: /data

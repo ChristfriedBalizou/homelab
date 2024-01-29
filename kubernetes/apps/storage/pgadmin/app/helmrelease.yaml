@@ -77,9 +77,9 @@ spec:
       config:
         enabled: true
         existingClaim: storage
-        subPath: pgadmin
         globalMounts:
-          - path: /var/lib/pgadmin
+          - subPath: pgadmin
+            path: /var/lib/pgadmin
     podSecurityContext:
       runAsUser: ${PUID}
       runAsGroup: ${PGID}
