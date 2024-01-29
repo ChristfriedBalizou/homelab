@@ -4,6 +4,8 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./pvc.yaml
-  - ./db
-  - ./minio
+  - ./postgresql/ks.yaml
+  - ./pgadmin/ks.yaml
+  - ./redis/ks.yaml
+  - ./minio/ks.yaml
   - ./synology/ks.yaml
