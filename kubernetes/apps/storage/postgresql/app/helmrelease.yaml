@@ -34,3 +34,7 @@ spec:
       podSecurityContext:
         enabled: true
         fsGroup: ${PGID}
+    metrics:
+      enabled: true
+      serviceMonitor:
+        enabled: true
