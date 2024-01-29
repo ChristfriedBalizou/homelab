@@ -1,40 +1,84 @@
 ---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2beta2.json
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
   name: pgadmin
   namespace: storage
 spec:
-  interval: 10m
+  interval: 30m
   chart:
     spec:
-      chart: pgadmin4
-      version: 1.23.1
+      chart: app-template
+      version: 2.5.0
       sourceRef:
         kind: HelmRepository
-        name: runix
+        name: bjw-s
         namespace: flux-system
+  maxHistory: 2
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
   values:
-    env:
-      email: ${SECRET_CLOUDFLARE_EMAIL}
-      password: ${SECRET_GRAFANA_ADMIN_PASSWORD}
+    controllers:
+      main:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          main:
+            image:
+              repository: dpage/pgadmin4
+              tag: "8.2@sha256:3b480788bfd84c9c46f09ce4984867f36fa8b8d8736b2044b376506cb0702ae2"
+            env:
+              PGADMIN_CONFIG_ENHANCED_COOKIE_PROTECTION: "False"
+              PGADMIN_DEFAULT_EMAIL: "${SECRET_CLOUDFLARE_EMAIL}"
+              PGADMIN_DEFAULT_PASSWORD: "${SECRET_GRAFANA_ADMIN_PASSWORD}"
+            resources:
+              requests:
+                cpu: 50m
+                memory: 100Mi
+              limits:
+                memory: 500Mi
+    service:
+      main:
+        ports:
+          http:
+            port: 80
     ingress:
-      enabled: true
-      ingressClassName: external
-      annotations:
-        external-dns.home.arpa/enabled: "true"
-        hajimari.io/enable: "true"
-        hajimari.io/icon: "simple-icons:postgresql"
-        hajimari.io/group: "Storage"
-      hosts:
-        - host: &host pgadmin.${SECRET_DOMAIN}
-          paths:
-            - path: /
-              pathType: Prefix
-      tls:
-        - hosts:
-            - *host
-          secretName: pgadmin-production-tls
-    persistentVolume:
-      enabled: true
-      existingClaim: storage
+      main:
+        enabled: true
+        annotations:
+          external-dns.home.arpa/enabled: "true"
+          hajimari.io/enable: "true"
+          hajimari.io/icon: "simple-icons:postgresql"
+          hajimari.io/group: "Storage"
+        hosts:
+          - host: &host pgadmin.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                service:
+                  name: main
+                  port: http
+        tls:
+          - hosts:
+              - *host
+            secretName: pgadmin-production-tls
+    persistence:
+      config:
+        enabled: true
+        existingClaim: storage
+        subPath: pgadmin
+        globalMounts:
+          - path: /var/lib/pgadmin
+    podSecurityContext:
+      runAsUser: ${PUID}
+      runAsGroup: ${PGID}
+      fsGroup: ${PGID}
+      fsGroupChangePolicy: "OnRootMismatch"
