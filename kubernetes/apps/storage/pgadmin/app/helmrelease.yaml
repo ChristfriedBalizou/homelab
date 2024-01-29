@@ -56,6 +56,7 @@ spec:
     ingress:
       main:
         enabled: true
+        className: external
         annotations:
           external-dns.home.arpa/enabled: "true"
           hajimari.io/enable: "true"
