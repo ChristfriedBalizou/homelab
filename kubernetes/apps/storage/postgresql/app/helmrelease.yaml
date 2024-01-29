@@ -22,6 +22,7 @@ spec:
       enabled: false
     auth:
       postgresPassword: ${SECRET_GRAFANA_ADMIN_PASSWORD}
+      database: "main"
     primary:
       persistence:
         enabled: true
