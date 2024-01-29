@@ -69,12 +69,17 @@ spec:
                 service:
                   name: main
                   port: http
-          - host: &host "s3.${SECRET_DOMAIN}"
+          - host: &hosts3 "s3.${SECRET_DOMAIN}"
             paths:
               - path: /
                 service:
                   name: main
                   port: s3
+        tls:
+          - hosts:
+              - *host
+              - *hosts3
+            secretName: minio-production-tls
 
     persistence:
       data:
