@@ -113,13 +113,3 @@ spec:
       enabled: true
       serviceMonitor:
         enabled: true
-
-  valuesFrom:
-    - targetPath: objstoreConfig.config.access_key
-      kind: Secret
-      name: cluster-thanos-secret
-      valuesKey: S3_ACCESS_KEY
-    - targetPath: objstoreConfig.config.secret_key
-      kind: Secret
-      name: cluster-thanos-secret
-      valuesKey: S3_SECRET_KEY
