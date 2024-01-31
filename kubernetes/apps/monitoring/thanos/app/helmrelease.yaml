@@ -22,8 +22,6 @@ spec:
         insecure: true
         bucket: thanos
         endpoint: minio.storage.svc.cluster.local:9000
-        access_key: "${S3_ACCESS_KEY}"
-        secret_key: "${S3_SECRET_KEY}"
 
     query:
       enabled: true
@@ -118,10 +116,8 @@ spec:
     - targetPath: objstoreConfig.config.access_key
       kind: Secret
       name: cluster-thanos-secret
-      namespace: monitoring
       valuesKey: S3_ACCESS_KEY
     - targetPath: objstoreConfig.config.secret_key
       kind: Secret
       name: cluster-thanos-secret
-      namespace: monitoring
       valuesKey: S3_SECRET_KEY
