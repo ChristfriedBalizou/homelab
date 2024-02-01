@@ -26,3 +26,4 @@ resources:
   - ./node-feature-discovery.yaml
   - ./kyverno.yaml
   - ./twingate.yaml
+  - ./democratic-csi.yaml
