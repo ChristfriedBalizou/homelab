@@ -71,8 +71,8 @@ spec:
           memory: 204M
       persistence:
         enabled: true
-        existingClaim: thanos
-        subPath: "compactor"
+        storageClass: "local-hostpath"
+        size: 15Gi
 
     storegateway:
       enabled: true
@@ -82,8 +82,8 @@ spec:
           memory: 204M
       persistence:
         enabled: true
-        existingClaim: thanos
-        subPath: "storegateway"
+        storageClass: "local-hostpath"
+        size: 1Gi
 
     ruler:
       enabled: true
@@ -100,8 +100,8 @@ spec:
         enabled: true
       persistence:
         enabled: true
-        existingClaim: thanos
-        subPath: "storegateway"
+        storageClass: "local-hostpath"
+        size: 512Mi
       resources:
         requests:
           cpu: 23m
