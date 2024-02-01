@@ -4,6 +4,7 @@ kind: Kustomization
 namespace: monitoring
 resources:
   - helmrelease.yaml
+  - ./scrapeconfigs
 configMapGenerator:
   - name: kube-state-metrics-configmap
     files:
