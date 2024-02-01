@@ -7,5 +7,5 @@ resources:
   - ./uptime-kuma/ks.yaml
   - ./dashboard/ks.yaml
   - ./thanos/ks.yaml
-  - ./kube-prometheus-stack
+  - ./kube-prometheus-stack/ks.yaml
   - ./webmin
