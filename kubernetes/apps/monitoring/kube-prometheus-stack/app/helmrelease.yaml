@@ -177,7 +177,7 @@ spec:
               storageClassName: local-hostpath
               resources:
                 requests:
-                  storage: 20Gi
+                  storage: 5Gi
     nodeExporter:
       enabled: true
     prometheus-node-exporter:
