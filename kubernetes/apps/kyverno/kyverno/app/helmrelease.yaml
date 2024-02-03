@@ -31,6 +31,8 @@ spec:
     grafana:
       enabled: false
     backgroundController:
+      metricsService:
+        create: false
       serviceMonitor:
         enabled: false
       rbac:
