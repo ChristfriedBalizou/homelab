@@ -1,7 +1,7 @@
 ---
 sonarr:
   main:
-    base_url: http://sonarr.media:80
+    base_url: http://sonarr.media:8989
     api_key: !env_var SONARR_0_API_KEY
     replace_existing_custom_formats: true
     delete_old_custom_formats: true
