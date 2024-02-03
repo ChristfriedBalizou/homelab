@@ -34,22 +34,7 @@ spec:
     grafana:
       enabled: false
     backgroundController:
-      metricsService:
-        create: false
-      metering:
-        disabled: true
-      rbac:
-        clusterRole:
-          extraResources:
-            - apiGroups:
-                - ""
-              resources:
-                - ingresses
-                - pods
-              verbs:
-                - create
-                - update
-                - delete
+      enabled: false
     cleanupController:
       serviceMonitor:
         enabled: false
