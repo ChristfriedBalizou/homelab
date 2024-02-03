@@ -32,7 +32,7 @@ spec:
       enabled: false
     backgroundController:
       serviceMonitor:
-        enabled: true
+        enabled: false
       rbac:
         clusterRole:
           extraResources:
@@ -47,10 +47,10 @@ spec:
                 - delete
     cleanupController:
       serviceMonitor:
-        enabled: true
+        enabled: false
     reportsController:
       serviceMonitor:
-        enabled: true
+        enabled: false
     admissionController:
       replicas: 1
       serviceMonitor:
