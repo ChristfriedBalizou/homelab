@@ -28,6 +28,9 @@ spec:
   values:
     crds:
       install: true
+    config:
+      metricsConfig:
+        create: false
     grafana:
       enabled: false
     backgroundController:
@@ -35,8 +38,6 @@ spec:
         create: false
       metering:
         disabled: true
-      metricsConfig:
-        create: false
       rbac:
         clusterRole:
           extraResources:
