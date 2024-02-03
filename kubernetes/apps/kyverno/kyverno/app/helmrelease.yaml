@@ -35,6 +35,8 @@ spec:
         create: false
       metering:
         disabled: true
+      metricsConfig:
+        create: false
       rbac:
         clusterRole:
           extraResources:
