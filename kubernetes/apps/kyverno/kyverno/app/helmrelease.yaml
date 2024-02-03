@@ -52,9 +52,9 @@ spec:
       serviceMonitor:
         enabled: true
     admissionController:
-      replicas: 3
+      replicas: 1
       serviceMonitor:
-        enabled: true
+        enabled: false
       rbac:
         clusterRole:
           extraResources:
