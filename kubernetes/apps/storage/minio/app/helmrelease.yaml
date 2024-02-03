@@ -36,8 +36,9 @@ spec:
             env:
               MINIO_ROOT_USER: ${SECRET_GRAFANA_ADMIN_USER}
               MINIO_ROOT_PASSWORD: ${SECRET_GRAFANA_ADMIN_PASSWORD}
-              MINIO_PROMETHEUS_JOB_ID: "minio"
+              MINIO_PROMETHEUS_JOB_ID: "scrapeConfig/monitoring/minio"
               MINIO_PROMETHEUS_AUTH_TYPE: "public"
+              MINIO_PROMETHEUS_URL: "http://kube-prometheus-stack-prometheus.monitoring:9090"
             resources:
               requests:
                 cpu: 5m
