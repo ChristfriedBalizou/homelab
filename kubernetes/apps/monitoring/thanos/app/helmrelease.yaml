@@ -46,6 +46,10 @@ spec:
         annotations:
           external-dns.home.arpa/enabled: "true"
           auth.home.arpa/enabled: "true"
+          hajimari.io/enable: "true"
+          hajimari.io/appNname: "Thanos"
+          hajimari.io/group: "Monitoring"
+          hajimari.io/icon: game-icons:gauntlet
         hostname: "thanos.${SECRET_DOMAIN}"
         ingressClassName: "external"
         tls: true
