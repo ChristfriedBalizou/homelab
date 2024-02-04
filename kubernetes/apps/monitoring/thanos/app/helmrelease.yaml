@@ -40,7 +40,7 @@ spec:
           memory: 64M
 
     queryFrontend:
-      enabled: true
+      enabled: false
       ingress:
         enabled: true
         annotations:
@@ -50,9 +50,13 @@ spec:
           hajimari.io/appNname: "Thanos"
           hajimari.io/group: "Monitoring"
           hajimari.io/icon: game-icons:gauntlet
-        hostname: "thanos.${SECRET_DOMAIN}"
+        hostname: &host "thanos.${SECRET_DOMAIN}"
         ingressClassName: "external"
         tls: true
+        extraTls:
+          - hosts:
+              - *host
+            secretName: thanos-production-tls
 
     bucketweb:
       enabled: true
