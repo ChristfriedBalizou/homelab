@@ -19,17 +19,14 @@ spec:
   values:
     annotations:
       configmap.reloader.stakater.com/reload: grafana
-      secret.reloader.stakater.com/reload: grafana-secret
+      secret.reloader.stakater.com/reload: cluster-grafana-secret
 
     extraInitContainers:
       - name: 01-init-db
         image: ghcr.io/onedr0p/postgres-init:16
-        env:
-          INIT_POSTGRES_DBNAME: grafana
-          INIT_POSTGRES_HOST: postgresql.storage.svc.cluster.local
-          INIT_POSTGRES_USER: ${GRAFANA_POSTGRES_USER}
-          INIT_POSTGRES_PASS: ${GRAFANA_POSTGRES_PASS}
-          INIT_POSTGRES_SUPER_PASS: ${POSTGRES_SUPER_PASS}
+        envFrom:
+          - secretRef:
+              name: &secret cluster-grafana-secret
 
     replicas: 1
 
@@ -231,32 +228,56 @@ spec:
       GF_SECURITY_COOKIE_SAMESITE: grafana
       GF_SERVER_ROOT_URL: https://grafana.${SECRET_DOMAIN}
 
-      GF_DATABASE_NAME: grafana
-      GF_DATABASE_HOST: postgresql.storage.svc.cluster.local:5432
-      GF_DATABASE_USER: ${GRAFANA_POSTGRES_USER}
-      GF_DATABASE_PASSWORD: ${GRAFANA_POSTGRES_PASS}
-      GF_DATABASE_SSL_MODE: disable
-      GF_DATABASE_TYPE: postgres
-      GF_AUTH_GENERIC_OAUTH_CLIENT_SECRET: ${GRAFANA_OAUTH_CLIENT_SECRET}
+    envFromSecrets:
+      - name: *secret
 
-      GF_ANALYTICS_CHECK_FOR_UPDATES: false
-      GF_ANALYTICS_CHECK_FOR_PLUGIN_UPDATES: false
-      GF_ANALYTICS_REPORTING_ENABLED: false
-      GF_AUTH_ANONYMOUS_ENABLED: false
-      GF_AUTH_BASIC_ENABLED: false
-      GF_AUTH_GENERIC_OAUTH_ENABLED: true
+    grafana.ini:
+      analytics:
+        check_for_updates: false
+        check_for_plugin_updates: false
+        reporting_enabled: false
+      auth:
+        oauth_auto_login: true
+        oauth_allow_insecure_email_lookup: true
+      auth.generic_oauth:
+        enabled: true
+        name: Authelia
+        icon: signin
+        scopes: openid profile email groups
+        empty_scopes: false
+        login_attribute_path: preferred_username
+        groups_attribute_path: groups
+        name_attribute_path: name
+        use_pkce: true
+      auth.generic_oauth.group_mapping:
+        org_id: 1
+        role_attribute_path: |
+          contains(groups[*], 'admin') && 'Admin'
+      auth.basic:
+        enabled: false
+      auth.anonymous:
+        enabled: false
+      news:
+        news_feed_enabled: false
 
     imageRenderer:
       enabled: true
 
     ingress:
       enabled: true
-      ingressClassName: internal-nginx
+      ingressClassName: external
+      annotations:
+        external-dns.home.arpa/enabled: "true"
+        hajimari.io/enable: "true"
+        hajimari.io/appNname: "Grafana"
+        hajimari.io/group: "Monitoring"
+        hajimari.io/icon: cbi:grafana
       hosts:
         - &host grafana.${SECRET_DOMAIN}
       tls:
         - hosts:
             - *host
+          secretName: grafana-production-tls
 
     persistence:
       enabled: false
