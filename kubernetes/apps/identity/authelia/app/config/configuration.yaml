@@ -53,7 +53,7 @@ identity_providers:
         pre_configured_consent_duration: 1y
         scopes: ["openid", "profile", "groups", "email"]
         redirect_uris: ["https://grafana.${SECRET_DOMAIN}/login/generic_oauth"]
-        userinfo_signing_algorithm: none
+        userinfo_signed_response_alg: none
       - id: pgadmin
         description: PG Admin
         secret: "${PG_OAUTH2_CLIENT_SECRET}"
