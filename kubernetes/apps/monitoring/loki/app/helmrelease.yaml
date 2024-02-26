@@ -132,7 +132,24 @@ spec:
         repository: nginxinc/nginx-unprivileged
         tag: 1.25-alpine
       ingress:
-        enabled: false
+        enabled: true
+        ingressClassName: "external"
+        annotations:
+          external-dns.home.arpa/enabled: "true"
+          auth.home.arpa/enabled: "true"
+          hajimari.io/enable: "true"
+          hajimari.io/appNname: "Loki"
+          hajimari.io/group: "Monitoring"
+          hajimari.io/icon: mdi:letter-l
+        hosts:
+          - host: &host "loki.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - *host
+            secretName: loki-production-tls
 
     write:
       replicas: 2
