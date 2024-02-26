@@ -49,8 +49,8 @@ spec:
               tag: latest@sha256:db064da4ed1e14aebcb57f49174deccb99e73767a6033c491b09348e0ac59474
             env:
               TZ: ${TIMEZONE}
-              PGID: 1000
-              PUID: 1000
+              PUID: ${PUID}
+              PGID: ${PGID}
               DELAY: 2.5
               SORT: rating
               NOSEARCH: yes
