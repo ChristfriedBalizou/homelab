@@ -303,6 +303,9 @@ spec:
     serviceMonitor:
       enabled: true
 
+    serviceAccount:
+      autoMount: true
+
     sidecar:
       dashboards:
         enabled: true
