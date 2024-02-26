@@ -40,7 +40,7 @@ spec:
           memory: 64M
 
     queryFrontend:
-      enabled: false
+      enabled: true
       ingress:
         enabled: true
         annotations:
