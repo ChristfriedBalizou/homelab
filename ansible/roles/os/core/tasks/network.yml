@@ -20,8 +20,10 @@
   community.general.alternatives:
     name: iptables
     path: /usr/sbin/iptables-legacy
+  ignore_errors: true
 
 - name: Networking | Correct ip6tables version selected
   community.general.alternatives:
     name: ip6tables
     path: /usr/sbin/ip6tables-legacy
+  ignore_errors: true

@@ -1,0 +1,4 @@
+---
+- include_tasks: application.yaml
+  tags:
+    - application

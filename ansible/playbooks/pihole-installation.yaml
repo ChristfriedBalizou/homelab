@@ -1,0 +1,16 @@
+---
+- hosts:
+    - pihole
+  become: true
+  gather_facts: true
+  any_errors_fatal: true
+  pre_tasks:
+    - name: Pausing for 5 seconds...
+      ansible.builtin.pause:
+        seconds: 5
+  tasks:
+    - name: Installing pihole from automated script
+      ansible.builtin.shell:
+        cmd: curl -sSL https://install.pi-hole.net | bash
+      args:
+        executable: /bin/bash

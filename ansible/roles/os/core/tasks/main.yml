@@ -3,14 +3,6 @@
   tags:
     - locale
 
-- include_tasks: packages.yml
-  tags:
-    - packages
-
-- include_tasks: raspberry.yml
-  tags:
-    - raspberry
-
 - include_tasks: kernel.yml
   tags:
     - kernel
@@ -26,7 +18,3 @@
 - include_tasks: user.yml
   tags:
     - user
-
-- include_tasks: application.yaml
-  tags:
-    - application

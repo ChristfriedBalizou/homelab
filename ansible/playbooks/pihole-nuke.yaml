@@ -1,0 +1,17 @@
+---
+- name: Nuke pihole
+  hosts: piholes
+  become: true
+  gather_facts: true
+  any_errors_fatal: true
+  serial: 1
+  pre_task:
+    - name: Pausing for 5 seconds...
+      ansible.builtin.pause:
+        seconds: 5
+  tasks:
+    - name: Uninstall pihole
+      ansible.builtin.shell:
+        cmd: pihole uninstall
+      args:
+        executable: /bin/bash

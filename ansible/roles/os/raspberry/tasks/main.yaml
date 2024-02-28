@@ -1,0 +1,8 @@
+---
+- include_tasks: packages.yaml
+  tags:
+    - packages
+
+- include_tasks: raspberry.yml
+  tags:
+    - raspberry

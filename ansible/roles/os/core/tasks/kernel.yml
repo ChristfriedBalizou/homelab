@@ -7,6 +7,7 @@
     - br_netfilter
     - overlay
     - rbd
+  ignore_errors: true
 
 - name: System Configuration (2) | Enable kernel modules on boot
   ansible.builtin.copy:
