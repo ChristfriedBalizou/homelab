@@ -10,7 +10,4 @@
         seconds: 5
   tasks:
     - name: Installing pihole from automated script
-      ansible.builtin.shell:
-        cmd: curl -sSL https://install.pi-hole.net | bash
-      args:
-        executable: /bin/bash
+      ansible.builtin.shell: curl -sSL https://install.pi-hole.net | /bin/bash /dev/stdin --unattended

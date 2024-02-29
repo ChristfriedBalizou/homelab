@@ -1,6 +1,6 @@
 ---
-- name: Nuke pihole
-  hosts: piholes
+- hosts:
+    - pihole
   become: true
   gather_facts: true
   any_errors_fatal: true
@@ -11,7 +11,5 @@
         seconds: 5
   tasks:
     - name: Uninstall pihole
-      ansible.builtin.shell:
-        cmd: pihole uninstall
-      args:
-        executable: /bin/bash
+      ansible.builtin.shell: pihole uninstall
+      ignore_errors: true

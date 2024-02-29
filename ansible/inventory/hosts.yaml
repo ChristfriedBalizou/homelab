@@ -18,9 +18,10 @@ kubernetes:
           ansible_user: ubuntu
           ansible_host: 192.168.1.121
 
-piholes:
+raspberry:
   children:
-    hosts:
-      pihole:
-        ansible_user: pi.hole
-        ansible_host: 192.168.1.114
+    piholes:
+      hosts:
+        pihole:
+          ansible_user: pi.hole
+          ansible_host: 192.168.1.114
