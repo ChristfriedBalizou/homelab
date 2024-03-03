@@ -1,6 +1,8 @@
 ---
 - hosts:
     - pihole
+  vars_files:
+    - "{{ BOOTSTRAP_DIR }}/vars/config.yaml"
   become: true
   gather_facts: true
   any_errors_fatal: true
@@ -9,5 +11,10 @@
       ansible.builtin.pause:
         seconds: 5
   tasks:
+    - name: Copy setupVars template
+      ansible.builtin.template:
+        src: setupVars.conf.j2
+        dest: /etc/pihole/setupVars.conf
+
     - name: Installing pihole from automated script
       ansible.builtin.shell: curl -sSL https://install.pi-hole.net | /bin/bash /dev/stdin --unattended
