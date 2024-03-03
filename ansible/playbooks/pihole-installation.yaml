@@ -2,7 +2,7 @@
 - hosts:
     - pihole
   vars_files:
-    - "{{.BOOTSTRAP_DIR}}/vars/config.yaml"
+    - ../../bootstrap/vars/config.yaml
   become: true
   gather_facts: true
   any_errors_fatal: true
@@ -11,6 +11,12 @@
       ansible.builtin.pause:
         seconds: 5
   tasks:
+    - name: Create /etc/pihole directory if it does not exist
+      ansible.builtin.file:
+        path: /etc/pihole
+        state: directory
+        mode: "0755"
+
     - name: Copy setupVars template
       ansible.builtin.template:
         src: setupVars.conf.j2
