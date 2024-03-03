@@ -13,3 +13,8 @@
     - name: Uninstall pihole
       ansible.builtin.shell: pihole uninstall
       ignore_errors: true
+
+    - name: Remove /etc/pihole
+      ansible.builtin.file:
+        path: /etc/pihole
+        state: absent
