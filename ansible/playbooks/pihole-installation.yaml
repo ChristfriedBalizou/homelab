@@ -2,7 +2,7 @@
 - hosts:
     - pihole
   vars_files:
-    - "{{ BOOTSTRAP_DIR }}/vars/config.yaml"
+    - "{{.BOOTSTRAP_DIR}}/vars/config.yaml"
   become: true
   gather_facts: true
   any_errors_fatal: true
