@@ -89,6 +89,13 @@ spec:
             - name: DS_PROMETHEUS
               value: Prometheus
 
+        minio:
+          # renovate: depName="MinIO Dashboard"
+          gnetId: 13502
+          revision: 26
+          datasource:
+            - { name: DS_PROMETHEUS, value: Prometheus }
+
         external-dns:
           # renovate: dashboardName="External-DNS"
           gnetId: 15038
