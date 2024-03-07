@@ -32,7 +32,7 @@ spec:
         sidecarsNamespace: monitoring
       stores:
         - minio.storage.svc.cluster.local:9001
-      replicaLabels:
+      replicaLabel:
         - "__replica__"
       resources:
         requests:
@@ -95,6 +95,7 @@ spec:
 
     ruler:
       enabled: true
+      replicaLabel: __replica__
       alertmanagers:
         - http://alertmanager.monitoring.svc.cluster.local:9093
       clusterName: default

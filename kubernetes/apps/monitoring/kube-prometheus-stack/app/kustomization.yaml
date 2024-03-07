@@ -5,9 +5,5 @@ namespace: monitoring
 resources:
   - helmrelease.yaml
   - ./scrapeconfigs
-configMapGenerator:
-  - name: kube-state-metrics-configmap
-    files:
-      - kube-state-metrics.yaml=./resources/kube-state-metrics.yaml
 generatorOptions:
   disableNameSuffixHash: true
