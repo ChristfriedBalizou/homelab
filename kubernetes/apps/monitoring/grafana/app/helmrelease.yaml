@@ -104,7 +104,7 @@ spec:
           datasource:
             - { name: DS_PROMETHEUS, value: Prometheus }
 
-         redis:
+        redis:
           # renovate: depName="Redis Dashboard for Prometheus Redis Exporter 1.x"
           gnetId: 763
           revision: 6
