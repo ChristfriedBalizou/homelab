@@ -20,7 +20,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: webmin
+                name: k8s-0
                 port:
                   number: 10000
   tls:
