@@ -213,7 +213,7 @@ spec:
 
     datasources:
       datasources.yaml:
-        apiVersion: 1d
+        apiVersion: 1
         datasources:
           - access: proxy
             isDefault: true
