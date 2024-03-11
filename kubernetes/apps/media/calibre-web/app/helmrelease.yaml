@@ -32,7 +32,7 @@ spec:
           main:
             image:
               repository: ghcr.io/bjw-s/calibre-web
-              tag: 0.6.21@sha256:646e3f9c0158d57b3ffdf031d14d68e31a40f89be6bb63be7dd9ed84173ff043
+              tag: 0.6.21@sha256:22d891357564eddd353ed66c96ce7181fe57b9c849267cf8e2e50d9f75ae7ec0
             env:
               TZ: ${TIMEZONE}
             resources:
