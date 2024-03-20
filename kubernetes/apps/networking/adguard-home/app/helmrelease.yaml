@@ -22,7 +22,7 @@ spec:
         reloader.stakater.com/auto: "true"
     image:
       repository: adguard/adguardhome
-      tag: v0.107.43
+      tag: v0.107.46
     service:
       main:
         enabled: true
