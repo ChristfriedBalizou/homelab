@@ -81,7 +81,7 @@ spec:
                 pathType: Prefix
                 service:
                   identifier: main
-                  path: http
+                  port: http
         tls:
           - hosts:
               - "calibre.${SECRET_DOMAIN}"

@@ -37,11 +37,6 @@ spec:
               repository: busybox
               tag: latest
             command: ["/bin/sh", "-c", "cp /traktarrconfig/config.json /config/config.json"]
-            volumeMounts:
-              - name: traktarr
-                mountPath: /traktarrconfig
-              - name: config
-                mountPath: /config
         containers:
           main:
             image:

@@ -64,7 +64,7 @@ spec:
                 pathType: Prefix
                 service:
                   identifier: main
-                  path: http
+                  port: http
         tls:
           - hosts:
               - "library.${SECRET_DOMAIN}"

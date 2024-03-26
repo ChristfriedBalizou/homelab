@@ -121,7 +121,7 @@ spec:
                 pathType: Prefix
                 service:
                   identifier: main
-                  path: http
+                  port: http
         tls:
           - hosts:
               - "prowlarr.${SECRET_DOMAIN}"

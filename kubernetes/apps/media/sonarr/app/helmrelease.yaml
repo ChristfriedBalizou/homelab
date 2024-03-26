@@ -32,7 +32,7 @@ spec:
     controllers:
       main:
         pod:
-          podSecurityContext:
+          securityContext:
             runAsUser: 568
             runAsGroup: 568
             fsGroup: 568
@@ -44,7 +44,7 @@ spec:
               image:
                 repository: ghcr.io/onedr0p/postgres-init
                 tag: 16.2
-              imagePullPolicy: IfNotPresent
+                pullPolicy: IfNotPresent
               env:
                 INIT_POSTGRES_DBNAME: sonarr sonarr-log
                 INIT_POSTGRES_HOST: &postgres postgresql.storage.svc.cluster.local
@@ -123,7 +123,7 @@ spec:
                 pathType: Prefix
                 service:
                   identifier: main
-                  path: http
+                  port: http
         tls:
           - hosts:
               - "sonarr.${SECRET_DOMAIN}"
