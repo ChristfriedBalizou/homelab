@@ -89,7 +89,7 @@ spec:
             port: *port
     serviceMonitor:
       main:
-      serviceName: cloudflared
+        serviceName: cloudflared
         enabled: true
     persistence:
       config:
