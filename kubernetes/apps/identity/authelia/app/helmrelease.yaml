@@ -118,8 +118,7 @@ spec:
               AUTHELIA_SERVER_BUFFERS_READ: "2048000"
             envFrom:
               - secretRef:
-                  name: cluster-authelia-secrets
-                  namespace: identity
+                  name: "identity:cluster-authelia-secrets"
             probes:
               liveness: &probes
                 enabled: true
@@ -153,6 +152,7 @@ spec:
     serviceMonitor:
       main:
         enabled: true
+        serviceName: authelia
         endpoints:
           - port: metrics
             scheme: http
