@@ -89,9 +89,14 @@ spec:
             port: *port
     serviceMonitor:
       main:
-        serviceName: cloudflared
         enabled: true
-    persistence:
+        serviceName: cloudflared
+        endpoints:
+          - port: http
+            scheme: http
+            path: /metrics
+            interval: 1m
+            scrapeTimeout: 30s
       config:
         enabled: true
         type: configMap
