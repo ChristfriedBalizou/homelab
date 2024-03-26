@@ -29,7 +29,7 @@ spec:
     controllers:
       main:
         pod:
-          podAnnotations:
+          annotations:
             secret.reloader.stakater.com/reload: "traktarr-config"
         initContainers:
           copy:
