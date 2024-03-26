@@ -50,6 +50,7 @@ spec:
                 memory: 500Mi
     service:
       main:
+        controler: main
         ports:
           http:
             port: 80
