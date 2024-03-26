@@ -118,7 +118,7 @@ spec:
               AUTHELIA_SERVER_BUFFERS_READ: "2048000"
             envFrom:
               - secretRef:
-                  name: "identity:cluster-authelia-secrets"
+                  name: cluster-authelia-secrets
             probes:
               liveness: &probes
                 enabled: true
