@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 2.5.0
+      version: 3.0.4
       sourceRef:
         kind: HelmRepository
         name: bjw-s
@@ -42,7 +42,7 @@ spec:
             image:
               repository: ghcr.io/onedr0p/postgres-init
               tag: 16.2
-            imagePullPolicy: IfNotPresent
+              pullPolicy: IfNotPresent
             env:
               INIT_POSTGRES_DBNAME: &db authelia
               INIT_POSTGRES_HOST: &postgres postgresql.storage.svc.cluster.local
@@ -58,7 +58,7 @@ spec:
               labelSelector:
                 matchLabels:
                   app.kubernetes.io/name: *app
-          podSecurityContext:
+          securityContext:
             runAsUser: 568
             runAsGroup: 568
             fsGroup: 568
@@ -143,6 +143,7 @@ spec:
                 memory: 200Mi
     service:
       main:
+        controller: main
         ports:
           http:
             port: *port
@@ -179,7 +180,7 @@ spec:
               - path: /
                 pathType: Prefix
                 service:
-                  name: main
+                  identifier: main
                   port: http
         tls:
           - hosts:
