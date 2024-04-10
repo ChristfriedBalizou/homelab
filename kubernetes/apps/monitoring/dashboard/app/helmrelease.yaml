@@ -19,7 +19,7 @@ spec:
     app:
       ingress:
         enabled: true
-        className: external
+        ingressClassName: external
         annotations:
           external-dns.home.arpa/enabled: "true"
           auth.home.arpa/enabled: "true"
