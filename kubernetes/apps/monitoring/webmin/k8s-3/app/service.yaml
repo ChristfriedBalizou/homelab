@@ -5,7 +5,7 @@ metadata:
   namespace: monitoring
 spec:
   ports:
-  - name: webmin
+  - name: k8s-3
     port: 10000
     protocol: TCP
     targetPort: 10000
