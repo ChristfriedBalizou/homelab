@@ -30,9 +30,7 @@ spec:
         hosts:
           - &host "kubernetes.${SECRET_DOMAIN}"
         tls:
-          - hosts:
-              - *host
-            secretName: dashboard-production-tls
+          secretName: dashboard-production-tls
     metricsScraper:
       enabled: true
     cert-manager:
