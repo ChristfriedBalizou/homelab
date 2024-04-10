@@ -16,26 +16,22 @@ spec:
         name: kubernetes-dashboard-charts
         namespace: flux-system
   values:
-    extraArgs:
-      - --enable-skip-login
-      - --disable-settings-authorizer
-      - --enable-insecure-login
-      - --insecure-bind-address=0.0.0.0
-    ingress:
-      enabled: true
-      className: external
-      annotations:
-        external-dns.home.arpa/enabled: "true"
-        auth.home.arpa/enabled: "true"
-        hajimari.io/enable: "true"
-        hajimari.io/appNname: "Kubernetes Dashboard"
-        hajimari.io/group: "System"
-        hajimari.io/icon: mdi:kubernetes
-      hosts:
-        - &host "kubernetes.${SECRET_DOMAIN}"
-      tls:
-        - hosts:
-            - *host
-          secretName: dashboard-production-tls
+    app:
+      ingress:
+        enabled: true
+        className: external
+        annotations:
+          external-dns.home.arpa/enabled: "true"
+          auth.home.arpa/enabled: "true"
+          hajimari.io/enable: "true"
+          hajimari.io/appNname: "Kubernetes Dashboard"
+          hajimari.io/group: "System"
+          hajimari.io/icon: mdi:kubernetes
+        hosts:
+          - &host "kubernetes.${SECRET_DOMAIN}"
+        tls:
+          - hosts:
+              - *host
+            secretName: dashboard-production-tls
     metricsScraper:
       enabled: true
