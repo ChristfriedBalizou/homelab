@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://kubernetes.github.io/dashboard
       chart: kubernetes-dashboard
-      version: 7.3.1
+      version: 7.3.0
       sourceRef:
         kind: HelmRepository
         name: kubernetes-dashboard-charts
@@ -35,3 +35,10 @@ spec:
             secretName: dashboard-production-tls
     metricsScraper:
       enabled: true
+    cert-manager:
+      enabled: false
+    nginx:
+      enabled: false
+    extras:
+      serviceMonitor:
+        enabled: true
