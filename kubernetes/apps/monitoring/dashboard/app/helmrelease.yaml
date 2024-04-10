@@ -31,6 +31,12 @@ spec:
           - &host "kubernetes.${SECRET_DOMAIN}"
         tls:
           secretName: dashboard-production-tls
+    api:
+      containers:
+        args:
+          - --enable-skip-login
+          - --disable-settings-authorizer
+          - --enable-insecure-login
     metricsScraper:
       enabled: true
     cert-manager:
