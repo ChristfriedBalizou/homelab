@@ -48,4 +48,5 @@ spec:
       config:
         enabled: true
         existingClaim: apps-media
-        subPath: jellyfin
+        globalMounts:
+          - subPath: jellyfin
