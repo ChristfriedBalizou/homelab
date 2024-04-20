@@ -38,9 +38,9 @@ spec:
                 memory: 250Mi
         pod:
           securityContext:
-            runAsUser: 568
-            runAsGroup: 568
-            fsGroup: 568
+            runAsUser: ${PUID}
+            runAsGroup: ${PGID}
+            fsGroup: ${PGID}
             fsGroupChangePolicy: "OnRootMismatch"
             supplementalGroups:
               - 100
