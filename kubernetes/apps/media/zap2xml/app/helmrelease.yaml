@@ -29,7 +29,7 @@ spec:
             command:
               - "/bin/sh"
               - "-c"
-              - "chmod +x /zap/zap2xml.pl && /zap/zap2xml.pl -u $USERNAME -p $PASSWORD -U -o /config/$XMLTV_FILENAME $OPT_ARGS"
+              - "cat /zap2xml.pl | sed 's/tvlistings.zap2it.com/tvschedule.zap2it.com/g' | perl - -u $USERNAME -p $PASSWORD -U -o /config/$XMLTV_FILENAME $OPT_ARGS"
             env:
               USERNAME: ${ZAP_USERNAME}
               PASSWORD: ${ZAP_PASSWORD}

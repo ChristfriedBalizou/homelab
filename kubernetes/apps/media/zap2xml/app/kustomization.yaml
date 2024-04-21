@@ -4,11 +4,3 @@ kind: Kustomization
 namespace: media
 resources:
   - ./helmrelease.yaml
-configMapGenerator:
-  - name: zap2xml-configmap
-    files:
-      - ./zap2xml.pl
-generatorOptions:
-  disableNameSuffixHash: true
-  annotations:
-    kustomize.toolkit.fluxcd.io/substitute: disabled
