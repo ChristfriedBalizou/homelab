@@ -28,7 +28,7 @@ spec:
             command:
               - "/bin/sh"
               - "-c"
-              - "/zap2xml.pl -u $USERNAME -p $PASSWORD -U -o /data/$XMLTV_FILENAME $OPT_ARGS"
+              - "/zap2xml.pl -u $USERNAME -p $PASSWORD -U -o /config/$XMLTV_FILENAME $OPT_ARGS"
             env:
               USERNAME: ${ZAP_USERNAME}
               PASSWORD: ${ZAP_PASSWORD}
@@ -49,7 +49,7 @@ spec:
             supplementalGroups:
               - 100
     persistence:
-      data:
+      config:
         enabled: true
         existingClaim: apps-media
         globalMounts:
