@@ -32,7 +32,7 @@ spec:
             env:
               USERNAME: ${ZAP_USERNAME}
               PASSWORD: ${ZAP_PASSWORD}
-              OPT_ARGS: '-I -D'
+              OPT_ARGS: '-I -D -c "/cache"'
               TZ: ${TIMEZONE}
             resources:
               requests:
@@ -54,3 +54,11 @@ spec:
         existingClaim: apps-media
         globalMounts:
           - subPath: jellyfin
+
+      cache:
+        enabled: true
+        type: emptyDir
+        medium: Memory
+        sizeLimit: 1Gi
+        globalMounts:
+          - path: /cache
