@@ -21,19 +21,23 @@ spec:
         cronjob:
           schedule: "0 */12 * * *"
         initContainers:
-          executable:
+          overwrite:
             image:
               repository: busybox
               tag: latest
             command:
               - "/bin/sh"
               - "-c"
-              - "chmod +x /entry.sh"
+              - "cat /config/entry.sh > /entry.sh"
         containers:
           main:
             image:
               repository: shuaiscott/zap2xml
               tag: latest@sha256:ffcb45211ac8f2eeaa7e7b323625d6261ee8e223e0169f082cd2101a9b77317f
+            command:
+              - "/bin/sh"
+              - "-c"
+              - "/zap2xml.pl -u $USERNAME -p $PASSWORD -U -o /data/$XMLTV_FILENAME $OPT_ARGS"
             env:
               USERNAME: ${ZAP_USERNAME}
               PASSWORD: ${ZAP_PASSWORD}
@@ -59,11 +63,3 @@ spec:
         existingClaim: apps-media
         globalMounts:
           - subPath: jellyfin
-
-      config:
-        enabled: true
-        type: configMap
-        name: zap2xml-configmap
-        globalMounts:
-          - path: /entry.sh
-            subPath: entry.sh
