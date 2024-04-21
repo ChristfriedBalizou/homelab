@@ -20,15 +20,6 @@ spec:
         type: cronjob
         cronjob:
           schedule: "0 */12 * * *"
-        initContainers:
-          overwrite:
-            image:
-              repository: busybox
-              tag: latest
-            command:
-              - "/bin/sh"
-              - "-c"
-              - "cat /config/entry.sh > /entry.sh"
         containers:
           main:
             image:
