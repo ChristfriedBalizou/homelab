@@ -67,4 +67,4 @@ spec:
         globalMounts:
           - path: /entry.sh
             subPath: entry.sh
-            readOnly: true
+            readOnly: false
