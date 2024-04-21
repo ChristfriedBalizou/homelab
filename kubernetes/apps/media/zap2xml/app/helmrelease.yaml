@@ -21,6 +21,12 @@ spec:
         cronjob:
           schedule: "0 */12 * * *"
           ttlSecondsAfterFinished: 86400
+        initContainers:
+          chmod:
+            image:
+              repository: busybox
+              tag: latest
+            command: ["/bin/sh", "-c", "chmod +x /zap/zap2xml.pl"]
         containers:
           main:
             image:
@@ -29,7 +35,7 @@ spec:
             command:
               - "/bin/sh"
               - "-c"
-              - "/zap2xml.pl -u $USERNAME -p $PASSWORD -U -o /config/$XMLTV_FILENAME $OPT_ARGS"
+              - "/zap/zap2xml.pl -u $USERNAME -p $PASSWORD -U -o /config/$XMLTV_FILENAME $OPT_ARGS"
             env:
               USERNAME: ${ZAP_USERNAME}
               PASSWORD: ${ZAP_PASSWORD}
@@ -63,3 +69,11 @@ spec:
         sizeLimit: 1Gi
         globalMounts:
           - path: /cache
+
+      zap:
+        enabled: true
+        type: configMap
+        name: zap2xml-configmap
+        globalMounts:
+          - path: /zap/zap2xml.pl
+            subPath: zap2xml.pl
