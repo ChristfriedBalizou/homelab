@@ -32,7 +32,7 @@ spec:
             env:
               USERNAME: ${ZAP_USERNAME}
               PASSWORD: ${ZAP_PASSWORD}
-              OPT_ARGS: '-I -D -c "/cache"'
+              OPT_ARGS: '-I -D -c /cache'
               TZ: ${TIMEZONE}
             resources:
               requests:
