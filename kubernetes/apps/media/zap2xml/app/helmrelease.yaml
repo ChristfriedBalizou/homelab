@@ -29,7 +29,7 @@ spec:
             command:
               - "/bin/sh"
               - "-c"
-              - "/zap/zap2xml.pl -u $USERNAME -p $PASSWORD -U -o /config/$XMLTV_FILENAME $OPT_ARGS"
+              - "chmod +x /zap/zap2xml.pl && /zap/zap2xml.pl -u $USERNAME -p $PASSWORD -U -o /config/$XMLTV_FILENAME $OPT_ARGS"
             env:
               USERNAME: ${ZAP_USERNAME}
               PASSWORD: ${ZAP_PASSWORD}
@@ -41,14 +41,6 @@ spec:
                 memory: 250Mi
               limits:
                 memory: 250Mi
-        pod:
-          securityContext:
-            runAsUser: ${PUID}
-            runAsGroup: ${PGID}
-            fsGroup: ${PGID}
-            fsGroupChangePolicy: "OnRootMismatch"
-            supplementalGroups:
-              - 100
     persistence:
       config:
         enabled: true
