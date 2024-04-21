@@ -21,7 +21,7 @@ spec:
         cronjob:
           schedule: "0 */12 * * *"
         initContainers:
-          copy:
+          executable:
             image:
               repository: busybox
               tag: latest
@@ -67,4 +67,3 @@ spec:
         globalMounts:
           - path: /entry.sh
             subPath: entry.sh
-            readOnly: false
