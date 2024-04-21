@@ -21,12 +21,6 @@ spec:
         cronjob:
           schedule: "0 */12 * * *"
           ttlSecondsAfterFinished: 86400
-        initContainers:
-          chmod:
-            image:
-              repository: busybox
-              tag: latest
-            command: ["/bin/sh", "-c", "chmod +x /zap/zap2xml.pl"]
         containers:
           main:
             image:
