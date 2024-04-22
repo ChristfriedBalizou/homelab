@@ -52,7 +52,7 @@ spec:
     ingress:
       main:
         enabled: true
-        ingressClassName: "external"
+        className: "external"
         annotations:
           external-dns.home.arpa/enabled: "true"
           nginx.ingress.kubernetes.io/auth-snippet: |-
@@ -90,4 +90,5 @@ spec:
       timeshift:
         enabled: true
         type: emptyDir
-        mountPath: /timeshift
+        globalMounts:
+          - path: /timeshift
