@@ -11,6 +11,7 @@ resources:
   - ./flaresolverr/ks.yaml
   - ./prowlarr/ks.yaml
   - ./zap2xml/ks.yaml
+  - ./tvheadend/ks.yaml
   - ./jellyfin/ks.yaml
   - ./jellyseerr/ks.yaml
   - ./unpackerr/ks.yaml
