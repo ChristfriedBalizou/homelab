@@ -1,7 +1,7 @@
 ---
 - hosts:
-    - master
-    - worker
+    - controllers
+    - workers
   become: true
   gather_facts: true
   any_errors_fatal: true
