@@ -1,6 +1,8 @@
 ---
 - name: Cluster rollout update
-  hosts: kubernetes
+  hosts:
+    - controllers
+    - workers
   become: true
   gather_facts: true
   any_errors_fatal: true
@@ -24,27 +26,6 @@
         # If spec.unschedulable is defined then the node is cordoned
         - not (kubectl_get_node['stdout'] | from_json).spec.unschedulable is defined
       block:
-        - name: Cordon
-          kubernetes.core.k8s_drain:
-            name: "{{ inventory_hostname }}"
-            kubeconfig: /etc/rancher/k3s/k3s.yaml
-            state: cordon
-          delegate_to: "{{ groups['controllers'][0] }}"
-
-        - name: Drain
-          kubernetes.core.k8s_drain:
-            name: "{{ inventory_hostname }}"
-            kubeconfig: /etc/rancher/k3s/k3s.yaml
-            state: drain
-            delete_options:
-              delete_emptydir_data: true
-              ignore_daemonsets: true
-              terminate_grace_period: 600
-              wait_timeout: 900
-            pod_selectors:
-              - app!=rook-ceph-osd # Rook Ceph
-          delegate_to: "{{ groups['controllers'][0] }}"
-
         - name: Update
           ansible.builtin.apt:
             upgrade: dist
@@ -61,10 +42,3 @@
             msg: Rebooting node
             post_reboot_delay: 60
             reboot_timeout: 3600
-
-        - name: Uncordon
-          kubernetes.core.k8s_drain:
-            name: "{{ inventory_hostname }}"
-            kubeconfig: /etc/rancher/k3s/k3s.yaml
-            state: uncordon
-          delegate_to: "{{ groups['controllers'][0] }}"
