@@ -24,10 +24,22 @@
     line: "ssl=0"
     backrefs: true
 
+- name: Change redirect host
+  ansible.builtin.lineinfile:
+    path: /etc/webmin/miniserv.conf
+    line: "redirect_host={{ inventory_hostname }}.{{ secret_domain }}"
+    state: present
+
 - name: Refere webmin to node
   ansible.builtin.lineinfile:
     path: /etc/webmin/config
-    line: "referers={{ inventory_hostname }}.{{ secret_domain }}"
+    line: "referer={{ inventory_hostname }}.{{ secret_domain }}"
+    state: present
+
+- name: Change websocket to use wss
+  ansible.builtin.lineinfile:
+    path: /etc/webmin/xterm/config
+    line: "host=wss://{{ inventory_hostname }}.{{ secret_domain }}"
     state: present
 
 - name: Enable Referers webmin
