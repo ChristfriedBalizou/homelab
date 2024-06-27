@@ -89,19 +89,3 @@ spec:
         enabled: true
         existingClaim: apps-networking-adguard-data
         mountPath: /opt/adguardhome/work
-    affinity:
-      podAntiAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          - labelSelector:
-              matchLabels:
-                name: adguard-home
-            topologyKey: kubernetes.io/hostname
-      nodeAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-            - matchExpressions:
-                - key: kubernetes.io/hostname
-                  operator: In
-                  values:
-                    - k8s-2
-                    - k8s-3

@@ -64,12 +64,3 @@ spec:
         cpu: 25m
       limits:
         memory: 2Gi
-    affintity:
-      nodeAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-            - matchExpressions:
-                - key: kubernetes.io/hostname
-                  operator: In
-                  values:
-                    - k8s-3
