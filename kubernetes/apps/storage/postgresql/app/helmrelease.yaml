@@ -17,7 +17,7 @@ spec:
   values:
     image:
       repository: bitnami/postgresql
-      tag: 16.3.0@sha256:cc55da2fa3660b5c97539cd050ac676c452e02693e1ed2e742f9e7bf07784755
+      tag: 16.3.0@sha256:5f5da81926e99bde90bd188bb43bf8de4bbcc1da45087e375631693e82d8b1c7
     volumePermissions:
       enabled: false
     auth:
