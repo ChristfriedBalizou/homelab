@@ -1,0 +1,96 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: vaultwarden
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.1.0
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  values:
+    controllers:
+      vaultwarden:
+        initContainers:
+          01-init-db:
+            image:
+              repository: ghcr.io/onedr0p/postgres-init
+              tag: 16.3
+              pullPolicy: IfNotPresent
+            env:
+              INIT_POSTGRES_DBNAME: vaultwarden 
+              INIT_POSTGRES_HOST: postgresql.storage.svc.cluster.local
+              INIT_POSTGRES_USER: "${VAULTWARDEN_POSTGRES_USER}"
+              INIT_POSTGRES_PASS: "${VAULTWARDEN_POSTGRES_PASS}"
+              INIT_POSTGRES_SUPER_PASS: "${POSTGRES_SUPER_PASS}"
+        pod:
+          securityContext:
+            runAsUser: 568
+            runAsGroup: 568
+            fsGroup: 568
+            fsGroupChangePolicy: "OnRootMismatch"
+        containers:
+          app:
+            image:
+              repository: vaultwarden/server
+              tag: 1.30.5
+            env:
+              DOMAIN: "https://vaultwarden.${SECRET_DOMAIN}"
+              TZ: ${TIMEZONE}
+              SIGNUPS_ALLOWED: false
+              WEBSOCKET_ENABLE: true
+              SMTP_HOST: smtp-relay.networking.svc.cluster.local
+              SMTP_FROM: noreply@${SECRET_DOMAIN}
+              SMPT_PORT: 25
+              SMTP_SECURITY: off
+              ADMIN_TOKEN: ${VAULTWARDEN_ADMIN_TOKEN}
+              DATABASE_URL: postgresql://{{ .VAULTWARDEN_POSTGRES_USER }}:{{ .VAULTWARDEN_POSTGRES_PASS }}@postgresql.storage.svc.cluster.local:5432/vaultwarden
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
+            resources:
+              requests:
+                cpu: 100m
+                memory: 200Mi
+              limits:
+                memory: 500Mi
+    service:
+      app:
+        controller: vaultwarden
+        ports:
+          http:
+            port: *port
+    ingress:
+      app:
+        className: external
+        annotations:
+          external-dns.home.arpa/enabled: "true"
+          whitelist.home.arpa/enableb: "true"
+          custom-http-errors.home.arpa/enabled: "true"
+          hajimari.io/enable: "true"
+          hajimari.io/name: "Vaultwarden"
+          hajimari.io/group: "Authentication"
+          hajimari.io/icon: "cbi:vaultwarden"
+        hosts:
+          - host: &host "vaultwarden.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: http
+        tls:
+          - hosts:
+              - *host
+            secretName: vaultwarden-production-tls
+    persistence:
+      data:
+        existingClaim: apps-identity
+        globalMounts:
+          - subPath: vaultwarden
