@@ -53,7 +53,6 @@ spec:
               - *host
             secretName: alertmanager-production-tls
       alertmanagerSpec:
-        replicas: 2
         useExistingSecret: true
         configSecret: alertmanager-secret
         storage:
