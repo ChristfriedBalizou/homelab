@@ -1,12 +1,12 @@
 ---
 kubernetes:
   children:
-    controllers:
+    master:
       hosts:
         k8s-3:
           ansible_user: ubuntu
           ansible_host: 192.168.1.122
-    workers:
+    worker:
       hosts:
         k8s-0:
           ansible_user: pi

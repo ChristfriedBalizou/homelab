@@ -65,6 +65,11 @@ spec:
               POSTGRES_IP: *postgres
               POSTGRES_PASSWORD: *postgres_pass
               POSTGRES_USER: *postgres_user
+              JWT_SECRET:
+                valueFrom:
+                  secretKeyRef:
+                    name: cluster-media-secrets
+                    key: "JELLYSTAT_0_JWT_SECRET"
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
