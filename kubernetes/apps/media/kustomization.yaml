@@ -19,4 +19,3 @@ resources:
   - ./readarr/ks.yaml
   - ./calibre/ks.yaml
   - ./calibre-web/ks.yaml
-  - ./maintainerr/ks.yaml
