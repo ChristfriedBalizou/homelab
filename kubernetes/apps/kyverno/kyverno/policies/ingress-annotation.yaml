@@ -58,29 +58,3 @@ spec:
                 Remote-User,Remote-Name,Remote-Groups,Remote-Email
               +(nginx.ingress.kubernetes.io/auth-snippet): |-
                 proxy_set_header X-Forwarded-Method $request_method;
-    - name: whitelist
-      match:
-        any:
-          - resources:
-              kinds: ["Ingress"]
-              annotations:
-                whitelist.home.arpa/enabled: "true"
-      mutate:
-        patchStrategicMerge:
-          metadata:
-            annotations:
-              +(nginx.ingress.kubernetes.io/whitelist-source-range): |-
-                10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16
-      - name: custom-http-errors
-        match:
-          any:
-            - resources:
-                kinds: ["Ingress"]
-                annotations:
-                  custom-http-errors.home.arpa/enabled: "true"
-        mutate:
-          patchStrategicMerge:
-            metadata:
-              annotations:
-                +(nginx.ingress.kubernetes.io/custom-http-errors): |-
-                  500,501,502,503,504,505,506,510
