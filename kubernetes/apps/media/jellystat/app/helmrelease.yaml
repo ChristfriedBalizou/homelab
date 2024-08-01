@@ -42,7 +42,7 @@ spec:
               repository: ghcr.io/onedr0p/postgres-init
               tag: 14.8
             env:
-              INIT_POSTGRES_DBNAME: jellystat
+              INIT_POSTGRES_DBNAME: &db jellystat
               INIT_POSTGRES_HOST: &postgres postgresql.storage.svc.cluster.local
               INIT_POSTGRES_USER: &postgres_user
                 valueFrom:
@@ -65,6 +65,7 @@ spec:
               POSTGRES_IP: *postgres
               POSTGRES_PASSWORD: *postgres_pass
               POSTGRES_USER: *postgres_user
+              POSTGRES_DB: *db
               JWT_SECRET:
                 valueFrom:
                   secretKeyRef:
