@@ -1,0 +1,107 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app vaultwarden
+  namespace: identity
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.3.1
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  maxHistory: 2
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    controllers:
+      vaultwarden:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        initContainers:
+          init-db:
+            image:
+              repository: ghcr.io/onedr0p/postgres-init
+              tag: 16
+            envFrom: &envFrom
+              - secretRef:
+                  name: cluster-vaultwarden-secrets
+        containers:
+          app:
+            image:
+              repository: vaultwarden/server
+              tag: 1.31.0@sha256:4e28425bad4bd13568e1779f682ff7e441eca2ecd079bd77cfcba6e4eaf1b999
+            env:
+              DOMAIN: "https://vaultwarden.${SECRET_DOMAIN}"
+              TZ: "${TIMEZONE}"
+              SIGNUPS_ALLOWED: false
+              WEBSOCKET_ENABLED: true
+              SMTP_HOST: smtp-relay.networking.svc.cluster.local
+              SMTP_PORT: "${SMTP_RELAY_PORT}"
+              SMTP_FROM: noreply@${SECRET_DOMAIN}
+              SMTP_SECURITY: "off"
+            envFrom: *envFrom
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
+            resources:
+              requests:
+                cpu: 100m
+                memory: 200Mi
+              limits:
+                memory: 500Mi
+    service:
+      app:
+        controller: *app
+        ports:
+          http:
+            port: &port 80
+    ingress:
+      app:
+        className: external
+        annotations:
+          external-dns.home.arpa/enabled: "true"
+        hosts:
+          - host: &host vaultwarden.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: http
+      admin:
+        className: external
+        annotations:
+          external-dns.home.arpa/enabled: "true"
+          hajimari.io/enable: "true"
+          hajimari.io/name: "Vaultwarden"
+          hajimari.io/group: "Authentication"
+          hajimari.io/icon: cbi:vaultwarden
+          nginx.ingress.kubernetes.io/whitelist-source-range: 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16
+        hosts:
+          - host: *host
+            paths:
+              - path: /admin
+                service:
+                  identifier: app
+                  port: http
+    persistence:
+      data:
+        enabled: true
+        existingClaim: apps-identity
+        globalMounts:
+          - subPath: vaultwarden
