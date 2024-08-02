@@ -77,6 +77,10 @@ spec:
         className: external
         annotations:
           external-dns.home.arpa/enabled: "true"
+          hajimari.io/enable: "true"
+          hajimari.io/name: "Vaultwarden"
+          hajimari.io/group: "Authentication"
+          hajimari.io/icon: cbi:vaultwarden
         hosts:
           - host: &host vaultwarden.${SECRET_DOMAIN}
             paths:
@@ -94,11 +98,6 @@ spec:
         annotations:
           external-dns.home.arpa/enabled: "true"
           auth.home.arpa/enabled: "true"
-          hajimari.io/enable: "true"
-          hajimari.io/name: "Vaultwarden"
-          hajimari.io/group: "Authentication"
-          hajimari.io/icon: cbi:vaultwarden
-          nginx.ingress.kubernetes.io/whitelist-source-range: 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16
         hosts:
           - host: *host
             paths:
