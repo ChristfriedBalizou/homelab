@@ -20,6 +20,7 @@ spec:
       ingress:
         enabled: true
         ingressClassName: external
+        useDefaultIngressClass: false
         annotations:
           external-dns.home.arpa/enabled: "true"
           auth.home.arpa/enabled: "true"
@@ -28,12 +29,13 @@ spec:
           hajimari.io/group: "System"
           hajimari.io/icon: mdi:kubernetes
         hosts:
-          - &host "kubernetes.${SECRET_DOMAIN}"
+          - "kubernetes.${SECRET_DOMAIN}"
         issuer:
           name: letsencrypt-production
           scope: cluster
         tls:
-          secretName: dashboard-production-tls
+          enabled: true
+          secretName: kubernetes-production-tls
     metricsScraper:
       enabled: true
     cert-manager:

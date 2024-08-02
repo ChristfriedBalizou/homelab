@@ -73,6 +73,7 @@ spec:
             port: &port 80
     ingress:
       app:
+        enabled: true
         className: external
         annotations:
           external-dns.home.arpa/enabled: "true"
@@ -83,10 +84,16 @@ spec:
                 service:
                   identifier: app
                   port: http
+        tls: &tls
+          - hosts:
+              - *host
+            secretName: vaultwarden-production-tls
       admin:
+        enabled: true
         className: external
         annotations:
           external-dns.home.arpa/enabled: "true"
+          auth.home.arpa/enabled: "true"
           hajimari.io/enable: "true"
           hajimari.io/name: "Vaultwarden"
           hajimari.io/group: "Authentication"
@@ -99,6 +106,7 @@ spec:
                 service:
                   identifier: app
                   port: http
+        tls: *tls
     persistence:
       data:
         enabled: true
