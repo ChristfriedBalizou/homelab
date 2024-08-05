@@ -22,6 +22,8 @@ spec:
     remediation:
       retries: 3
   values:
+    additionalArgs:
+      - '--auth-methods=user-account'
     adminUser:
       create: true
       createSecret: true
