@@ -22,6 +22,10 @@ spec:
     remediation:
       retries: 3
   values:
+    adminUser:
+      create: true
+      username: admin
+      passwordHash: "${WEAVE_GITOPS_ADMIN_PASSWORD}"
     ingress:
       enabled: true
       className: external
