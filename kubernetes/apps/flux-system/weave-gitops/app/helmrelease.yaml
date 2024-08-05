@@ -22,18 +22,12 @@ spec:
     remediation:
       retries: 3
   values:
-    additionalArgs:
-      - '--auth-methods=user-account'
-    adminUser:
-      create: true
-      createSecret: true
-      username: admin
-      passwordHash: "${WEAVE_GITOPS_ADMIN_PASSWORD}"
     ingress:
       enabled: true
       className: external
       annotations:
         external-dns.home.arpa/enabled: "true"
+        auth.home.arpa/enabled: "true"
         hajimari.io/enable: "true"
         hajimari.io/group: "System"
         hajimari.io/icon: sawtooth-wave
