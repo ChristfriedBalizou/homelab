@@ -6,6 +6,12 @@ kubernetes:
         k8s-3:
           ansible_user: ubuntu
           ansible_host: 192.168.1.122
+        k8s-4:
+          ansible_user: ubuntu
+          ansible_host: 192.168.1.123
+        k8s-5:
+          ansible_user: ubuntu
+          ansible_host: 192.168.1.124
     worker:
       hosts:
         k8s-0:
