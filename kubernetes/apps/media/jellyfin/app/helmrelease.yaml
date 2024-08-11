@@ -70,11 +70,11 @@ spec:
                 - key: kubernetes.io/hostname
                   operator: In
                   values:
-                    - k8s-3
+                    - k8s-4
     resources:
       requests:
         cpu: 100m
-        memory: 4Gi
+        memory: 8Gi
       limits:
         gpu.intel.com/i915: 1
-        memory: 8Gi
+        memory: 16Gi
