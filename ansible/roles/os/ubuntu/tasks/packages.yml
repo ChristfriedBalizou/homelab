@@ -9,6 +9,7 @@
   register: apt_upgrade
   retries: 5
   until: apt_upgrade is success
+  ignore_errors: true
 
 - name: Packages | Install required packages
   ansible.builtin.apt:
