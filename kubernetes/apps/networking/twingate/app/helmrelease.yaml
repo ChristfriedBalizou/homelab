@@ -31,3 +31,12 @@ spec:
       accessToken: "${TWINGATE_ACCESS_TOKEN}"
       refreshToken: "${TWINGATE_REFRESH_TOKEN}"
       dnsServer: "${ADGUARD_ADDR_NS1},{ADGUARD_ADDR_NS2}"
+    affinity:
+      podAffinity:
+        topologySpreadConstraints:
+            - maxSkew: 1
+              topologyKey: kubernetes.io/instance
+              whenUnsatisfiable: DoNotSchedule
+              labelSelector:
+                matchLabels:
+                  app.kubernetes.io/name: twingate-backup
