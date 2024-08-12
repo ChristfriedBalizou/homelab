@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: cloudflared
+  name: &app cloudflared
   namespace: networking
 spec:
   interval: 30m
@@ -30,7 +30,7 @@ spec:
   values:
     controllers:
       main:
-        replicas: 2
+        replicas: 3
         strategy: RollingUpdate
         annotations:
           reloader.stakater.com/auto: "true"
@@ -78,6 +78,14 @@ spec:
               limits:
                 memory: 256M
         pod:
+          enableServiceLinks: false
+          topologySpreadConstraints:
+            - maxSkew: 1
+              topologyKey: kubernetes.io/hostname
+              whenUnsatisfiable: DoNotSchedule
+              labelSelector:
+                matchLabels:
+                  app.kubernetes.io/name: *app
           securityContext:
             runAsUser: 568
             runAsGroup: 568
