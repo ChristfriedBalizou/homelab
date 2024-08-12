@@ -35,8 +35,8 @@ spec:
       podAffinity:
         topologySpreadConstraints:
             - maxSkew: 1
-              topologyKey: kubernetes.io/instance
+              topologyKey: kubernetes.io/hostname
               whenUnsatisfiable: DoNotSchedule
               labelSelector:
                 matchLabels:
-                  app.kubernetes.io/name: twingate-backup
+                  app.kubernetes.io/instance: twingate-backup
