@@ -37,6 +37,9 @@ spec:
       podSecurityContext:
         enabled: true
         fsGroup: ${PGID}
+      service:
+        ports:
+          postgresql: 5435
     metrics:
       enabled: true
       serviceMonitor:
