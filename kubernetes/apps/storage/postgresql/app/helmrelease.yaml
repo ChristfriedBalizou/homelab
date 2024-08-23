@@ -23,12 +23,7 @@ spec:
     auth:
       postgresPassword: ${SECRET_GRAFANA_ADMIN_PASSWORD}
       database: "main"
-    containerPorts:
-      postgresql: 5493
     primary:
-      service:
-        ports:
-          postgresql: 5499
       persistence:
         enabled: true
         existingClaim: storage
