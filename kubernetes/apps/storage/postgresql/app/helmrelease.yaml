@@ -24,6 +24,10 @@ spec:
       postgresPassword: ${SECRET_GRAFANA_ADMIN_PASSWORD}
       database: "main"
     primary:
+      livenessProbe:
+        enabled: false
+      readinessProbe:
+        enabled: false
       persistence:
         enabled: true
         existingClaim: storage
