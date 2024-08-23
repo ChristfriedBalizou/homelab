@@ -40,6 +40,10 @@ spec:
       podSecurityContext:
         enabled: true
         fsGroup: ${PGID}
+      livenessProbe:
+        enable: false
+      readinessProbe:
+        enable: false
     metrics:
       enabled: false
       serviceMonitor:
