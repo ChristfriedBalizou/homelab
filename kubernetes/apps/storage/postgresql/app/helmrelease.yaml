@@ -18,6 +18,8 @@ spec:
     image:
       repository: bitnami/postgresql
       tag: 16.3.0@sha256:865e341baf49006e32b3e72254a15a81c939178cb9c48fcd9faf1c0ac4b49664
+    containerPorts:
+      postgresql: 5435
     volumePermissions:
       enabled: false
     auth:
