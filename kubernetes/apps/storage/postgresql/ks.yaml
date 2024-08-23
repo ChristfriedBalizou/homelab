@@ -15,7 +15,7 @@ spec:
   healthChecks:
     - apiVersion: helm.toolkit.fluxcd.io/v2beta2
       kind: HelmRelease
-      name: postgresql
+      name: postgresql-backup
       namespace: storage
   interval: 30m
   retryInterval: 1m
