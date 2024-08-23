@@ -41,6 +41,6 @@ spec:
         enabled: true
         fsGroup: ${PGID}
     metrics:
-      enabled: true
+      enabled: false
       serviceMonitor:
         enabled: true
