@@ -33,9 +33,9 @@ spec:
       refreshToken: "${TWINGATE_REFRESH_TOKEN_BACKUP}"
       dnsServer: "${ADGUARD_ADDR_NS1},{ADGUARD_ADDR_NS2}"
     topologySpreadConstraints:
-        - maxSkew: 1
-          topologyKey: kubernetes.io/hostname
-          whenUnsatisfiable: DoNotSchedule
-          labelSelector:
-            matchLabels:
-              app.kubernetes.io/instance: twingate
+      - maxSkew: 1
+        topologyKey: kubernetes.io/hostname
+        whenUnsatisfiable: DoNotSchedule
+        labelSelector:
+          matchLabels:
+            app.kubernetes.io/instance: twingate
