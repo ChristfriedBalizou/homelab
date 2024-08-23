@@ -24,7 +24,7 @@ spec:
       postgresPassword: ${SECRET_GRAFANA_ADMIN_PASSWORD}
       database: "main"
     primary:
-      command:
+      args:
         - "--single"
         - "-d 1"
       livenessProbe:
