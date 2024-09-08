@@ -27,3 +27,4 @@ resources:
   - ./kyverno.yaml
   - ./twingate.yaml
   - ./democratic-csi.yaml
+  - ./kubernetes-sigs-descheduler.yaml
