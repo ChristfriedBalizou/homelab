@@ -28,3 +28,4 @@ resources:
   - ./twingate.yaml
   - ./democratic-csi.yaml
   - ./kubernetes-sigs-descheduler.yaml
+  - ./emqx.yaml
