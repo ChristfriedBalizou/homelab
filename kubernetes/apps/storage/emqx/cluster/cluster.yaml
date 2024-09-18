@@ -36,7 +36,7 @@ spec:
       replicas: 3
       envFrom:
         - secretRef:
-            name: emqx-secret
+            name: storage:emqx
       extraVolumeMounts:
         - name: init-user
           mountPath: /opt/init-user.json
@@ -45,7 +45,7 @@ spec:
       extraVolumes:
         - name: init-user
           secret:
-            secretName: emqx-init-user
+            secretName: storage:emqx-secret
   listenersServiceTemplate:
     metadata:
       annotations:
