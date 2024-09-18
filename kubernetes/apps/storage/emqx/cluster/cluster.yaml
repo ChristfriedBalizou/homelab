@@ -49,6 +49,7 @@ spec:
   listenersServiceTemplate:
     metadata:
       annotations:
-        io.cilium/lb-ipam-ips: ${EMQX_IP}
+        metallb.universe.tf/loadBalancerIPs: "${EMQX_IP}"
+        metallb.universe.tf/ip-allocated-from-pool: default-pool
     spec:
       type: LoadBalancer
