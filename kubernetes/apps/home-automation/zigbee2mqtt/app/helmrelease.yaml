@@ -84,6 +84,16 @@ spec:
                 memory: 300Mi
               limits:
                 memory: 500Mi
+        pod:
+          affinity:
+            nodeAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                nodeSelectorTerms:
+                  - matchExpressions:
+                      - key: kubernetes.io/hostname
+                        operator: In
+                        values:
+                          - k8s-3
     defaultPodOptions:
       securityContext:
         runAsNonRoot: true
@@ -125,12 +135,3 @@ spec:
           zigbee2mqtt:
             app:
               - path: ${ZIGBEE2MQTT_CONFIG_SERIAL_PORT}
-    affinity:
-      nodeAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-            - matchExpressions:
-                - key: kubernetes.io/hostname
-                  operator: In
-                  values:
-                    - k8s-3
