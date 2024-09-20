@@ -112,7 +112,10 @@ spec:
                   port: http
     persistence:
       config:
-        existingClaim: zigbee2mqtt
+        enabled: true
+        existingClaim: apps-home-automation
+        globalMounts:
+          - subPath: zigbee2mqtt
       usb:
         enabled: true
         type: hostPath
