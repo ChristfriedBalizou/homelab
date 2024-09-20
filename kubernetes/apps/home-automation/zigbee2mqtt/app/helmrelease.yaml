@@ -122,3 +122,12 @@ spec:
           zigbee2mqtt:
             app:
               - path: ${ZIGBEE2MQTT_CONFIG_SERIAL_PORT}
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: kubernetes.io/hostname
+                  operator: In
+                  values:
+                    - k8s-3
