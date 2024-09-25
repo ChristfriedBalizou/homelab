@@ -124,12 +124,3 @@ spec:
         existingClaim: apps-home-automation
         globalMounts:
           - subPath: zigbee2mqtt
-      usb:
-        enabled: true
-        type: hostPath
-        hostPathType: CharDevice
-        hostPath: ${ZIGBEE2MQTT_CONFIG_SERIAL_PORT}
-        advancedMounts:
-          zigbee2mqtt:
-            app:
-              - path: ${ZIGBEE2MQTT_CONFIG_SERIAL_PORT}
