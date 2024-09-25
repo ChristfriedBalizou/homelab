@@ -6,8 +6,13 @@ metadata:
   namespace: storage
   annotations:
     external-dns.alpha.kubernetes.io/target: internal.${SECRET_DOMAIN}
+    cert-manager.home.arpa/enabled: "true"
 spec:
   ingressClassName: internal
+  tls:
+    - hosts:
+        - "emqx.${SECRET_DOMAIN}"
+      secretName: emqx-production-tls
   rules:
     - host: emqx.${SECRET_DOMAIN}
       http:
