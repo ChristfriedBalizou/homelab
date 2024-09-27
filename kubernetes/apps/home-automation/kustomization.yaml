@@ -5,3 +5,4 @@ resources:
   - ./namespace.yaml
   - ./pvc.yaml
   - ./zigbee2mqtt/ks.yaml
+  - ./home-assistant/ks.yaml
