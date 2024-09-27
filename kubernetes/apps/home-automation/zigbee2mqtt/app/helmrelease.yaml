@@ -113,6 +113,9 @@ spec:
         annotations:
           external-dns.alpha.kubernetes.io/target: internal.${SECRET_DOMAIN}
           cert-manager.home.arpa/enabled: "true"
+          hajimari.io/enable: "true"
+          hajimari.io/group: "Home Automation"
+          hajimari.io/icon: "cbi:zigbee2mqtt" 
         className: internal
         hosts:
           - host: zigbee.${SECRET_DOMAIN}
