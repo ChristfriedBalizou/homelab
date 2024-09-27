@@ -38,6 +38,7 @@ spec:
           - flux-system
           - storage
           - media
+          - home-automation
       name: "${SECRET_GRAFANA_ADMIN_USER}"
       lightTheme: blackboard
       darkTheme: horizon
