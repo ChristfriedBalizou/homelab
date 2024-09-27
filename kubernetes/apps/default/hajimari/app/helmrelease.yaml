@@ -52,10 +52,9 @@ spec:
     ingress:
       main:
         enabled: true
-        ingressClassName: external
+        ingressClassName: internal
         annotations:
-          external-dns.home.arpa/enabled: "true"
-          auth.home.arpa/enabled: "true"
+          external-dns.home.arpa/enabled: "false"
           hajimari.io/enable: "false"
         hosts:
           - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
