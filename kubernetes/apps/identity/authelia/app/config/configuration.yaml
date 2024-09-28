@@ -28,16 +28,16 @@ access_control:
       resources: ["^/api"]
       policy: bypass
       query:
-        - - operator: "present"
+        - - operator: "pattern"
             key: "apikey"
             value: "${SONARR_API_KEY}"
-        - - operator: "present"
+        - - operator: "pattern"
             key: "apikey"
             value: "${RADARR_API_KEY}"
-        - - operator: "present"
+        - - operator: "pattern"
             key: "apikey"
             value: "${READARR_API_KEY}"
-        - - operator: "present"
+        - - operator: "pattern"
             key: "apikey"
             value: "${PROWLARR_API_KEY}"
 
