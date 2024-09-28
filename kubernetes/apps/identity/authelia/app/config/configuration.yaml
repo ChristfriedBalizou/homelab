@@ -41,6 +41,12 @@ access_control:
             key: "apikey"
             value: "${PROWLARR_API_KEY}"
 
+    - domain: hass.${SECRET_DOMAIN}
+      resources:
+        - "^/api"
+        - "^/auth"
+      policy: bypass
+
     - domain:
         - hajimari.${SECRET_DOMAIN}
         - k8s-1.${SECRET_DOMAIN}
@@ -62,6 +68,7 @@ access_control:
         - prometheus.${SECRET_DOMAIN}
         - alertmanager.${SECRET_DOMAIN}
         - grafana.${SECRET_DOMAIN}
+        - hass.${SECRET_DOMAIN}
       policy: two_factor
       subject:
         - ["group:admin"]
