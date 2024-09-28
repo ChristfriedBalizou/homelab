@@ -15,24 +15,64 @@ access_control:
   default_policy: two_factor
   networks:
     - name: internal
-      networks: ["10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16"]
+      networks:
+        - 10.0.0.0/8
+        - 172.16.0.0/12
+        - 192.168.0.0/16
   rules:
-    - domain_regex: "(sonarr|radarr|readarr|prowlarr).${SECRET_DOMAIN}"
+    - domain:
+        - sonarr.${SECRET_DOMAIN}
+        - radarr.${SECRET_DOMAIN}
+        - readarr.${SECRET_DOMAIN}
+        - prowlarr.${SECRET_DOMAIN}
       resources: ["^/api"]
       policy: bypass
       query:
-        - - operator: "pattern"
+        - - operator: "present"
             key: "apikey"
-            value: "(${SONARR_API_KEY}|${RADARR_API_KEY}|${READARR_API_KEY}|${PROWLARR_API_KEY})"
-    - domain: "hajimari.${SECRET_DOMAIN}"
-      domain_regex:
-        - "k8s-([0-9]+).${SECRET_DOMAIN}"
-        - "(status|kubernetes|prometheus).${SECRET_DOMAIN}"
-        - "(nzbget|sonarr|radarr|prowlarr|readarr).${SECRET_DOMAIN}"
-        - "(thanos|loki|minio|prometheus|alertmanager|grafana).${SECRET_DOMAIN}"
+            value: "${SONARR_API_KEY}"
+        - - operator: "present"
+            key: "apikey"
+            value: "${RADARR_API_KEY}"
+        - - operator: "present"
+            key: "apikey"
+            value: "${READARR_API_KEY}"
+        - - operator: "present"
+            key: "apikey"
+            value: "${PROWLARR_API_KEY}"
+
+    - domain: hass.${SECRET_DOMAIN}
+      resources:
+        - "^/api"
+        - "^/auth"
+      policy: bypass
+
+    - domain:
+        - hajimari.${SECRET_DOMAIN}
+        - k8s-1.${SECRET_DOMAIN}
+        - k8s-2.${SECRET_DOMAIN}
+        - k8s-3.${SECRET_DOMAIN}
+        - k8s-4.${SECRET_DOMAIN}
+        - k8s-5.${SECRET_DOMAIN}
+        - status.${SECRET_DOMAIN}
+        - kubernetes.${SECRET_DOMAIN}
+        - prometheus.${SECRET_DOMAIN}
+        - nzbget.${SECRET_DOMAIN}
+        - sonarr.${SECRET_DOMAIN}
+        - radarr.${SECRET_DOMAIN}
+        - prowlarr.${SECRET_DOMAIN}
+        - readarr.${SECRET_DOMAIN}"
+        - thanos.${SECRET_DOMAIN}
+        - loki.${SECRET_DOMAIN}
+        - minio.${SECRET_DOMAIN}
+        - prometheus.${SECRET_DOMAIN}
+        - alertmanager.${SECRET_DOMAIN}
+        - grafana.${SECRET_DOMAIN}
+        - hass.${SECRET_DOMAIN}
       policy: two_factor
       subject:
         - ["group:admin"]
+
     - domain: "calibre.${SECRET_DOMAIN}"
       policy: two_factor
       subject:
