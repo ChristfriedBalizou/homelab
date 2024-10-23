@@ -39,8 +39,8 @@ spec:
             . /opt/bitnami/scripts/liblog.sh
             . /opt/bitnami/scripts/libos.sh
 
-            # Ensure user set in security context exists when running as 'root'
-            am_i_root && ensure_user_exists "${PUSER}" --uid "${PUID}" --gid "${PGID}"
+            cat /etc/shadow
+
       persistence:
         enabled: true
         existingClaim: storage
