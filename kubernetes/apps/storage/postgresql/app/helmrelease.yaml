@@ -26,7 +26,7 @@ spec:
     primary:
       preInitDb:
         scripts:
-          create_data_owner_script.sh: |
+          create_data_owner.sh: |
             #!/bin/bash
             #
             # Create PostgreSQL data user
