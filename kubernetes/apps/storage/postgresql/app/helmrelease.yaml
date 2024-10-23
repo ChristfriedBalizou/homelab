@@ -30,7 +30,17 @@ spec:
             #!/bin/bash
             #
             # Create PostgreSQL data user
-            echo "postgresql"
+
+            set -o errexit
+            set -o nounset
+            set -o pipefail
+
+            # Load libraries
+            . /opt/bitnami/scripts/liblog.sh
+            . /opt/bitnami/scripts/libos.sh
+
+            # Ensure 'daemon' user exists when running as 'root'
+            am_i_root && ensure_user_exists "${PUSER}" --uid "${PUID}" --gid "${PGID}"
       persistence:
         enabled: true
         existingClaim: storage
