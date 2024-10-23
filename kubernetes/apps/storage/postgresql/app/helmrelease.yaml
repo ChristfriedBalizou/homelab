@@ -26,7 +26,7 @@ spec:
     primary:
       preInitDb:
         scripts:
-          create_data_owner.sh: |
+          create_data_owner_script.sh: |
             #!/bin/bash
             #
             # Create PostgreSQL data user
@@ -39,7 +39,7 @@ spec:
             . /opt/bitnami/scripts/liblog.sh
             . /opt/bitnami/scripts/libos.sh
 
-            # Ensure 'daemon' user exists when running as 'root'
+            # Ensure user set in security context exists when running as 'root'
             am_i_root && ensure_user_exists "${PUSER}" --uid "${PUID}" --gid "${PGID}"
       persistence:
         enabled: true
