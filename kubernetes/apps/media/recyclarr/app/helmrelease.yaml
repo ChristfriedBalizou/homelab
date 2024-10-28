@@ -37,7 +37,7 @@ spec:
           main:
             image:
               repository: ghcr.io/recyclarr/recyclarr
-              tag: 7.2.4
+              tag: 7.3.0
             command:
               - /app/recyclarr/recyclarr
             args:
