@@ -6,7 +6,6 @@ resources:
   - ./local-path-provisioner/ks.yaml
   - ./pvc.yaml
   - ./postgresql/ks.yaml
-  - ./postgresql-17/ks.yaml
   - ./pgadmin/ks.yaml
   - ./redis/ks.yaml
   - ./minio/ks.yaml
