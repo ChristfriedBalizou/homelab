@@ -17,7 +17,7 @@ spec:
   values:
     image:
       repository: bitnami/postgresql
-      tag: 16.4.0@sha256:ef5d01eb7ce08e8e5a1e82b8b52f25f9cdabb8a86ca5567eb597aa79ea54d515
+      tag: 17.0.0@sha256:5755fc084c9f2782a6b45ce935c810b207759e3948ff620a8b101635566ccf6b
     volumePermissions:
       enabled: false
     auth:
@@ -27,7 +27,7 @@ spec:
       persistence:
         enabled: true
         existingClaim: storage
-        subPath: postgresql
+        subPath: postgresql-17
       containerSecurityContext:
         enabled: true
         runAsUser: ${PUID}
