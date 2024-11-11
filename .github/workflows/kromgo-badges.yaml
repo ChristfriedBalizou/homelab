@@ -1,0 +1,62 @@
+---
+name: "Download kromgo badges"
+
+on:
+  workflow_call:
+    secrets:
+      BOT_APP_ID:
+        description: The App ID of the GitHub App
+        required: true
+      BOT_APP_PRIVATE_KEY:
+        description: The private key of the GitHub App
+        required: true
+      SECRET_DOMAIN:
+        description: Protected secret domain endpoint
+        required: true
+      KROMGO_AUTHELIA_APIKEY:
+        description: Authelia apikey to identify kromgo
+        required: true
+
+jobs:
+  render-readme:
+    name: Download kromgo badges
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate Token
+        uses: actions/create-github-app-token@v1
+        id: app-token
+        with:
+          app-id: "${{ secrets.BOT_APP_ID }}"
+          private-key: "${{ secrets.BOT_APP_PRIVATE_KEY }}"
+
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: "${{ steps.app-token.outputs.token }}"
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.x
+          cache: pip
+
+      - name: Install Python Requirements
+        shell: bash
+        run: pip install requests==2.32.3
+
+      - name: Download kromgo badges
+        env:
+          GITHUB_TOKEN: "${{ steps.app-token.outputs.token }}"
+          SECRET_DOMAIN: "${{ secrets.SECRET_DOMAIN }}"
+          KROMGO_AUTHELIA_APIKEY: "${{ secrets.KROMGO_AUTHELIA_APIKEY }}"
+        shell: bash
+        run: python ./.github/scripts/kromgo-badges.py
+
+      - name: Commit Changes
+        shell: bash
+        run: |
+          git config --global user.name "bot-ross"
+          git config --global user.email "98030736+bot-ross[bot]@users.noreply.github.com"
+          git add ./kromgo
+          git commit -m "chore: download kromgo badges" || echo "No changes to commit"
+          git push origin || echo "No changes to push"
