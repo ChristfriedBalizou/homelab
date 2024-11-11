@@ -11,6 +11,12 @@
 [![Discord](https://img.shields.io/badge/discord-chat-7289DA.svg?maxAge=60&style=for-the-badge&logo=discord)](https://discord.gg/DNCynrJ) [![k3s](https://img.shields.io/badge/v1.30.3-blue?style=for-the-badge&logo=kubernetes)](https://k3s.io/) [![GitHub last commit](https://img.shields.io/github/last-commit/christfriedbalizou/homelab?color=purple&style=for-the-badge)](https://github.com/christfriedbalizou/homelab/commits/main) ![GitHub Release](https://img.shields.io/github/release/christfriedbalizou/homelab?style=for-the-badge&logo=dependabot)
 
 
+[![Age-Days](https://raw.githubusercontent.com/ChristfriedBalizou/homelab/refs/heads/main/kromgo/cluster_age_days.svg)](https://github.com/kashalls/kromgo/)&nbsp;
+[![Node-Count](https://raw.githubusercontent.com/ChristfriedBalizou/homelab/refs/heads/main/kromgo/cluster_node_count.svg)](https://github.com/kashalls/kromgo/)&nbsp;
+[![Pod-Count](https://raw.githubusercontent.com/ChristfriedBalizou/homelab/refs/heads/main/kromgo/cluster_pod_count.svg)](https://github.com/kashalls/kromgo/)&nbsp;
+[![CPU-Usage](https://raw.githubusercontent.com/ChristfriedBalizou/homelab/refs/heads/main/kromgo/cluster_cpu_usage.svg)](https://github.com/kashalls/kromgo/)&nbsp;
+[![Memory-Usage](https://raw.githubusercontent.com/ChristfriedBalizou/homelab/refs/heads/main/kromgo/cluster_memory_usage.svg)](https://github.com/kashalls/kromgo/)&nbsp;
+
 </div>
 
 ---
