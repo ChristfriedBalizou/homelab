@@ -41,6 +41,13 @@ access_control:
             key: "apikey"
             value: "${PROWLARR_API_KEY}"
 
+    - domain: kromgo.${SECRET_DOMAIN}
+      policy: bypass
+      query:
+        - - operator: "pattern"
+            key: "apikey"
+            value: "${KROMGO_AUTHELIA_APIKEY}"
+
     - domain:
         - hajimari.${SECRET_DOMAIN}
         - k8s-1.${SECRET_DOMAIN}
@@ -62,6 +69,7 @@ access_control:
         - prometheus.${SECRET_DOMAIN}
         - alertmanager.${SECRET_DOMAIN}
         - grafana.${SECRET_DOMAIN}
+        - kromgo.${SECRET_DOMAIN}
       policy: two_factor
       subject:
         - ["group:admin"]
