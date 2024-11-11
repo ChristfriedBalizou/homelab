@@ -96,7 +96,7 @@ spec:
           hajimari.io/group: Monitoring
           hajimari.io/appName: kromgo
         hosts:
-          - host: kromgo.${SECRET_DOMAIN}
+          - host: &host kromgo.${SECRET_DOMAIN}
             paths:
               - path: /
                 service:
