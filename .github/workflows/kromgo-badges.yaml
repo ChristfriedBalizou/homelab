@@ -3,20 +3,8 @@ name: "Download kromgo badges"
 
 on:
   workflow_dispatch:
-  workflow_call:
-    secrets:
-      BOT_APP_ID:
-        description: The App ID of the GitHub App
-        required: true
-      BOT_APP_PRIVATE_KEY:
-        description: The private key of the GitHub App
-        required: true
-      SECRET_DOMAIN:
-        description: Protected secret domain endpoint
-        required: true
-      KROMGO_AUTHELIA_APIKEY:
-        description: Authelia apikey to identify kromgo
-        required: true
+  schedule: 
+    - cron: "0 */6 * * *"
 
 jobs:
   render-readme:
