@@ -15,8 +15,9 @@ def build_kromgo_url(tag: str, base_url: str = secret_domain):
 
 def download_svg(tag: str):
     response = requests.get(build_kromgo_url(tag))
+    response.raise_for_status()
 
-    with open("./kromgo/{tag}.sgv", "wb") as file_descriptor:
+    with open(f"./kromgo/{tag}.sgv", "wb") as file_descriptor:
         for chunk in response:
             file_descriptor.write(chunk)
 
