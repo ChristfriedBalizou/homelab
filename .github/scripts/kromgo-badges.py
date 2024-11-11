@@ -17,7 +17,7 @@ def build_kromgo_url(tag: str, base_url: str = secret_domain):
 
 def download_svg(tag: str):
     response = requests.get(build_kromgo_url(tag))
-    print("Downloaded badge with status: {response.status_code}", file=sys.stdout)
+    print(f"Downloaded badge with status: {response.status_code}", file=sys.stdout)
 
     response.raise_for_status()
 
