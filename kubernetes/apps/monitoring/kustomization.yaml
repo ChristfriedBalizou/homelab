@@ -11,3 +11,4 @@ resources:
   - ./grafana/ks.yaml
   - ./kube-prometheus-stack/ks.yaml
   - ./webmin
+  - ./kromgo/ks.yaml
