@@ -1,10 +1,11 @@
-<h1 align="center">
-  My Home Kubernetes Cluster
-  <br />
-  <br />
-  <img src="https://i.imgur.com/4l9bHvG.png" alt="ansible logo" width="150" />
+<div align="center">
   <img src="https://raspbernetes.github.io/img/logo.svg">
-</h1>
+  <br /> <br />
+  
+  ### My Home Operations Repository
+  _... managed by Flux, Renovate, and GitHub Actions_ 🤖
+ 
+</div> 
 <br />
 <div align="center">
   
