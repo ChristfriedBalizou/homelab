@@ -7,7 +7,10 @@
 </h1>
 <br />
 <div align="center">
-[![kubernetes](https://img.shields.io/badge/dynamic/yaml?url=https://raw.githubusercontent.com/ChristfriedBalizou/homelab/main/kubernetes/apps/system-upgrade/system-upgrade-controller/plans/server.yaml&query=%24.spec.version&style=for-the-badge&logo=kubernetes&logoColor=white&label=%20)](https://k3s.io/) [![GitHub last commit](https://img.shields.io/github/last-commit/christfriedbalizou/homelab?color=purple&style=for-the-badge)](https://github.com/christfriedbalizou/homelab/commits/main) ![GitHub Release](https://img.shields.io/github/release/christfriedbalizou/homelab?style=for-the-badge&logo=dependabot)
+  
+[![kubernetes](https://img.shields.io/badge/dynamic/yaml?url=https://raw.githubusercontent.com/ChristfriedBalizou/homelab/main/kubernetes/apps/system-upgrade/system-upgrade-controller/plans/server.yaml&query=%24.spec.version&style=for-the-badge&logo=kubernetes&logoColor=white&label=%20)](https://k3s.io/) &nbsp;
+[![GitHub last commit](https://img.shields.io/github/last-commit/christfriedbalizou/homelab?color=purple&style=for-the-badge)](https://github.com/christfriedbalizou/homelab/commits/main) &nbsp;
+![GitHub Release](https://img.shields.io/github/release/christfriedbalizou/homelab?style=for-the-badge&logo=dependabot)
 
 
 [![Age-Days](https://raw.githubusercontent.com/ChristfriedBalizou/homelab/refs/heads/main/kromgo/cluster_age_days.svg)](https://github.com/kashalls/kromgo/)&nbsp;
