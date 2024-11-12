@@ -6,7 +6,7 @@ metadata:
   name: emqx
   namespace: storage
 spec:
-  image: public.ecr.aws/emqx/emqx:5.8.1
+  image: public.ecr.aws/emqx/emqx:5.8.2
   config:
     data: |
       authentication {
