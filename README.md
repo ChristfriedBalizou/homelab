@@ -15,6 +15,7 @@
 
 
 [![Age-Days](https://raw.githubusercontent.com/ChristfriedBalizou/homelab/refs/heads/main/kromgo/cluster_age_days.svg)](https://github.com/kashalls/kromgo/)&nbsp;
+[![Uptime-Days](https://raw.githubusercontent.com/ChristfriedBalizou/homelab/refs/heads/main/kromgo/cluster_uptime_days.svg)](https://github.com/kashalls/kromgo/)&nbsp;
 [![Node-Count](https://raw.githubusercontent.com/ChristfriedBalizou/homelab/refs/heads/main/kromgo/cluster_node_count.svg)](https://github.com/kashalls/kromgo/)&nbsp;
 [![Pod-Count](https://raw.githubusercontent.com/ChristfriedBalizou/homelab/refs/heads/main/kromgo/cluster_pod_count.svg)](https://github.com/kashalls/kromgo/)&nbsp;
 [![CPU-Usage](https://raw.githubusercontent.com/ChristfriedBalizou/homelab/refs/heads/main/kromgo/cluster_cpu_usage.svg)](https://github.com/kashalls/kromgo/)&nbsp;
