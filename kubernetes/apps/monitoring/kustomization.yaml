@@ -5,6 +5,7 @@ resources:
   - ./namespace.yaml
   - ./pvc.yaml
   - ./uptime-kuma/ks.yaml
+  - ./gatus/ks.yaml
   - ./dashboard/ks.yaml
   - ./thanos/ks.yaml
   - ./loki/ks.yaml
