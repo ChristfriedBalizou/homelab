@@ -16,11 +16,11 @@ connectivity:
     interval: 1m
 endpoints:
   - name: status
-      group: external
-      url: https://gatus.${SECRET_DOMAIN}
-      interval: 1m
-      client:
-        dns-resolver: tcp://1.1.1.1:53
-        ignore-redirect: true
-      conditions:
-        - "[STATUS] == 200"
+    group: external
+    url: https://gatus.${SECRET_DOMAIN}
+    interval: 1m
+    client:
+      dns-resolver: tcp://1.1.1.1:53
+      ignore-redirect: true
+    conditions:
+      - "[STATUS] == 200"
