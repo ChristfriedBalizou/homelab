@@ -16,13 +16,14 @@ spec:
     - apiVersion: helm.toolkit.fluxcd.io/v2beta2
       kind: HelmRelease
       name: &app radarr
-      namespace: media
+      namespace: &namespace media
   interval: 30m
   retryInterval: 1m
   timeout: 3m
   postBuild:
     substitute:
       APP: *app
+      NAMESPACE: *namespace
     substituteFrom:
       - kind: Secret
         name: cluster-secrets
