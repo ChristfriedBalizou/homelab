@@ -122,12 +122,16 @@ spec:
           hajimari.io/group: Monitoring
           hajimari.io/appName: gatus
         hosts:
-          - host: gatus.${SECRET_DOMAIN}
+          - host: &host gatus.${SECRET_DOMAIN}
             paths:
               - path: /
                 service:
                   identifier: app
                   port: http
+        tls:
+          - hosts:
+              - *host
+            secretName: gatus-production-tls
     serviceAccount:
       create: true
       name: gatus
