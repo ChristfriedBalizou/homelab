@@ -10,6 +10,15 @@ debug: false
 ui:
   title: Status | Gatus
   header: Status
+alerting:
+  telegram:
+    id: 123456
+    token: token
+    default-alert:
+      description: health-check failed
+      send-on-resolved: true
+      failure-threshold: 3
+      success-threshold: 3
 connectivity:
   checker:
     target: 1.1.1.1:53
@@ -23,3 +32,5 @@ endpoints:
       dns-resolver: tcp://1.1.1.1:53
     conditions:
       - "[STATUS] == 404"
+    alerts:
+      - type: telegram
