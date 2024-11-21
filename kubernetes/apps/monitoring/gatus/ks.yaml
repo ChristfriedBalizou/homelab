@@ -22,4 +22,7 @@ spec:
       namespace: monitoring
   interval: 30m
   retryInterval: 1m
-  timeout: 3m
+  postBuild:
+    substitute:
+      APP: gatus
+      GATUS_SUBDOMAIN: gatus
