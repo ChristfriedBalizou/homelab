@@ -11,9 +11,8 @@ ui:
   title: Status | Gatus
   header: Status
 alerting:
-  telegram:
-    id: 123456
-    token: token
+  slack:
+    webhook_url: "https://hooks.slack.com/services"
     default-alert:
       description: health-check failed
       send-on-resolved: true
@@ -33,4 +32,4 @@ endpoints:
     conditions:
       - "[STATUS] == 404"
     alerts:
-      - type: telegram
+      - type: slack
