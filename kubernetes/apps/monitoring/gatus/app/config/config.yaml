@@ -12,15 +12,18 @@ ui:
   header: Status
 connectivity:
   checker:
-    target: 1.1.1.1:53
+    target: 192.168.1.70:53
     interval: 1m
 endpoints:
-  - name: status
-    group: external
-    url: https://gatus.${SECRET_DOMAIN}
-    interval: 1m
-    client:
-      dns-resolver: tcp://1.1.1.1:53
-      ignore-redirect: true
-    conditions:
-      - "[STATUS] == 200"
+   - name: gatus
+     group: guarded
+     url: 192.168.1.70
+     interval: 1m
+     ui:
+       hide-hostname: true
+       hide-url: true
+     dns:
+       query-name: "gatus.${SECRET_DOMAIN}"
+       query-type: A
+     conditions:
+       - "len([BODY]) == 0"
