@@ -11,7 +11,7 @@ data:
     endpoints:
       - name: "${APP}"
         group: external
-        url: "https://${GATUS_SUBDOMAIN:-${APP}}.${SECRET_DOMAIN}${GATUS_PATH:-/}"
+        url: "https://${GATUS_SUBDOMAIN:-${APP}}.${SECRET_DOMAIN}${GATUS_PATH:-/}?apikey={GATUS_AUTHELIA_APIKEY}"
         interval: 1m
         client:
           dns-resolver: tcp://1.1.1.1:53
