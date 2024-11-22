@@ -20,6 +20,13 @@ access_control:
         - 172.16.0.0/12
         - 192.168.0.0/16
   rules:
+    - domain_regex: ^(.*)\.${SECRET_DOMAIN}
+      policy: bypass
+      query:
+        - - operator: "pattern"
+            key: "apikey"
+            value: "${GATUS_AUTHELIA_APIKEY}"
+
     - domain:
         - sonarr.${SECRET_DOMAIN}
         - radarr.${SECRET_DOMAIN}
@@ -48,28 +55,7 @@ access_control:
             key: "apikey"
             value: "${KROMGO_AUTHELIA_APIKEY}"
 
-    - domain:
-        - hajimari.${SECRET_DOMAIN}
-        - k8s-1.${SECRET_DOMAIN}
-        - k8s-2.${SECRET_DOMAIN}
-        - k8s-3.${SECRET_DOMAIN}
-        - k8s-4.${SECRET_DOMAIN}
-        - k8s-5.${SECRET_DOMAIN}
-        - status.${SECRET_DOMAIN}
-        - kubernetes.${SECRET_DOMAIN}
-        - prometheus.${SECRET_DOMAIN}
-        - nzbget.${SECRET_DOMAIN}
-        - sonarr.${SECRET_DOMAIN}
-        - radarr.${SECRET_DOMAIN}
-        - prowlarr.${SECRET_DOMAIN}
-        - readarr.${SECRET_DOMAIN}"
-        - thanos.${SECRET_DOMAIN}
-        - loki.${SECRET_DOMAIN}
-        - minio.${SECRET_DOMAIN}
-        - prometheus.${SECRET_DOMAIN}
-        - alertmanager.${SECRET_DOMAIN}
-        - grafana.${SECRET_DOMAIN}
-        - kromgo.${SECRET_DOMAIN}
+    - domain_regex: ^(.*)\.${SECRET_DOMAIN}
       policy: two_factor
       subject:
         - ["group:admin"]
