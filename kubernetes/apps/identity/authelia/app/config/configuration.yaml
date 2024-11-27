@@ -20,7 +20,8 @@ access_control:
         - 172.16.0.0/12
         - 192.168.0.0/16
   rules:
-    - domain_regex: ^(.*)\.${SECRET_DOMAIN}
+    - domain:
+        - "*.${SECRET_DOMAIN}"
       policy: bypass
       query:
         - - operator: "pattern"
@@ -55,7 +56,11 @@ access_control:
             key: "apikey"
             value: "${KROMGO_AUTHELIA_APIKEY}"
 
-    - domain_regex: ^(.*)\.${SECRET_DOMAIN}
+    - domain: auth.${SECRET_DOMAIN}
+      policy: bypass
+
+    - domain:
+        - "*.${SECRET_DOMAIN}"
       policy: two_factor
       subject:
         - ["group:admin"]
