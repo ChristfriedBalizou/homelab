@@ -24,6 +24,7 @@ spec:
     substitute:
       APP: *app
       NAMESPACE: *namespace
+      GATUS_STATUS: 307
     substituteFrom:
       - kind: Secret
         name: cluster-secrets
