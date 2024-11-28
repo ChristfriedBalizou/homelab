@@ -99,9 +99,9 @@ spec:
             port: 3000
     ingress:
       app:
-        className: external
+        className: internal
         annotations:
-          external-dns.home.arpa/enabled: "true"
+          external-dns.home.arpa/enabled: "false"
           auth.home.arpa/enabled: "true"
           hajimari.io/enable: 'true'
           hajimari.io/icon: oui:stats

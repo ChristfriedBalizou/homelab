@@ -15,8 +15,12 @@ spec:
   healthChecks:
     - apiVersion: helm.toolkit.fluxcd.io/v2beta2
       kind: HelmRelease
-      name: jellystat
-      namespace: media
+      name: &app jellystat
+      namespace: &namespace media
   interval: 30m
   retryInterval: 1m
   timeout: 3m
+  postBuild:
+    substitute:
+      APP: *app
+      NAMESPACE: *namespace
