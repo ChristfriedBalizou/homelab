@@ -107,7 +107,7 @@ spec:
         enabled: true
         existingClaim: apps-media
         globalMounts:
-            subPath: sabnzbd
+          - subPath: sabnzbd
       media:
         enabled: true
         existingClaim: media
