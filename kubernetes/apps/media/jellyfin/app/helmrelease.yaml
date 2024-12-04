@@ -114,8 +114,10 @@ spec:
         subPath: jellyfin
       media:
         enabled: true
-        mountPath: /media
         existingClaim: media
+        globalMounts:
+          - path: /media
+            readOnly: true
       cache:
         type: emptyDir
       transcode:
