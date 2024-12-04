@@ -85,6 +85,10 @@ spec:
     service:
       app:
         controller: jellyfin
+        type: LoadBalancer
+        annotations:
+          metallb.universe.tf/loadBalancerIPs: "${JELLYFIN_IP}"
+          metallb.universe.tf/ip-allocated-from-pool: default-pool
         ports:
           http:
             port: *port
