@@ -80,15 +80,15 @@ spec:
     ingress:
       main:
         enabled: true
-        className: external
+        className: internal
         annotations:
-          external-dns.home.arpa/enabled: "true"
+          external-dns.home.arpa/enabled: "false"
           auth.home.arpa/enabled: "true"
           hajimari.io/enable: 'true'
           hajimari.io/icon: material-symbols:book-outline
           hajimari.io/group: Media
         hosts:
-          - host: "calibre.${SECRET_DOMAIN}"
+          - host: &host "calibre.${SECRET_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
@@ -97,7 +97,7 @@ spec:
                   port: http
         tls:
           - hosts:
-              - "calibre.${SECRET_DOMAIN}"
+              - *host
             secretName: calibre-production-tls
     persistence:
       config:

@@ -23,3 +23,7 @@ spec:
     substitute:
       APP: *app
       NAMESPACE: *namespace
+    substituteFrom:
+      - kind: Secret
+        name: cluster-secrets
+

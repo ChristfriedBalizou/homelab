@@ -14,6 +14,7 @@ resources:
   - ./jellyseerr/ks.yaml
   - ./unpackerr/ks.yaml
   - ./nzbget/ks.yaml
+  - ./sabnzbd/ks.yaml
   - ./traktarr/ks.yaml
   - ./recyclarr/ks.yaml
   - ./readarr/ks.yaml

@@ -130,7 +130,7 @@ spec:
           hajimari.io/icon: mdi:television-classic
           hajimari.io/group: Media
         hosts:
-          - host: "sonarr.${SECRET_DOMAIN}"
+          - host: &host "sonarr.${SECRET_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
@@ -139,7 +139,7 @@ spec:
                   port: http
         tls:
           - hosts:
-              - "sonarr.${SECRET_DOMAIN}"
+              - *host
             secretName: sonarr-production-tls
     persistence:
       config:

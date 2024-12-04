@@ -129,7 +129,7 @@ spec:
           hajimari.io/icon: mdi:filmstrip
           hajimari.io/group: Media
         hosts:
-          - host: "radarr.${SECRET_DOMAIN}"
+          - host: &host "radarr.${SECRET_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
@@ -138,7 +138,7 @@ spec:
                   port: http
         tls:
           - hosts:
-              - "radarr.${SECRET_DOMAIN}"
+              - *host
             secretName: radarr-production-tls
     persistence:
       config:

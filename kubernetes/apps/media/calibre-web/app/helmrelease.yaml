@@ -37,10 +37,20 @@ spec:
               TZ: ${TIMEZONE}
             resources:
               requests:
-                cpu: 10m
-                memory: 250Mi
+                cpu: 5m
+                memory: 470M
               limits:
-                memory: 2000Mi
+                memory: 470M
+            probes:
+              liveness:
+                enabled: true
+              readiness:
+                enabled: true
+              startup:
+                enabled: true
+                spec:
+                  failureThreshold: 30
+                  periodSeconds: 5
     service:
       main:
         controller: main
@@ -58,7 +68,7 @@ spec:
           hajimari.io/icon: mdi:bookshelf
           hajimari.io/group: Media
         hosts:
-          - host: "library.${SECRET_DOMAIN}"
+          - host: &host "library.${SECRET_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
@@ -67,7 +77,7 @@ spec:
                   port: http
         tls:
           - hosts:
-              - "library.${SECRET_DOMAIN}"
+              - *host
             secretName: library-production-tls
     podSecurityContext:
       runAsUser: ${PUID}

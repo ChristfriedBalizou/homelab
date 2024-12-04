@@ -107,12 +107,16 @@ spec:
           hajimari.io/icon: oui:stats
           hajimari.io/group: Media
         hosts:
-          - host: jellystat.${SECRET_DOMAIN}
+          - host: &host jellystat.${SECRET_DOMAIN}
             paths:
               - path: /
                 service:
                   identifier: app
                   port: http
+        tls:
+          - hosts:
+              - *host
+            secretName: jellystat-production-tls
     persistence:
       backup:
         enabled: true

@@ -1,50 +1,112 @@
 ---
-# yaml-language-server: $schema=https://kubernetes-schemas.devbu.io/helmrelease_v2beta1.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: jellyfin
   namespace: media
 spec:
-  interval: 10m
+  interval: 30m
   chart:
     spec:
-      chart: jellyfin
-      version: 9.5.3
+      chart: app-template
+      version: 3.5.1
       sourceRef:
         kind: HelmRepository
-        name: k8s-at-home
+        name: bjw-s
         namespace: flux-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
   values:
-    image:
-      repository: jellyfin/jellyfin
-      tag: 10.10.3
-    env:
-      JELLYFIN_CACHE_DIR: /config/cache
-      TZ: ${TIMEZONE}
+    controllers:
+      jellyfin:
+        pod:
+          nodeSelector:
+            intel.feature.node.kubernetes.io/gpu: "true"
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 568
+            runAsGroup: 568
+            fsGroup: 568
+            fsGroupChangePolicy: OnRootMismatch
+            seccompProfile: { type: RuntimeDefault }
+            supplementalGroups:
+              - 44 # video
+              - 109 # render
+              - 568
+        containers:
+          app:
+            image:
+              repository: jellyfin/jellyfin
+              tag: 10.10.3@sha256:17c3a8d9dddb97789b5f37112840ebf96566442c14d4754193a6c2eb154bc221
+            env:
+              JELLYFIN_PublishedServerUrl: https://jellyfin.${SECRET_DOMAIN}
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /health
+                    port: &port 8096
+                  initialDelaySeconds: 0
+                  periodSeconds: 10
+                  timeoutSeconds: 1
+                  failureThreshold: 3
+              readiness: *probes
+              startup:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /health
+                    port: *port
+                  initialDelaySeconds: 0
+                  periodSeconds: 10
+                  timeoutSeconds: 1
+                  failureThreshold: 30
+            resources:
+              requests:
+                cpu: 100m
+                memory: 8Gi
+              limits:
+                gpu.intel.com/i915: 1
+                memory: 16Gi
+    service:
+      app:
+        controller: jellyfin
+        ports:
+          http:
+            port: *port
     ingress:
-      main:
-        enabled: true
-        ingressClassName: external
+      app:
+        className: external
         annotations:
           external-dns.home.arpa/enabled: "true"
           hajimari.io/enable: 'true'
           hajimari.io/icon: simple-icons:jellyfin
           hajimari.io/group: Media
         hosts:
-          - host: &host "jellyfin.${SECRET_DOMAIN}"
+          - host: &host jellyfin.${SECRET_DOMAIN}
             paths:
               - path: /
-                pathType: Prefix
+                service:
+                  identifier: app
+                  port: http
         tls:
           - hosts:
               - *host
-            secretName: jelyfin-production-tls
-    podSecurityContext:
-      supplementalGroups:
-        - 44
-        - 109
-        - 568
+            secretName: jellyfin-production-tls
     persistence:
       config:
         enabled: true
@@ -54,27 +116,8 @@ spec:
         enabled: true
         mountPath: /media
         existingClaim: media
+      cache:
+        type: emptyDir
       transcode:
         enabled: true
         type: emptyDir
-    affinity:
-      nodeAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-            - matchExpressions:
-                - key: intel.feature.node.kubernetes.io/gpu
-                  operator: In
-                  values:
-                    - "true"
-            - matchExpressions:
-                - key: kubernetes.io/hostname
-                  operator: In
-                  values:
-                    - k8s-4
-    resources:
-      requests:
-        cpu: 100m
-        memory: 8Gi
-      limits:
-        gpu.intel.com/i915: 1
-        memory: 16Gi

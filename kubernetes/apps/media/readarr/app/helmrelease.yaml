@@ -92,7 +92,7 @@ spec:
           hajimari.io/icon: book-open-page-variant-outline
           hajimari.io/group: Media
         hosts:
-          - host: "readarr.${SECRET_DOMAIN}"
+          - host: &host "readarr.${SECRET_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
@@ -101,7 +101,7 @@ spec:
                   port: http
         tls:
           - hosts:
-              - "readarr.${SECRET_DOMAIN}"
+              - *host
             secretName: readarr-production-tls
     persistence:
       config:

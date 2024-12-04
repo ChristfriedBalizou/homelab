@@ -128,7 +128,7 @@ spec:
           hajimari.io/icon: mdi:movie-search
           hajimari.io/group: Media
         hosts:
-          - host: "prowlarr.${SECRET_DOMAIN}"
+          - host: &host "prowlarr.${SECRET_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
@@ -137,7 +137,7 @@ spec:
                   port: http
         tls:
           - hosts:
-              - "prowlarr.${SECRET_DOMAIN}"
+              - *host
             secretName: prowlarr-production-tls
     persistence:
       config:
