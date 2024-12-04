@@ -106,10 +106,11 @@ spec:
       config:
         enabled: true
         existingClaim: apps-media
-        subPath: sabnzbd
+        globalMounts:
+          - path: /media/Downloads/sabnzbd
+            subPath: sabnzbd
       media:
         enabled: true
-        mountPath: /media
         existingClaim: media
         globalMounts:
           - path: /media/Downloads/sabnzbd
