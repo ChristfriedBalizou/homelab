@@ -57,6 +57,19 @@ spec:
                 memory: 250Mi
               limits:
                 memory: 2000Mi
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /ping
+                    port: *port
+                  initialDelaySeconds: 0
+                  periodSeconds: 10
+                  timeoutSeconds: 1
+                  failureThreshold: 3
+              readiness: *probes
     service:
       main:
         controller: main
@@ -66,9 +79,9 @@ spec:
     ingress:
       main:
         enabled: true
-        className: external
+        className: internal
         annotations:
-          external-dns.home.arpa/enabled: "true"
+          external-dns.home.arpa/enabled: "false"
           auth.home.arpa/enabled: "true"
           nginx.ingress.kubernetes.io/auth-snippet: |-
             proxy_set_header X-Forwarded-Method $request_method;

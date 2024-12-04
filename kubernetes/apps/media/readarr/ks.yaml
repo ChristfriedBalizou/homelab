@@ -15,8 +15,11 @@ spec:
   healthChecks:
     - apiVersion: helm.toolkit.fluxcd.io/v2beta2
       kind: HelmRelease
-      name: readarr
-      namespace: media
+      name: &app readarr
+      namespace: &namespace media
   interval: 30m
   retryInterval: 1m
-  timeout: 3m
+  timeout: 3mpostBuild:
+    substitute:
+      APP: *app
+      NAMESPACE: *namespace
