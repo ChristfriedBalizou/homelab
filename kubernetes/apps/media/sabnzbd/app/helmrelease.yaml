@@ -27,9 +27,6 @@ spec:
    - name: vpn-gateway
      namespace: networking
   values:
-    defaultPodOptions:
-      annotations:
-        setGateway: "true"
     controllers:
       sabnzbd:
         annotations:
@@ -72,6 +69,8 @@ spec:
               limits:
                 memory: 8Gi
     defaultPodOptions:
+      annotations:
+        setGateway: "true"
       securityContext:
         runAsNonRoot: true
         runAsUser: 568
