@@ -15,14 +15,14 @@ spec:
   healthChecks:
     - apiVersion: helm.toolkit.fluxcd.io/v2beta2
       kind: HelmRelease
-      name: &app calibre-web
+      name: calibre-web
       namespace: &namespace media
   interval: 30m
   retryInterval: 1m
   timeout: 3m
   postBuild:
     substitute:
-      APP: *app
+      APP: library
       NAMESPACE: *namespace
     substituteFrom:
       - kind: Secret
