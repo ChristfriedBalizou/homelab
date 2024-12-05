@@ -24,6 +24,7 @@ spec:
     substitute:
       APP: library
       NAMESPACE: *namespace
+      GATUS_STATUS: "302"
     substituteFrom:
       - kind: Secret
         name: cluster-secrets
