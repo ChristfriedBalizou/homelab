@@ -23,6 +23,9 @@ spec:
     remediation:
       strategy: rollback
       retries: 3
+   dependsOn:
+    - name: vpn-gateway
+      namespace: networking
   values:
     controllers:
       sabnzbd:

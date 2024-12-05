@@ -24,9 +24,9 @@ spec:
     ingress:
       main:
         enabled: true
-        ingressClassName: external
+        ingressClassName: internal
         annotations:
-          external-dns.home.arpa/enabled: "true"
+          external-dns.home.arpa/enabled: "false"
           hajimari.io/enable: "true"
           hajimari.io/appName: "QBittorrent"
           hajimari.io/group: "Media"
