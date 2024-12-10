@@ -3,9 +3,7 @@ name: "Download kromgo badges"
 
 on:
   workflow_dispatch:
-  push:
-    branches: ["main"]
-  schedule:
+  schedule: 
     - cron: "0 */6 * * *"
 
 jobs:
