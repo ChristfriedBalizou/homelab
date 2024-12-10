@@ -31,8 +31,8 @@ spec:
         pod:
           securityContext:
             runAsNonRoot: true
-            runAsUser: 65534
-            runAsGroup: 65534
+            runAsUser: 568
+            runAsGroup: 568
             seccompProfile: { type: RuntimeDefault }
         initContainers:
           init-db:
