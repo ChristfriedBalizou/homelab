@@ -110,7 +110,7 @@ spec:
           hajimari.io/icon: mdi:rabbit
           hajimari.io/group: Media
         hosts:
-          - host: autobrr.${SECRET_DOMAIN}
+          - host: &host autobrr.${SECRET_DOMAIN}
             paths:
               - path: /
                 service:
