@@ -1,0 +1,15 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ./helmrelease.yaml
+  - ../../../../shared/templates/gatus/guarded
+configMapGenerator:
+  - name: autobrr-loki-rules
+    files:
+      - autobrr.yaml=./config/lokirule.yaml
+    options:
+      labels:
+        loki_rule: "true"
+generatorOptions:
+  disableNameSuffixHash: true
