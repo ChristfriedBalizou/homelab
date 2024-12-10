@@ -67,11 +67,11 @@ spec:
               AUTOBRR__POSTGRES_USER: *dbUser
               AUTOBRR__POSTGRES_PASS: *dbPass
               AUTOBRR__POSTGRES_PORT: "5432"
-              AUTOBRR__SESSION_SECRET: 
+              AUTOBRR__SESSION_SECRET:
                 valueFrom:
                   secretKeyRef:
                     name: cluster-media-secrets
-                    key: "AUTOBRR_0_SESSION_SECRET"
+                    key: "AUTOBRR_0_API_KEY"
             probes:
               liveness: &probes
                 enabled: true
