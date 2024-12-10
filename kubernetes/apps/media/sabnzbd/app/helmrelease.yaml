@@ -113,8 +113,6 @@ spec:
       media:
         enabled: true
         existingClaim: media
-        globalMounts:
-          - path: /media/Downloads/sabnzbd
       logs:
         type: emptyDir
         globalMounts:
