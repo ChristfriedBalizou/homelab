@@ -1,6 +1,7 @@
 ---
 groups:
   - name: autobrr
+    namespace: media
     rules:
       - alert: AutobrrNetworkUnhealthy
         expr: |
