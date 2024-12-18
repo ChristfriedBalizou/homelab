@@ -67,6 +67,7 @@ spec:
 
     compactor:
       enabled: true
+      concurrency: 4
       extraFlags:
         - --delete-delay=30m
       retentionResolutionRaw: 14d
