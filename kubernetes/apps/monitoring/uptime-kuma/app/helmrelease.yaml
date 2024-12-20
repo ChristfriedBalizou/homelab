@@ -21,7 +21,7 @@ spec:
       PUID: ${PUID}
     image:
       repository: louislam/uptime-kuma
-      tag: 1.23.15
+      tag: 1.23.16
     persistence:
       data:
         enabled: true
