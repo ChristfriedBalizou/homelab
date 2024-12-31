@@ -90,6 +90,7 @@ spec:
         className: internal
         annotations:
           external-dns.home.arpa/enabled: "false"
+          auth.home.arpa/enabled: "true"
           hajimari.io/enable: 'true'
           hajimari.io/icon: download-box
           hajimari.io/group: Media
