@@ -32,10 +32,22 @@ spec:
     worker:
       config:
         core:
-          sources: ["custom", "pci", "usb"]
-        sources:
-          usb:
-            deviceClassWhitelist: ["02", "03", "0e", "ef", "fe", "ff"]
-            deviceLabelFields: ["class", "vendor", "device"]
+          sources:
+            - system
+            - pci
+            - usb
+      resources:
+        requests:
+          cpu: 5m
+          memory: 48Mi
+        limit:
+          memory: 48Mi
+    master:
+      resources:
+        requests:
+          cpu: 21m
+          memory: 51Mi
+        limit:
+          memory: 51Mi
     prometheus:
       enable: true
