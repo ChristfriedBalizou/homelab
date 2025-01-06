@@ -20,9 +20,6 @@ kubernetes:
         k8s-1:
           ansible_user: pi
           ansible_host: 192.168.1.120
-        k8s-2:
-          ansible_user: ubuntu
-          ansible_host: 192.168.1.121
     raspberrypi:
       hosts:
         pihole:
