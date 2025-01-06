@@ -35,7 +35,7 @@ spec:
               tag: 2.0.0@sha256:6105a3a01a66bbfb98909a7c309d0707ec7b41728ac15d399747077225231545
             env:
               TZ: ${TIMEZONE}
-              ZIGBEE2MQTT_DATA: /config
+              ZIGBEE2MQTT_DATA: /data
               ZIGBEE2MQTT_CONFIG_ADVANCED_HOMEASSISTANT_DISCOVERY_TOPIC: homeassistant
               ZIGBEE2MQTT_CONFIG_ADVANCED_HOMEASSISTANT_LEGACY_ENTITY_ATTRIBUTES: "false"
               ZIGBEE2MQTT_CONFIG_ADVANCED_HOMEASSISTANT_LEGACY_TRIGGERS: "false"
@@ -113,7 +113,7 @@ spec:
           external-dns.home.arpa/enabled: "false"
           hajimari.io/enable: "true"
           hajimari.io/group: "Home Automation"
-          hajimari.io/icon: "cbi:zigbee2mqtt" 
+          hajimari.io/icon: "cbi:zigbee2mqtt"
         className: internal
         hosts:
           - host: zigbee.${SECRET_DOMAIN}
@@ -127,7 +127,7 @@ spec:
               - "zigbee.${SECRET_DOMAIN}"
             secretName: zigbee-production-tls
     persistence:
-      config:
+      data:
         enabled: true
         existingClaim: apps-home-automation
         globalMounts:
