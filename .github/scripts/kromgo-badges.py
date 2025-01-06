@@ -42,4 +42,3 @@ if __name__ == "__main__":
             download_svg(tag)
         except:
             print(f"Downloading badge {tag} failed.", file=sys.stderr)
-            pass
