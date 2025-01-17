@@ -1,8 +1,9 @@
 ---
 - name: Check if it is a Raspberry Pi
-  ansible.builtin.shell: cat /proc/cpuinfo | grep -q 'Raspberry Pi'
+  ansible.builtin.shell:  cat /proc/cpuinfo | grep -q 'Raspberry Pi'
   register: is_raspberry_pi
   changed_when: false
+  ignore_errors: true
 
 - name: Upgrade all system packages
   ansible.builtin.apt:
@@ -66,3 +67,4 @@
     enabled: true
     state: restarted
   when: is_raspberry_pi.rc != 0
+
