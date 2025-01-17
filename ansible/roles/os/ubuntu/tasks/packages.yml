@@ -1,4 +1,9 @@
 ---
+- name: Check if it is a Raspberry Pi
+  ansible.builtin.shell: cat /proc/cpuinfo | grep -q 'Raspberry Pi'
+  register: is_raspberry_pi
+  changed_when: false
+
 - name: Upgrade all system packages
   ansible.builtin.apt:
     upgrade: full
@@ -16,6 +21,7 @@
     name: "{{ ubuntu.packages | default([]) }}"
     state: present
     update_cache: true
+  when: is_raspberry_pi.rc != 0
 
 - name: Packages | Remove leaf packages
   ansible.builtin.apt:
@@ -51,6 +57,7 @@
     name: unattended-upgrades
     enabled: true
     state: started
+  when: is_raspberry_pi.rc != 0
 
 - name: Packages | Restart unattended-upgrades service
   ansible.builtin.service:
@@ -58,3 +65,4 @@
     daemon_reload: true
     enabled: true
     state: restarted
+  when: is_raspberry_pi.rc != 0
