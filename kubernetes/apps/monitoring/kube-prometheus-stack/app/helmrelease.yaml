@@ -38,33 +38,7 @@ spec:
         foreConflicts: true
     cleanPrometheusOperatorObjectNames: true
     alertmanager:
-      ingress:
-        enabled: true
-        pathType: Prefix
-        ingressClassName: external
-        annotations:
-          external-dns.home.arpa/enabled: "true"
-          auth.home.arpa/enabled: "true"
-          hajimari.io/enable: "true"
-          hajimari.io/appNname: "Alert Manager"
-          hajimari.io/group: "Monitoring"
-          hajimari.io/icon: mdi:alert
-        hosts:
-          - &host alertmanager.${SECRET_DOMAIN}
-        tls:
-          - hosts:
-              - *host
-            secretName: alertmanager-production-tls
-      alertmanagerSpec:
-        useExistingSecret: true
-        configSecret: alertmanager-secret
-        storage:
-          volumeClaimTemplate:
-            spec:
-              storageClassName: local-path
-              resources:
-                requests:
-                  storage: 1Gi
+      enabled: false
     kubeApiServer:
       serviceMonitor:
         selector:
