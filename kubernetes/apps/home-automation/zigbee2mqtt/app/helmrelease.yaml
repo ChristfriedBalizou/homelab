@@ -48,14 +48,10 @@ spec:
               ZIGBEE2MQTT_CONFIG_ADVANCED_LAST_SEEN: ISO_8601
               # zigbee network
               ZIGBEE2MQTT_CONFIG_ADVANCED_CHANNEL: 25
-              # frontend
-              ZIGBEE2MQTT_CONFIG_FRONTEND_ENABLED: true
-              ZIGBEE2MQTT_CONFIG_FRONTEND_URL: https://zigbee2mqtt.${SECRET_DOMAIN}
               # logging
               ZIGBEE2MQTT_CONFIG_ADVANCED_LOG_LEVEL: info
               ZIGBEE2MQTT_CONFIG_ADVANCED_LOG_OUTPUT: '["console"]'
               # device-availability
-              ZIGBEE2MQTT_CONFIG_AVAILABILITY_ENABLED: true
               ZIGBEE2MQTT_CONFIG_AVAILABILITY_ACTIVE_TIMEOUT: 60
               ZIGBEE2MQTT_CONFIG_AVAILABILITY_PASSIVE_TIMEOUT: 2000
               ZIGBEE2MQTT_CONFIG_DEVICE_OPTIONS_RETAIN: true
