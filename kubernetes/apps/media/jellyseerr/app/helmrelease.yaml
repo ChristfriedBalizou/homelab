@@ -40,16 +40,16 @@ spec:
               CONFIG_DIRECTORY: /config
             probes:
               liveness: &probes
-              enabled: true
-              custom: true
-              spec:
-                httpGet:
-                  path: /status
-                  port: &port 5055
-                  initialDelaySeconds: 0
-                  periodSeconds: 10
-                  timeoutSeconds: 1
-                  failureThreshold: 3
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /status
+                    port: &port 5055
+                    initialDelaySeconds: 0
+                    periodSeconds: 10
+                    timeoutSeconds: 1
+                    failureThreshold: 3
               readiness: *probes
             securityContext:
               allowPrivilegeEscalation: false
