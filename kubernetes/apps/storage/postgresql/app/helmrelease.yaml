@@ -42,6 +42,11 @@ spec:
         limits:
           cpu: 2000m
           memory: 2048Mi
+      nodeAffinityPreset:
+        type: "soft"
+        key: "kubernetes.io/hostname"
+        values:
+          - k8s-5
     metrics:
       enabled: true
       serviceMonitor:
