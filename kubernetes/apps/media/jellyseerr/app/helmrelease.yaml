@@ -18,47 +18,39 @@ spec:
   values:
     controllers:
       main:
-        pod:
-          securityContext:
-            runAsUser: 568
-            runAsGroup: 568
-            fsGroup: 568
-            fsGroupChangePolicy: "OnRootMismatch"
-            supplementalGroups:
-              - 44
-              - 109
-              - 568
-        containers:
-          main:
-            image:
-              repository: docker.io/fallenbagel/jellyseerr
-              tag: 2.3.0
-            env:
-              TZ: ${TIMEZONE}
-              JELLYSEER__INSTANCE_NAME: Jellyseerr
-              NAME: Jellyseerr
-              INSTANCE_NAME: Jellyseerr
-              LOG_LEVEL: "info"
-              PORT: &port 80
-            resources:
-              requests:
-                cpu: 10m
-                memory: 500Mi
-              limits:
-                memory: 1000Mi
-            probes:
-              liveness: &probes
-                enabled: true
-                custom: true
-                spec:
-                  httpGet:
-                    path: /status
-                    port: *port
-                  initialDelaySeconds: 0
-                  periodSeconds: 10
-                  timeoutSeconds: 1
-                  failureThreshold: 3
-              readiness: *probes
+        image:
+          repository: fallenbagel/jellyseerr
+          tag: 2.3.0@sha256:df53a7b06006e9da117a7072a55cf5d8b2071a6272f6bb329d8ca62b6f5c08a6
+        env:
+          TZ: ${TIMEZONE}
+          LOG_LEVEL: info
+          JELLYSEER__INSTANCE_NAME: &name Jellyseerr
+          NAME: *name
+          INSTANCE_NAME: *name
+          CONFIG_DIRECTORY: /config
+        probes:
+          liveness: &probes
+          enabled: true
+          custom: true
+          spec:
+            httpGet:
+              path: /status
+              port: &port 5055
+              initialDelaySeconds: 0
+              periodSeconds: 10
+              timeoutSeconds: 1
+              failureThreshold: 3
+          readiness: *probes
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          capabilities: { drop: ["ALL"] }
+        resources:
+          requests:
+            cpu: 10m
+            memory: 250Mi
+          limits:
+            memory: 500Mi
     service:
       main:
         controller: main
@@ -88,8 +80,7 @@ spec:
             secretName: jellyseerr-production-tls
     persistence:
       config:
-        enabled: true
         existingClaim: apps-media
         globalMounts:
-          - path: /app/config
+          - path: /config
             subPath: jellyseerr
