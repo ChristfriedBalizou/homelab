@@ -30,6 +30,7 @@ spec:
   values:
     controllers:
       vaultwarden:
+        replicas: 2
         annotations:
           reloader.stakater.com/auto: "true"
         initContainers:
