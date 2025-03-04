@@ -18,39 +18,49 @@ spec:
   values:
     controllers:
       main:
-        image:
-          repository: fallenbagel/jellyseerr
-          tag: 2.3.0@sha256:df53a7b06006e9da117a7072a55cf5d8b2071a6272f6bb329d8ca62b6f5c08a6
-        env:
-          TZ: ${TIMEZONE}
-          LOG_LEVEL: info
-          JELLYSEER__INSTANCE_NAME: &name Jellyseerr
-          NAME: *name
-          INSTANCE_NAME: *name
-          CONFIG_DIRECTORY: /config
-        probes:
-          liveness: &probes
-          enabled: true
-          custom: true
-          spec:
-            httpGet:
-              path: /status
-              port: &port 5055
-              initialDelaySeconds: 0
-              periodSeconds: 10
-              timeoutSeconds: 1
-              failureThreshold: 3
-          readiness: *probes
-        securityContext:
-          allowPrivilegeEscalation: false
-          readOnlyRootFilesystem: true
-          capabilities: { drop: ["ALL"] }
-        resources:
-          requests:
-            cpu: 10m
-            memory: 250Mi
-          limits:
-            memory: 500Mi
+        pod:
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 568
+            runAsGroup: 568
+            fsGroup: 568
+            fsGroupChangePolicy: OnRootMismatch
+            seccompProfile: { type: RuntimeDefault }
+        containers:
+          main:
+            image:
+              repository: fallenbagel/jellyseerr
+              tag: 2.3.0@sha256:df53a7b06006e9da117a7072a55cf5d8b2071a6272f6bb329d8ca62b6f5c08a6
+            env:
+              TZ: ${TIMEZONE}
+              LOG_LEVEL: info
+              JELLYSEER__INSTANCE_NAME: &name Jellyseerr
+              NAME: *name
+              INSTANCE_NAME: *name
+              CONFIG_DIRECTORY: /config
+            probes:
+              liveness: &probes
+              enabled: true
+              custom: true
+              spec:
+                httpGet:
+                  path: /status
+                  port: &port 5055
+                  initialDelaySeconds: 0
+                  periodSeconds: 10
+                  timeoutSeconds: 1
+                  failureThreshold: 3
+              readiness: *probes
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
+            resources:
+              requests:
+                cpu: 10m
+                memory: 250Mi
+              limits:
+                memory: 500Mi
     service:
       main:
         controller: main
