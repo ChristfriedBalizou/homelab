@@ -27,3 +27,4 @@ resources:
   - ./democratic-csi.yaml
   - ./kubernetes-sigs-descheduler.yaml
   - ./emqx.yaml
+  - ./openebs.yaml
