@@ -8,5 +8,4 @@ resources:
   - ./pgadmin/ks.yaml
   - ./redis/ks.yaml
   - ./minio/ks.yaml
-  - ./synology/ks.yaml
   - ./emqx/ks.yaml
