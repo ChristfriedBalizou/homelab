@@ -1,0 +1,20 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-lb
+  namespace: storage
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: postgres.${SECRET_DOMAIN}
+    metallb.universe.tf/loadBalancerIPs: ${JELLYFIN_IP}
+    metallb.universe.tf/ip-allocated-from-pool: default-pool
+spec:
+  type: LoadBalancer
+  ports:
+    - name: postgres
+      port: 5432
+      protocol: TCP
+      targetPort: 5432
+  selector:
+    cnpg.io/cluster: postgres16
+    role: primary

@@ -28,3 +28,4 @@ resources:
   - ./kubernetes-sigs-descheduler.yaml
   - ./emqx.yaml
   - ./openebs.yaml
+  - ./cloudnative-pg.yaml
