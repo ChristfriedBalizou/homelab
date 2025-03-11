@@ -38,7 +38,10 @@ spec:
           key: aws-access-key-id
         secretAccessKey:
           name: cloudnative-pg
-          key: aws-secret-access-key
+          key: aws-access-key-secret
+        region:
+          name: cloudnative-pg
+          key: aws-region
       destinationPath: s3://cloudnative-pg/
       data:
         compression: bzip2
