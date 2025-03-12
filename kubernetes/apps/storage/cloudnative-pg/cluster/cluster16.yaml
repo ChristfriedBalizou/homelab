@@ -40,9 +40,6 @@ spec:
         secretAccessKey:
           name: cloudnative-pg
           key: aws-access-key-secret
-        region:
-          name: cloudnative-pg
-          key: aws-region
       destinationPath: s3://cloudnative-pg/
       data:
         compression: bzip2
@@ -51,15 +48,4 @@ spec:
         maxParallel: 4
       # NOTE: serverName version needs to be incremented
       # when recovering from an existing cnpg cluster
-      serverName: &currentCluster postgres16-003
-  # NOTE: previousCluster needs to be set to the name of the previous
-  # cluster when recovering from an existing cnpg cluster
-  bootstrap:
-    recovery:
-      source: &previousCluster postgres16-002
-  # NOTE: externalClusters is needed when recovering from an existing cnpg cluster
-  externalClusters:
-    - name: *previousCluster
-      barmanObjectStore:
-        <<: *barmanObjectStore
-        serverName: *previousCluster
+      serverName: &currentCluster postgres16-v1
