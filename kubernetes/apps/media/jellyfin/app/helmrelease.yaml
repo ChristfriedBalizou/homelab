@@ -112,6 +112,11 @@ spec:
       transcode:
         enabled: true
         type: emptyDir
+      dri:
+        type: hostPath
+        hostPath: /dev/dri
+        globalMounts:
+          - path: /dev/dri
     affinity:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
