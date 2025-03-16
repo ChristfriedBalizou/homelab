@@ -66,6 +66,8 @@ spec:
               tag: 1.32.2.4985@sha256:116c8f9a3fcb6f354ed0bcf075ac1a29e2206520bb9e1fd3a4dac00db4e11157
             env:
               TZ: ${TIMEZONE}
+              PROWLARR__AUTH__METHOD: External
+              PROWLARR__AUTH__REQUIRED: DisabledForLocalAddresses
               PROWLARR__INSTANCE_NAME: Prowlarr
               PROWLARR__PORT: &port 80
               PROWLARR__LOG_LEVEL: info
@@ -102,10 +104,10 @@ spec:
               readiness: *probes
             resources:
               requests:
-                cpu: 10m
-                memory: 250Mi
+                cpu: 200m
+                memory: 600Mi
               limits:
-                memory: 2000Mi
+                memory: 1Gi
     service:
       main:
         controller: main
