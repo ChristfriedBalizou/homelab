@@ -72,8 +72,8 @@ spec:
               SONARR__POSTGRES_HOST: *postgres
               SONARR__POSTGRES_MAIN_DB: "sonarr"
               SONARR__POSTGRES_LOG_DB: "sonarr-log"
-              SONARR__AUTHENTICATION_METHOD: External
-              SONARR__AUTHENTICATION_REQUIRED: DisabledForLocalAddresses
+              SONARR__AUTH__METHOD: External
+              SONARR__AUTH__REQUIRED: DisabledForLocalAddresses
               SONARR__POSTGRES_PASSWORD:
                 valueFrom:
                   secretKeyRef:
@@ -91,10 +91,10 @@ spec:
                     key: "SONARR_0_API_KEY"
             resources:
               requests:
-                cpu: 10m
-                memory: 250Mi
+                cpu: 200m
+                memory: 800Mi
               limits:
-                memory: 2000Mi
+                memory: 1Gi
             probes:
               liveness: &probes
                 enabled: true
