@@ -13,7 +13,7 @@ spec:
       version: 2.2.28
       sourceRef:
         kind: HelmRepository
-        name: emqx
+        name: home-operations
         namespace: flux-system
   install:
     remediation:

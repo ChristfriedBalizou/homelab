@@ -4,4 +4,4 @@ kind: Kustomization
 resources:
   - ./bitnami.yaml
   - ./weave-gitops.yaml
-  - ./home-operation.yaml
+  - ./home-operations.yaml

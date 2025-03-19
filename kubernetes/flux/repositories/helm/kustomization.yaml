@@ -3,29 +3,13 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - ./bjw-s.yaml
-  - ./external-dns.yaml
   - ./hajimari.yaml
-  - ./ingress-nginx.yaml
-  - ./jetstack.yaml
-  - ./k8s-gateway.yaml
   - ./metallb.yaml
-  - ./metrics-server.yaml
   - ./stakater.yaml
-  - ./dex.yaml
-  - ./oauth2-proxy.yaml
-  - ./christfried.yaml
   - ./kubernetes-dashboard.yaml
-  - ./runix.yaml
   - ./grafana.yaml
   - ./prometheus-community.yaml
   - ./k8s-at-home.yaml
-  - ./nfs-subdir-external-provisioner.yaml
-  - ./intel.yaml
-  - ./node-feature-discovery.yaml
   - ./kyverno.yaml
   - ./twingate.yaml
-  - ./democratic-csi.yaml
-  - ./kubernetes-sigs-descheduler.yaml
-  - ./emqx.yaml
-  - ./openebs.yaml
   - ./cloudnative-pg.yaml
