@@ -48,12 +48,12 @@ spec:
         maxParallel: 4
       # NOTE: serverName version needs to be incremented
       # when recovering from an existing cnpg cluster
-      serverName: postgres17-v2
+      serverName: postgres17-v1
   # NOTE: previousCluster needs to be set to the name of the previous
   # cluster when recovering from an existing cnpg cluster
   bootstrap:
     recovery:
-      source: postgres17-v1
+      empty: {}
   # NOTE: externalClusters is needed when recovering from an existing cnpg cluster
   externalClusters:
     - name: postgres17-v1
