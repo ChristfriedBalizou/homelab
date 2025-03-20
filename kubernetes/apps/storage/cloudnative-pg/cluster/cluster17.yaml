@@ -72,6 +72,3 @@ spec:
         wal:
           compression: bzip2
           maxParallel: 4
-        # NOTE: serverName version needs to be incremented
-        # when recovering from an existing cnpg cluster
-      serverName: &previousCluster
