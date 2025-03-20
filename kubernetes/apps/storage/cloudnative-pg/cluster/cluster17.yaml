@@ -53,7 +53,6 @@ spec:
   # cluster when recovering from an existing cnpg cluster
   bootstrap:
     recovery:
-      empty: {}
   # NOTE: externalClusters is needed when recovering from an existing cnpg cluster
   externalClusters:
     - name: postgres17-v1
