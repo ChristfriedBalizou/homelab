@@ -48,4 +48,4 @@ spec:
         maxParallel: 4
       # NOTE: serverName version needs to be incremented
       # when recovering from an existing cnpg cluster
-      serverName: &currentCluster postgres16-v1
+      serverName: &currentCluster postgres17-v1
