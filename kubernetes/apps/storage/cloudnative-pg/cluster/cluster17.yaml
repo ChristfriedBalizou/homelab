@@ -31,7 +31,7 @@ spec:
         action: labeldrop
   backup:
     retentionPolicy: 30d
-    barmanObjectStore: &barmanObjectStore
+    barmanObjectStore:
       endpointURL: http://minio.storage.svc.cluster.local:9000
       s3Credentials:
         accessKeyId:
@@ -58,5 +58,20 @@ spec:
   externalClusters:
     - name: *previousCluster
       barmanObjectStore:
-        <<: *barmanObjectStore
-        serverName: *previousCluster
+        endpointURL: http://minio.storage.svc.cluster.local:9000
+        s3Credentials:
+          accessKeyId:
+            name: cloudnative-pg
+            key: aws-access-key-id
+          secretAccessKey:
+            name: cloudnative-pg
+            key: aws-access-key-secret
+        destinationPath: s3://cloudnative-pg/
+        data:
+          compression: bzip2
+        wal:
+          compression: bzip2
+          maxParallel: 4
+        # NOTE: serverName version needs to be incremented
+        # when recovering from an existing cnpg cluster
+        serverName: &previousCluster
