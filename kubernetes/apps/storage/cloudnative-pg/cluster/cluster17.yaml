@@ -49,25 +49,3 @@ spec:
       # NOTE: serverName version needs to be incremented
       # when recovering from an existing cnpg cluster
       serverName: postgres17-v1
-  # NOTE: previousCluster needs to be set to the name of the previous
-  # cluster when recovering from an existing cnpg cluster
-  bootstrap:
-    recovery:
-  # NOTE: externalClusters is needed when recovering from an existing cnpg cluster
-  externalClusters:
-    - name: postgres17-v1
-      barmanObjectStore:
-        endpointURL: http://minio.storage.svc.cluster.local:9000
-        s3Credentials:
-          accessKeyId:
-            name: cloudnative-pg
-            key: aws-access-key-id
-          secretAccessKey:
-            name: cloudnative-pg
-            key: aws-access-key-secret
-        destinationPath: s3://cloudnative-pg/
-        data:
-          compression: bzip2
-        wal:
-          compression: bzip2
-          maxParallel: 4
