@@ -23,7 +23,6 @@ spec:
       retries: 3
   values:
     interval: 2m
-    fullnameOverride: *app
     provider: cloudflare
     env:
       - name: CF_API_EMAIL
