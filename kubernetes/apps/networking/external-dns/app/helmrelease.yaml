@@ -23,7 +23,8 @@ spec:
       retries: 3
   values:
     interval: 2m
-    provider: cloudflare
+    provider:
+      name: cloudflare
     env:
       - name: CF_API_EMAIL
         valueFrom:
