@@ -50,10 +50,20 @@ access_control:
         - ["group:admin"]
         - ["group:ebook"]
 
+    - domain: "paperless.${SECRET_DOMAIN}"
+      policy: two_factor
+      subject:
+        - ["group:admin"]
+        - ["group:paperless"]
+
 identity_providers:
   oidc:
     cors:
-      endpoints: ["authorization", "token", "revocation", "introspection"]
+      endpoints:
+        - "authorization"
+        - "token"
+        - "revocation"
+        - "introspection"
       allowed_origins_from_client_redirect_uris: true
     clients:
       - id: grafana
@@ -62,8 +72,27 @@ identity_providers:
         public: false
         authorization_policy: two_factor
         pre_configured_consent_duration: 1y
-        scopes: ["openid", "profile", "groups", "email"]
-        redirect_uris: ["https://grafana.${SECRET_DOMAIN}/login/generic_oauth"]
+        scopes:
+          - "openid"
+          - "profile"
+          - "groups"
+          - "email"
+        redirect_uris:
+          - "https://grafana.${SECRET_DOMAIN}/login/generic_oauth"
+        userinfo_signed_response_alg: none
+      - id: paperless
+        description: Paperless
+        secret: "${PAPERLESS_OAUTH_CLIENT_SECRET}"
+        public: false
+        authorization_policy: two_factor
+        pre_configured_consent_duration: 1y
+        scopes:
+          - "openid"
+          - "profile"
+          - "groups"
+          - "email"
+        redirect_uris:
+          - "https://paperless.${SECRET_DOMAIN}/accounts/oidc/authelia/login/callback/"
         userinfo_signed_response_alg: none
       - id: pgadmin
         description: PG Admin
@@ -71,6 +100,11 @@ identity_providers:
         public: false
         authorization_policy: two_factor
         pre_configured_consent_duration: 1y
-        scopes: ["openid", "profile", "groups", "email"]
-        redirect_uris: ["https://pgadmin.${SECRET_DOMAIN}/oauth2/authorize"]
+        scopes:
+          - "openid"
+          - "profile"
+          - "groups"
+          - "email"
+        redirect_uris:
+          - "https://pgadmin.${SECRET_DOMAIN}/oauth2/authorize"
         userinfo_signing_algorithm: none
