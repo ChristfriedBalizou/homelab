@@ -76,7 +76,7 @@ spec:
               USERMAP_GID: "568"
             envFrom:
               - secretRef:
-                  name: paperless
+                  name: cluster-paperless-secrets
             resources:
               requests:
                 cpu: 100m
