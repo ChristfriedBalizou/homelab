@@ -113,7 +113,7 @@ spec:
         existingClaim:
           name: paperless-media
         globalMounts:
-            path: /data/local
+          - path: /data/local
       nas:
         existingClaim: apps-default  # this directory is backup every so
         globalMounts:
