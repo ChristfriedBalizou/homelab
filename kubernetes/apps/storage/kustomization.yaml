@@ -10,3 +10,4 @@ resources:
   - ./redis/ks.yaml
   - ./minio/ks.yaml
   - ./emqx/ks.yaml
+  - ./dragonfly/ks.yaml
