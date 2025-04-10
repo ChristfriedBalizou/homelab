@@ -110,8 +110,7 @@ spec:
             secretName: paperless-production-tls
     persistence:
       data:
-        existingClaim:
-          name: paperless-media
+        existingClaim: paperless-media
         globalMounts:
           - path: /data/local
       nas:
