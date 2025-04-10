@@ -1,15 +1,24 @@
 ---
 session:
+  same_site: lax
+  inactivity: 5m
+  expiration: 1h
+  remember_me: 1M
+  cookies:
+    - name: final_space
+      domain: ${SECRET_DOMAIN}
+      authelia_url: https://auth.${SECRET_DOMAIN}
+      default_redirection_url: https://${SECRET_DOMAIN}
   redis:
-    high_availability:
-      sentinel_name: redis-master
-      nodes:
-        - host: redis-node-0.redis-headless.database.svc.cluster.local
-          port: 26379
-        - host: redis-node-1.redis-headless.database.svc.cluster.local
-          port: 26379
-        - host: redis-node-2.redis-headless.database.svc.cluster.local
-          port: 26379
+    host: dragonfly.database.svc.cluster.local
+    database_index: 2
+
+notifier:
+  disable_startup_check: true
+  smtp:
+    address: ${SMTP_RELAY_ADDR}
+    sender: Authelia <noreply@${SECRET_DOMAIN}>
+    disable_require_tls: true
 
 access_control:
   default_policy: two_factor

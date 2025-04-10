@@ -71,7 +71,7 @@ spec:
               PAPERLESS_CONSUMER_SUBDIRS_AS_TAGS: "true"
               PAPERLESS_OCR_LANGUAGE: fra+eng
               PAPERLESS_DBHOST: *postgres
-              PAPERLESS_REDIS: redis://redis.default.svc.cluster.local:6379
+              PAPERLESS_REDIS: redis://dragonfly.storage.svc.cluster.local:6379/3
               USERMAP_UID: "568"
               USERMAP_GID: "568"
             envFrom:
@@ -83,18 +83,6 @@ spec:
                 memory: 1Gi
               limits:
                 memory: 2Gi
-      redis:
-          containers:
-            redis:
-              image:
-                repository: docker.io/valkey/valkey
-                tag: 8.1.0
-              resources:
-                requests:
-                  cpu: 5m
-                  memory: 32Mi
-                limits:
-                  memory: 128Mi
 
     service:
       app:
@@ -102,11 +90,6 @@ spec:
         ports:
           http:
             port: 8000
-      redis:
-        controller: redis
-        ports:
-          http:
-            port: 6379
 
     ingress:
       app:
