@@ -111,10 +111,8 @@ spec:
     persistence:
       data:
         existingClaim:
-          name: media
-          namespace: media
+          name: paperless-media
         globalMounts:
-          - subPath: paperless
             path: /data/local
       nas:
         existingClaim: apps-default  # this directory is backup every so
