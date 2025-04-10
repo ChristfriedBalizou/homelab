@@ -104,6 +104,10 @@ spec:
                 service:
                   identifier: app
                   port: http
+        tls:
+          - hosts:
+              - *host
+            secretName: paperless-production-tls
     persistence:
       data:
         existingClaim: media
