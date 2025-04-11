@@ -94,7 +94,3 @@ spec:
         globalMounts:
           - path: /config
             subPath: jellyseerr
-      config-cache:
-        existingClaim: jellyseerr-cache
-        globalMounts:
-          - path: /app/config/cache
