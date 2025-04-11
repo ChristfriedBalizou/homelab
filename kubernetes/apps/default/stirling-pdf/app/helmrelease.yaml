@@ -31,9 +31,6 @@ spec:
       stirling-pdf:
         type: deployment
         replicas: 1
-        pod:
-          labels:
-            ingress.home.arpa/nginx-internal: allow
         containers:
           main:
             image:

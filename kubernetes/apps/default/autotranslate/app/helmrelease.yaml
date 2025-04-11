@@ -1,0 +1,72 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: autotranslate
+  namespace: default
+spec:
+  interval: 10m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.7.3
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  maxHistory: 3
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+
+  values:
+    controllers:
+      autotranslate:
+        type: deployment
+        replicas: 1
+        containers:
+          main:
+            image:
+              repository: zorbatherainy/autotranslate
+              tag: 2.2.0d@sha256:4362f9d49019dc133649e134e313c3ff804d88cad4249402b596045c7afbc3f7
+            env:
+              DEEPL_AUTH_KEY: ${AUTOTRANSLATE_DEEPL_AUTH_KEY}
+              DEEPL_TARGET_LANG: FR
+              ORIGINAL_BEFORE_TRANSLATION: 0
+              TRANSLATE_FILENAME: 0
+              CHECK_EVERY_X_MINUTES: 15
+            resources:
+              requests:
+                cpu: "10m"
+                memory: "512Mi"
+              limits:
+                memory: "1024Mi"
+
+    service:
+      autotranslate:
+        controller: autotranslate
+
+    persistence:
+      logs:
+        type: emptyDir
+        globalMounts:
+          - path: /logDir
+
+      translate:
+        existingClaim: apps-default
+        globalMounts:
+          - subPath: autotranslate
+            path: /inputDir
+
+      consume:
+        existingClaim: media
+        globalMounts:
+          - subPath: autotranslate
+            path: /outputDir

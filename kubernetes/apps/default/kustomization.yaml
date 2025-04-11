@@ -7,3 +7,4 @@ resources:
   - ./hajimari/ks.yaml
   - ./stirling-pdf/ks.yaml
   - ./paperless/ks.yaml
+  - ./autotranslate/ks.yaml

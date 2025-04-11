@@ -112,9 +112,10 @@ spec:
             secretName: paperless-production-tls
     persistence:
       data:
-        existingClaim: paperless-media
+        existingClaim: media
         globalMounts:
-          - path: /data/local
+          - subPath: paperless
+            path: /data/local
       nas:
         existingClaim: apps-default  # this directory is backup every so
         globalMounts:
