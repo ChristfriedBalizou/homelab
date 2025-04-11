@@ -5,7 +5,7 @@ session:
   expiration: 1h
   remember_me: 1M
   redis:
-    host: dragonfly.database.svc.cluster.local
+    host: dragonfly.storage.svc.cluster.local
     database_index: 2
 
 access_control:
