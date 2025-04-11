@@ -28,7 +28,7 @@ spec:
   dependsOn:
     - name: lldap
       namespace: identity
-    - name: redis
+    - name: dragonfly-operator
       namespace: storage
   values:
     controllers:
