@@ -54,7 +54,7 @@ spec:
         controller: autotranslate
         ports:
           http:
-            enable: false
+            enabled: false
 
     persistence:
       logs:
