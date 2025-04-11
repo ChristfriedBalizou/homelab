@@ -54,7 +54,6 @@ spec:
         controller: autotranslate
         ports:
           http:
-            enabled: false
             port: 8080
 
     persistence:
