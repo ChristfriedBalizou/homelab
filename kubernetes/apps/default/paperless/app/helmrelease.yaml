@@ -112,7 +112,7 @@ spec:
             secretName: paperless-production-tls
     persistence:
       data:
-        existingClaim: media
+        existingClaim: media-default
         globalMounts:
           - subPath: paperless
             path: /data/local
