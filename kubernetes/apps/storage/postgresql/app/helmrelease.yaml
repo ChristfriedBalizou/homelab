@@ -45,7 +45,7 @@ spec:
       livenessProbe: &probes
         enabled: true
         initialDelaySeconds: 600
-        periodSeconds: 60
+        periodSeconds: 600
         timeoutSeconds: 5
         failureThreshold: 10
         successThreshold: 1
