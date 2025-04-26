@@ -21,3 +21,4 @@ resources:
   - ./calibre/ks.yaml
   - ./calibre-web/ks.yaml
   - ./jellystat/ks.yaml
+  - ./huntarr/ks.yaml
