@@ -1,0 +1,21 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: smtp-relay-production-tls
+  namespace: networking
+spec:
+  secretName: smtp-relay-production-tls
+  issuerRef:
+    group: cert-manager.io
+    name: letsencrypt-production
+    kind: ClusterIssuer
+  usages:
+    - digital signature
+    - key encipherment
+  commonName: smtp.${SECRET_DOMAIN}
+  dnsNames:
+    - smtp.${SECRET_DOMAIN}
+  privateKey:
+    rotationPolicy: Always
+

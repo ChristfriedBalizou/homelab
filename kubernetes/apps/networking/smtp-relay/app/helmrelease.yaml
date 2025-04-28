@@ -64,6 +64,7 @@ spec:
         type: LoadBalancer
         annotations:
           metallb.universe.tf/loadBalancerIPs: "${SMTP_RELAY_ADDR}"
+          external-dns.alpha.kubernetes.io/hostname: smtp.${SECRET_DOMAIN}
           metallb.universe.tf/ip-allocated-from-pool: default-pool
         externalTrafficPolicy: Local
         ports:
@@ -98,3 +99,10 @@ spec:
         sizeLimit: 1Gi
         globalMounts:
           - path: /dev/shm
+      tls:
+        enabled: true
+        type: secret
+        name: smtp-relay-production-tls
+        globalMounts:
+          - path: /tls
+            readOnly: true
