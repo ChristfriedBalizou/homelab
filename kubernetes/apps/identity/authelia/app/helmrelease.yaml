@@ -45,7 +45,7 @@ spec:
               pullPolicy: IfNotPresent
             env:
               INIT_POSTGRES_DBNAME: &db authelia
-              INIT_POSTGRES_HOST: &postgres postgresql.storage.svc.cluster.local
+              INIT_POSTGRES_HOST: &postgres postgres.${SECRET_DOMAIN}
               INIT_POSTGRES_USER: "${AUTHELIA_STORAGE_POSTGRES_USERNAME}"
               INIT_POSTGRES_PASS: "${AUTHELIA_STORAGE_POSTGRES_PASSWORD}"
               INIT_POSTGRES_SUPER_PASS: "${POSTGRES_SUPER_PASS}"

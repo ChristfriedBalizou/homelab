@@ -43,7 +43,7 @@ spec:
               tag: 17
             env:
               INIT_POSTGRES_DBNAME: &db jellystat
-              INIT_POSTGRES_HOST: &postgres postgresql.storage.svc.cluster.local
+              INIT_POSTGRES_HOST: &postgres postgres.${SECRET_DOMAIN}
               INIT_POSTGRES_USER: &postgres_user
                 valueFrom:
                   secretKeyRef:
