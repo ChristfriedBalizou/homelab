@@ -74,14 +74,6 @@ spec:
             editable: true
             options:
               path: /var/lib/grafana/dashboards/nginx
-          - name: thanos
-            orgId: 1
-            folder: Thanos
-            type: file
-            disableDeletion: false
-            editable: true
-            options:
-              path: /var/lib/grafana/dashboards/thanos
 
     dashboards:
       default:
@@ -182,68 +174,30 @@ spec:
           url: https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/grafana/dashboards/request-handling-performance.json
           datasource: Prometheus
 
-      thanos:
-        thanos-bucket-replicate:
-          url: https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/thanos/dashboards/bucket-replicate.json
-          datasource: Prometheus
-        thanos-compact:
-          url: https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/thanos/dashboards/compact.json
-          datasource: Prometheus
-        thanos-overview:
-          url: https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/thanos/dashboards/overview.json
-          datasource: Prometheus
-        thanos-query:
-          url: https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/thanos/dashboards/query.json
-          datasource: Prometheus
-        thanos-query-frontend:
-          url: https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/thanos/dashboards/query-frontend.json
-          datasource: Prometheus
-        thanos-receieve:
-          url: https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/thanos/dashboards/receive.json
-          datasource: Prometheus
-        thanos-rule:
-          url: https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/thanos/dashboards/rule.json
-          datasource: Prometheus
-        thanos-sidecar:
-          url: https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/thanos/dashboards/sidecar.json
-          datasource: Prometheus
-        thanos-store:
-          url: https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/thanos/dashboards/store.json
-          datasource: Prometheus
-
     datasources:
       datasources.yaml:
         apiVersion: 1
         datasources:
-          - access: proxy
-            isDefault: true
-            name: Prometheus
+          - name: Prometheus
             type: prometheus
-            url: http://thanos-query.monitoring:9090
+            uid: prometheus
+            access: proxy
+            url: http://prometheus-operated.monitoring.svc.cluster.local:9090
             jsonData:
-              prometheusType: Thanos
               timeInterval: 1m
-          - access: proxy
-            name: Loki
+            isDefault: true
+          - name: Loki
             type: loki
             uid: loki
-            url: http://loki-gateway.monitoring.svc.cluster.local
+            access: proxy
+            url: http://loki-headless.monitoring.svc.cluster.local:3100
             jsonData:
               maxLines: 250
-          - name: Alertmanager
-            type: alertmanager
-            access: proxy
-            url: http://alertmanager.monitoring.svc.cluster.local:9093
-            jsonData:
-              implementation: prometheus
         deleteDatasources:
-          - name: Alertmanager
-            orgId: 1
           - name: Prometheus
             orgId: 1
           - name: Loki
             orgId: 1
-
     env:
       GF_AUTH_GENERIC_OAUTH_API_URL: https://auth.${SECRET_DOMAIN}/api/oidc/userinfo
       GF_AUTH_GENERIC_OAUTH_AUTH_URL: https://auth.${SECRET_DOMAIN}/api/oidc/authorization
