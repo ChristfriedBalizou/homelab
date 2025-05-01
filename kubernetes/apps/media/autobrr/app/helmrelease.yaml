@@ -41,7 +41,7 @@ spec:
               tag: 17
             env:
               INIT_POSTGRES_DBNAME: &dbName autobrr
-              INIT_POSTGRES_HOST: &postgres postgres.${SECRET_DOMAIN}
+              INIT_POSTGRES_HOST: &postgres postgres-lb.storage.svc.cluster.local
               INIT_POSTGRES_USER: &dbUser
                 valueFrom:
                   secretKeyRef:
