@@ -74,6 +74,14 @@ spec:
             editable: true
             options:
               path: /var/lib/grafana/dashboards/nginx
+          - name: emqx
+            orgId: 1
+            folder: EMQX
+            type: file
+            disableDeletion: false
+            editable: true
+            options:
+              path: /var/lib/grafana/dashboards/emqx-folder
 
     dashboards:
       default:
@@ -121,6 +129,33 @@ spec:
 
         node-feature-discovery:
           url: https://raw.githubusercontent.com/kubernetes-sigs/node-feature-discovery/master/examples/grafana-dashboard.json
+          datasource: Prometheus
+
+        cnpg:
+          url: https://raw.githubusercontent.com/cloudnative-pg/grafana-dashboards/refs/heads/main/charts/cluster/grafana-dashboard.json
+          datasource: Prometheus
+
+      emqx:
+        emqx-authentication:
+          url: https://raw.githubusercontent.com/emqx/emqx-exporter/main/grafana-dashboard/template/emqx-5/authentication.json
+          datasource: Prometheus
+        emqx-authorization:
+          url: https://raw.githubusercontent.com/emqx/emqx-exporter/main/grafana-dashboard/template/emqx-5/authorization.json
+          datasource: Prometheus
+        emqx-client-events:
+          url: https://raw.githubusercontent.com/emqx/emqx-exporter/main/grafana-dashboard/template/emqx-5/client-events.json
+          datasource: Prometheus
+        emqx-messages:
+          url: https://raw.githubusercontent.com/emqx/emqx-exporter/main/grafana-dashboard/template/emqx-5/messages.json
+          datasource: Prometheus
+        emqx-overview:
+          url: https://raw.githubusercontent.com/emqx/emqx-exporter/main/grafana-dashboard/template/emqx-5/overview.json
+          datasource: Prometheus
+        emqx-rule-engine-count:
+          url: https://raw.githubusercontent.com/emqx/emqx-exporter/main/grafana-dashboard/template/emqx-5/rule-engine-count.json
+          datasource: Prometheus
+        emqx-rule-engine-rate:
+          url: https://raw.githubusercontent.com/emqx/emqx-exporter/main/grafana-dashboard/template/emqx-5/rule-engine-rate.json
           datasource: Prometheus
 
       flux:
