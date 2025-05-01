@@ -22,13 +22,6 @@ spec:
       memory: 2Gi
   monitoring:
     enablePodMonitor: true
-    # see https://github.com/cloudnative-pg/cloudnative-pg/issues/2501
-    podMonitorMetricRelabelings:
-      - sourceLabels: ["cluster"]
-        targetLabel: cnpg_cluster
-        action: replace
-      - regex: cluster
-        action: labeldrop
   backup:
     retentionPolicy: 30d
     barmanObjectStore:
