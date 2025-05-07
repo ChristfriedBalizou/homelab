@@ -89,7 +89,6 @@ spec:
         medium: Memory
         globalMounts:
           - path: /var/cache/nginx/
-          - path: /var/cache/nginx/
             subPath: client_temp
           - path: /var/log/nginx
           - path: /run
