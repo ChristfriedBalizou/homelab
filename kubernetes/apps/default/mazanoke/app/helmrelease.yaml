@@ -59,7 +59,7 @@ spec:
         controller: mazanoke
         ports:
           http:
-            port: 3474
+            port: 80
 
     ingress:
       main:
