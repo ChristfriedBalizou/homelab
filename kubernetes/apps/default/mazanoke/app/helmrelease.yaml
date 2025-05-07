@@ -31,6 +31,12 @@ spec:
       mazanoke:
         type: deployment
         replicas: 1
+        initContainers:
+          create-nginx-logs:
+            image:
+              repository: busybox
+              tag: latest
+            command: ["/bin/sh", "-c", "touch /var/log/nginx/error.log"]
         containers:
           main:
             image:
