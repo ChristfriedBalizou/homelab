@@ -88,5 +88,7 @@ spec:
         type: emptyDir
         medium: Memory
         globalMounts:
-          - path: /var
-            subPath: cache
+          - path: /var/cache
+            subPath: nginx
+          - path: /var/log
+            subPath: nginx
