@@ -82,3 +82,11 @@ spec:
           - hosts:
               - *host
             secretName: mazanoke-production-tls
+
+    persistence:
+      temporary:
+        type: emptyDir
+        medium: Memory
+        globalMounts:
+          - path: /var
+            subPath: cache
