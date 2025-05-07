@@ -40,10 +40,12 @@ spec:
               TZ: ${TIMEZONE}
               ENVIRONMENT: "production"
             securityContext:
-              readOnlyRootFilesystem: true
-              allowPrivilegeEscalation: false
-              capabilities:
-                drop: ["ALL"]
+              runAsUser: 568
+              runAsGroup: 568
+              fsGroup: 568
+              fsGroupChangePolicy: "OnRootMismatch"
+              supplementalGroups:
+                - 100
             resources:
               requests:
                 cpu: "10m"
