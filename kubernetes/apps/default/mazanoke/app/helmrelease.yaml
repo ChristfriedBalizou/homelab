@@ -96,5 +96,4 @@ spec:
         globalMounts:
           - path: /var/cache/nginx
             subPath: client_temp
-          - path: /var/log
-            subPath: nginx
+          - path: /var/log/nginx
