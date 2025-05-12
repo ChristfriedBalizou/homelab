@@ -24,7 +24,7 @@ spec:
       strategy: rollback
       retries: 3
   dependsOn:
-    - name: postgresql
+    - name: cloudnative-pg
       namespace: storage
   values:
     controllers:

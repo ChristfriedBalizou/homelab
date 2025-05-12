@@ -27,7 +27,7 @@ spec:
   uninstall:
     keepHistory: false
   dependsOn:
-    - name: postgresql
+    - name: cloudnative-pg
       namespace: storage
   values:
     controllers:
