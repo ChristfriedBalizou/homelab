@@ -60,6 +60,7 @@ spec:
     serviceMonitor:
       main:
         enabled: true
+        serviceName: minio
         endpoints:
           - port: s3
             scheme: http
