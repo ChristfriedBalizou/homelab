@@ -5,3 +5,4 @@ resources:
   - ./bitnami.yaml
   - ./weave-gitops.yaml
   - ./home-operations.yaml
+  - ./bjw-s.yaml
