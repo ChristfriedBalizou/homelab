@@ -12,3 +12,4 @@ resources:
   - ./kyverno.yaml
   - ./twingate.yaml
   - ./cloudnative-pg.yaml
+  - ./nvidia-operator.yaml
