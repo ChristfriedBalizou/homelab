@@ -39,9 +39,6 @@ spec:
             image:
               repository: dpage/pgadmin4
               tag: "9.4@sha256:6b1c0db09695758c72abcd5160b7c4cc6d0847ab0c90a2403bdbf951f0defb5a"
-            env:
-              PGADMIN_DEFAULT_EMAIL: "${SECRET_CLOUDFLARE_EMAIL}"
-              PGADMIN_DEFAULT_PASSWORD: "${SECRET_GRAFANA_ADMIN_PASSWORD}"
             resources:
               requests:
                 cpu: 50m
@@ -81,6 +78,13 @@ spec:
         globalMounts:
           - subPath: pgadmin
             path: /var/lib/pgadmin
+      oauth2:
+        enabled: true
+        type: secret
+        name: pgadmin-secrets
+        globalMounts:
+          - path: /pgadmin4
+
     podSecurityContext:
       runAsUser: ${PUID}
       runAsGroup: ${PGID}
