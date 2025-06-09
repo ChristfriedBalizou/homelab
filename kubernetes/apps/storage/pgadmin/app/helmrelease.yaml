@@ -83,7 +83,8 @@ spec:
         type: secret
         name: pgadmin-secrets
         globalMounts:
-          - path: /pgadmin4
+          - path: /pgadmin4/config_local.py
+            subPath: config_local.py
 
     podSecurityContext:
       runAsUser: ${PUID}
