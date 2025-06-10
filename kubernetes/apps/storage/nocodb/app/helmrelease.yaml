@@ -70,10 +70,10 @@ spec:
         enabled: true
         className: external
         annotations:
-        external-dns.home.arpa/enabled: "true"
-        hajimari.io/enable: "true"
-        hajimari.io/icon: "simple-icons:nocodb"
-        hajimari.io/group: "Storage"
+          external-dns.home.arpa/enabled: "true"
+          hajimari.io/enable: "true"
+          hajimari.io/icon: "simple-icons:nocodb"
+          hajimari.io/group: "Storage"
         hosts:
           - host: &host "nocodb.${SECRET_DOMAIN}"
             paths:
@@ -82,9 +82,9 @@ spec:
                   identifier: app
                   port: http
         tls:
-          - secretName: "nocodb-production-tls"
-            hosts:
+          - hosts:
               - *host
+            secretName: "nocodb-production-tls"
     persistence:
       data:
         enabled: true
