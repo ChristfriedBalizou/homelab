@@ -9,3 +9,4 @@ resources:
   - ./minio/ks.yaml
   - ./emqx/ks.yaml
   - ./dragonfly/ks.yaml
+  - ./nocodb/ks.yaml
