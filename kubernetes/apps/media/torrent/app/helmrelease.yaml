@@ -1,32 +1,136 @@
 ---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: torrent
+  name: qbittorrent
   namespace: media
 spec:
-  interval: 10m
+  interval: 30m
   chart:
     spec:
-      chart: qbittorrent
-      version: 13.5.2
+      chart: app-template
+      version: 3.7.3
       sourceRef:
         kind: HelmRepository
-        name: k8s-at-home
+        name: bjw-s
         namespace: flux-system
-  dependsOn:
-    - name: vpn-gateway
-      namespace: networking
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
   values:
-    image:
-      repository: ghcr.io/k8s-at-home/qbittorrent
-      tag: v4.4.3.1
-    ingress:
-      main:
-        enabled: true
-        ingressClassName: internal
+    controllers:
+      qbittorrent:
         annotations:
-          external-dns.home.arpa/enabled: "false"
+          secret.reloader.stakater.com/reload: qbittorrent,qbittorrent-gluetun
+        pod:
+          securityContext:
+            fsGroup: 568
+            fsGroupChangePolicy: OnRootMismatch
+          terminationGracePeriodSeconds: 120
+        initContainers:
+          dnsdist:
+            image:
+              repository: docker.io/powerdns/dnsdist-19
+              tag: 1.9.10@sha256:7495affd85c450050eb2fce1cb99964cb439482ffada22e9d312a761b6bf138d
+            restartPolicy: Always
+          gluetun:
+            dependsOn:
+              - dnsdist
+            image:
+              repository: ghcr.io/qdm12/gluetun
+              tag: v3.40.0@sha256:2b42bfa046757145a5155acece417b65b4443c8033fb88661a8e9dcf7fda5a00
+            restartPolicy: Always
+            env:
+              DOT: "off"
+              DNS_ADDRESS: 127.0.0.2
+              VPN_SERVICE_PROVIDER: custom
+              VPN_TYPE: wireguard
+              VPN_INTERFACE: wg0
+              WIREGUARD_ENDPOINT_PORT: 51820
+              VPN_PORT_FORWARDING: on
+              VPN_PORT_FORWARDING_PROVIDER: nordvpn
+              FIREWALL_INPUT_PORTS: &port 8080
+              FIREWALL_OUTBOUND_SUBNETS: ${K8S_CLUSTER_CIDR},${K8S_SERVICE_CIDR}
+            envFrom:
+              - secretRef:
+                  name: qbittorrent
+            securityContext:
+              capabilities: { add: ["NET_ADMIN"] }
+              allowPrivilegeEscalation: false
+            resources:
+              limits:
+                squat.ai/tun: "1"
+        containers:
+          app:
+            nameOverride: qbittorrent
+            image:
+              repository: ghcr.io/home-operations/qbittorrent
+              tag: 5.1.0@sha256:37aefd713ba31d51255995261616f1144378887bc5f21665a0ebf851fb85f69a
+            securityContext:
+              runAsUser: 568
+              runAsGroup: 568
+              runAsNonRoot: true
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
+            probes:
+              liveness:
+                enabled: true
+              readiness:
+                enabled: true
+              startup:
+                enabled: true
+                spec:
+                  failureThreshold: 30
+                  periodSeconds: 5
+            resources:
+              requests:
+                cpu: 100m
+                memory: 3Gi
+              limits:
+                memory: 5Gi
+          port-forward:
+            image:
+              repository: ghcr.io/bjw-s-labs/gluetun-qb-port-sync
+              tag: 0.0.4@sha256:838ba41b3c736b23ae30f7e79a2610173f389a5ac6fb2b3e9c7bd482b9353c18
+            env:
+              GLUETUN_CONTROL_SERVER_HOST: localhost
+              GLUETUN_CONTROL_SERVER_PORT: 8000
+              GLUETUN_CONTROL_SERVER_API_KEY:
+                valueFrom:
+                  secretKeyRef:
+                    name: qbittorrent
+                    key: GLUETUN_CONTROL_SERVER_API_KEY
+              QBITTORRENT_HOST: localhost
+              QBITTORRENT_WEBUI_PORT: *port
+              CRON_ENABLED: true
+              CRON_SCHEDULE: "*/5 * * * *"
+              LOG_TIMESTAMP: false
+            securityContext:
+              runAsUser: 568
+              runAsGroup: 568
+              runAsNonRoot: true
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
+    service:
+      app:
+        controller: qbittorrent
+        ports:
+          http:
+            port: *port
+    ingress:
+      app:
+        className: external
+        annotations:
+          external-dns.home.arpa/enabled: true
+          auth.home.arpa/enabled: true
           hajimari.io/enable: "true"
           hajimari.io/appName: "QBittorrent"
           hajimari.io/group: "Media"
@@ -35,7 +139,9 @@ spec:
           - host: &host torrent.${SECRET_DOMAIN}
             paths:
               - path: /
-                pathType: Prefix
+                service:
+                  identifier: app
+                  port: http
         tls:
           - hosts:
               - *host
@@ -45,25 +151,26 @@ spec:
         enabled: true
         existingClaim: apps-media
         subPath: qbittorrent
+        advancedMounts:
+          qbittorrent:
+            app:
+              - path: /config
       media:
         enabled: true
         mountPath: /media
         existingClaim: media
-    podAnnotations:
-      setGateway: "true"
-    resources:
-      requests:
-        cpu: 500m
-        memory: 2Gi
-      limits:
-        memory: 2Gi
-    probes:
-      liveness:
-        enabled: true
-      readiness:
-        enabled: true
-      startup:
-        enabled: true
-        spec:
-          failureThreshold: 30
-          periodSeconds: 10
+      empty-config:
+        type: emptyDir
+        advancedMounts:
+          qbittorrent:
+            port-forward:
+              - path: /config
+      dnsdist:
+        type: configMap
+        name: qbittorrent-dnsdist
+        advancedMounts:
+          qbittorrent:
+            dnsdist:
+              - path: /etc/dnsdist/dnsdist.conf
+                subPath: dnsdist.conf
+                readOnly: true
