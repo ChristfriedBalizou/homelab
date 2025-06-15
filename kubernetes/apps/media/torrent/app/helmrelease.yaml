@@ -157,7 +157,6 @@ spec:
                 subPath: qbittorrent
       media:
         enabled: true
-        mountPath: /media
         existingClaim: media
       empty-config:
         type: emptyDir
