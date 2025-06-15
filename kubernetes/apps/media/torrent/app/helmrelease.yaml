@@ -150,11 +150,11 @@ spec:
       config:
         enabled: true
         existingClaim: apps-media
-        subPath: qbittorrent
         advancedMounts:
           qbittorrent:
             app:
               - path: /config
+                subPath: qbittorrent
       media:
         enabled: true
         mountPath: /media
