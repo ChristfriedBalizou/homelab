@@ -30,7 +30,7 @@ spec:
           main:
             image:
               repository: fallenbagel/jellyseerr
-              tag: 2.5.1@sha256:52ca0b18c58ec4e769b8acae9beaae37a520a365c7ead52b7fc3ba1c3352d1f0
+              tag: 2.6.0@sha256:8f320036d937d84c385ea5800f87d69ba16ec4d3770fccf6cad803b5e8d66a52
             env:
               TZ: ${TIMEZONE}
               LOG_LEVEL: info
