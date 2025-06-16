@@ -66,6 +66,7 @@ spec:
         type: emptyDir
         globalMounts:
           - path: /dev/termination-log
+            readOnly: false
       sys:
         type: hostPath
         hostPath: /sys
