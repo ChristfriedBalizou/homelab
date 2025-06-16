@@ -6,9 +6,9 @@ namespace: kube-system
 resources:
   - ./helmrelease.yaml
 configMapGenerator:
-  - name: gneric-device-plugins
+  - name: gneric-device-plugin
     files:
-      - config.yaml=./config/config.yaml
+      config.yaml=./config/config.yaml
 generatorOptions:
   disableNameSuffixHash: true
   annotations:
