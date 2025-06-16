@@ -5,3 +5,4 @@ kind: Kustomization
 resources:
   - ./intel/ks.yaml
   - ./nvidia/ks.yaml
+  - ./generic/ks.yaml
